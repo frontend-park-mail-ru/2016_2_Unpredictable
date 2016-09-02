@@ -8,6 +8,15 @@ function onSubmit(form) {
     form.v
     if(res === '100') {
         form.hidden = true;
+        window.helloWorld.innerHTML = hello(data.user)
     }
     console.log(data,res);
+}
+
+function hello(text) {
+    return 'Привет, ' + text;
+}
+
+if (typeof exports === 'object') {
+    exports.hello = hello;
 }
