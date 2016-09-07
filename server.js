@@ -6,7 +6,7 @@ let app = express();
 app.use('/', express.static('public'));
 
 app.use(parser.json());
-app.use(technologger);
+//app.use(technologger);
 let emailDb = {};
 app.post('/users', (req, res, body) => {
     console.log(req.body);
