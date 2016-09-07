@@ -11,14 +11,14 @@ let emailDb = {};
 app.post('/users', (req, res, body) => {
     console.log(req.body);
 
-    if (req.body.email in emailDb) {
+    if (emailDb[req.body.email]) {
         emailDb[req.body.email]++;
     }
     else {
         emailDb[req.body.email] = 1;
     }
     console.log(emailDb[req.body.email]);
-    res.send(String(emailDb[req.body.email]));
+    res.send(''+emailDb[req.body.email]);
     // TODO: вернуть количество обращений
 });
 

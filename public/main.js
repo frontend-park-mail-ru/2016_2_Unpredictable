@@ -6,15 +6,17 @@ function onSubmit(form) {
     };
     let res = request('/users', data);
     form.v
-    if(res == '5') {
+    /*if(res == '5') {
         form.hidden = true;
         window.helloWorld.innerHTML = hello(data.user)
-    }
+    }*/
+    form.hidden = true;
+    window.helloWorld.innerHTML = hello(data.user, res);
     console.log(data,res);
 }
 
-function hello(text) {
-    return 'Привет, ' + text;
+function hello(text, n) {
+    return 'Привет, ' + text + ' ты был здесь ' + n + ' раз(а)';
 }
 
 if (typeof exports === 'object') {
