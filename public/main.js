@@ -6,7 +6,7 @@ function onSubmit(form) {
     };
     let res = request('/users', data);
     form.v
-    if(res === '100') {
+    if(res == '5') {
         form.hidden = true;
         window.helloWorld.innerHTML = hello(data.user)
     }

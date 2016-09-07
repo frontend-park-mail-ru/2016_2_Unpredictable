@@ -7,10 +7,18 @@ app.use('/', express.static('public'));
 
 app.use(parser.json());
 app.use(technologger);
-
+let emailDb = {};
 app.post('/users', (req, res, body) => {
     console.log(req.body);
-    res.send('100');
+
+    if (req.body.email in emailDb) {
+        emailDb[req.body.email]++;
+    }
+    else {
+        emailDb[req.body.email] = 1;
+    }
+    console.log(emailDb[req.body.email]);
+    res.send(String(emailDb[req.body.email]));
     // TODO: вернуть количество обращений
 });
 
