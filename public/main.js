@@ -5,7 +5,7 @@
     function filter (str, rules = ['KEK']) {
         for  (let i = 0; i < rules.length; i++) {
             let regexp = new RegExp ('\\b(' + rules[i] + ')\\b', 'gi');
-            str = str.replace(regexp,'***');
+            str = str.replace(regexp,'****');
         }
         return str;
     }
