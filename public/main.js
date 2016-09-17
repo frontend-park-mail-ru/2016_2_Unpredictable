@@ -37,9 +37,14 @@
         if (isMy) {
             message.classList.add('chat__message_my');
         } else {
-            message.style.backgroundColor = `#${technolibs.colorHash(opts.email || '')}`;
+            let background = `#${technolibs.colorHash(opts.email || '')}`;
+            let R = background.charAt(1)+background.charAt(2);
+            let G = background.charAt(3)+background.charAt(4);
+            let B = background.charAt(5)+background.charAt(6);
+            message.style.backgroundColor = `rgba(${parseInt(R,16)}, ${parseInt(G,16)}, ${parseInt(B,16)}, 0.4)`;
         }
-        message.innerHTML = opts.message;
+        opts.message = decodeURIComponent(opts.message);
+        message.innerHTML = filter(opts.message);
         email.innerHTML = opts.email;
         message.appendChild(email);
 

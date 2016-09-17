@@ -1,5 +1,6 @@
 body {
-	padding: 5vw;
+	padding: 20vw;
+	padding: 15vh;
 	box-sizing: border-box;
 }
 
@@ -12,21 +13,23 @@ body {
 }
 
 .chat__message {
-	font-size: 20px;
+	font-size: 25px;
     padding: 1vw;
     border-radius: 15px;
-    background-color: #bdbdbd;
+   	color: #000000;
     margin: 0.5vw 0;
 	margin-right: 5vw;
 	word-wrap: break-word;
+	font-style: oblique
 }
 
 .chat__message_my {
-	background-color: #0e751f;
-	color: #bdbdbd;
+	background-color: rgba(215, 212, 0, 0.3);
+	color: #000000;
 	margin-right: 0;
 	margin-left: 5vw;
 	text-align: right;
+	font-style: oblique
 }
 
 .chat__input {
@@ -35,13 +38,13 @@ body {
 
 .chat__email {
 	text-align: right;
-    font-size: 10px;
+    font-size: 15px;
     color: #000;
 }
 
 .chat__message_my .chat__email {
 	text-align: left;
-	color: #fff;
+	color: #c5c5b8;
 }
 
 
