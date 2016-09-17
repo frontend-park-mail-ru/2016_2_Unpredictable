@@ -16,9 +16,9 @@ assert.equal(hello('Test'), 'Привет, Test');
 // assert.equal(plural(100), '100 раз!');
 // assert.equal(plural(103), '103 раза!');
 
-assert.equal(filter('KEK'), '***');
-assert.equal(filter('Kek'), '***');
-assert.equal(filter('kek'), '***');
-assert.equal(filter('kEk'), '***');
+assert.equal(filter('KEK'), '****');
+assert.equal(filter('Kek'), '****');
+assert.equal(filter('kek'), '****');
+assert.equal(filter('kEk'), '****');
 assert.equal(filter('KEKs'), 'KEKs');
-assert.equal(filter('KEKs kekkek kek Kek Keeek KEk'), 'KEKs kekkek *** *** Keeek ***');
+assert.equal(filter('KEKs kekkek kek Kek Keeek KEk'), 'KEKs kekkek **** **** Keeek ****');
