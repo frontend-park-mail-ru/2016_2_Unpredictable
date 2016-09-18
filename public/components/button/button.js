@@ -1,28 +1,28 @@
 (function () {
-	'use strict';
+    'use strict';
 
-	class Button {
-		constructor (options) {
-			this.el = document.createElement('button');
-			this.el.innerHTML = options.text;
-			this.el.style.backgroundColor = options.backgroundColor || '';
-			this.el.classList.add('button');
+    class Button {
+        constructor (options) {
+            this.el = document.createElement('button');
+            this.el.innerHTML = options.text;
+            this.el.style.backgroundColor = options.backgroundColor || '';
+            this.el.classList.add('button');
 
-			this.setAttrs(options.attrs);
-		}
+            this.setAttrs(options.attrs);
+        }
 
-		setAttrs (attrs) {
-			Object.keys(attrs).forEach(name => {
-				this.el.setAttribute(name, attrs[name]);
-			})
-		}
+        setAttrs (attrs) {
+            Object.keys(attrs).forEach(name => {
+                this.el.setAttribute(name, attrs[name]);
+            })
+        }
 
-		static include (btn, el) {
-			el.appendChild(btn.el);
-		}
-	}
+        static include (btn, el) {
+            el.appendChild(btn.el);
+        }
+    }
 
-	//export
-	window.Button = Button;
+    //export
+    window.Button = Button;
 
 })();

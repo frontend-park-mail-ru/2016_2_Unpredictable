@@ -5,20 +5,55 @@
     //import
     if (typeof window === 'object') {
         let Button = window.Button;
-        let formEl = document.querySelector('.js-form');
+        let Input = window.Input;
 
-        let userData = {};
+        let formElHello = document.querySelector('.js-form-hello');
 
-        // Пример использования компоненты
-        let formButton = new Button({
+        let inputEmail = new Input({
+            attrs: {
+                placeholder:"Ваш email",
+                type:"email",
+                name:"email",
+                value:""
+            }
+        });
+
+        let inputName = new Input({
+            attrs: {
+                placeholder:"Ваше имя",
+                type:"text",
+                name:"user",
+                value:""
+            }
+        });
+
+        let formButtonHello = new Button({
             text: 'Привет!',
             attrs: {
                 name: 'name'
             }
         });
 
-        Button.include(formButton, formEl);
+        Input.include(inputEmail, formElHello);
+        Input.include(inputName, formElHello);
+        Button.include(formButtonHello, formElHello);
+
+
+
+        let formElSubmit = document.querySelector('.js-form-submit');
+        let formButtonSubmit = new Button({
+            text: 'Отправить!',
+            attrs: {
+                name: 'name',
+                type: 'submit'
+            }
+        });
+
+        Button.include(formButtonSubmit, formElSubmit);
     }
+
+
+
 
     let userData = {};
 
