@@ -1,11 +1,31 @@
 (function() {
     'use strict';
+
+
+    //import
+    if (typeof window === 'object') {
+        let Button = window.Button;
+        let formEl = document.querySelector('.js-form');
+
+        let userData = {};
+
+        // Пример использования компоненты
+        let formButton = new Button({
+            text: 'Привет!',
+            attrs: {
+                name: 'name'
+            }
+        });
+
+        Button.include(formButton, formEl);
+    }
+
     let userData = {};
 
     function filter (str, rules = ['KEK']) {
         for  (let i = 0; i < rules.length; i++) {
             let regexp = new RegExp ('\\b(' + rules[i] + ')\\b', 'gi');
-            str = str.replace(regexp,'****');
+            str = str.replace(regexp,new Array(rules[i].length+1).join("*"));
         }
         return str;
     }
