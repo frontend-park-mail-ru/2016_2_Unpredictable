@@ -1,29 +1,41 @@
 (function() {
     'use strict';
 
+    const jsLogin = window.jsLogin;
+    const jsChat = window.jsChat;
+    let userData = {};
 
     //import
     if (typeof window === 'object') {
-        let Button = window.Button;
+        let Form = window.Form;
         let Input = window.Input;
+        let Button = window.Button;
 
         let formElHello = document.querySelector('.js-form-hello');
 
+        let helloForm = new Form({
+            attrs: {
+                onsubmit:'onLogin(this); return false;',
+
+
+            }
+        });
+
         let inputEmail = new Input({
             attrs: {
-                placeholder:"Ваш email",
-                type:"email",
-                name:"email",
-                value:""
+                placeholder:'Ваш email',
+                type:'email',
+                name:'email',
+                value:'1@1'
             }
         });
 
         let inputName = new Input({
             attrs: {
-                placeholder:"Ваше имя",
-                type:"text",
-                name:"user",
-                value:""
+                placeholder:'Ваше имя',
+                type:'text',
+                name:'user',
+                value:'1'
             }
         });
 
@@ -34,9 +46,13 @@
             }
         });
 
-        Input.include(inputEmail, formElHello);
-        Input.include(inputName, formElHello);
-        Button.include(formButtonHello, formElHello);
+        helloForm.add(inputEmail);
+        helloForm.add(inputName);
+        helloForm.add(formButtonHello);
+        // Input.include(inputEmail, helloForm.el);
+        // Input.include(inputName, helloForm.el);
+        // Button.include(formButtonHello, helloForm.el);
+        Form.include(helloForm,formElHello);
 
 
 
@@ -55,7 +71,6 @@
 
 
 
-    let userData = {};
 
     function filter (str, rules = ['KEK', 'Apple','Orange', 'OrangeJuce']) {
         for  (let i = 0; i < rules.length; i++) {
@@ -66,13 +81,14 @@
     }
 
     function onLogin (form, block) {
+        console.info('form submited');
         userData = {
             user: form.elements['user'].value,
             email: form.elements['email'].value
         };
 
-        jsLogin.hidden = true;
-        jsChat.hidden = false;
+        window.jsLogin.hidden = true;
+        window.jsChat.hidden = false;
 
         if (userData.user) {
             userData.user = filter(userData.user);
