@@ -97,6 +97,12 @@
         });
     }
 
+    function onKeyPressed(e) {
+        if (e.keyCode == 13 && (e.metaKey || e.ctrlKey)) {
+            e.target.form.onsubmit(e.target.form);
+        }
+    }
+
 
 
 // function onSubmit(form) {
@@ -148,6 +154,8 @@
         return ('\nHello, ' + text + ' you have been here ' + plural_en(n));
     }
 
+
+
     if (typeof exports === 'object') { //for NodeJS
         exports.hello = hello;
         exports.plural = plural;
@@ -155,6 +163,7 @@
     } else {
         window.onLogin = onLogin;
         window.onChat = onChat;
+        window.onKeyPressed = onKeyPressed;
     }
 
 })();

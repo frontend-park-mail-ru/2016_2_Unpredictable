@@ -31,8 +31,9 @@
         </div>
     </div>
     <form onsubmit="onChat(this); return false;">
-        <textarea required class="chat__input" name="message" cols="30" rows="10"></textarea>
-        <button name="name">
+		<textarea id="usertext-edit" required class="chat__input" name="message" cols="30" rows="10"
+                  onkeypress="onKeyPressed(event)"></textarea>
+        <button name="name" type="submit">
             Отправить
         </button>
     </form>
