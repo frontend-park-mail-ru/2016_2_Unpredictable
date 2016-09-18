@@ -1,8 +1,11 @@
 (function() {
     'use strict';
 
-    const jsLogin = window.jsLogin;
-    const jsChat = window.jsChat;
+
+    // if (!exports) {
+    //     const jsLogin = window.jsLogin;
+    //     const jsChat = window.jsChat;
+    // }
     let userData = {};
 
     //import
