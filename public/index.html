@@ -1,51 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Frontend privet</title>
-    <link rel="stylesheet" href="/css/milligram.min.css"/>
-    <link rel="stylesheet" href="/css/main.css" />
-    <link rel="stylesheet" href="/components/button/button.css" />
-    <link rel="stylesheet" href="/components/input/input.css" />
-    <link rel="stylesheet" href="/components/form/form.css" />
+	<meta charset="UTF-8">
+	<title>Frontend privet</title>
+	<link rel="stylesheet" href="/css/milligram.min.css"/>
+	<link rel="stylesheet" href="/css/main.css" />
 
+	<link rel="stylesheet" href="/components/button/button.css" />
+	<link rel="stylesheet" href="/components/chat/chat.css" />
 </head>
 <body>
 
-<div id="jsLogin" class = "js-form-hello"> <!---->
-    <h3>Привет, залогинься!</h3>
-    <!--<form onsubmit="onLogin(this); return false;">-->
-        <!--<input required placeholder="Ваш email" type="email"  name="email" value="" />-->
-        <!--<input required placeholder="Ваше имя" type="text" name="user" value="" />-->
-    <!--<button name="name">Привет!</button> -->
-    <!--</form>-->
-</div>
-
-
-
-<div id="jsChat" hidden>
-    <h3 id="jsTitle">Ты в чате, %username%!</h3>
-    <div id="jsMessages" class="chat">
-        <div class="cssload-wrap">
-            <div class="cssload-cssload-spinner"></div>
-        </div>
-    </div>
-    <form class="js-form-submit" onsubmit="onChat(this); return false;">
-		<textarea id="usertext-edit" required class="chat__input" name="message" cols="30" rows="10"
-                  onkeypress="onKeyPressed(event)"></textarea>
-        <!--<button name="name" type="submit">-->
-            <!--Отправить-->
-        <!--</button>-->
-    </form>
-</div>
-
+	<div class="js-login" hidden="hidden">
+	</div>
+	<div class="js-chat" hidden="hidden">
+	</div>
 
 	<script src="/components/button/button.js"></script>
-    <script src="/components/input/input.js"></script>
-    <script src="/components/form/form.js"></script>
+	<script src="/components/form/form.js"></script>
+	<script src="/components/chat/chat.js"></script>
+
 	<script src="/libs/technolibs/index.js"></script>
 	<script src="main.js"></script>
-
 </body>
 </html>
-

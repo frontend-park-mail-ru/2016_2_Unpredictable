@@ -10,26 +10,25 @@ module.exports = {
 	"host": "http://localhost:3000",
 
 	paths: {
-		'/messages': require('./resources/messages')
+		'/messages': require('./resources/messages'),
+		'/session': require('./resources/session'),
+		'/user': require('./resources/user'),
+
 		// TODO
 		/*
-		'/users': require('./resourses/users'),
-		'/users/:id': require('./resourses/user'),
-		'/sessions': require('./resourses/sessions'),
-		'/sessions/:sessionid': require('./resourses/session')
+		 '/users': require('./resourses/users'),
+		 '/users/:id': require('./resourses/user'),
+		 '/sessions': require('./resourses/sessions'),
+		 '/sessions/:sessionid': require('./resourses/session')
 
 
-		*/
+		 */
 	},
 
 	definitions: {
 		Message: require('./scheme/Message'),
-		// TODO
-		/*
-		User: require(...),
-		Session: require(...)
-
-		*/
+		Session: require('./scheme/Session'),
+		User: require('./scheme/User'),
 	}
 
-};
+}
