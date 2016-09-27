@@ -1,26 +1,47 @@
-exports.post = {
+exports.get = {
   "tags": ["user"],
-  "description": "Метод создания пользователя",
+  "description": "Метод получения информации о пользователе",
 
   "parameters": [
     {
-      "name": "login",
-      "description": "Логин пользователя",
-      "type": "string"
+      "name": "id",
+      "description": "Id сессии",
+      "type": "integer",
+      "in": "path",
+      "required": true
     },
-    {
-      "name": "password",
-      "description": "Пароль пользователя",
-      "type": "string"
-    }
   ],
 
   "responses": {
     "200": {
-      "description": "Id пользователя",
+      "description": "Информация о пользователе",
       "schema": {
-        "$ref": "#/definitions/Session"
+        "$ref": "#/definitions/User"
       }
+    },
+    "401": {
+      "description": "Ошибка при выполнении запроса"
+    }
+  }
+};
+
+exports.delete = {
+  "tags": ["user"],
+  "description": "Метод удаления пользователя",
+
+  "parameters": [
+    {
+      "name": "id",
+      "description": "Id сессии",
+      "type": "integer",
+      "in": "path",
+      "required": true
+    },
+  ],
+
+  "responses": {
+    "200": {
+      "description": "Успешный запрос"
     },
     "403": {
       "description": "Ошибка при выполнении запроса"
