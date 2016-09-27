@@ -6,15 +6,30 @@ module.exports = {
 		"description": "**ТехноЧат**"
 	},
 	"basePath": "/api",
-	"schemes": ["http"],
-   	"host": "http://localhost:3000",
+	"schemes": ["http", "https"],
+	"host": "http://localhost:3000",
 
 	paths: {
 		'/messages': require('./resources/messages')
+		// TODO
+		/*
+		'/users': require('./resourses/users'),
+		'/users/:id': require('./resourses/user'),
+		'/sessions': require('./resourses/sessions'),
+		'/sessions/:sessionid': require('./resourses/session')
+
+
+		*/
 	},
 
 	definitions: {
 		Message: require('./scheme/Message'),
+		// TODO
+		/*
+		User: require(...),
+		Session: require(...)
+
+		*/
 	}
 
-}
+};

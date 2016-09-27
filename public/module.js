@@ -4,30 +4,30 @@
 	// Class
 
 	class Animal {
-		constructor (options) {
+		constructor(options) {
 			this.name = options.name;
 			console.log('Creating new instance!');
 		}
 
-		sayHello () {
+		sayHello() {
 			console.log(`Hello! I am ${this.name}`);
 		}
 	}
 
 
 	class Dog extends Animal {
-		constructor (options) {
+		constructor(options) {
 			super(options);
 
 			this.someField = 'foo';
 		}
 
-		bark () {
+		bark() {
 			super.sayHello();
 			console.log('Woff-woff!')
 		}
 
-		static catchDog (dog) {
+		static catchDog(dog) {
 			Dog.__instances.push(dog);
 		}
 

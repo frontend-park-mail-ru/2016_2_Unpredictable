@@ -3,7 +3,7 @@ exports.post = {
 	"description": "Метод создает новое сообщение",
 	"parameters": [
 		{
-			"name": "email",
+			"name": "id",
 			"description": "Имя пользователя",
 			"type": "string"
 		},
@@ -23,38 +23,7 @@ exports.post = {
 		"400": {
 			"description": "Ошибка при выполнении запроса"
 		}
-	},
-	"x-amples": [{
-		"description": "создание тестового сообщения",
-		"request": {
-			"params": {
-				"login": "test",
-				"text": "Проверяем"
-			}
-		},
-		"response": {
-			"status": 200,
-			"headers": {
-				"content-type": "application/json"
-			},
-			"validator": function (res) {
-
-				if (typeof res.id !== 'number' ) {
-					return 'не корректный id';
-				}
-
-				if (typeof res.message !== 'string') {
-					return 'не корректный текст сообщения';
-				}
-
-				if (typeof res.email !== 'string') {
-					return 'не корректный login';
-				}
-
-				return true;
-			}
-		}
-	}]
+	}
 };
 
 exports.get = {
@@ -71,28 +40,6 @@ exports.get = {
 				}
 			}
 		}
-	},
-
-	"x-amples": [{
-		"description": "получение списка сообщений",
-		"request": {
-			"params": {}
-		},
-		"response": {
-			"status": 200,
-			"headers": {
-				"content-type": "application/json"
-			},
-			"validator": function (res) {
-
-				if (Array.isArray(res)) {
-					return true;
-				}
-
-				return 'не корректный список сообщений';
-			}
-		}
-	}]
-
+	}
 
 }

@@ -1,7 +1,9 @@
-let assert = require('assert');
-let hello = require('./public/main').hello;
-let plural = require('./public/main').plural;
-let filter = require('./public/main').filter;
+'use strict';
+
+const assert = require('assert');
+const hello = require('./public/main').hello;
+const plural = require('./public/main').plural;
+const filter = require('./public/main').filter;
 
 assert.equal(hello('Test'), 'Привет, Test');
 
