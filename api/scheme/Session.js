@@ -3,12 +3,17 @@ module.exports =  {
 	"description": "Сессия",
 
 	"properties": {
-		"id": {
+		"sessionid": {
 			"description": "Id авторизационной сессии",
 			"type": "integer",
 			"minimum": 0
+		},
+		"userid":{
+			"description" : "Id пользователя, связанного с сессией",
+			"type" : "integer",
+			"minimum" : 0
 		}
 	},
 
-	"required": ["id"]
+	"required": ["sessionid", "userid"]
 };

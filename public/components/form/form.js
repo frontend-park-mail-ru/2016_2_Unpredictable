@@ -17,7 +17,7 @@
 		}
 
 		render () { 
-			this._updateHtml()
+			this._updateHtml();
 			this._installControls();
 		}
 		

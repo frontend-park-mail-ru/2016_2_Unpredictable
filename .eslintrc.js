@@ -28,6 +28,12 @@ module.exports = {
 		"prefer-arrow-callback": 0,
 		"comma-dangle": 0,
 		"no-console": 0,
-		"func-names": 0
-	}
+		"func-names": 0,
+		"eol-last": 2,
+		"no-plusplus" : 0,
+		"arrow-parens" : 0,
+		"wrap-iife" : 0,
+		"no-param-reassign" : 0
+	},
+
 };

@@ -1,17 +1,16 @@
 (function () {
 	'use strict';
-	
+
 	if (typeof window === 'object') {
-	
-		//import
-		let Button = window.Button;
-		let Chat = window.Chat;
-		let Form = window.Form;
-		
-		let loginPage = document.querySelector('.js-login');
-		let chatPage = document.querySelector('.js-chat');
-		
-		let form = new Form({
+		// import
+
+		const Button = window.Button;
+		const Chat = window.Chat;
+		const Form = window.Form;
+		const loginPage = document.querySelector('.js-login');
+		const chatPage = document.querySelector('.js-chat');
+
+		const form = new Form({
 			el: document.createElement('div'),
 			data: {
 				title: 'Login',
@@ -35,33 +34,33 @@
 				]
 			}
 		});
-		
-		let chat = new Chat({
+
+		const chat = new Chat({
 			el: document.createElement('div'),
 		});
-		
+
 		form.on('submit', event => {
 			event.preventDefault();
-			
-			let formData = form.getFormData();
-			technolibs.request('/api/login', formData);
 
+			const formData = form.getFormData();
+			// fetch('/api/users',{ ... })
+			//  .then()
+			//  .catch()
 			chat.set({
 				username: formData.user,
 				email: formData.email
 			})
-			.render();
-			
+				.render();
+
 			chat.subscribe();
-			
+
 			loginPage.hidden = true;
 			chatPage.hidden = false;
 		});
-		
+
 		loginPage.appendChild(form.el);
 		chatPage.appendChild(chat.el);
-		
+
 		loginPage.hidden = false;
 	}
-
 })();
