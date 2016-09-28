@@ -33,7 +33,8 @@ module.exports = {
 		"no-plusplus" : 0,
 		"arrow-parens" : 0,
 		"wrap-iife" : 0,
-		"no-param-reassign" : 0
-	},
+		"no-param-reassign" : 0,
+		"prefer-template" : 0
+	}
 
 };

@@ -2,8 +2,8 @@ module.exports = {
 	"swagger": "2.0",
 	"info": {
 		"version": "0.0.3",
-		"title": "TechnoChat API",
-		"description": "**ТехноЧат**"
+		"title": "TechnoOsmos API",
+		"description": "**ТехноОсмос**"
 	},
 	"basePath": "/api",
 	"schemes": ["http", "https"],
@@ -16,7 +16,6 @@ module.exports = {
 		'/sessions/:sessionid': require('./resourses/session')
 	},
 	definitions: {
-		Message: require('./scheme/Message'),
 		Session: require('./scheme/Session'),
 		User: require('./scheme/User'),
 	}

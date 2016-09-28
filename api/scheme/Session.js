@@ -1,4 +1,4 @@
-module.exports =  {
+module.exports = {
 	"type": "object",
 	"description": "Сессия",
 
@@ -8,10 +8,10 @@ module.exports =  {
 			"type": "integer",
 			"minimum": 0
 		},
-		"userid":{
-			"description" : "Id пользователя, связанного с сессией",
-			"type" : "integer",
-			"minimum" : 0
+		"userid": {
+			"description": "Id пользователя, связанного с сессией",
+			"type": "integer",
+			"minimum": 0
 		}
 	},
 
