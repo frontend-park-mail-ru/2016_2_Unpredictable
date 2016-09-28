@@ -7,7 +7,7 @@ module.exports = {
 	},
 	"basePath": "/api",
 	"schemes": ["http", "https"],
-	"host": "http://localhost:3000",
+	"host": "https://unpredictable.herokuapp.com/",
 
 	paths: {
 		'/users': require('./resources/users'),
