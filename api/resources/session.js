@@ -16,23 +16,12 @@ exports.post = {
 	"responses": {
 		"200": {
 			"description": "Id сессии",
-		},
-		"400": {
-			"description": "Ошибка при выполнении запроса"
-		}
-	},
-		"response": {
-			"status": 200,
-			"headers": {
-				"content-type": "application/json"
+			"schema": {
+				"$ref": "#/definitions/Session"
 			},
-			"validator": function (res) {
-
-				if (typeof res.id !== 'number') {
-					return 'не корректный id';
-				}
-
-				return true;
+			"400": {
+				"description": "Ошибка при выполнении запроса"
 			}
 		}
+	}
 };

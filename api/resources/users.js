@@ -18,6 +18,9 @@ exports.post = {
 	"responses": {
 		"200": {
 			"description": "Id пользователя",
+			"schema": {
+				"$ref": "#/definitions/Session"
+			}
 		},
 		"403": {
 			"description": "Ошибка при выполнении запроса"
@@ -32,6 +35,9 @@ exports.get = {
 	"response": {
 		"200": {
 			"description": "Все пользоваетли",
+			"schema": {
+				"$ref": "#/definitions/Session"
+			}
 		},
 		"403": {
 			"descrition": "Ошибка выполнения запроса"
