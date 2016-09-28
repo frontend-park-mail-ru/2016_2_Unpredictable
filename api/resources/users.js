@@ -19,7 +19,7 @@ exports.post = {
 		"200": {
 			"description": "Id пользователя",
 			"schema": {
-				"$ref": "#/definitions/Session"
+				"$ref": "#/definitions/Users"
 			}
 		},
 		"403": {
@@ -36,7 +36,7 @@ exports.get = {
 		"200": {
 			"description": "Все пользоваетли",
 			"schema": {
-				"$ref": "#/definitions/Session"
+				"$ref": "#/definitions/Users"
 			}
 		},
 		"403": {
