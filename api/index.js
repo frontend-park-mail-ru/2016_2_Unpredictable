@@ -10,10 +10,10 @@ module.exports = {
 	"host": "http://localhost:3000",
 
 	paths: {
-		'/users': require('./resourses/users'),
-		'/users/:id': require('./resourses/user'),
-		'/sessions': require('./resourses/sessions'),
-		'/sessions/:sessionid': require('./resourses/session')
+		'/users': require('./resources/users'),
+		'/users/:id': require('./resources/user'),
+		'/sessions': require('./resources/sessions'),
+		'/sessions/:sessionid': require('./resources/session')
 	},
 	definitions: {
 		Session: require('./scheme/Session'),
