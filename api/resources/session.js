@@ -24,14 +24,6 @@ exports.post = {
 			"description": "Ошибка при выполнении запроса"
 		}
 	},
-	"x-amples": [{
-		"description": "логин пользователя",
-		"request": {
-			"params": {
-				"login": "dmitrydorofeev",
-				"password": "veeforodyrtimd"
-			}
-		},
 		"response": {
 			"status": 200,
 			"headers": {
