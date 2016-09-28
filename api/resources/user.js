@@ -15,9 +15,6 @@ exports.get = {
 	"responses": {
 		"200": {
 			"description": "Информация о пользователе",
-			"schema": {
-				"$ref": "#/definitions/User"
-			}
 		},
 		"401": {
 			"description": "Ошибка при выполнении запроса"

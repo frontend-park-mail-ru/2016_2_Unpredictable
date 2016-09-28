@@ -1,5 +1,5 @@
 exports.post = {
-	"tags": ["user"],
+	"tags": ["users"],
 	"description": "Метод создания пользователя",
 
 	"parameters": [
@@ -18,12 +18,23 @@ exports.post = {
 	"responses": {
 		"200": {
 			"description": "Id пользователя",
-			"schema": {
-				"$ref": "#/definitions/Session"
-			}
 		},
 		"403": {
 			"description": "Ошибка при выполнении запроса"
+		}
+	}
+};
+
+exports.get = {
+	"tags": ["users"],
+	"description": "Вывод всех пользователей",
+
+	"response": {
+		"200": {
+			"description": "Все пользоваетли",
+		},
+		"403": {
+			"descrition": "Ошибка выполнения запроса"
 		}
 	}
 };
