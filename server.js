@@ -1,27 +1,36 @@
-let express = require('express');
-let technologger = require('technologger');
-let parser = require('body-parser');
-let app = express();
+'use strict';
 
-app.use('/', express.static('public'));
+const express = require('express');
+const parser = require('body-parser');
+const technoDoc = require('techno-gendoc');
+const path = require('path');
+const technolibs = require('technolibs');
+
+const app = express();
+
+app.use('/', express.static('public', { maxAge: 1 }));
+technoDoc.generate(require('./api'), 'public');
 
 app.use(parser.json());
-//app.use(technologger);
-let emailDb = {};
-app.post('/users', (req, res, body) => {
-    console.log(req.body);
+app.use('/libs', express.static('node_modules'));
 
-    if (emailDb[req.body.email]) {
-        emailDb[req.body.email]++;
-    }
-    else {
-        emailDb[req.body.email] = 1;
-    }
-    console.log(emailDb[req.body.email]);
-    res.send(''+emailDb[req.body.email]);
-    // TODO: вернуть количество обращений
+app.get('/api/session', (req, res) => {
+	res.send(technoDoc.mock(require('./api/scheme/Session')));
 });
 
+app.post('/api/messages', function (req, res) {
+	technolibs.publish(req.body).then(body => res.json(req.body));
+});
+/*
+app.get('/api/messages', function (req, res) {
+	res.send([
+		technoDoc.mock(require('./api/scheme/Message')),
+		technoDoc.mock(require('./api/scheme/Message')),
+		technoDoc.mock(require('./api/scheme/Message')),
+		technoDoc.mock(require('./api/scheme/Message'))
+	]);
+});
+*/
 app.listen(process.env.PORT || 3000, () => {
 	console.log(`App started on port ${process.env.PORT || 3000}`);
 });

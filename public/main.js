@@ -1,54 +1,66 @@
-'use strict';
+(function () {
+	'use strict';
 
-function onSubmit(form) {
-    let data = {
-        user: form.elements ['user'].value,
-        email: form.elements ['email'].value
-    };
-    let res = request('/users', data);
-    //form.v
-    /*if(res == '5') {
-        form.hidden = true;
-        window.helloWorld.innerHTML = hello(data.user)
-    }*/
-    form.hidden = true;
-    window.helloRussian.innerHTML = hello(data.user) + name(res);
-    window.helloEnglish.innerHTML = hello_en(data.user, res);
-    console.log(data,res);
-}
+	if (typeof window === 'object') {
+		// import
 
-function plural(n) {
-    if (n % 10 === 1 || n === 1) {
-        return (n + ' раз!');
-    } else if (n % 10 === 2 || n % 10 === 3 || n % 10 === 4 ||
-        n === 2 || n === 3 || n === 4) {
-        if (!(n === 11 || n === 12 || n === 13 || n === 14)) {
-            return (n + ' раза!');
-        } else {
-            return (n + ' раз!');
-        }
-    } else {
-        return (n + ' раз!');
-    }
-}
-function plural_en(n) {
-    if (n == 1) {
-        return (n + ' time!');
-    }
-    else
-        return (n + ' times!');
-}
+		const Button = window.Button;
+		const Chat = window.Chat;
+		const Form = window.Form;
+		const loginPage = document.querySelector('.js-login');
+		const chatPage = document.querySelector('.js-chat');
 
-function hello(text) {
-    return ('Привет, ' + text);
-}
-function name(n) {
-    return (' ты был(а) здесь ' + plural(n));
-}
-function hello_en(text, n) {
-    return ('\nHello, ' + text + ' you have been here ' + plural_en(n));
-}
-if (typeof exports === 'object') {
-    exports.hello = hello;
-    exports.plural = plural;
-}
+		const form = new Form({
+			el: document.createElement('div'),
+			data: {
+				title: 'Login',
+				fields: [
+					{
+						name: 'user',
+						type: 'text'
+					},
+					{
+						name: 'email',
+						type: 'email'
+					}
+				],
+				controls: [
+					{
+						text: 'Войти',
+						attrs: {
+							type: 'submit'
+						}
+					}
+				]
+			}
+		});
+
+		const chat = new Chat({
+			el: document.createElement('div'),
+		});
+
+		form.on('submit', event => {
+			event.preventDefault();
+
+			const formData = form.getFormData();
+			// fetch('/api/users',{ ... })
+			//  .then()
+			//  .catch()
+			chat.set({
+				username: formData.user,
+				email: formData.email
+			})
+				.render();
+
+			chat.subscribe();
+
+			loginPage.hidden = true;
+			chatPage.hidden = false;
+		});
+
+		loginPage.appendChild(form.el);
+		chatPage.appendChild(chat.el);
+
+		loginPage.hidden = false;
+	}
+})();
