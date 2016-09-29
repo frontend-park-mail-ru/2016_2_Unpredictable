@@ -1,32 +1,16 @@
 (function () {
 	'use strict';
 
-	class Button {
-		constructor (options) {
-			this.text = options.text;
-			this.attrs = options.attrs || [];
-			this.el = document.createElement('button');
-		}
+	const Block = window.Block;
 
-		setAttrs (attrs) {
-			Object.keys(attrs).forEach(name => {
-				this.el.setAttribute(name, attrs[name]);
-			})
-		}
-
-		render () {
-			this.el.innerHTML = this.text;
-			this.el.classList.add('button');
-			this.setAttrs(this.attrs);
-			return this;
-		}
-		
-		toString () {
-			return this.el.outerHTML;
+	class Button extends Block{
+		constructor(text,options){
+			super('button', options);
+			this._el.innerText = text;
+			this._el.classList.add('button');
 		}
 	}
 
-	//export
 	window.Button = Button;
 
 })();

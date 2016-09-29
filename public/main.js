@@ -1,66 +1,58 @@
 (function () {
 	'use strict';
+	// TODO
+	/*
+	 fetch
+	 localStorage
+	 Promise
+	 call/apply
+	 bind
+	 cors
+	 JSDoc
+	 RegExp
+	 CSS
 
-	if (typeof window === 'object') {
-		// import
+	 */
 
-		const Button = window.Button;
-		const Chat = window.Chat;
-		const Form = window.Form;
-		const loginPage = document.querySelector('.js-login');
-		const chatPage = document.querySelector('.js-chat');
+	const SignForm = window.SignForm;
+	const AppForm = window.AppForm;
 
-		const form = new Form({
-			el: document.createElement('div'),
-			data: {
-				title: 'Login',
-				fields: [
-					{
-						name: 'user',
-						type: 'text'
-					},
-					{
-						name: 'email',
-						type: 'email'
-					}
-				],
-				controls: [
-					{
-						text: 'Войти',
-						attrs: {
-							type: 'submit'
-						}
-					}
-				]
-			}
-		});
+	const signPage = document.querySelector('.js-sign');
+	const appPage = document.querySelector('.js-app');
 
-		const chat = new Chat({
-			el: document.createElement('div'),
-		});
+	const showSignForm = function () {
+		signPage.hidden = true;
+		appPage.hidden = true;
 
-		form.on('submit', event => {
-			event.preventDefault();
+		const signForm = new SignForm();
+		signForm.onSignin(showAppForm);
+		signForm.onSignup(showAppForm);
 
-			const formData = form.getFormData();
-			// fetch('/api/users',{ ... })
-			//  .then()
-			//  .catch()
-			chat.set({
-				username: formData.user,
-				email: formData.email
+		signForm.renderTo(signPage);
+		signPage.hidden = false;
+
+	};
+
+	const showAppForm = function () {
+		signPage.hidden = true;
+		appPage.hidden = true;
+
+		const userid = window.localStorage.getItem('userid');
+		fetch('/api/users/' + userid, {method: 'GET'})
+			.then(function (resp) {
+				return resp.json();
 			})
-				.render();
+			.then(function (userInfo) {
+				window.localStorage.setItem('userLogin', userInfo.login);
+				const appForm = new AppForm({name: userInfo.login});
+				appForm.onLogout(showSignForm);
+				appForm.renderTo(appPage);
+				appPage.hidden = false;
+			});
 
-			chat.subscribe();
 
-			loginPage.hidden = true;
-			chatPage.hidden = false;
-		});
+	};
 
-		loginPage.appendChild(form.el);
-		chatPage.appendChild(chat.el);
+	showSignForm();
 
-		loginPage.hidden = false;
-	}
 })();

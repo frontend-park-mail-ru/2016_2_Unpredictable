@@ -96,7 +96,7 @@
 				this.renderMessages(Object.keys(data).map(key => data[key]));
 			});
 			
-			this.el.querySelector('.js-chat-form')
+			this.el.querySelector('.js-chat-formOld')
 				.addEventListener('submit', (event) => {
 					event.preventDefault();
 					this.onChat(event.target);

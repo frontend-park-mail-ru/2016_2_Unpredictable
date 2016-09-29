@@ -1,26 +1,19 @@
 (function () {
-    'use strict';
+	'use strict';
 
-    class Input {
-        constructor (options) {
-            this.el = document.createElement('input'); //
-            this.el.style.borderColor = options.borderColor || '';
-            this.el.classList.add('input');
-            this.setAttrs(options.attrs);
-        }
+	const Block = window.Block;
 
-        setAttrs (attrs) {
-            Object.keys(attrs).forEach(name => {
-                this.el.setAttribute(name, attrs[name]);
-            })
-        }
+	class Input extends Block {
+		constructor(options) {
+			super('input', options);
+		}
 
-        static include (input, el) {
-            el.appendChild(input.el);
-        }
-    }
+		getValue() {
+			return this._el.value;
+		}
 
-    //export
-    window.Input = Input;
+	}
+
+	window.Input = Input;
 
 })();
