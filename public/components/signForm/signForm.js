@@ -5,6 +5,7 @@
 	const Input = window.Input;
 	const Button = window.Button;
 	const Block = window.Block;
+	const fetch = window.fetch;
 
 	const validateLogin = function (login) {
 		if (!login || login.length === 0) {
@@ -102,10 +103,11 @@
 
 			const body = {
 				login: this._inputLogin.getValue(),
-				password: this._inputPassword.getValue()
+				password: this._inputPassword.getValue(),
+				email: 'api@api.com'
 			};
 
-			return fetch('/api/users', {
+			return fetch('https://morning-hamlet-29496.herokuapp.com/api/users', {
 				method: 'POST',
 				body: JSON.stringify(body),
 				headers: {
@@ -118,8 +120,8 @@
 				return Promise.reject(resp.json());
 			}).then(function (user) {
 				console.log(user);
-				window.localStorage.setItem('userid', user.id);
-				return fetch('/api/sessions', {
+				window.localStorage.setItem('userId', user.userid);
+				return fetch('https://morning-hamlet-29496.herokuapp.com/api/sessions', {
 					method: 'POST',
 					body: JSON.stringify(body),
 					headers: {
@@ -167,7 +169,7 @@
 				password: this._inputPassword.getValue()
 			};
 
-			return fetch('/api/sessions', {
+			return fetch('https://morning-hamlet-29496.herokuapp.com/api/sessions', {
 				method: 'POST',
 				body: JSON.stringify(body),
 				headers: {

@@ -5,6 +5,7 @@
 	const Input = window.Input;
 	const Button = window.Button;
 	const Block = window.Block;
+	const fetch = window.fetch;
 
 	class AppForm extends Form {
 		constructor(options) {
@@ -21,7 +22,7 @@
 		// логаут
 		_logout() {
 			const sessionid = window.localStorage.getItem('sessionid');
-			return fetch('/api/sessions/' + sessionid, {
+			return fetch('https://morning-hamlet-29496.herokuapp.com/api/sessions/' + sessionid, {
 				method: 'DELETE'
 			}).then(function () {
 				window.localStorage.clear();

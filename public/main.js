@@ -42,13 +42,13 @@
 	const showAppForm = function () {
 		clearPage();
 
-		const userid = window.localStorage.getItem('userid');
-		fetch('/api/users/' + userid, { method: 'GET' })
+		let userId = window.localStorage.getItem('userId');
+		fetch('/api/users/' + userId, { method: 'GET' })
 			.then(function (resp) {
 				return resp.json();
 			})
 			.then(function (userInfo) {
-				window.localStorage.setItem('userLogin', userInfo.login);
+				window.localStorage.setItem('login', userInfo.login);
 				const appForm = new AppForm({ name: userInfo.login });
 				appForm.onLogout(showSignForm);
 				appForm.renderTo(appPage);
@@ -57,20 +57,6 @@
 
 
 	};
-
-
-	/*const showSignForm = function () {
-		signPage.hidden = true;
-		appPage.hidden = true;
-
-		const signForm = new SignForm();
-		signForm.onSignin(showAppForm);
-		signForm.onSignup(showAppForm);
-
-		signForm.renderTo(signPage);
-		signPage.hidden = false;
-
-	};*/
 
 	showSignForm();
 

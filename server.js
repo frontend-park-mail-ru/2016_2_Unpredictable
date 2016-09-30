@@ -30,7 +30,7 @@ app.get('/api/users', function (req, res) {
 	const r = [...users.values()].map(user => {
 		user.password = undefined;
 		return user;
-	});
+	});https://www.google.ru/search?q=localhost%3A3000%2Fapi%2Fusers%2F&oq=localhost%3A3000%2Fapi%2Fusers%2F&aqs=chrome..69i58j69i57.3984j0j4&sourceid=chrome&ie=UTF-8
 	res.json(r);
 });
 
