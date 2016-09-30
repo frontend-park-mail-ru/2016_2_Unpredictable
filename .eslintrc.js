@@ -30,11 +30,18 @@ module.exports = {
 		"no-console": 0,
 		"func-names": 0,
 		"eol-last": 2,
-		"no-plusplus" : 0,
-		"arrow-parens" : 0,
-		"wrap-iife" : 0,
-		"no-param-reassign" : 0,
-		"prefer-template" : 0
-	}
+		"no-plusplus": 0,
+		"arrow-parens": 0,
+		"wrap-iife": 0,
+		"no-param-reassign": 0,
+		"prefer-template": 0,
+		"no-underscore-dangle": 0,
+		"padded-blocks": 0,
+		"consistent-return": 0,
+		"class-methods-use-this": 0,
+		"no-use-before-define": 0,
+		"object-curly-spacing": 0,
+		"newline-per-chained-call": 1
 
+	}
 };

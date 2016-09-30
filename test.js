@@ -1,8 +1,6 @@
 'use strict';
 
 const assert = require('assert');
-const hello = require('./public/main').hello;
-const plural = require('./public/main').plural;
 const filter = require('./public/filter').filter;
 
 assert.equal(filter('KEK'), '***');
@@ -14,4 +12,3 @@ assert.equal(filter('KEKs kekkek kek Kek Keeek KEk'), 'KEKs kekkek *** *** Keeek
 assert.equal(filter('Apple'), '*****');
 assert.equal(filter('OrangeJuce'), '**********');
 assert.equal(filter('Orange Orange'), '****** ******');
-

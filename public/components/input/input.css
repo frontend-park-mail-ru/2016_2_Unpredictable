@@ -1,5 +1,4 @@
-.input[type="text"]:hover:focus, input[type = "email"]:hover:focus{
-    border: .1rem solid #FFD700;
-    border-radius: .4rem;
-    outline: none;
+.input {
+	border: 100px solid #cccccc;
+	border-radius: 10px;
 }
