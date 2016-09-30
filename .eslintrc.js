@@ -30,11 +30,13 @@ module.exports = {
 		"no-console": 0,
 		"func-names": 0,
 		"eol-last": 2,
-		"no-plusplus" : 0,
-		"arrow-parens" : 0,
-		"wrap-iife" : 0,
-		"no-param-reassign" : 0,
-		"prefer-template" : 0
+		"no-plusplus": 0,
+		"arrow-parens": 0,
+		"wrap-iife": 0,
+		"no-param-reassign": 0,
+		"prefer-template": 0,
+		"linebreak-style": 0,
+		"no-underscore-dangle": 0
 	}
 
 };

@@ -13,16 +13,22 @@
 	 CSS
 
 	 */
-
+	const fetch = window.fetch;
 	const SignForm = window.SignForm;
 	const AppForm = window.AppForm;
 
 	const signPage = document.querySelector('.js-sign');
 	const appPage = document.querySelector('.js-app');
 
-	const showSignForm = function () {
+	const clearPage = function () {
 		signPage.hidden = true;
 		appPage.hidden = true;
+		signPage.innerHTML = '';
+		appPage.innerHTML = '';
+	};
+
+	const showSignForm = function () {
+		clearPage();
 
 		const signForm = new SignForm();
 		signForm.onSignin(showAppForm);
@@ -34,8 +40,7 @@
 	};
 
 	const showAppForm = function () {
-		signPage.hidden = true;
-		appPage.hidden = true;
+		clearPage();
 
 		const userid = window.localStorage.getItem('userid');
 		fetch('/api/users/' + userid, {method: 'GET'})
