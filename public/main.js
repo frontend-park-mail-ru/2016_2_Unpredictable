@@ -59,7 +59,7 @@
 	};
 
 
-	const showSignForm = function () {
+	/*const showSignForm = function () {
 		signPage.hidden = true;
 		appPage.hidden = true;
 
@@ -70,7 +70,7 @@
 		signForm.renderTo(signPage);
 		signPage.hidden = false;
 
-	};
+	};*/
 
 	showSignForm();
 
