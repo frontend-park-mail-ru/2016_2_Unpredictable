@@ -20,12 +20,11 @@
 		// TODO комментарии в стиле JSDoc
 		// логаут
 		_logout() {
-			const userid = window.localStorage.getItem('userid');
-			return fetch('/api/users' + userid, {
+			const sessionid = window.localStorage.getItem('sessionid');
+			return fetch('/api/sessions/' + sessionid, {
 				method: 'DELETE'
 			}).then(function () {
 				window.localStorage.clear();
-
 			}).catch(function (resp) {
 				console.log(JSON.parse(resp.body).error || 'Неизвестная ошибка. Попробуйте позже');
 			});
@@ -38,7 +37,7 @@
 				if (res) {
 					res.then(function () {
 						callback();
-					});
+					}).catch();
 				}
 			}.bind(this));
 		}
