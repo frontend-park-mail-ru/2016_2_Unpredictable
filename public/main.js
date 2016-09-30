@@ -43,13 +43,13 @@
 		clearPage();
 
 		let userId = window.localStorage.getItem('userId');
-		fetch('/api/users/' + userId, { method: 'GET' })
+		fetch('/api/users/' + userId, {method: 'GET'})
 			.then(function (resp) {
 				return resp.json();
 			})
 			.then(function (userInfo) {
 				window.localStorage.setItem('login', userInfo.login);
-				const appForm = new AppForm({ name: userInfo.login });
+				const appForm = new AppForm({name: userInfo.login});
 				appForm.onLogout(showSignForm);
 				appForm.renderTo(appPage);
 				appPage.hidden = false;
