@@ -12,4 +12,3 @@ assert.equal(filter('KEKs kekkek kek Kek Keeek KEk'), 'KEKs kekkek *** *** Keeek
 assert.equal(filter('Apple'), '*****');
 assert.equal(filter('OrangeJuce'), '**********');
 assert.equal(filter('Orange Orange'), '****** ******');
-

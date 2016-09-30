@@ -112,10 +112,13 @@
 					'Content-type': 'application/json; charset=UTF-8'
 				}
 			}).then(function (resp) {
-				return resp.json();
+				if (resp.status < 300) {
+					return resp.json();
+				}
+				return Promise.reject(resp.json());
 			}).then(function (user) {
 				console.log(user);
-				window.localStorage.setItem('userid', user.userid);
+				window.localStorage.setItem('userid', user.id);
 				return fetch('/api/sessions', {
 					method: 'POST',
 					body: JSON.stringify(body),
@@ -123,18 +126,23 @@
 						'Content-type': 'application/json; charset=UTF-8'
 					}
 				});
-			})
-				.then(function (resp) {
+			}).then(function (resp) {
+				if (resp.status < 300) {
 					return resp.json();
-				})
-				.then(function (session) {
-					console.log(session);
-					window.localStorage.setItem('sessionid', session.sessionid);
+				}
+				return Promise.reject(resp.json());
+			}).then(function (session) {
+				console.log(session);
+				window.localStorage.setItem('sessionid', session.sessionid);
 
-				})
-				.catch(function (resp) {
-					this._errorText._get().innerText = JSON.parse(resp.body).error || 'Неизвестная ошибка. Попробуйте позже';
-				}.bind(this));
+			}).catch(function (body) {
+				try {
+					this._errorText._get().innerText = body.error || 'Неизвестная ошибка. Попробуйте позже';
+				} catch (_) {
+					this._errorText._get().innerText = 'Неизвестная ошибка. Попробуйте позже';
+				}
+				return Promise.reject();
+			}.bind(this));
 		}
 
 		onSignup(callback) {
@@ -144,7 +152,7 @@
 				if (res) {
 					res.then(function () {
 						callback();
-					});
+					}).catch();
 				}
 			}.bind(this));
 		}
@@ -166,14 +174,22 @@
 					'Content-type': 'application/json; charset=UTF-8'
 				}
 			}).then(function (resp) {
-				return resp.json();
+				if (resp.status < 300) {
+					return resp.json();
+				}
+				return Promise.reject(resp.json());
 			}).then(function (session) {
 				console.log(session);
 				window.localStorage.setItem('userid', session.userid);
 				window.localStorage.setItem('sessionid', session.sessionid);
 
-			}).catch(function (resp) {
-				this._errorText._get().innerText = JSON.parse(resp.body).error || 'Неизвестная ошибка. Попробуйте позже';
+			}).catch(function (body) {
+				try {
+					this._errorText._get().innerText = body.error || 'Неизвестная ошибка. Попробуйте позже';
+				} catch (_) {
+					this._errorText._get().innerText = 'Неизвестная ошибка. Попробуйте позже';
+				}
+				return Promise.reject();
 			}.bind(this));
 		}
 
@@ -184,7 +200,7 @@
 				if (res) {
 					res.then(function () {
 						callback();
-					});
+					}).catch();
 				}
 			}.bind(this));
 		}
