@@ -1,18 +1,6 @@
 (function () {
 	'use strict';
-	// TODO
-	/*
-	 fetch
-	 localStorage
-	 Promise
-	 call/apply
-	 bind
-	 cors
-	 JSDoc
-	 RegExp
-	 CSS
 
-	 */
 	const fetch = window.fetch;
 	const SignForm = window.SignForm;
 	const AppForm = window.AppForm;
@@ -42,14 +30,19 @@
 	const showAppForm = function () {
 		clearPage();
 
-		let userId = window.localStorage.getItem('userId');
+		const userId = window.localStorage.getItem('userid');
 		fetch('/api/users/' + userId, {method: 'GET'})
 			.then(function (resp) {
 				return resp.json();
 			})
 			.then(function (userInfo) {
 				window.localStorage.setItem('login', userInfo.login);
-				const appForm = new AppForm({name: userInfo.login});
+				const appForm = new AppForm({
+					name: userInfo.login,
+					attrs: {
+						class: 'appForm'
+					}
+				});
 				appForm.onLogout(showSignForm);
 				appForm.renderTo(appPage);
 				appPage.hidden = false;

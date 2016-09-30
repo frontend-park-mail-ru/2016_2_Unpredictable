@@ -1,11 +1,11 @@
 .button {
-	background-color: #FF0000;
+	background-color: #FFD700;
 	border: .1rem solid #FFD700;
 	border-radius: .4rem;
-	color: #fff;
+	color: grey;
 	cursor: pointer;
 	display: inline-block;
-	font-size: 1.1rem;
+	font-size: 1.3rem;
 	font-weight: 700;
 	height: 3.8rem;
 	letter-spacing: .1rem;
@@ -15,6 +15,5 @@
 	text-decoration: none;
 	text-transform: uppercase;
 	white-space: nowrap;
-	margin-left: 40px;
 	margin-right:40px;
 }
