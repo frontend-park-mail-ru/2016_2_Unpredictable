@@ -20,6 +20,27 @@
 	const signPage = document.querySelector('.js-sign');
 	const appPage = document.querySelector('.js-app');
 
+	const showAppForm = function () {
+		signPage.hidden = true;
+		appPage.hidden = true;
+
+		const userid = window.localStorage.getItem('userid');
+		fetch('/api/users/' + userid, { method: 'GET' })
+			.then(function (resp) {
+				return resp.json();
+			})
+			.then(function (userInfo) {
+				window.localStorage.setItem('userLogin', userInfo.login);
+				const appForm = new AppForm({ name: userInfo.login });
+				appForm.onLogout(showSignForm);
+				appForm.renderTo(appPage);
+				appPage.hidden = false;
+			});
+
+
+	};
+
+
 	const showSignForm = function () {
 		signPage.hidden = true;
 		appPage.hidden = true;
@@ -30,26 +51,6 @@
 
 		signForm.renderTo(signPage);
 		signPage.hidden = false;
-
-	};
-
-	const showAppForm = function () {
-		signPage.hidden = true;
-		appPage.hidden = true;
-
-		const userid = window.localStorage.getItem('userid');
-		fetch('/api/users/' + userid, {method: 'GET'})
-			.then(function (resp) {
-				return resp.json();
-			})
-			.then(function (userInfo) {
-				window.localStorage.setItem('userLogin', userInfo.login);
-				const appForm = new AppForm({name: userInfo.login});
-				appForm.onLogout(showSignForm);
-				appForm.renderTo(appPage);
-				appPage.hidden = false;
-			});
-
 
 	};
 

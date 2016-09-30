@@ -1,5 +1,5 @@
 .button {
-	background-color: #FFD700;
+	background-color: #FF0000;
 	border: .1rem solid #FFD700;
 	border-radius: .4rem;
 	color: #fff;
@@ -15,4 +15,6 @@
 	text-decoration: none;
 	text-transform: uppercase;
 	white-space: nowrap;
+	margin-left: 40px;
+	margin-right:40px;
 }

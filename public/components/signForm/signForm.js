@@ -48,22 +48,29 @@
 	class SignForm extends Form {
 		constructor(options) {
 			super(options);
+			this._header = new Block('h1', {});
+			this._header._get().innerText = `Привет!`;
+			this._header1 = new Block('h3', {});
+			this._header1._get().innerText = `Залогинься или зарегистрируйся`;
 			this._inputLogin = new Input({
 				attrs: {
 					type: 'text',
-					name: 'login'
+					name: 'login',
+					placeholder: 'Введите свой логин'
 				}
 			});
 			this._inputPassword = new Input({
 				attrs: {
 					type: 'password',
-					name: 'password'
+					name: 'password',
+					placeholder: 'Введите свой пароль'
 				}
 			});
-			this._inButton = new Button('Sign in', {});
-			this._upButton = new Button('Sign up', {});
+			this._inButton = new Button('Залогиниться', {});
+			this._upButton = new Button('Зарегистрироваться', {});
 			this._errorText = new Block('div', {});
-			//this.append(greating._get());
+			this.append(this._header._get());
+			this.append(this._header1._get());
 			this.append(this._inputLogin._get());
 			this.append(this._inputPassword._get());
 			this.append(this._errorText._get());
@@ -102,7 +109,7 @@
 				method: 'POST',
 				body: JSON.stringify(body),
 				headers: {
-					"Content-type": "application/json; charset=UTF-8"
+					'Content-type': 'application/json; charset=UTF-8'
 				}
 			}).then(function (resp) {
 				return resp.json();
@@ -113,18 +120,21 @@
 					method: 'POST',
 					body: JSON.stringify(body),
 					headers: {
-						"Content-type": "application/json; charset=UTF-8"
+						'Content-type': 'application/json; charset=UTF-8'
 					}
 				});
-			}).then(function (resp) {
-				return resp.json();
-			}).then(function (session) {
-				console.log(session);
-				window.localStorage.setItem('sessionid', session.sessionid);
+			})
+				.then(function (resp) {
+					return resp.json();
+				})
+				.then(function (session) {
+					console.log(session);
+					window.localStorage.setItem('sessionid', session.sessionid);
 
-			}).catch(function (resp) {
-				this._errorText._get().innerText = JSON.parse(resp.body).error || 'Неизвестная ошибка. Попробуйте позже';
-			}.bind(this));
+				})
+				.catch(function (resp) {
+					this._errorText._get().innerText = JSON.parse(resp.body).error || 'Неизвестная ошибка. Попробуйте позже';
+				}.bind(this));
 		}
 
 		onSignup(callback) {
@@ -153,7 +163,7 @@
 				method: 'POST',
 				body: JSON.stringify(body),
 				headers: {
-					"Content-type": "application/json; charset=UTF-8"
+					'Content-type': 'application/json; charset=UTF-8'
 				}
 			}).then(function (resp) {
 				return resp.json();

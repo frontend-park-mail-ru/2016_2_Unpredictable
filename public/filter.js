@@ -9,5 +9,7 @@
 
 	if (typeof exports === 'object') {
 		exports.filter = filter;
+	} else {
+		window.filter = filter;
 	}
 })();
