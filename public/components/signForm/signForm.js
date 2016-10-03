@@ -111,12 +111,12 @@
 				email: 'api@api.com'
 			};
 
-			return fetch('/api/users', {
+			return fetch('https://morning-hamlet-29496.herokuapp.com/users', {
 				method: 'POST',
 				body: JSON.stringify(body),
 				mode : 'cors',
 				headers: {
-					'Content-type': 'https://morning-hamlet-29496.herokuapp.com/application/json; charset=UTF-8'
+					'Content-type': 'application/json; charset=UTF-8'
 				}
 			}).then(function (resp) {
 				if (resp.status < 300) {
@@ -126,12 +126,12 @@
 			}).then(function (user) {
 				console.log(user);
 				window.localStorage.setItem('userid', user.id);
-				return fetch('/api/sessions', {
+				return fetch('https://morning-hamlet-29496.herokuapp.com/sessions', {
 					method: 'POST',
 					body: JSON.stringify(body),
 					mode : 'cors',
 					headers: {
-						'Content-type': 'https://morning-hamlet-29496.herokuapp.com/application/json; charset=UTF-8'
+						'Content-type': 'application/json; charset=UTF-8'
 					}
 				});
 			}).then(function (resp) {
@@ -176,7 +176,7 @@
 				password: this._inputPassword.getValue()
 			};
 
-			return fetch('https://morning-hamlet-29496.herokuapp.com//api/sessions', {
+			return fetch('https://morning-hamlet-29496.herokuapp.com/sessions', {
 				method: 'POST',
 				body: JSON.stringify(body),
 				mode : 'cors',
