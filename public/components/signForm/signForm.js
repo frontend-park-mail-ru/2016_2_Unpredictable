@@ -116,7 +116,7 @@
 				body: JSON.stringify(body),
 				mode : 'cors',
 				headers: {
-					'Content-type': 'application/json; charset=UTF-8'
+					'Content-type': 'https://morning-hamlet-29496.herokuapp.com/application/json; charset=UTF-8'
 				}
 			}).then(function (resp) {
 				if (resp.status < 300) {
@@ -131,7 +131,7 @@
 					body: JSON.stringify(body),
 					mode : 'cors',
 					headers: {
-						'Content-type': 'application/json; charset=UTF-8'
+						'Content-type': 'https://morning-hamlet-29496.herokuapp.com/application/json; charset=UTF-8'
 					}
 				});
 			}).then(function (resp) {
@@ -176,7 +176,7 @@
 				password: this._inputPassword.getValue()
 			};
 
-			return fetch('/api/sessions', {
+			return fetch('https://morning-hamlet-29496.herokuapp.com//api/sessions', {
 				method: 'POST',
 				body: JSON.stringify(body),
 				mode : 'cors',

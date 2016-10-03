@@ -6,5 +6,4 @@
 	const app = new Application();
 	app.renderTo(document.body);
 
-
 })();
