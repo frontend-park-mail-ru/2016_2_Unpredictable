@@ -49,7 +49,9 @@
 	class SignForm extends Form {
 		constructor(options) {
 			super(options);
-			this._header = new Block('h1', {});
+			this._header = new Block('h1', {attrs: {
+				class: 'header'
+			}});
 			this._header._get().innerText = `Привет!`;
 			this._header1 = new Block('h3', {});
 			this._header1._get().innerText = `Залогинься или зарегистрируйся`;
@@ -69,7 +71,9 @@
 			});
 			this._inButton = new Button('Залогиниться', {});
 			this._upButton = new Button('Зарегистрироваться', {});
-			this._errorText = new Block('div', {});
+			this._errorText = new Block('div', {attrs: {
+				class: 'error'
+			}});
 			this.append(this._header._get());
 			this.append(this._header1._get());
 			this.append(this._inputLogin._get());
@@ -107,7 +111,7 @@
 				email: 'api@api.com'
 			};
 
-			return fetch('https://morning-hamlet-29496.herokuapp.com/api/users', {
+			return fetch('/api/users', {
 				method: 'POST',
 				body: JSON.stringify(body),
 				mode : 'cors',
@@ -121,8 +125,8 @@
 				return Promise.reject(resp.json());
 			}).then(function (user) {
 				console.log(user);
-				window.localStorage.setItem('userId', user.userid);
-				return fetch('https://morning-hamlet-29496.herokuapp.com/api/sessions', {
+				window.localStorage.setItem('userid', user.id);
+				return fetch('/api/sessions', {
 					method: 'POST',
 					body: JSON.stringify(body),
 					mode : 'cors',
@@ -138,13 +142,14 @@
 			}).then(function (session) {
 				console.log(session);
 				window.localStorage.setItem('sessionid', session.sessionid);
-
-			}).catch(function (body) {
-				try {
-					this._errorText._get().innerText = body.error || 'Неизвестная ошибка. Попробуйте позже';
-				} catch (_) {
-					this._errorText._get().innerText = 'Неизвестная ошибка. Попробуйте позже';
-				}
+			}).catch(function (data) {
+				data.then(function (obj) {
+					try {
+						this._errorText._get().innerText = obj.error || 'Неизвестная ошибка. Попробуйте позже';
+					} catch (_) {
+						this._errorText._get().innerText = 'Неизвестная ошибка. Попробуйте позже';
+					}
+				}.bind(this));
 				return Promise.reject();
 			}.bind(this));
 		}
@@ -171,7 +176,7 @@
 				password: this._inputPassword.getValue()
 			};
 
-			return fetch('https://morning-hamlet-29496.herokuapp.com/api/sessions', {
+			return fetch('/api/sessions', {
 				method: 'POST',
 				body: JSON.stringify(body),
 				mode : 'cors',
@@ -188,12 +193,14 @@
 				window.localStorage.setItem('userid', session.userid);
 				window.localStorage.setItem('sessionid', session.sessionid);
 
-			}).catch(function (body) {
-				try {
-					this._errorText._get().innerText = body.error || 'Неизвестная ошибка. Попробуйте позже';
-				} catch (_) {
-					this._errorText._get().innerText = 'Неизвестная ошибка. Попробуйте позже';
-				}
+			}).catch(function (data) {
+				data.then(function (obj) {
+					try {
+						this._errorText._get().innerText = obj.error || 'Неизвестная ошибка. Попробуйте позже';
+					} catch (_) {
+						this._errorText._get().innerText = 'Неизвестная ошибка. Попробуйте позже';
+					}
+				}.bind(this));
 				return Promise.reject();
 			}.bind(this));
 		}
