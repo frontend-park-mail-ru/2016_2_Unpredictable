@@ -110,6 +110,7 @@
 			return fetch('https://morning-hamlet-29496.herokuapp.com/api/users', {
 				method: 'POST',
 				body: JSON.stringify(body),
+				mode : 'cors',
 				headers: {
 					'Content-type': 'application/json; charset=UTF-8'
 				}
@@ -124,6 +125,7 @@
 				return fetch('https://morning-hamlet-29496.herokuapp.com/api/sessions', {
 					method: 'POST',
 					body: JSON.stringify(body),
+					mode : 'cors',
 					headers: {
 						'Content-type': 'application/json; charset=UTF-8'
 					}
@@ -172,6 +174,7 @@
 			return fetch('https://morning-hamlet-29496.herokuapp.com/api/sessions', {
 				method: 'POST',
 				body: JSON.stringify(body),
+				mode : 'cors',
 				headers: {
 					'Content-type': 'application/json; charset=UTF-8'
 				}
