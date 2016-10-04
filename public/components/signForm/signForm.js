@@ -49,9 +49,11 @@
 	class SignForm extends Form {
 		constructor(options) {
 			super(options);
-			this._header = new Block('h1', {attrs: {
-				class: 'header'
-			}});
+			this._header = new Block('h1', {
+				attrs: {
+					class: 'header'
+				}
+			});
 			this._header._get().innerText = `Привет!`;
 			this._header1 = new Block('h3', {});
 			this._header1._get().innerText = `Залогинься или зарегистрируйся`;
@@ -71,9 +73,11 @@
 			});
 			this._inButton = new Button('Залогиниться', {});
 			this._upButton = new Button('Зарегистрироваться', {});
-			this._errorText = new Block('div', {attrs: {
-				class: 'error'
-			}});
+			this._errorText = new Block('div', {
+				attrs: {
+					class: 'error'
+				}
+			});
 			this.append(this._header._get());
 			this.append(this._header1._get());
 			this.append(this._inputLogin._get());
@@ -111,9 +115,10 @@
 				email: 'api@api.com'
 			};
 
-			return fetch('/api/users', {
+			return fetch('https://morning-hamlet-29496.herokuapp.com/api/users', {
 				method: 'POST',
 				body: JSON.stringify(body),
+				mode: 'cors',
 				headers: {
 					'Content-type': 'application/json; charset=UTF-8'
 				}
@@ -124,10 +129,11 @@
 				return Promise.reject(resp.json());
 			}).then(function (user) {
 				console.log(user);
-				window.localStorage.setItem('userid', user.id);
-				return fetch('/api/sessions', {
+				window.localStorage.setItem('userid', user.userid);
+				return fetch('https://morning-hamlet-29496.herokuapp.com/api/sessions', {
 					method: 'POST',
 					body: JSON.stringify(body),
+					mode: 'cors',
 					headers: {
 						'Content-type': 'application/json; charset=UTF-8'
 					}
@@ -158,6 +164,7 @@
 				const res = this._signup();
 				if (res) {
 					res.then(function () {
+						console.log('on signin callback');
 						callback();
 					}).catch();
 				}
@@ -174,9 +181,10 @@
 				password: this._inputPassword.getValue()
 			};
 
-			return fetch('/api/sessions', {
+			return fetch('https://morning-hamlet-29496.herokuapp.com/api/sessions', {
 				method: 'POST',
 				body: JSON.stringify(body),
+				mode: 'cors',
 				headers: {
 					'Content-type': 'application/json; charset=UTF-8'
 				}
@@ -187,17 +195,15 @@
 				return Promise.reject(resp.json());
 			}).then(function (session) {
 				console.log(session);
-				window.localStorage.setItem('userid', session.userid);
+				window.localStorage.setItem('userid', session.userId);
 				window.localStorage.setItem('sessionid', session.sessionid);
-
+				return true;
 			}).catch(function (data) {
-				data.then(function (obj) {
-					try {
-						this._errorText._get().innerText = obj.error || 'Неизвестная ошибка. Попробуйте позже';
-					} catch (_) {
-						this._errorText._get().innerText = 'Неизвестная ошибка. Попробуйте позже';
-					}
-				}.bind(this));
+				try {
+					this._errorText._get().innerText = data.error || 'Неизвестная ошибка. Попробуйте позже';
+				} catch (_) {
+					this._errorText._get().innerText = 'Неизвестная ошибка. Попробуйте позже';
+				}
 				return Promise.reject();
 			}.bind(this));
 		}
@@ -208,6 +214,7 @@
 				const res = this._signin();
 				if (res) {
 					res.then(function () {
+						console.log('on signin callback');
 						callback();
 					}).catch();
 				}

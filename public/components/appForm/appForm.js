@@ -10,11 +10,7 @@
 	class AppForm extends Form {
 		constructor(options) {
 			super(options);
-			this._logoutButton = new Button('Log out', {
-				attrs: {
-					class: 'nomargin'
-				}}
-			);
+			this._logoutButton = new Button('Log out', {});
 			this._header = new Block('h1', {});
 			this._header._get().innerText = `Hello, ${this._options.name || 'Anon'}`;
 			this.append(this._header._get());
@@ -26,8 +22,9 @@
 		// логаут
 		_logout() {
 			const sessionid = window.localStorage.getItem('sessionid');
-			return fetch('/api/sessions/' + sessionid, {
-				method: 'DELETE'
+			return fetch('https://morning-hamlet-29496.herokuapp.com/api/sessions/' + sessionid, {
+				method: 'DELETE',
+				mode :'cors'
 			}).then(function () {
 				window.localStorage.clear();
 			}).catch(function (resp) {
