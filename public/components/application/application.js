@@ -9,20 +9,28 @@
 	const signPage = document.querySelector('.js-sign');
 	const appPage = document.querySelector('.js-app');
 
+	function clearPage() {
+		signPage.hidden = true;
+		appPage.hidden = true;
+		signPage.innerHTML = '';
+		appPage.innerHTML = '';
+	}
+
 	class Application extends Block {
 		constructor() {
 			super('div', {});
-			this.signFunc = this.showSignForm;
-			this.appFunc = this.showAppForm;
+
+			this.showSignForm = this.showSignForm.bind(this);
+			this.showAppForm = this.showAppForm.bind(this);
 			this.showSignForm();
 		}
 
 		showSignForm() {
-			this.clearPage();
+			clearPage();
 
 			const signForm = new SignForm();
-			signForm.onSignin(this.signFunc);
-			signForm.onSignup(this.appFunc);
+			signForm.onSignin(this.showAppForm);
+			signForm.onSignup(this.showAppForm);
 
 			signForm.renderTo(signPage);
 			signPage.hidden = false;
@@ -30,9 +38,18 @@
 		};
 
 		showAppForm() {
-			this.clearPage();
-
-			let userId = window.localStorage.getItem('userId');
+			clearPage();
+			const _a = function (userInfo) {
+				window.localStorage.setItem('login', userInfo.login);
+				const appForm = new AppForm({name: window.localStorage.getItem('login')});
+				console.log(appForm);
+				appForm.onLogout(this.showSignForm);
+				signPage.hidden = true;
+				appPage.hidden = false;
+				appForm.renderTo(appPage);
+			};
+			console.log(this);
+			let userId = window.localStorage.getItem('userid');
 			fetch('https://morning-hamlet-29496.herokuapp.com/api/users/' + userId, {
 				method: 'GET',
 				mode: 'cors'
@@ -40,22 +57,10 @@
 				.then(function (resp) {
 					return resp.json();
 				})
-				.then(function (userInfo) {
-					window.localStorage.setItem('login', userInfo.login);
-					const appForm = new AppForm({name: userInfo.login});
-					appForm.onLogout(this.signFunc);
-					appForm.renderTo(appPage);
-					appPage.hidden = false;
-				});
+				.then(_a.bind(this));
 
 		};
 
-		clearPage() {
-			signPage.hidden = true;
-			appPage.hidden = true;
-			signPage.innerHTML = '';
-			appPage.innerHTML = '';
-		};
 
 	}
 
