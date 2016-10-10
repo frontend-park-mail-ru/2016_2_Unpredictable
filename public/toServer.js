@@ -18,14 +18,13 @@
 			}
 			return Promise.reject(resp.json());
 		}).then(function (answer) {
-			
+
 			console.log(answer);
-			debugger;
 			params.attrs.forEach(name => {
 				window.localStorage.setItem(name.toLowerCase(), answer[name]);
 			});
-			if(params.oneMore === true) {
-				let newParams = {
+			if (params.oneMore === true) {
+				const newParams = {
 					url: 'api/sessions',
 					method: 'POST',
 					attrs: ['sessionid'],
@@ -33,12 +32,12 @@
 					oneMore: false
 				};
 				sendToServer(newParams);
-			}
-			else
+			} else {
 				return {};
+			}
 		}).catch(function (data) {
 			try {
-				this._errorText._get().innerText = obj.error || 'Неизвестная ошибка. Попробуйте позже';
+				this._errorText._get().innerText = 'Неизвестная ошибка. Попробуйте позже';
 			} catch (_) {
 				this._errorText._get().innerText = 'Неизвестная ошибка. Попробуйте позже';
 			}
