@@ -33,7 +33,7 @@
 				.then(_a.bind(this));
 		};
 
-		showSignForm(){
+		showSignForm() {
 			this.hide();
 			return this.router.go('/');
 		};

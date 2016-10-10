@@ -118,10 +118,10 @@
 
 			let params = {
 				method: 'POST',
-				url : 'api/users',
-				attrs : ['userid'],
-				body : body,
-				oneMore : true
+				url: 'api/users',
+				attrs: ['userid'],
+				body: body,
+				oneMore: true
 			};
 
 			return sendToServer(params);
@@ -152,10 +152,10 @@
 
 			let params = {
 				method: 'POST',
-				url : 'api/sessions',
-				attrs : ['userId', 'sessionid'],
-				body : body,
-				oneMore : false
+				url: 'api/sessions',
+				attrs: ['userId', 'sessionid'],
+				body: body,
+				oneMore: false
 			};
 			return sendToServer(params);
 		}
