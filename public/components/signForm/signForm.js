@@ -6,6 +6,7 @@
 	const Button = window.Button;
 	const Block = window.Block;
 	const fetch = window.fetch;
+	const sendToServer = window.sendToServer;
 
 	const validateLogin = function (login) {
 		if (!login || login.length === 0) {
@@ -115,47 +116,15 @@
 				email: 'api@api.com'
 			};
 
-			return fetch('https://morning-hamlet-29496.herokuapp.com/api/users', {
+			let params = {
 				method: 'POST',
-				body: JSON.stringify(body),
-				mode: 'cors',
-				headers: {
-					'Content-type': 'application/json; charset=UTF-8'
-				}
-			}).then(function (resp) {
-				if (resp.status < 300) {
-					return resp.json();
-				}
-				return Promise.reject(resp.json());
-			}).then(function (user) {
-				console.log(user);
-				window.localStorage.setItem('userid', user.userid);
-				return fetch('https://morning-hamlet-29496.herokuapp.com/api/sessions', {
-					method: 'POST',
-					body: JSON.stringify(body),
-					mode: 'cors',
-					headers: {
-						'Content-type': 'application/json; charset=UTF-8'
-					}
-				});
-			}).then(function (resp) {
-				if (resp.status < 300) {
-					return resp.json();
-				}
-				return Promise.reject(resp.json());
-			}).then(function (session) {
-				console.log(session);
-				window.localStorage.setItem('sessionid', session.sessionid);
-			}).catch(function (data) {
-				data.then(function (obj) {
-					try {
-						this._errorText._get().innerText = obj.error || 'Неизвестная ошибка. Попробуйте позже';
-					} catch (_) {
-						this._errorText._get().innerText = 'Неизвестная ошибка. Попробуйте позже';
-					}
-				}.bind(this));
-				return Promise.reject();
-			}.bind(this));
+				url : 'api/users',
+				attrs : ['userid'],
+				body : body,
+				oneMore : true
+			};
+
+			return sendToServer(params);
 		}
 
 		onSignup(callback) {
@@ -181,31 +150,14 @@
 				password: this._inputPassword.getValue()
 			};
 
-			return fetch('https://morning-hamlet-29496.herokuapp.com/api/sessions', {
+			let params = {
 				method: 'POST',
-				body: JSON.stringify(body),
-				mode: 'cors',
-				headers: {
-					'Content-type': 'application/json; charset=UTF-8'
-				}
-			}).then(function (resp) {
-				if (resp.status < 300) {
-					return resp.json();
-				}
-				return Promise.reject(resp.json());
-			}).then(function (session) {
-				console.log(session);
-				window.localStorage.setItem('userid', session.userId);
-				window.localStorage.setItem('sessionid', session.sessionid);
-				return true;
-			}).catch(function (data) {
-				try {
-					this._errorText._get().innerText = data.error || 'Неизвестная ошибка. Попробуйте позже';
-				} catch (_) {
-					this._errorText._get().innerText = 'Неизвестная ошибка. Попробуйте позже';
-				}
-				return Promise.reject();
-			}.bind(this));
+				url : 'api/sessions',
+				attrs : ['userId', 'sessionid'],
+				body : body,
+				oneMore : false
+			};
+			return sendToServer(params);
 		}
 
 		onSignin(callback) {
