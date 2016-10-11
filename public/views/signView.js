@@ -21,7 +21,8 @@
 		};
 
 		showRegForm(){
-			return this.router.go('/registrate');
+			window.localStorage.setItem('fromSign' , 'true');
+			return this.router.go('/signup');
 		};
 
 	}

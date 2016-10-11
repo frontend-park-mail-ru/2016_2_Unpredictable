@@ -14,7 +14,7 @@ technoDoc.generate(require('./api'), 'public');
 const app = express();
 app.use('/', express.static('public', {maxAge: 1}));
 app.use('/app', express.static('public', {maxAge: 1}));
-app.use('/registrate', express.static('public', {maxAge: 1}));
+app.use('/signup', express.static('public', {maxAge: 1}));
 
 app.use(parser.json());
 app.use('/libs', express.static('node_modules'));

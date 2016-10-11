@@ -17,7 +17,6 @@
 		}
 
 		resume(){
-			debugger;
 			if(window.localStorage.getItem('fromSign') === null) {
 				this.showSignForm();
 			} else {

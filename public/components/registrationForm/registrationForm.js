@@ -53,7 +53,6 @@
 			});
 			this._regButton = new Button('Зарегистрироваться', {});
 			this._backButton = new Button('Назад',{});
-			debugger;
 			this.append(this._header._get());
 			this.append(this._inputLogin._get());
 			this.append(this._inputEmail._get());
