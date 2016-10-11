@@ -1,0 +1,114 @@
+(function(){
+	'use strict';
+
+	const Form = window.Form;
+	const Input = window.Input;
+	const Button = window.Button;
+	const Block = window.Block;
+
+	class RegitrationForm extends Form{
+		constructor (options){
+			super(options);
+			this._header = new Block('h3' , {
+				attrs : {
+					class : 'header'
+				}
+			});
+			this._header._get().innerText = 'Введите свои данные';
+			this._inputLogin = new Input({
+				attrs: {
+					type: 'text',
+					name: 'login',
+					placeholder: 'Введите свой логин'
+				}
+			});
+			this._inputEmail = new Input({
+				attrs: {
+					type: 'text',
+					name: 'email',
+					placeholder: 'Введите свой email'
+				}
+			});
+			this._inputName = new Input({
+				attrs: {
+					type: 'text',
+					name: 'name',
+					placeholder: 'Введите свое имя'
+				}
+			});
+			this._inputPassword = new Input({
+				attrs: {
+					type: 'password',
+					name: 'password',
+					placeholder: 'Введите пароль'
+				}
+			});
+
+			this._inputRepeatPassword = new Input({
+				attrs: {
+					type: 'password',
+					name: 'reppassword',
+					placeholder: 'Подтвердите пароль'
+				}
+			});
+			this._regButton = new Button('Зарегистрироваться', {});
+			this._backButton = new Button('Назад',{});
+			debugger;
+			this.append(this._header._get());
+			this.append(this._inputLogin._get());
+			this.append(this._inputEmail._get());
+			this.append(this._inputName._get());
+			this.append(this._inputPassword._get());
+			this.append(this._inputRepeatPassword._get());
+			this.append(this._regButton._get());
+			this.append(this._backButton._get());
+
+		}
+
+
+		_registr(){
+			//TODO: validate
+
+			const body = {
+				login : this._inputLogin.getValue(),
+				email : this._inputName.getValue(),
+				name : this._inputName.getValue(),
+				password : this._inputName.getValue()
+			};
+
+			let params = {
+				method: 'POST',
+				url: 'api/users',
+				attrs: ['userid'],
+				body: body,
+				oneMore: true
+			};
+
+			return sendToServer(params);
+		}
+
+		onRegistration(callback){
+			this._regButton.on('click', function (button){
+				button.preventDefault();
+				const res = this._registr;
+				if(res){
+					res.then(function(){
+						callback();
+					})
+				}
+			}.bind(this))
+		}
+
+		onBack(callback){
+			this._backButton.on('click', function(button){
+				button.preventDefault();
+				callback();
+			})
+		}
+
+	}
+
+	window.RegistrationForm = RegitrationForm;
+
+
+})();

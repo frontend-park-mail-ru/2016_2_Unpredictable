@@ -17,9 +17,6 @@
 				this.appForm.onLogout(this.showSignForm.bind(this));
 				this.appForm.renderTo(this.getElement());
 			};
-			if(window.localStorage.getItem('sessionid') === null){
-				console.log(this.router);
-			}
 			let userid = window.localStorage.getItem('userid');
 			fetch('https://morning-hamlet-29496.herokuapp.com/api/users/' + userid, {
 				method: 'GET',
@@ -32,7 +29,7 @@
 		};
 
 		resume(){
-			if(window.localStorage.getItem('userid') === null){
+			if(window.localStorage.getItem('fromSign') === null){
 				this.showSignForm();
 			} else {
 				this.show();
@@ -40,7 +37,6 @@
 		}
 
 		showSignForm() {
-			console.log(this.router);
 			return this.router.go('/');
 		};
 

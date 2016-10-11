@@ -12,12 +12,16 @@
 
 		init(){
 			this.signForm.onSignin(this.showAppForm.bind(this));
-			this.signForm.onSignup(this.showAppForm.bind(this));
+			this.signForm.onSignup(this.showRegForm.bind(this));
 			this.signForm.renderTo(this.getElement());
 		}
 
 		showAppForm() {
 			return this.router.go('/app');
+		};
+
+		showRegForm(){
+			return this.router.go('/registrate');
 		};
 
 	}

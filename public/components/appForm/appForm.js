@@ -12,7 +12,6 @@
 			super(options);
 			this._logoutButton = new Button('Log out', {});
 			this._header = new Block('h1', {});
-			console.log(this);
 			this._header._get().innerText = `Hello, ${this._options.name || 'Anon'}`;
 			this.append(this._header._get());
 			this.append(this._logoutButton._get());

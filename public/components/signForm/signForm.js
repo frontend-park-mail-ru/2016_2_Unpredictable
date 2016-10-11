@@ -128,16 +128,10 @@
 		}
 
 		onSignup(callback) {
-			this._upButton.on('click', function (e) {
-				e.preventDefault();
-				const res = this._signup();
-				if (res) {
-					res.then(function () {
-						console.log('on signin callback');
-						callback();
-					}).catch();
-				}
-			}.bind(this));
+		this._upButton.on('click',function (button){
+			button.preventDefault();
+			callback();
+		})
 		}
 
 		_signin() {
@@ -166,6 +160,8 @@
 				const res = this._signin();
 				if (res) {
 					res.then(function () {
+						debugger;
+						window.localStorage.setItem('fromSign' , 'true');
 						console.log('on signin callback');
 						callback();
 					}).catch();
