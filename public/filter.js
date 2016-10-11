@@ -1,4 +1,5 @@
 (function () {
+
 	function filter(str, rules = ['KEK', 'Apple', 'Orange', 'OrangeJuce']) {
 		for (let i = 0; i < rules.length; i++) {
 			const regexp = new RegExp('\\b(' + rules[i] + ')\\b', 'gi');

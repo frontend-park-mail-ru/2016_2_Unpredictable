@@ -24,7 +24,7 @@
 			const sessionid = window.localStorage.getItem('sessionid');
 			return fetch('https://morning-hamlet-29496.herokuapp.com/api/sessions/' + sessionid, {
 				method: 'DELETE',
-				mode :'cors'
+				mode: 'cors'
 			}).then(function () {
 				window.localStorage.clear();
 			}).catch(function (resp) {

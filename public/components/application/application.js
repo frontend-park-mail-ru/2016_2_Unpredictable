@@ -48,7 +48,6 @@
 				appPage.hidden = false;
 				appForm.renderTo(appPage);
 			};
-			console.log(this);
 			let userId = window.localStorage.getItem('userid');
 			fetch('https://morning-hamlet-29496.herokuapp.com/api/users/' + userId, {
 				method: 'GET',
