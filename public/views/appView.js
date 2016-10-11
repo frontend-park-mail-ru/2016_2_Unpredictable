@@ -8,22 +8,20 @@
 	class AppView extends View {
 		constructor() {
 			super('js-app');
-			this.showAppForm();
 		}
 
-		showAppForm() {
-			this.getLogin();
-			const appForm = new AppForm({name: window.localStorage.getItem('login')});
-			appForm.onLogout(this.showSignForm.bind(this));
-			appForm.renderTo(this.getElement());
-		};
-
-		getLogin() {
+		init() {
 			const _a = function (userInfo) {
 				window.localStorage.setItem('login', userInfo.login);
+				this.appForm = new AppForm({name: window.localStorage.getItem('login')});
+				this.appForm.onLogout(this.showSignForm.bind(this));
+				this.appForm.renderTo(this.getElement());
 			};
-			let userId = window.localStorage.getItem('userid');
-			fetch('https://morning-hamlet-29496.herokuapp.com/api/users/' + userId, {
+			if(window.localStorage.getItem('sessionid') === null){
+				console.log(this.router);
+			}
+			let userid = window.localStorage.getItem('userid');
+			fetch('https://morning-hamlet-29496.herokuapp.com/api/users/' + userid, {
 				method: 'GET',
 				mode: 'cors'
 			})
@@ -33,8 +31,16 @@
 				.then(_a.bind(this));
 		};
 
+		resume(){
+			if(window.localStorage.getItem('userid') === null){
+				this.showSignForm();
+			} else {
+				this.show();
+			}
+		}
+
 		showSignForm() {
-			this.hide();
+			console.log(this.router);
 			return this.router.go('/');
 		};
 

@@ -16,7 +16,6 @@
 				this.tagName = options.tagName || 'div';
 				this._el = document.createElement(this.tagName);
 			}
-			this.init(options);
 		}
 
 		/**

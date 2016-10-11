@@ -7,20 +7,17 @@
 	class SignView extends View {
 		constructor() {
 			super('js-sign');
-			this.showSignForm();
+			this.signForm = new SignForm();
 		}
 
-		showSignForm() {
-			const signForm = new SignForm();
-			signForm.onSignin(this.showAppForm.bind(this));
-			signForm.onSignup(this.showAppForm.bind(this));
-			signForm.renderTo(this.getElement());
-		};
+		init(){
+			this.signForm.onSignin(this.showAppForm.bind(this));
+			this.signForm.onSignup(this.showAppForm.bind(this));
+			this.signForm.renderTo(this.getElement());
+		}
 
 		showAppForm() {
-			this.hide();
-			return this.router.go('/logout');
-
+			return this.router.go('/app');
 		};
 
 	}
