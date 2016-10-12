@@ -51,6 +51,11 @@
 					placeholder: 'Подтвердите пароль'
 				}
 			});
+			this._errorText = new Block('div', {
+				attrs: {
+					class: 'error'
+				}
+			});
 			this._regButton = new Button('Зарегистрироваться', {});
 			this._backButton = new Button('Назад',{});
 			this.append(this._header._get());
@@ -59,6 +64,7 @@
 			this.append(this._inputName._get());
 			this.append(this._inputPassword._get());
 			this.append(this._inputRepeatPassword._get());
+			this.append(this._errorText._get());
 			this.append(this._regButton._get());
 			this.append(this._backButton._get());
 
@@ -71,25 +77,25 @@
 			const body = {
 				login : this._inputLogin.getValue(),
 				email : this._inputName.getValue(),
-				name : this._inputName.getValue(),
+				//name : this._inputName.getValue(),
 				password : this._inputName.getValue()
 			};
 
-			let params = {
+			this.params = {
 				method: 'POST',
 				url: 'api/users',
 				attrs: ['userid'],
 				body: body,
-				oneMore: true
+				oneMore: true,
+				func : 'signup'
 			};
-
-			return sendToServer(params);
+			return sendToServer.call(this);
 		}
 
 		onRegistration(callback){
 			this._regButton.on('click', function (button){
 				button.preventDefault();
-				const res = this._registr;
+				const res = this._registr();
 				if(res){
 					res.then(function(){
 						callback();

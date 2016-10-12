@@ -18,12 +18,14 @@
 				this.appForm.renderTo(this.getElement());
 			};
 			let userid = window.localStorage.getItem('userid');
-			fetch('https://morning-hamlet-29496.herokuapp.com/api/users/' + userid, {
+			return fetch('https://morning-hamlet-29496.herokuapp.com/api/users/' + userid, {
 				method: 'GET',
 				mode: 'cors'
 			})
 				.then(function (resp) {
-					return resp.json();
+					if(resp.status < 300) {
+						return resp.json();
+					}
 				})
 				.then(_a.bind(this));
 		};

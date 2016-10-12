@@ -116,15 +116,16 @@
 				email: 'api@api.com'
 			};
 
-			let params = {
+			this.params = {
 				method: 'POST',
 				url: 'api/users',
 				attrs: ['userid'],
 				body: body,
-				oneMore: true
+				oneMore: true,
+				func : 'singin'
 			};
 
-			return sendToServer(params);
+			return sendToServer.call(this);
 		}
 
 		onSignup(callback) {
@@ -144,14 +145,15 @@
 				password: this._inputPassword.getValue()
 			};
 
-			let params = {
+			this.params = {
 				method: 'POST',
 				url: 'api/sessions',
 				attrs: ['userId', 'sessionid'],
 				body: body,
-				oneMore: false
+				oneMore: false,
+				func : 'signin'
 			};
-			return sendToServer(params);
+			return sendToServer.call(this);
 		}
 
 		onSignin(callback) {
@@ -160,7 +162,6 @@
 				const res = this._signin();
 				if (res) {
 					res.then(function () {
-						debugger;
 						window.localStorage.setItem('fromSign' , 'true');
 						console.log('on signin callback');
 						callback();
