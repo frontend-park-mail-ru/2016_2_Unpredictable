@@ -1,9 +1,9 @@
 (function () {
 	'use strict';
+	const fetch = window.fetch;
 
-	function sendToServer(params) {
+	function sendToServer() {
 
-		const fetch = window.fetch;
 		console.log(this);
 		return fetch('https://morning-hamlet-29496.herokuapp.com/' + this.params.url, {
 			method: this.params.method,
@@ -18,24 +18,19 @@
 			}
 			return Promise.reject(resp.json());
 		}).then(function (answer) {
-
 			console.log(answer);
-			params.attrs.forEach(name => {
+			this.params.attrs.forEach(name => {
 				window.localStorage.setItem(name.toLowerCase(), answer[name]);
 			});
-			if (params.oneMore === true) {
-				const newParams = {
-					url: 'api/sessions',
-					method: 'POST',
-					attrs: ['sessionid'],
-					body: this.params.body,
-					oneMore: false
-				};
-				sendToServer(newParams);
+			if (this.params.oneMore == true) {
+				this.params.url = 'api/sessions';
+				this.params.attrs = ['sessionid'];
+				this.params.oneMore = false;
+				sendToServer.call(this);
 			} else {
 				return {};
 			}
-		}).catch(function (data) {
+		}.bind(this)).catch(function (data) {
 			if(this.params.func == 'signin')
 				this._errorText._get().innerText = 'Такого пользователя не существует. Попробуйте еще раз';
 			else

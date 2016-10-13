@@ -162,6 +162,7 @@
 				const res = this._signin();
 				if (res) {
 					res.then(function () {
+						debugger;
 						window.localStorage.setItem('fromSign' , 'true');
 						console.log('on signin callback');
 						callback();
