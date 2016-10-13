@@ -166,7 +166,9 @@
 						callback();
 					}).catch();
 				}
+
 			}.bind(this));
+
 		}
 	}
 
