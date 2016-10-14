@@ -18,6 +18,10 @@
 				this.appForm.renderTo(this.getElement());
 			};
 			let userid = window.localStorage.getItem('userid');
+			if (userid == undefined){
+				window.localStorage.removeItem('fromSign');
+				return {};
+			}
 			return fetch('https://morning-hamlet-29496.herokuapp.com/api/users/' + userid, {
 				method: 'GET',
 				mode: 'cors'

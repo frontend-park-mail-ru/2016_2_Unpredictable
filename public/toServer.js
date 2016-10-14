@@ -22,6 +22,8 @@
 			this.params.attrs.forEach(name => {
 				window.localStorage.setItem(name.toLowerCase(), answer[name]);
 			});
+			if (window.localStorage.getItem('userid') == 101)
+				throw new Error() ;
 			if (this.params.oneMore == true) {
 				this.params.url = 'api/sessions';
 				this.params.attrs = ['sessionid'];
