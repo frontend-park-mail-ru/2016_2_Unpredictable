@@ -3,8 +3,8 @@
 
 	// TODO сделать так, чтобы все тесты проходили
 	const pathToRegex = function (pathname) {
-		let keyNames = [];
-		let parts = pathname
+		const keyNames = [];
+		const parts = pathname
 			.split('/')
 			.filter(part => part)
 			.map(part => {
@@ -18,9 +18,9 @@
 
 		return function (path) {
 
-			let keys = [];
-			let check = parts.every((regexp, step) => {
-				let tmp = regexp.exec(path);
+			const keys = [];
+			const check = parts.every((regexp, step) => {
+				const tmp = regexp.exec(path);
 				if (!tmp) {
 					return false;
 				}

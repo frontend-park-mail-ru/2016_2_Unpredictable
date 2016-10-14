@@ -1,7 +1,7 @@
 (function () {
 	'use strict';
 
-	let Route = window.Route;
+	const Route = window.Route;
 
 
 	/** Класс роутера */
@@ -30,7 +30,7 @@
 		 * @returns {Router}
 		 */
 		addRoute(pathname, view, options = {}) {
-			let route = new Route(pathname, view, options);
+			const route = new Route(pathname, view, options);
 			route.setRouter(this);
 			this.routes.push(route);
 			return this;
@@ -42,9 +42,9 @@
 		 */
 		start(state = {}) {
 			window.onpopstate = function (event) {
-				let state = event.state;
-				let pathname = window.location.pathname;
-				this.onroute(pathname, state);
+				const status = event.state;
+				const pathname = window.location.pathname;
+				this.onroute(pathname, status);
 			}.bind(this);
 
 			const pathname = window.location.pathname;
@@ -57,7 +57,7 @@
 		 * @param {Object} [state={}] - Объект state, который передаётся в вызов метода navigate
 		 */
 		onroute(pathname, state = {}) {
-			let route = this.routes.find(route => route.match(pathname));
+			const route = this.routes.find(r => r.match(pathname));
 			if (!route) {
 				return;
 			}

@@ -22,9 +22,10 @@
 			this.params.attrs.forEach(name => {
 				window.localStorage.setItem(name.toLowerCase(), answer[name]);
 			});
-			if (window.localStorage.getItem('userid') == 101)
-				throw new Error() ;
-			if (this.params.oneMore == true) {
+			if (window.localStorage.getItem('userid') === 101) {
+				throw new Error();
+			}
+			if (this.params.oneMore) {
 				this.params.url = 'api/sessions';
 				this.params.attrs = ['sessionid'];
 				this.params.oneMore = false;
@@ -33,10 +34,11 @@
 				return {};
 			}
 		}.bind(this)).catch(function (data) {
-			if(this.params.func == 'signin')
+			if (this.params.func === 'signin') {
 				this._errorText._get().innerText = 'Такого пользователя не существует. Попробуйте еще раз';
-			else
+			} else {
 				this._errorText._get().innerText = 'Такого пользователя существует. Попробуйте еще раз';
+			}
 			return Promise.reject();
 		}.bind(this));
 	}

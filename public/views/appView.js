@@ -17,8 +17,8 @@
 				this.appForm.onLogout(this.showSignForm.bind(this));
 				this.appForm.renderTo(this.getElement());
 			};
-			let userid = window.localStorage.getItem('userid');
-			if (userid == undefined){
+			const userid = window.localStorage.getItem('userid');
+			if (!userid) {
 				window.localStorage.removeItem('fromSign');
 				return {};
 			}
@@ -27,15 +27,15 @@
 				mode: 'cors'
 			})
 				.then(function (resp) {
-					if(resp.status < 300) {
+					if (resp.status < 300) {
 						return resp.json();
 					}
 				})
 				.then(_a.bind(this));
-		};
+		}
 
-		resume(){
-			if(window.localStorage.getItem('fromSign') === null){
+		resume() {
+			if (window.localStorage.getItem('fromSign') === null) {
 				this.showSignForm();
 			} else {
 				this.show();
@@ -44,8 +44,7 @@
 
 		showSignForm() {
 			return this.router.go('/');
-		};
-
+		}
 	}
 
 	window.AppView = AppView;
