@@ -107,7 +107,6 @@
 		it('метод переходит на один из роутов', function () {
 			this.router.go('/path2');
 			expect(this.router.routes[1].navigate).toHaveBeenCalledWith('/path2', {});
-		})
+		});
 	});
-	
 })();

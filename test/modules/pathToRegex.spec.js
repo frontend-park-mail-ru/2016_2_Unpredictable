@@ -1,7 +1,7 @@
 (function () {
 	'use strict';
 
-	//let pathToRegex = function () {};
+	// let pathToRegex = function () {};
 
 	describe('pathToRegex', function () {
 		it('pathToRegex возвращает функцию', function () {
@@ -10,7 +10,7 @@
 
 		describe('Простой шаблон пути: pathToRegex("/path")', function () {
 			beforeEach(function () {
-				this.func = pathToRegex('/path')
+				this.func = pathToRegex('/path');
 			});
 
 			it('матчит "/path"', function () {
@@ -36,7 +36,7 @@
 
 		describe('Шаблон пути с переменной частью: pathToRegex("/user/:id")', function () {
 			beforeEach(function () {
-				this.func = pathToRegex('/user/:id')
+				this.func = pathToRegex('/user/:id');
 			});
 
 			it('матчит "/user/123"', function () {
@@ -75,7 +75,7 @@
 
 		describe('Шаблон пути с несколькими переменными частями: pathToRegex("/user/:id/post/:key")', function () {
 			beforeEach(function () {
-				this.func = pathToRegex('/user/:id/post/:key')
+				this.func = pathToRegex('/user/:id/post/:key');
 			});
 
 			it('матчер возвращает объект для "/user/123/post/321" со списком параметров', function () {

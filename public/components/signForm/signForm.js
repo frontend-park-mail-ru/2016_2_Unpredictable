@@ -122,14 +122,14 @@
 				password: this._inputPassword.getValue()
 			};
 
-			let params = {
+			const params = {
 				url: 'api/sessions',
 				attrs: ['userId', 'sessionid'],
 				body,
 				oneMore: false,
 				func: 'signin'
 			};
-			let sign = new SignIn(params).send();
+			const sign = new SignIn(params).send();
 			return sign;
 		}
 
