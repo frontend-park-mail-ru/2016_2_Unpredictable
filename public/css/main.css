@@ -3,7 +3,7 @@ body {
 	padding: 10vh;
 	box-sizing: border-box;
 	color: grey;
-	font-size: 3vh;
+	font-size: 1.9vmax;
 	letter-spacing: .01em;
 	line-height: 1.2;
 }
