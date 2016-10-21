@@ -4,10 +4,10 @@
 
 	describe('Класс View', function () {
 		beforeEach(function () {
-			this.view = new View({createElement: true});
+			this.view = new View();
 		});
 
-		it('Если при создании view задана опция createElement, то создастся элемент div', function () {
+		it('Если при создании view не задана опция tag, то создастся элемент div', function () {
 			expect(this.view._el).toBeDefined();
 			expect(this.view._el.tagName.toLowerCase()).toBe('div');
 		});

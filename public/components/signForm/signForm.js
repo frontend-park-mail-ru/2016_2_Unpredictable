@@ -6,7 +6,7 @@
 	const Button = window.Button;
 	const Block = window.Block;
 	const fetch = window.fetch;
-	const sendToServer = window.sendToServer;
+	const SignIn = window.SignIn;
 
 	const validateLogin = function (login) {
 		if (!login || login.length === 0) {
@@ -122,15 +122,15 @@
 				password: this._inputPassword.getValue()
 			};
 
-			this.params = {
-				method: 'POST',
+			let params = {
 				url: 'api/sessions',
 				attrs: ['userId', 'sessionid'],
 				body,
 				oneMore: false,
 				func: 'signin'
 			};
-			return sendToServer.call(this);
+			let sign = new SignIn(params).send();
+			return sign;
 		}
 
 		onSignin(callback) {

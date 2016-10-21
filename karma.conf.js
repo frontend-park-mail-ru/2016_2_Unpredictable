@@ -1,14 +1,18 @@
+'use strict';
+
 module.exports = function (config) {
 	'use strict';
-	let configuration = {
+
+	var configuration = {
 
 		basePath: '',
 
 		frameworks: ['jasmine'],
 
 		files: [
-			'./public/components/**/*.js',
+			// './public/components/**/*.js',
 			'./public/modules/**/*.js',
+			'./public/models/**/*.js',
 			'./public/views/**/*.js',
 			'./test/**/*.spec.js'
 		],
@@ -17,6 +21,7 @@ module.exports = function (config) {
 		preprocessors: {
 			'./public/components/**/*.js': ['coverage'],
 			'./public/modules/**/*.js': ['coverage'],
+			'./public/models/**/*.js': ['coverage'],
 			'./public/views/**/*.js': ['coverage']
 		},
 
