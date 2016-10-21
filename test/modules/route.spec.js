@@ -24,7 +24,7 @@
 
 	describe('Route.fn.navigate', function () {
 		beforeEach(function () {
-			this.route = new Route('/path/:key', View);
+			this.route = new Route('/path/:key', new View());
 			spyOn(View.prototype, 'init');
 			spyOn(View.prototype, 'resume');
 			spyOn(View.prototype, 'setRouter');

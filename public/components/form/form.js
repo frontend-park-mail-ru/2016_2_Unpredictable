@@ -10,7 +10,7 @@
 		}
 
 	}
-
+	console.log(1);
 	window.Form = Form;
 
 })();

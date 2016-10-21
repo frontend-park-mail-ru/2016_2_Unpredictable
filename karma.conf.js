@@ -1,14 +1,18 @@
+'use strict';
+
 module.exports = function (config) {
 	'use strict';
-	config.set({
+
+	var configuration = {
 
 		basePath: '',
 
 		frameworks: ['jasmine'],
 
 		files: [
-			//'./public/components/**/*.js',
+			// './public/components/**/*.js',
 			'./public/modules/**/*.js',
+			'./public/models/**/*.js',
 			'./public/views/**/*.js',
 			'./test/**/*.spec.js'
 		],
@@ -17,6 +21,7 @@ module.exports = function (config) {
 		preprocessors: {
 			'./public/components/**/*.js': ['coverage'],
 			'./public/modules/**/*.js': ['coverage'],
+			'./public/models/**/*.js': ['coverage'],
 			'./public/views/**/*.js': ['coverage']
 		},
 
@@ -28,11 +33,27 @@ module.exports = function (config) {
 		// level of logging
 		// possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
 		logLevel: config.LOG_INFO,
-
+		plugins: [
+			'karma-jasmine',
+			'karma-chrome-launcher',
+			'karma-coverage'
+		],
 		browsers: ['Chrome'],
+		customLaunchers: {
+			Chrome_travis_ci: {
+				base: 'Chrome',
+				flags: ['--no-sandbox']
+			}
+		},
 		coverageReporter: {
 			type: 'html',
 			dir: 'public/coverage/'
 		}
-	});
+	};
+
+	if (process.env.TRAVIS) {
+		configuration.browsers = ['Chrome_travis_ci']
+	}
+
+	config.set(configuration)
 };
