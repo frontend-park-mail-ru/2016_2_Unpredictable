@@ -10,7 +10,7 @@
 		 * @param {Object} [options={}] - Объект с параметрами
 		 */
 		constructor(tag, options = {}) {
-			if(document.querySelector('.'+ tag)){
+			if (document.querySelector('.' + tag)) {
 				this._el = document.querySelector('.' + tag);
 			} else {
 				this.tagName = options.tagName || 'div';
@@ -82,7 +82,9 @@
 		 * Удаляет элемент текущей view
 		 */
 		remove() {
-			this._el && this._el.remove();
+			if (this._el) {
+				this._el.remove();
+			}
 		}
 
 		/**
@@ -90,7 +92,9 @@
 		 * @param {HTMLElement} el - HTML-элемент, который становится элементом текущей view
 		 */
 		setElement(el) {
-			this._el && this._el.remove();
+			if (this._el) {
+				this._el.remove();
+			}
 			this._el = el;
 		}
 
@@ -101,7 +105,7 @@
 		setAttrs(attrs = {}) {
 			Object.keys(attrs).forEach(name => {
 				this._el.setAttribute(name, attrs[name]);
-			})
+			});
 		}
 
 		/**
@@ -120,7 +124,7 @@
 			this.router = router;
 		}
 
-		getElement(){
+		getElement() {
 			return this._el;
 		}
 

@@ -1,13 +1,13 @@
-(function(){
+(function () {
 	'use strict';
 
 	const RegistrationForm = window.RegistrationForm;
 	const View = window.View;
 
-	class RegView extends View{
-		constructor(){
+	class RegView extends View {
+		constructor() {
 			super('js-reg');
-			this.regForm = new RegistrationForm()
+			this.regForm = new RegistrationForm();
 		}
 
 		init() {
@@ -16,9 +16,8 @@
 			this.regForm.renderTo(this.getElement());
 		}
 
-		resume(){
-			debugger;
-			if(window.localStorage.getItem('fromSign') === null) {
+		resume() {
+			if (window.localStorage.getItem('fromSign') === null) {
 				this.showSignForm();
 			} else {
 				this.show();
@@ -27,11 +26,11 @@
 
 		showAppForm() {
 			return this.router.go('/app');
-		};
+		}
 
-		showSignForm(){
+		showSignForm() {
 			return this.router.go('/');
-		};
+		}
 
 	}
 

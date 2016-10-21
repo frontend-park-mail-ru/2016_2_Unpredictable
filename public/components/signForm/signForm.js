@@ -104,34 +104,12 @@
 		}
 
 		// TODO комментарии в стиле JSDoc
-		// регистрация
-		_signup() {
-			if (!this.validate()) {
-				return;
-			}
-
-			const body = {
-				login: this._inputLogin.getValue(),
-				password: this._inputPassword.getValue(),
-				email: 'api@api.com'
-			};
-
-			let params = {
-				method: 'POST',
-				url: 'api/users',
-				attrs: ['userid'],
-				body: body,
-				oneMore: true
-			};
-
-			return sendToServer(params);
-		}
 
 		onSignup(callback) {
-		this._upButton.on('click',function (button){
-			button.preventDefault();
-			callback();
-		})
+			this._upButton.on('click', function (button) {
+				button.preventDefault();
+				callback();
+			});
 		}
 
 		_signin() {
@@ -144,14 +122,15 @@
 				password: this._inputPassword.getValue()
 			};
 
-			let params = {
+			this.params = {
 				method: 'POST',
 				url: 'api/sessions',
 				attrs: ['userId', 'sessionid'],
-				body: body,
-				oneMore: false
+				body,
+				oneMore: false,
+				func: 'signin'
 			};
-			return sendToServer(params);
+			return sendToServer.call(this);
 		}
 
 		onSignin(callback) {
@@ -160,8 +139,7 @@
 				const res = this._signin();
 				if (res) {
 					res.then(function () {
-						debugger;
-						window.localStorage.setItem('fromSign' , 'true');
+						window.localStorage.setItem('fromSign', 'true');
 						console.log('on signin callback');
 						callback();
 					}).catch();

@@ -1,17 +1,18 @@
-(function(){
+(function () {
 	'use strict';
 
 	const Form = window.Form;
 	const Input = window.Input;
 	const Button = window.Button;
 	const Block = window.Block;
+	const sendToServer = window.sendToServer;
 
-	class RegitrationForm extends Form{
-		constructor (options){
+	class RegitrationForm extends Form {
+		constructor(options) {
 			super(options);
-			this._header = new Block('h3' , {
-				attrs : {
-					class : 'header'
+			this._header = new Block('h3', {
+				attrs: {
+					class: 'header'
 				}
 			});
 			this._header._get().innerText = 'Введите свои данные';
@@ -51,59 +52,64 @@
 					placeholder: 'Подтвердите пароль'
 				}
 			});
+			this._errorText = new Block('div', {
+				attrs: {
+					class: 'error'
+				}
+			});
 			this._regButton = new Button('Зарегистрироваться', {});
-			this._backButton = new Button('Назад',{});
-			debugger;
+			this._backButton = new Button('Назад', {});
 			this.append(this._header._get());
 			this.append(this._inputLogin._get());
 			this.append(this._inputEmail._get());
 			this.append(this._inputName._get());
 			this.append(this._inputPassword._get());
 			this.append(this._inputRepeatPassword._get());
+			this.append(this._errorText._get());
 			this.append(this._regButton._get());
 			this.append(this._backButton._get());
 
 		}
 
 
-		_registr(){
-			//TODO: validate
+		_registr() {
+			// TODO: validate
 
 			const body = {
-				login : this._inputLogin.getValue(),
-				email : this._inputName.getValue(),
-				name : this._inputName.getValue(),
-				password : this._inputName.getValue()
+				login: this._inputLogin.getValue(),
+				email: this._inputName.getValue(),
+				// name : this._inputName.getValue(),
+				password: this._inputName.getValue()
 			};
 
-			let params = {
+			this.params = {
 				method: 'POST',
 				url: 'api/users',
 				attrs: ['userid'],
-				body: body,
-				oneMore: true
+				body,
+				oneMore: true,
+				func: 'signup'
 			};
-
-			return sendToServer(params);
+			return sendToServer.call(this);
 		}
 
-		onRegistration(callback){
-			this._regButton.on('click', function (button){
+		onRegistration(callback) {
+			this._regButton.on('click', function (button) {
 				button.preventDefault();
-				const res = this._registr;
-				if(res){
-					res.then(function(){
+				const res = this._registr();
+				if (res) {
+					res.then(function () {
 						callback();
-					})
+					});
 				}
-			}.bind(this))
+			}.bind(this));
 		}
 
-		onBack(callback){
-			this._backButton.on('click', function(button){
+		onBack(callback) {
+			this._backButton.on('click', function (button) {
 				button.preventDefault();
 				callback();
-			})
+			});
 		}
 
 	}

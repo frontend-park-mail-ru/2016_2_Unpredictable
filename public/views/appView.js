@@ -17,19 +17,25 @@
 				this.appForm.onLogout(this.showSignForm.bind(this));
 				this.appForm.renderTo(this.getElement());
 			};
-			let userid = window.localStorage.getItem('userid');
-			fetch('https://morning-hamlet-29496.herokuapp.com/api/users/' + userid, {
+			const userid = window.localStorage.getItem('userid');
+			if (!userid) {
+				window.localStorage.removeItem('fromSign');
+				return {};
+			}
+			return fetch('https://morning-hamlet-29496.herokuapp.com/api/users/' + userid, {
 				method: 'GET',
 				mode: 'cors'
 			})
 				.then(function (resp) {
-					return resp.json();
+					if (resp.status < 300) {
+						return resp.json();
+					}
 				})
 				.then(_a.bind(this));
-		};
+		}
 
-		resume(){
-			if(window.localStorage.getItem('fromSign') === null){
+		resume() {
+			if (window.localStorage.getItem('fromSign') === null) {
 				this.showSignForm();
 			} else {
 				this.show();
@@ -38,8 +44,7 @@
 
 		showSignForm() {
 			return this.router.go('/');
-		};
-
+		}
 	}
 
 	window.AppView = AppView;

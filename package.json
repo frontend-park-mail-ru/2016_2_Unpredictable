@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "node test.js",
-    "lint": "./node_modules/.bin/eslint **/*.js *.js ./**/*.js ./public/**/*.js"
+    "lint": "./node_modules/.bin/eslint './**/*.js'"
   },
   "repository": {
     "type": "git",

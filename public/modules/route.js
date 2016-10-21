@@ -12,7 +12,7 @@
 		 * @param {Object} [options={}] - Дополнительные параметры, которые будут переданы во view при её создании и инициализации
 		 */
 		constructor(pathname, view, options = {}) {
-			//TODO: Сущий адище, нам нужно менеджерить депсы
+			// TODO: Сущий адище, нам нужно менеджерить депсы
 			this.pathToRegex = window.pathToRegex;
 
 			this.id = 'p' + id;
@@ -39,9 +39,9 @@
 		 */
 		navigate(pathname, state = {}) {
 			state = state || {};
-			let keys = this.regex(pathname);
+			const keys = this.regex(pathname);
 			if (!this._view) {
-				let view = new this.View(this.options);
+				const view = new this.View(this.options);
 				view.init(this.options);
 				view.setRouter(this.__router);
 				this._view = view;
@@ -54,7 +54,9 @@
 		 * Деактивирует текущий Route
 		 */
 		leave() {
-			this._view && this._view.pause();
+			if (this._view) {
+				this._view.pause();
+			}
 		}
 
 		/**
