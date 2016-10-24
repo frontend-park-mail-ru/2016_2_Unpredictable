@@ -5,7 +5,7 @@
 	const Input = window.Input;
 	const Button = window.Button;
 	const Block = window.Block;
-	const Sign = window.Sign;
+	const User = window.User;
 
 	class RegitrationForm extends Form {
 		constructor(options) {
@@ -80,7 +80,7 @@
 					// name : this._inputName.getValue(),
 					password: this._inputName.getValue()
 				};
-				const model = new Sign();
+				const model = new User(body);
 				const res = model.signUp(body);
 				if (res) {
 					res.then(function () {

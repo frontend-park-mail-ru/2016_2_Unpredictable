@@ -39,10 +39,10 @@
 			return attributes;
 		}
 
-		_send(url, method, data = {}) {
+		_send(url, method, params) {
 			return fetch('https://morning-hamlet-29496.herokuapp.com/' + url, {
 				method: method,
-				body: JSON.stringify(data.body),
+				body: JSON.stringify(params.body),
 				mode: 'cors',
 				headers: {
 					'Content-type': 'application/json; charset=UTF-8'
@@ -54,24 +54,22 @@
 				return Promise.reject(resp.json());
 			}).then(function (answer) {
 				console.log(answer);
-				data.attrs.forEach(name => {
+				params.attrs.forEach(name => {
 					window.localStorage.setItem(name.toLowerCase(), answer[name]);
 				});
 				if (window.localStorage.getItem('userid') === 101) {
 					window.localStorage.clear();
 					throw new Error();
 				}
-				console.log('ololol');
-				if (data.oneMore) {
-					this.params = {};
+				if (params.oneMore) {
 					let newUrl = 'api/sessions';
-					this.params.attrs = ['sessionid'];
-					this.params.body = {
-						login : data.body.login,
-						password : data.body.password
-					}
-					this.params.oneMore = false;
-					this.save(newUrl)
+					params.attrs = ['sessionid'];
+					params.body = {
+						login : params.body.login,
+						password :params.body.password
+					};
+					params.oneMore = false;
+					this.save(newUrl, params)
 				}
 				console.log('ololol');
 				return {};
@@ -86,19 +84,26 @@
 			}.bind(this));
 		}
 
-		save(url) {
+		save(url, params) {
 			const method = 'POST';
-			return this._send(url, method, this.params);
+			return this._send(url, method, params);
 		}
 
-		getInfo(url) {
+		getInfo(url, params) {
 			const method = 'GET';
-			return this._send(url, method, this.params);
+			return this._send(url, method, params);
 		}
 
-		deleteInfo(url) {
+		deleteInfo(sessionid) {
 			const method = 'DELETE';
-			return this._send(url, method, this.params);
+			return fetch('https://morning-hamlet-29496.herokuapp.com/api/sessions/' + sessionid, {
+				method: 'DELETE',
+				mode: 'cors'
+			}).then(function () {
+				window.localStorage.clear();
+			}).catch(function (resp) {
+				console.log(JSON.parse(resp.body).error || 'Неизвестная ошибка. Попробуйте позже');
+			});
 		}
 
 		getError(){
