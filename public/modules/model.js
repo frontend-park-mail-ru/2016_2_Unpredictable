@@ -1,6 +1,7 @@
 (function () {
 	'use strict';
 
+	const fetch = window.fetch;
 	/**
 	 *
 	 */
@@ -35,14 +36,13 @@
 					this._clean(attributes[key]);
 				}
 			});
-
 			return attributes;
 		}
 
-		send(method, data = {}) {
-			return fetch('https://morning-hamlet-29496.herokuapp.com/' + data.url, {
+		_send(url, method, data = {}) {
+			return fetch('https://morning-hamlet-29496.herokuapp.com/' + url, {
 				method: method,
-				body: JSON.stringify(this.params.body),
+				body: JSON.stringify(data.body),
 				mode: 'cors',
 				headers: {
 					'Content-type': 'application/json; charset=UTF-8'
@@ -61,37 +61,48 @@
 					window.localStorage.clear();
 					throw new Error();
 				}
-				if (data.params.oneMore) {
-					data.params.url = 'api/sessions';
-					data.params.attrs = ['sessionid'];
-					data.params.oneMore = false;
-					// sendToServer.call(this);
-				} else {
-					return {};
+				console.log('ololol');
+				if (data.oneMore) {
+					this.params = {};
+					let newUrl = 'api/sessions';
+					this.params.attrs = ['sessionid'];
+					this.params.body = {
+						login : data.body.login,
+						password : data.body.password
+					}
+					this.params.oneMore = false;
+					this.save(newUrl)
 				}
+				console.log('ololol');
+				return {};
 			}.bind(this)).catch(function (data) {
+				console.log(this);
 				if (this.params.func === 'signin') {
-					this._errorText._get().innerText = 'Такого пользователя не существует. Попробуйте еще раз';
+					this._errorText = 'Такого пользователя не существует. Попробуйте еще раз';
 				} else {
-					this._errorText._get().innerText = 'Такого пользователя существует. Попробуйте еще раз';
+					this._errorText = 'Такого пользователя существует. Попробуйте еще раз';
 				}
 				return Promise.reject();
 			}.bind(this));
 		}
 
-		save() {
+		save(url) {
 			const method = 'POST';
-			return this.send(method, this.attributes);
+			return this._send(url, method, this.params);
 		}
 
-		getInfo() {
+		getInfo(url) {
 			const method = 'GET';
-			return this.send(method, this.attributes);
+			return this._send(url, method, this.params);
 		}
 
-		deleteInfo() {
+		deleteInfo(url) {
 			const method = 'DELETE';
-			return this.send(method, this.attributes);
+			return this._send(url, method, this.params);
+		}
+
+		getError(){
+			return this._errorText;
 		}
 	}
 

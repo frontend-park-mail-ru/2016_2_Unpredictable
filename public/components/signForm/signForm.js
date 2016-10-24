@@ -6,7 +6,7 @@
 	const Button = window.Button;
 	const Block = window.Block;
 	const fetch = window.fetch;
-	const SignIn = window.SignIn;
+	const Sign = window.Sign;
 
 	const validateLogin = function (login) {
 		if (!login || login.length === 0) {
@@ -112,33 +112,19 @@
 			});
 		}
 
-		_signin() {
-			if (!this.validate()) {
-				return;
-			}
-
-			const body = {
-				login: this._inputLogin.getValue(),
-				password: this._inputPassword.getValue()
-			};
-
-			const params = {
-				url: 'api/sessions',
-				attrs: ['userId', 'sessionid'],
-				body,
-				oneMore: false,
-				func: 'signin'
-			};
-			const sign = new SignIn(params).send();
-			return sign;
-		}
-
 		onSignin(callback) {
 			this._inButton.on('click', function (e) {
 				e.preventDefault();
-				const res = this._signin();
-				if (res) {
-					res.then(function () {
+				const params = {
+					login: this._inputLogin.getValue(),
+					password: this._inputPassword.getValue()
+				};
+				const model = new Sign();
+				const result = model.signIn(params);
+				if(model.getError()){
+					// вывести ошибку
+				} else if (result) {
+					result.then(function () {
 						window.localStorage.setItem('fromSign', 'true');
 						console.log('on signin callback');
 						callback();
