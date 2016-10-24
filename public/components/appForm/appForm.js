@@ -24,7 +24,7 @@
 			this._logoutButton.on('click', function (e) {
 				e.preventDefault();
 				const model = new User();
-				const res = model.logOut();
+				const res = model.logout();
 				if (res) {
 					res.then(function () {
 						callback();

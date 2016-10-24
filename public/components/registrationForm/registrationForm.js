@@ -81,7 +81,7 @@
 					password: this._inputName.getValue()
 				};
 				const model = new User(body);
-				const res = model.signUp(body);
+				const res = model.signup(body);
 				if (res) {
 					res.then(function () {
 						callback();

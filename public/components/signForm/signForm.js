@@ -8,45 +8,6 @@
 	const fetch = window.fetch;
 	const User = window.User;
 
-	const validateLogin = function (login) {
-		if (!login || login.length === 0) {
-			return {
-				errorText: 'Логин не должен быть пустым',
-				error: true
-			};
-		}
-
-		if (!login.match(/^[a-zA-Z0-9]{1,20}$/)) {
-			return {
-				errorText: 'Логин должен состоять из латинских букв или цифр и иметь длину не более 20 символов',
-				error: true
-			};
-		}
-		return {
-			error: false
-		};
-	};
-
-	const validatePassword = function (password) {
-		if (!password || password.length === 0) {
-			return {
-				errorText: 'Пароль не должен быть пустым',
-				error: true
-			};
-		}
-
-		if (!password.match(/^[a-z0-9]{6,20}$/i)) {
-			return {
-				errorText: 'Пароль должен состоять из латинских букв или цифр и иметь длину от 6 до 20 символов',
-				error: true
-			};
-		}
-		return {
-			error: false
-		};
-	};
-
-
 	class SignForm extends Form {
 		constructor(options) {
 			super(options);
@@ -104,16 +65,21 @@
 					login: this._inputLogin.getValue(),
 					password: this._inputPassword.getValue()
 				};
+				console.log(params);
 				const model = new User(params);
-				const result = model.signIn();
+				const result = model.signin();
 				if(model.getError()){
-					// вывести ошибку
+					this._errorText._get().innerText = model.getError();
 				} else if (result) {
 					result.then(function () {
 						window.localStorage.setItem('fromSign', 'true');
 						console.log('on signin callback');
 						callback();
-					}).catch();
+					}).catch(function () {
+						console.log(model.getError());
+						this._errorText._get().innerText = model.getError();
+						return Promise.reject();
+					}.bind(this));
 				}
 			}.bind(this));
 		}

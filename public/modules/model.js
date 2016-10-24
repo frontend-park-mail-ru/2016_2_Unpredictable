@@ -57,7 +57,7 @@
 				params.attrs.forEach(name => {
 					window.localStorage.setItem(name.toLowerCase(), answer[name]);
 				});
-				if (window.localStorage.getItem('userid') === 101) {
+				if (window.localStorage.getItem('userid') === '101') {
 					window.localStorage.clear();
 					throw new Error();
 				}
@@ -71,10 +71,8 @@
 					params.oneMore = false;
 					this.save(newUrl, params)
 				}
-				console.log('ololol');
 				return {};
 			}.bind(this)).catch(function (data) {
-				console.log(this);
 				if (this.params.func === 'signin') {
 					this._errorText = 'Такого пользователя не существует. Попробуйте еще раз';
 				} else {
