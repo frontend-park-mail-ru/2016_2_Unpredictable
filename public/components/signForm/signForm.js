@@ -6,7 +6,7 @@
 	const Button = window.Button;
 	const Block = window.Block;
 	const fetch = window.fetch;
-	const Sign = window.Sign;
+	const User = window.User;
 
 	const validateLogin = function (login) {
 		if (!login || login.length === 0) {
@@ -119,8 +119,8 @@
 					login: this._inputLogin.getValue(),
 					password: this._inputPassword.getValue()
 				};
-				const model = new Sign();
-				const result = model.signIn(params);
+				const model = new User(params);
+				const result = model.signIn();
 				if(model.getError()){
 					// вывести ошибку
 				} else if (result) {

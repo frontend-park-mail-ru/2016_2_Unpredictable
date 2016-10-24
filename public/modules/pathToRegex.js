@@ -22,7 +22,7 @@
 			let length = parts.length;
 			const check = parts.every((regexp, step) => {
 				const tmp = regexp.exec(path);
-				if (tmp === null) {
+				if (!tmp) {
 					return false;
 				}
 				if (length === 1) {
