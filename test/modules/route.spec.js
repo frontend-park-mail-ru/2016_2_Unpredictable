@@ -20,11 +20,11 @@
 			expect(this.route.match('/pathpathpath/123')).toBe(false);
 
 		});
-	})
+	});
 
 	describe('Route.fn.navigate', function () {
 		beforeEach(function () {
-			this.route = new Route('/path/:key', new View());
+			this.route = new Route('/path/:key', View);
 			spyOn(View.prototype, 'init');
 			spyOn(View.prototype, 'resume');
 			spyOn(View.prototype, 'setRouter');
@@ -47,13 +47,13 @@
 		});
 
 		it('при переходе на роут у созданной view вызывается метод resume() c первым артументом, содержащим данные из state', function () {
-			let state = {foo: 'bar'};
+			const state = {foo: 'bar'};
 			this.route.navigate('/path/123', state);
 			expect(View.prototype.resume).toHaveBeenCalledWith({foo: 'bar', key: '123'});
 		});
 
 		it('при переходе на роут во вновь созданную view прокидывается объект роутера, установленный вызовом метода setRoute()', function () {
-			let router = {foo: 'bar'};
+			const router = {foo: 'bar'};
 			this.route.setRouter(router);
 			this.route.navigate('/path/123');
 			expect(View.prototype.setRouter).toHaveBeenCalledWith(router);
@@ -72,7 +72,7 @@
 			this.route.leave();
 			expect(View.prototype.pause).toHaveBeenCalled();
 		});
-	})
+	});
 
 
 })();

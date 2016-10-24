@@ -5,15 +5,15 @@
 	 *
 	 */
 	class Model {
-		
+
 		constructor(attributes = {}) {
 			this.attributes = Object.assign({}, this.defaults, this._clean(attributes));
 		}
-		
+
 		get defaults() {
 			return {};
 		}
-		
+
 		get url() {
 			return '/';
 		}
@@ -65,7 +65,7 @@
 					data.params.url = 'api/sessions';
 					data.params.attrs = ['sessionid'];
 					data.params.oneMore = false;
-					sendToServer.call(this);
+					// sendToServer.call(this);
 				} else {
 					return {};
 				}
@@ -78,23 +78,23 @@
 				return Promise.reject();
 			}.bind(this));
 		}
-		
+
 		save() {
-			let method = 'POST';
+			const method = 'POST';
 			return this.send(method, this.attributes);
 		}
 
-		getInfo(){
-			let method = 'GET';
+		getInfo() {
+			const method = 'GET';
 			return this.send(method, this.attributes);
 		}
 
-		deleteInfo(){
-			let method = 'DELETE';
+		deleteInfo() {
+			const method = 'DELETE';
 			return this.send(method, this.attributes);
 		}
 	}
-	
+
 	// export
 	window.Model = Model;
 })();
