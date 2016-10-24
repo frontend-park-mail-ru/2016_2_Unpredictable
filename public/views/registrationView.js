@@ -24,6 +24,25 @@
 			}
 		}
 
+		show() {
+			setTimeout(() => {
+				this._el.hidden = false;
+				this._el.classList.toggle('js-reg--hidden', false);
+
+			}, 301);
+		}
+
+		pause() {
+			this._el.classList.toggle('js-reg--hidden', true);
+			this.hide();
+		}
+
+		hide() {
+			setTimeout(() => {
+				this._el.hidden = true;
+			}, 300);
+		}
+
 		showAppForm() {
 			return this.router.go('/app');
 		}

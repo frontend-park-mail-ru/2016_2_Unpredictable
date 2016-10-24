@@ -7,12 +7,12 @@ body {
 	line-height: 1.2;
 }
 
-.js-sign {
+.js-sign, .js-app, .js-reg {
 	opacity: 1;
 	transition: opacity 0.3s;
 }
 
-.js-sign--hidden {
+.js-sign--hidden, .js-app--hidden, .js-reg--hidden {
 	opacity: 0;
 	pointer-events: none;
 }

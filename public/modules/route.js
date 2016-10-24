@@ -19,7 +19,7 @@
 			id++;
 			this.pathname = pathname;
 			this.regex = this.pathToRegex(pathname);
-			this._view = view;
+			this.View = view;
 			this.options = options;
 		}
 
