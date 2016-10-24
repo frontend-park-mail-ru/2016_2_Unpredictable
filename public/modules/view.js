@@ -10,7 +10,8 @@
 		 * @param {Object} [options={}] - Объект с параметрами
 		 */
 		constructor(tag, options = {}) {
-			if (document.querySelector('.' + tag)) {
+
+			if (tag && document.querySelector('.' + tag)) {
 				this._el = document.querySelector('.' + tag);
 			} else {
 				this.tagName = options.tagName || 'div';

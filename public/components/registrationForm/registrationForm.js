@@ -5,7 +5,7 @@
 	const Input = window.Input;
 	const Button = window.Button;
 	const Block = window.Block;
-	const sendToServer = window.sendToServer;
+	const User = window.User;
 
 	class RegitrationForm extends Form {
 		constructor(options) {
@@ -71,32 +71,17 @@
 
 		}
 
-
-		_registr() {
-			// TODO: validate
-
-			const body = {
-				login: this._inputLogin.getValue(),
-				email: this._inputName.getValue(),
-				// name : this._inputName.getValue(),
-				password: this._inputName.getValue()
-			};
-
-			this.params = {
-				method: 'POST',
-				url: 'api/users',
-				attrs: ['userid'],
-				body,
-				oneMore: true,
-				func: 'signup'
-			};
-			return sendToServer.call(this);
-		}
-
 		onRegistration(callback) {
 			this._regButton.on('click', function (button) {
 				button.preventDefault();
-				const res = this._registr();
+				const body = {
+					login: this._inputLogin.getValue(),
+					email: this._inputName.getValue(),
+					// name : this._inputName.getValue(),
+					password: this._inputName.getValue()
+				};
+				const model = new User(body);
+				const res = model.signup(body);
 				if (res) {
 					res.then(function () {
 						callback();

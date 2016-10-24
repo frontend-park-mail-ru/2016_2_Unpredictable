@@ -1,7 +1,8 @@
-node_modules
+node_modules/
 *.pid
 *.out
 *.log
-/.idea/
+.idea/
 .DS_Store
-/public/api/
+public/api/
+public/coverage/

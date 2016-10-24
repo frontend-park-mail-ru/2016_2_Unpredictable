@@ -10,7 +10,6 @@
 		}
 
 	}
-
 	window.Form = Form;
 
 })();

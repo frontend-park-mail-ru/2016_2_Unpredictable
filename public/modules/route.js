@@ -41,12 +41,11 @@
 			state = state || {};
 			const keys = this.regex(pathname);
 			if (!this._view) {
-				const view = new this.View(this.options);
+				const view = new this.View('', this.options);
 				view.init(this.options);
 				view.setRouter(this.__router);
 				this._view = view;
 			}
-
 			this._view.resume(Object.assign(state, keys));
 		}
 
