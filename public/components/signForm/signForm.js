@@ -88,21 +88,6 @@
 			this.append(this._upButton._get());
 		}
 
-		validate() {
-			const isLoginValid = validateLogin(this._inputLogin.getValue());
-			const isPasswordValid = validatePassword(this._inputPassword.getValue());
-			if (isLoginValid.error) {
-				this._errorText._get().innerText = isLoginValid.errorText;
-				return false;
-			}
-			if (isPasswordValid.error) {
-				this._errorText._get().innerText = isPasswordValid.errorText;
-				return false;
-			}
-			return true;
-
-		}
-
 		// TODO комментарии в стиле JSDoc
 
 		onSignup(callback) {
