@@ -5,7 +5,7 @@
 	const Input = window.Input;
 	const Button = window.Button;
 	const Block = window.Block;
-	const sendToServer = window.sendToServer;
+	const User = window.User;
 
 	class RegitrationForm extends Form {
 		constructor(options) {
@@ -23,6 +23,12 @@
 					placeholder: 'Введите свой логин'
 				}
 			});
+			this._errorTextLogin = new Block('div', {
+				attrs: {
+					class: 'error'
+				}
+			});
+
 			this._inputEmail = new Input({
 				attrs: {
 					type: 'text',
@@ -44,6 +50,11 @@
 					placeholder: 'Введите пароль'
 				}
 			});
+			this._errorTextPassword = new Block('div', {
+				attrs: {
+					class: 'error'
+				}
+			});
 
 			this._inputRepeatPassword = new Input({
 				attrs: {
@@ -52,54 +63,64 @@
 					placeholder: 'Подтвердите пароль'
 				}
 			});
+			this._errorTextRepeat = new Block('div', {
+				attrs: {
+					class: 'error'
+				}
+			});
 			this._errorText = new Block('div', {
 				attrs: {
 					class: 'error'
 				}
 			});
+
 			this._regButton = new Button('Зарегистрироваться', {});
 			this._backButton = new Button('Назад', {});
 			this.append(this._header._get());
 			this.append(this._inputLogin._get());
+			this.append(this._errorTextLogin._get());
 			this.append(this._inputEmail._get());
 			this.append(this._inputName._get());
 			this.append(this._inputPassword._get());
+			this.append(this._errorTextPassword._get());
 			this.append(this._inputRepeatPassword._get());
+			this.append(this._errorTextRepeat._get());
 			this.append(this._errorText._get());
 			this.append(this._regButton._get());
 			this.append(this._backButton._get());
-
-		}
-
-
-		_registr() {
-			// TODO: validate
-
-			const body = {
-				login: this._inputLogin.getValue(),
-				email: this._inputName.getValue(),
-				// name : this._inputName.getValue(),
-				password: this._inputName.getValue()
-			};
-
-			this.params = {
-				method: 'POST',
-				url: 'api/users',
-				attrs: ['userid'],
-				body,
-				oneMore: true,
-				func: 'signup'
-			};
-			return sendToServer.call(this);
+			this.errors = {
+				logError : this._errorTextLogin,
+				passError : this._errorTextPassword,
+				repeatError : this._errorTextRepeat,
+				commonError : this._errorText
+			}
 		}
 
 		onRegistration(callback) {
 			this._regButton.on('click', function (button) {
 				button.preventDefault();
-				const res = this._registr();
-				if (res) {
+				const body = {
+					login: this._inputLogin.getValue(),
+					email: this._inputEmail.getValue(),
+					name : this._inputName.getValue(),
+					password: this._inputPassword.getValue(),
+					repeatPassword : this._inputRepeatPassword.getValue()
+				};
+				const model = new User(body);
+				const res = model.signup(body);
+				if(model.getError()){
+					for (let key in this.errors){
+						this.errors[key]._get().innerText = '';
+					}
+					let errors = model.getError();
+					for(let key in errors){
+						this[key]._get().innerText = errors[key];
+					}
+				} else if (res) {
 					res.then(function () {
 						callback();
+					}).catch(function(){
+
 					});
 				}
 			}.bind(this));
@@ -111,7 +132,6 @@
 				callback();
 			});
 		}
-
 	}
 
 	window.RegistrationForm = RegitrationForm;

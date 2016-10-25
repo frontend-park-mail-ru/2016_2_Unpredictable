@@ -6,46 +6,7 @@
 	const Button = window.Button;
 	const Block = window.Block;
 	const fetch = window.fetch;
-	const SignIn = window.SignIn;
-
-	const validateLogin = function (login) {
-		if (!login || login.length === 0) {
-			return {
-				errorText: 'Логин не должен быть пустым',
-				error: true
-			};
-		}
-
-		if (!login.match(/^[a-zA-Z0-9]{1,20}$/)) {
-			return {
-				errorText: 'Логин должен состоять из латинских букв или цифр и иметь длину не более 20 символов',
-				error: true
-			};
-		}
-		return {
-			error: false
-		};
-	};
-
-	const validatePassword = function (password) {
-		if (!password || password.length === 0) {
-			return {
-				errorText: 'Пароль не должен быть пустым',
-				error: true
-			};
-		}
-
-		if (!password.match(/^[a-z0-9]{6,20}$/i)) {
-			return {
-				errorText: 'Пароль должен состоять из латинских букв или цифр и иметь длину от 6 до 20 символов',
-				error: true
-			};
-		}
-		return {
-			error: false
-		};
-	};
-
+	const User = window.User;
 
 	class SignForm extends Form {
 		constructor(options) {
@@ -88,21 +49,6 @@
 			this.append(this._upButton._get());
 		}
 
-		validate() {
-			const isLoginValid = validateLogin(this._inputLogin.getValue());
-			const isPasswordValid = validatePassword(this._inputPassword.getValue());
-			if (isLoginValid.error) {
-				this._errorText._get().innerText = isLoginValid.errorText;
-				return false;
-			}
-			if (isPasswordValid.error) {
-				this._errorText._get().innerText = isPasswordValid.errorText;
-				return false;
-			}
-			return true;
-
-		}
-
 		// TODO комментарии в стиле JSDoc
 
 		onSignup(callback) {
@@ -112,41 +58,28 @@
 			});
 		}
 
-		_signin() {
-			if (!this.validate()) {
-				return;
-			}
-
-			const body = {
-				login: this._inputLogin.getValue(),
-				password: this._inputPassword.getValue()
-			};
-
-			const params = {
-				url: 'api/sessions',
-				attrs: ['userId', 'sessionid'],
-				body,
-				oneMore: false,
-				func: 'signin'
-			};
-			const sign = new SignIn(params).send();
-			return sign;
-		}
-
 		onSignin(callback) {
 			this._inButton.on('click', function (e) {
 				e.preventDefault();
-				const res = this._signin();
-				if (res) {
-					res.then(function () {
+				const params = {
+					login: this._inputLogin.getValue(),
+					password: this._inputPassword.getValue()
+				};
+				const model = new User(params);
+				const result = model.signin();
+				if(model.getError()){
+					this._errorText._get().innerText = model.getError();
+				} else if (result) {
+					result.then(function () {
 						window.localStorage.setItem('fromSign', 'true');
-						console.log('on signin callback');
 						callback();
-					}).catch();
+					}).catch(function () {
+						console.log(model.getError());
+						this._errorText._get().innerText = model.getError();
+						return Promise.reject();
+					}.bind(this));
 				}
-
 			}.bind(this));
-
 		}
 	}
 
