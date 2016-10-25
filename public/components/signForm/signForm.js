@@ -65,7 +65,6 @@
 					login: this._inputLogin.getValue(),
 					password: this._inputPassword.getValue()
 				};
-				console.log(params);
 				const model = new User(params);
 				const result = model.signin();
 				if(model.getError()){
@@ -73,7 +72,6 @@
 				} else if (result) {
 					result.then(function () {
 						window.localStorage.setItem('fromSign', 'true');
-						console.log('on signin callback');
 						callback();
 					}).catch(function () {
 						console.log(model.getError());
