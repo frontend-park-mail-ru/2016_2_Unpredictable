@@ -24,7 +24,7 @@
 			return {};
 		};
 
-		validatePassword (password, repeat = {}) {
+		validatePassword (password, repeat = null) {
 			if (!password || password.length === 0) {
 				return {
 					errorText: 'Пароль не должен быть пустым',
@@ -43,23 +43,7 @@
 			return {};
 		};
 
-		validateIn() {
-			const isLoginValid = this.validateLogin(this.body.login);
-			const isPasswordValid = this.validatePassword(this.body.password);
-			if (isLoginValid !== {}) {
-				return {
-					errorText : isLoginValid.errorText,
-				}
-			}
-			if (isPasswordValid.error !== {}) {
-				return {
-					errorText : isPasswordValid.errorText,
-				}
-			}
-			return {};
-		}
-
-		validateUp(){
+		validate(){
 			const isLoginValid = this.validateLogin(this.body.login);
 			const isPasswordValid = this.validatePassword(this.body.password, this.body.repeatPassword);
 			let result = {};
@@ -75,9 +59,14 @@
 		}
 
 		signin(){
-			let validation = this.validateIn();
-			if (validation.errorText) {
-				this._errorText = validation.errorText;
+			let validation = this.validate();
+			if (validation.error) {
+				this._errorText = {};
+				for(let key in validation) {
+					if(key !== 'error') {
+						this._errorText[key] = validation[key];
+					}
+				}
 				return;
 			}
 			this.params = {
@@ -91,9 +80,14 @@
 		}
 
 		signup(){
-			let validation = this.validateUp();
+			let validation = this.validate();
 			if (validation.error) {
-				this._errorText = validation;
+				this._errorText = {};
+				for(let key in validation) {
+					if(key !== 'error') {
+						this._errorText[key] = validation[key];
+					}
+				}
 				return;
 			}
 			this.params = {

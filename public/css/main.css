@@ -2,6 +2,7 @@ body {
 	padding: 20vw;
 	padding: 15vh;
 	box-sizing: border-box;
+	font-family: 'OCR_OneCTT', arial;
 }
 
 .chat {
