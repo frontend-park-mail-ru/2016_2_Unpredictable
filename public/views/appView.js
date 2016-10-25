@@ -64,6 +64,7 @@
 		showSignForm() {
 			return this.router.go('/');
 		}
+
 	}
 
 	window.AppView = AppView;

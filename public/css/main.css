@@ -5,6 +5,7 @@ body {
 	font-size: 1.9vmax;
 	letter-spacing: .01em;
 	line-height: 1.2;
+	font-family: 'OCR_OneCTT', arial;
 }
 
 .js-sign, .js-app, .js-reg {
@@ -16,4 +17,6 @@ body {
 	opacity: 0;
 	pointer-events: none;
 }
+
+
 

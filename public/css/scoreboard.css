@@ -1,0 +1,15 @@
+.js-score .scoreboard__title {
+	font-size: 20px;
+	text-align: center;
+}
+
+.js-score .record__username {
+	display: inline-block;
+	width: 50%;
+
+}
+
+.js-score .record__score {
+	display: inline-block;
+	width: 50%;
+}

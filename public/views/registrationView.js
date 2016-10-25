@@ -28,7 +28,6 @@
 			setTimeout(() => {
 				this._el.hidden = false;
 				this._el.classList.toggle('js-reg--hidden', false);
-
 			}, 301);
 		}
 

@@ -106,6 +106,8 @@
 			return this.deleteInfo(sessionid);
 		}
 
+
+
 	}
 
 	window.User = User;
