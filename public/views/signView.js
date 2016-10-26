@@ -35,10 +35,6 @@
 			return this.router.go('/signup', this.user);
 		}
 
-		resume() {
-			this.show();
-		}
-
 		show() {
 			setTimeout(() => {
 				this._el.hidden = false;

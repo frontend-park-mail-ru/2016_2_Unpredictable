@@ -19,7 +19,7 @@
 			this._header._get().innerText = `Привет!`;
 			this._header1 = new Block('h3', {});
 			this._header1._get().innerText = `Залогинься или зарегистрируйся`;
-			this._loginBlock = new Block ('div', {});
+			this._loginBlock = new Block('div', {});
 			this._inputLogin = new Input({
 				attrs: {
 					type: 'text',
@@ -32,7 +32,7 @@
 					class: 'error'
 				}
 			});
-			this._passwordBlock = new Block ('div', {});
+			this._passwordBlock = new Block('div', {});
 			this._inputPassword = new Input({
 				attrs: {
 					type: 'password',
@@ -64,8 +64,8 @@
 			this.append(this._inButton._get());
 			this.append(this._upButton._get());
 			this.errors = {
-				errorTextLogin : this._errorTextLogin,
-				errorTextPassword : this._errorTextPassword
+				errorTextLogin: this._errorTextLogin,
+				errorTextPassword: this._errorTextPassword
 			}
 		}
 
@@ -82,7 +82,6 @@
 
 		onSignin(callback, options = {}) {
 			this._inButton.on('click', function (e) {
-				console.log(options);
 				e.preventDefault();
 				const body = {
 					login: this._inputLogin.getValue(),
@@ -90,15 +89,13 @@
 				};
 				options.setUserInfo(body);
 				const result = options.signin();
-				if(options.getError()){
+				if (options.getError()) {
 					let errors = options.getError();
-					console.log(errors);
-					for(let key in errors){
+					for (let key in errors) {
 						this[key]._get().innerText = errors[key];
 					}
 				} else if (result) {
 					result.then(function () {
-						window.localStorage.setItem('fromSign', 'true');
 						callback();
 					}).catch(function () {
 						this._errorText._get().innerText = options.getError();
@@ -110,8 +107,8 @@
 			options.clearErrors();
 		}
 
-		clearInputErrors(){
-			for (let key in this.errors){
+		clearInputErrors() {
+			for (let key in this.errors) {
 				this.errors[key]._get().innerText = '';
 			}
 		}

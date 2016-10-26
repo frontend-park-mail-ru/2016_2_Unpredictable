@@ -46,28 +46,24 @@
 		validate(){
 			const isLoginValid = this.validateLogin(this.info.login);
 			const isPasswordValid = this.validatePassword(this.info.password, this.info.repeatPassword);
-			let result = {};
+			let error = false;
 			if (isLoginValid.errorText) {
-				result.error = true;
-				result._errorTextLogin = isLoginValid.errorText;
+				error = true;
+				this._errorText._errorTextLogin = isLoginValid.errorText;
 			}
 			if (isPasswordValid.errorText) {
-				result.error = true;
-				result._errorTextPassword = isPasswordValid.errorText;
+				error = true;
+				this._errorText._errorTextPassword = isPasswordValid.errorText;
 			}
-			return result;
+			return error;
 		}
 
 		signin(){
 			let validation = this.validate();
-			if (validation.error) {
-				this._errorText = {};
-				for(let key in validation) {
-					if(key !== 'error') {
-						this._errorText[key] = validation[key];
-					}
-				}
+			if (validation) {
 				return;
+			} else {
+				this._errorText = null;
 			}
 			let params = {
 				attrs: ['userId', 'sessionid'],
@@ -81,14 +77,10 @@
 
 		signup(){
 			let validation = this.validate();
-			if (validation.error) {
-				this._errorText = {};
-				for(let key in validation) {
-					if(key !== 'error') {
-						this._errorText[key] = validation[key];
-					}
-				}
+			if (validation) {
 				return;
+			} else {
+				this._errorText = null;
 			}
 			let params = {
 				attrs: ['userid'],

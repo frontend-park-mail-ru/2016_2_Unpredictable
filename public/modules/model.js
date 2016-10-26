@@ -55,10 +55,10 @@
 			}).then(function (answer) {
 				console.log(answer);
 				params.attrs.forEach(name => {
-					window.localStorage.setItem(name.toLowerCase(), answer[name]);
+					this.info[name.toLowerCase()] = answer[name];
 				});
-				if (window.localStorage.getItem('userid') === '101') {
-					window.localStorage.clear();
+				if (this.info['userid'] === '101') {
+					this.clear();
 					throw new Error();
 				}
 				if (params.oneMore) {
@@ -105,6 +105,7 @@
 		}
 
 		getError(){
+			if(this._errorText)
 			return this._errorText;
 		}
 

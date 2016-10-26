@@ -7,7 +7,6 @@
 	const RegView = window.RegView;
 	const User = window.User;
 	const ScoreView = window.ScoreView;
-	const MainView = window.MainView;
 
 	let options = {
 		user: new User()
@@ -19,7 +18,7 @@
 		.addRoute('/signup', RegView, options)
 		.addRoute('/app/score/', ScoreView, options)
 		.addRoute('/app', AppView, options)
-		.addRoute('/', MainView, options)
+		.addRoute('/', SignView, options)
 		.start();
 
 })();
