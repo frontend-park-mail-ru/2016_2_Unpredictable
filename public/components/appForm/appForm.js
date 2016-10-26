@@ -11,10 +11,15 @@
 		constructor(options) {
 			super(options);
 			this._logoutButton = new Button('Log out', {});
+			this._score = new Block('a',{attrs: {
+				href:'/app/score'
+			}});
+			this._score._get().innerText = `Scoreboard`;
 			this._header = new Block('h1', {});
 			this._header._get().innerText = `Hello, ${this._options.name || 'Anon'}`;
 			this.append(this._header._get());
 			this.append(this._logoutButton._get());
+			this.append(this._score._get());
 		}
 
 

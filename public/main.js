@@ -6,6 +6,8 @@
 	const SignView = window.SignView;
 	const RegView = window.RegView;
 	const User = window.User;
+	const ScoreView = window.ScoreView;
+	const MainView = window.MainView;
 
 	let options = {
 		user: new User()
@@ -15,8 +17,9 @@
 	// З.Ы. чтобы более ранние роуты не были префиксами более поздних ;]
 	(new Router())
 		.addRoute('/signup', RegView, options)
+		.addRoute('/app/score/', ScoreView, options)
 		.addRoute('/app', AppView, options)
-		.addRoute('/', SignView, options)
-		.start(options);
+		.addRoute('/', MainView, options)
+		.start();
 
 })();
