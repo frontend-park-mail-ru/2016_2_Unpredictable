@@ -6,6 +6,7 @@
 	const SignView = window.SignView;
 	const RegView = window.RegView;
 	const ScoreView = window.ScoreView;
+	const MainView = window.MainView;
 
 
 	// TIP: роуты нужно указывать от наиболее специфичного к наименее специфичному
@@ -14,7 +15,7 @@
 		.addRoute('/signup', RegView)
 		.addRoute('/app/score/', ScoreView)
 		.addRoute('/app', AppView)
-		.addRoute('/', SignView)
+		.addRoute('/', MainView)
 		.start();
 
 })();
