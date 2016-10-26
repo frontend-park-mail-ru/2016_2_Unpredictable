@@ -25,7 +25,7 @@ a {
 }
 
 
-.js-sign, .js-app, .js-reg .js-scoreboard{
+.js-sign, .js-app, .js-reg .js-score{
 	opacity: 1;
 	transition: opacity 0.3s;
 }
