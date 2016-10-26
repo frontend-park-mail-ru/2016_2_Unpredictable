@@ -34,8 +34,9 @@
 				.then(_a.bind(this));
 		}
 
-		resume() {
-			if (window.localStorage.getItem('fromSign') === null) {
+		resume(model = {}) {
+			this.model = model;
+			if (!this.model.fromSign) {
 				this.showSignForm();
 			} else {
 				this.show();

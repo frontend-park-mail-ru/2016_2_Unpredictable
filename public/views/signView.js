@@ -10,19 +10,29 @@
 			this.signForm = new SignForm();
 		}
 
-		init() {
-			this.signForm.onSignin(this.showAppForm.bind(this));
-			this.signForm.onSignup(this.showRegForm.bind(this));
+		init(model = {}) {
+			this.signForm.clearInputErrors();
+			this.user = model.user;
+			this.signForm.onSignin(this.showAppForm.bind(this), this.user);
+			this.signForm.onSignup(this.showRegForm.bind(this), this.user);
 			this.signForm.renderTo(this.getElement());
 		}
 
+		resume(options = {}) {
+			this.signForm.clearInputErrors();
+			this.user.fromSign = true;
+			this.show();
+		}
+
+
 		showAppForm() {
-			return this.router.go('/app');
+			this.hide();
+			return this.router.go('/app', this.user);
 		}
 
 		showRegForm() {
-			window.localStorage.setItem('fromSign', 'true');
-			return this.router.go('/signup');
+			this.hide();
+			return this.router.go('/signup', this.user);
 		}
 
 	}

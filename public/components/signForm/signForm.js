@@ -63,31 +63,36 @@
 			this.append(this._errorText._get());
 			this.append(this._inButton._get());
 			this.append(this._upButton._get());
+			this.errors = {
+				errorTextLogin : this._errorTextLogin,
+				errorTextPassword : this._errorTextPassword
+			}
 		}
 
 		// TODO комментарии в стиле JSDoc
 
-		onSignup(callback) {
+		onSignup(callback, options = {}) {
+			console.log(options);
 			this._upButton.on('click', function (button) {
 				button.preventDefault();
+				options.clearErrors();
 				callback();
 			});
 		}
 
-		onSignin(callback) {
+		onSignin(callback, options = {}) {
 			this._inButton.on('click', function (e) {
+				console.log(options);
 				e.preventDefault();
-				const params = {
+				const body = {
 					login: this._inputLogin.getValue(),
 					password: this._inputPassword.getValue()
 				};
-				const model = new User(params);
-				const result = model.signin();
-				if(model.getError()){
-					for (let key in this.errors){
-						this.errors[key]._get().innerText = '';
-					}
-					let errors = model.getError();
+				options.setUserInfo(body);
+				const result = options.signin();
+				if(options.getError()){
+					let errors = options.getError();
+					console.log(errors);
 					for(let key in errors){
 						this[key]._get().innerText = errors[key];
 					}
@@ -96,14 +101,19 @@
 						window.localStorage.setItem('fromSign', 'true');
 						callback();
 					}).catch(function () {
-						this._errorText._get().innerText = model.getError();
-						debugger;
+						this._errorText._get().innerText = options.getError();
 						return {};
 					}.bind(this));
 				}
 
 			}.bind(this));
+			options.clearErrors();
+		}
 
+		clearInputErrors(){
+			for (let key in this.errors){
+				this.errors[key]._get().innerText = '';
+			}
 		}
 	}
 

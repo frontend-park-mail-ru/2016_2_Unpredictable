@@ -44,8 +44,8 @@
 		};
 
 		validate(){
-			const isLoginValid = this.validateLogin(this.body.login);
-			const isPasswordValid = this.validatePassword(this.body.password, this.body.repeatPassword);
+			const isLoginValid = this.validateLogin(this.info.login);
+			const isPasswordValid = this.validatePassword(this.info.password, this.info.repeatPassword);
 			let result = {};
 			if (isLoginValid.errorText) {
 				result.error = true;
@@ -69,14 +69,14 @@
 				}
 				return;
 			}
-			this.params = {
+			let params = {
 				attrs: ['userId', 'sessionid'],
-				body : this.body,
+				body : this.info,
 				oneMore: false,
 				func: 'signin'
 			};
 			let url = 'api/sessions';
-			return this.save(url, this.params);
+			return this.save(url, params);
 		}
 
 		signup(){
@@ -90,20 +90,28 @@
 				}
 				return;
 			}
-			this.params = {
+			let params = {
 				attrs: ['userid'],
-				body : this.body,
+				body : this.info,
 				oneMore: true,
 				func: 'signup'
 			};
 			let url = 'api/users';
-			return this.save(url, this.params);
+			return this.save(url, params);
 
 		}
 
 		logout(){
 			const sessionid = window.localStorage.getItem('sessionid');
 			return this.deleteInfo(sessionid);
+		}
+
+		setUserInfo(newInfo){
+			this.info = newInfo;
+		}
+
+		clear(){
+			this.info = {};
 		}
 
 	}

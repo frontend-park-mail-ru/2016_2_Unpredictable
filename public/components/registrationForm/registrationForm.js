@@ -96,45 +96,51 @@
 			}
 		}
 
-		onRegistration(callback) {
+		onRegistration(callback, options = {}) {
 			this._regButton.on('click', function (button) {
 				button.preventDefault();
 				const body = {
 					login: this._inputLogin.getValue(),
 					email: this._inputEmail.getValue(),
-					name : this._inputName.getValue(),
+					//name : this._inputName.getValue(),
 					password: this._inputPassword.getValue(),
-					repeatPassword : this._inputRepeatPassword.getValue()
+					//repeatPassword : this._inputRepeatPassword.getValue()
 				};
-				const model = new User(body);
-				const res = model.signup(body);
-				if(model.getError()){
-					for (let key in this.errors){
-						this.errors[key]._get().innerText = '';
-					}
-					let errors = model.getError();
+				console.log(options);
+				options.setUserInfo(body);
+				const res = options.signup();
+				for (let key in this.errors){
+					this.errors[key]._get().innerText = '';
+				}
+				if(options.getError()){
+					let errors = options.getError();
 					for(let key in errors){
 						this[key]._get().innerText = errors[key];
 					}
 				} else if (res) {
 					res.then(function () {
 						callback();
-					}).catch(function(){
-
-					});
+					}).catch(console.error);
 				}
 			}.bind(this));
+			options.clearErrors();
 		}
 
-		onBack(callback) {
+		onBack(callback, options = {}) {
 			this._backButton.on('click', function (button) {
 				button.preventDefault();
+				options.clearErrors();
 				callback();
 			});
+		}
+
+		clearInputErrors(){
+			for (let key in this.errors){
+				this.errors[key]._get().innerText = '';
+			}
 		}
 	}
 
 	window.RegistrationForm = RegitrationForm;
-
 
 })();

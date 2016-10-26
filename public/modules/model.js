@@ -76,7 +76,7 @@
 				if (this.params.func === 'signin') {
 					this._errorText = 'Такого пользователя не существует. Попробуйте еще раз';
 				} else {
-					this._errorText = 'Такого пользователя существует. Попробуйте еще раз';
+					this._errorText = 'Такой пользователя существует. Попробуйте еще раз';
 				}
 				return Promise.reject();
 			}.bind(this));
@@ -106,6 +106,10 @@
 
 		getError(){
 			return this._errorText;
+		}
+
+		clearErrors(){
+			this._errorText = {};
 		}
 	}
 

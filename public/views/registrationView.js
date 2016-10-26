@@ -10,14 +10,16 @@
 			this.regForm = new RegistrationForm();
 		}
 
-		init() {
-			this.regForm.onRegistration(this.showAppForm.bind(this));
-			this.regForm.onBack(this.showSignForm.bind(this));
+		init(model = {}) {
+			this.user = model.user;
+			this.regForm.onRegistration(this.showAppForm.bind(this), this.user);
+			this.regForm.onBack(this.showSignForm.bind(this), this.user);
 			this.regForm.renderTo(this.getElement());
 		}
 
-		resume() {
-			if (window.localStorage.getItem('fromSign') === null) {
+		resume(model = {}) {
+			this.regForm.clearInputErrors();
+			if (!this.user.fromSign) {
 				this.showSignForm();
 			} else {
 				this.show();
@@ -25,11 +27,13 @@
 		}
 
 		showAppForm() {
-			return this.router.go('/app');
+			this.hide();
+			return this.router.go('/app', this.user);
 		}
 
 		showSignForm() {
-			return this.router.go('/');
+			this.hide();
+			return this.router.go('/', this.user);
 		}
 
 	}
