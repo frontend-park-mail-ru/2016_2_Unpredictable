@@ -18,7 +18,7 @@
 			if (!this.user.fromSign) {
 				this.showSignForm();
 			} else {
-				if(this.user.getLogin()) {
+				if (this.user.getLogin()) {
 					this.appForm = new AppForm({
 						name: this.user.getLogin()
 					});
@@ -38,7 +38,7 @@
 		}
 
 		pause() {
-			if(this.user.fromSign) {
+			if (this.user.fromSign) {
 				this.getElement().removeChild(this.appForm._get());
 			}
 			this._el.classList.toggle('js-app--hidden', true);

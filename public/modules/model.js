@@ -41,7 +41,7 @@
 
 		_send(url, method, params) {
 			return fetch('https://morning-hamlet-29496.herokuapp.com/' + url, {
-				method: method,
+				method,
 				body: JSON.stringify(params.body),
 				mode: 'cors',
 				headers: {
@@ -65,8 +65,8 @@
 					let newUrl = 'api/sessions';
 					params.attrs = ['sessionid'];
 					params.body = {
-						login : params.body.login,
-						password :params.body.password
+						login: params.body.login,
+						password: params.body.password
 					};
 					params.oneMore = false;
 					this.save(newUrl, params)
@@ -103,12 +103,12 @@
 			});
 		}
 
-		getError(){
-			if(this._errorText)
-			return this._errorText;
+		getError() {
+			if (this._errorText)
+				return this._errorText;
 		}
 
-		clearErrors(){
+		clearErrors() {
 			this._errorText = {};
 		}
 	}

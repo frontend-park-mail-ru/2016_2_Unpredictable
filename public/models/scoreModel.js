@@ -1,20 +1,20 @@
-( function (){
+(function () {
 	'use strict';
 
 	const Model = window.Model;
 
-	class ScoreTable extends Model{
-		constructor(attributes = {}){
+	class ScoreTable extends Model {
+		constructor(attributes = {}) {
 			super(attributes);
 		}
 
-		getScore(){
+		getScore() {
 			let params = {
 				attrs: [],
 				oneMore: false,
 			};
 			let url = 'api/users';
-			this.getInfo(url,params);
+			this.getInfo(url, params);
 		}
 	}
 

@@ -66,7 +66,7 @@
 			this.errors = {
 				errorTextLogin: this._errorTextLogin,
 				errorTextPassword: this._errorTextPassword
-			}
+			};
 		}
 
 		// TODO комментарии в стиле JSDoc
@@ -89,7 +89,7 @@
 				options.setUserInfo(body);
 				const result = options.signin();
 				if (options.getError()) {
-					let errors = options.getError();
+					const errors = options.getError();
 					for (let key in errors) {
 						this[key]._get().innerText = errors[key];
 					}

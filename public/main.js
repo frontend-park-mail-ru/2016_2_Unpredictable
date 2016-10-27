@@ -8,7 +8,7 @@
 	const User = window.User;
 	const ScoreView = window.ScoreView;
 
-	let options = {
+	const options = {
 		user: new User()
 	};
 

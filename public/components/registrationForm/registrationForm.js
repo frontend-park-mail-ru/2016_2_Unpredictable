@@ -89,10 +89,10 @@
 			this.append(this._regButton._get());
 			this.append(this._backButton._get());
 			this.errors = {
-				logError : this._errorTextLogin,
-				passError : this._errorTextPassword,
-				repeatError : this._errorTextRepeat,
-				commonError : this._errorText
+				logError: this._errorTextLogin,
+				passError: this._errorTextPassword,
+				repeatError: this._errorTextRepeat,
+				commonError: this._errorText
 			}
 		}
 
@@ -109,12 +109,12 @@
 				console.log(options);
 				options.setUserInfo(body);
 				const res = options.signup();
-				for (let key in this.errors){
+				for (let key in this.errors) {
 					this.errors[key]._get().innerText = '';
 				}
-				if(options.getError()){
+				if (options.getError()) {
 					let errors = options.getError();
-					for(let key in errors){
+					for (let key in errors) {
 						this[key]._get().innerText = errors[key];
 					}
 				} else if (res) {
@@ -134,8 +134,8 @@
 			});
 		}
 
-		clearInputErrors(){
-			for (let key in this.errors){
+		clearInputErrors() {
+			for (let key in this.errors) {
 				this.errors[key]._get().innerText = '';
 			}
 		}

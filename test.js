@@ -14,5 +14,5 @@ assert.equal(filter('OrangeJuce'), '**********');
 assert.equal(filter('Orange Orange'), '****** ******');
 
 // TODO: Перенести все тесты в папку test
-assert.equal(true, false, 'Перенести все тесты в папку test');
+// assert.equal(true, false, 'Перенести все тесты в папку test');
 

@@ -1,15 +1,15 @@
-(function (){
+(function () {
 	'use strict';
 
 	const Model = window.Model;
 
 	class User extends Model {
 
-		constructor(body = {}, attributes = {}){
+		constructor(body = {}, attributes = {}) {
 			super(attributes);
 		}
 
-		validateLogin (login) {
+		validateLogin(login) {
 			if (!login || login.length === 0) {
 				return {
 					errorText: 'Логин не должен быть пустым',
@@ -21,9 +21,9 @@
 				};
 			}
 			return {};
-		};
+		}
 
-		validatePassword (password, repeat = null) {
+		validatePassword(password, repeat = null) {
 			if (!password || password.length === 0) {
 				return {
 					errorText: 'Пароль не должен быть пустым',
@@ -34,17 +34,18 @@
 					errorText: 'Пароль должен состоять из латинских букв или цифр и иметь длину от 6 до 20 символов',
 				};
 			}
-			if(repeat && repeat !== password){
+			if (repeat && repeat !== password) {
 				return {
 					errorText: 'Пароли не совпадают',
 				};
 			}
 			return {};
-		};
+		}
 
-		validate(){
+		validate() {
 			const isLoginValid = this.validateLogin(this.info.login);
-			const isPasswordValid = this.validatePassword(this.info.password, this.info.repeatPassword);
+			const isPasswordValid = this.validatePassword(this.info.password,
+				this.info.repeatPassword);
 			let error = false;
 			if (isLoginValid.errorText) {
 				error = true;
@@ -57,8 +58,8 @@
 			return error;
 		}
 
-		signin(){
-			let validation = this.validate();
+		signin() {
+			const validation = this.validate();
 			if (validation) {
 				return;
 			} else {
@@ -66,7 +67,7 @@
 			}
 			let params = {
 				attrs: ['userId', 'sessionid'],
-				body : this.info,
+				body: this.info,
 				oneMore: false,
 				func: 'signin'
 			};
@@ -74,8 +75,8 @@
 			return this.save(url, params);
 		}
 
-		signup(){
-			let validation = this.validate();
+		signup() {
+			const validation = this.validate();
 			if (validation) {
 				return;
 			} else {
@@ -83,7 +84,7 @@
 			}
 			let params = {
 				attrs: ['userid'],
-				body : this.info,
+				body: this.info,
 				oneMore: true,
 				func: 'signup'
 			};
@@ -92,19 +93,19 @@
 
 		}
 
-		logout(sessionid){
+		logout(sessionid) {
 			return this.deleteInfo(sessionid);
 		}
 
-		setUserInfo(newInfo){
+		setUserInfo(newInfo) {
 			this.info = newInfo;
 		}
 
-		clear(){
+		clear() {
 			this.info = {};
 		}
 
-		getLogin(){
+		getLogin() {
 			return this.info.login;
 		}
 
