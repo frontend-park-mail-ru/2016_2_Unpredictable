@@ -26,12 +26,12 @@
 
 
 		showAppForm() {
-			this.hide();
+			this.pause();
 			return this.router.go('/app', this.user);
 		}
 
 		showRegForm() {
-			this.hide();
+			this.pause();
 			return this.router.go('/signup', this.user);
 		}
 

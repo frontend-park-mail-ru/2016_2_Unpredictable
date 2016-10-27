@@ -25,11 +25,11 @@
 
 		// TODO комментарии в стиле JSDoc
 
-		onLogout(callback) {
+		onLogout(callback, options = {}) {
 			this._logoutButton.on('click', function (e) {
 				e.preventDefault();
 				const model = new User();
-				const res = model.logout();
+				const res = model.logout(options.info.sessionid);
 				if (res) {
 					res.then(function () {
 						callback();

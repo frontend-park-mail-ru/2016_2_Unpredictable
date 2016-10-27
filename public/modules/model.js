@@ -93,7 +93,6 @@
 		}
 
 		deleteInfo(sessionid) {
-			const method = 'DELETE';
 			return fetch('https://morning-hamlet-29496.herokuapp.com/api/sessions/' + sessionid, {
 				method: 'DELETE',
 				mode: 'cors'

@@ -7,7 +7,6 @@
 
 		constructor(body = {}, attributes = {}){
 			super(attributes);
-			this.body = body;
 		}
 
 		validateLogin (login) {
@@ -93,8 +92,7 @@
 
 		}
 
-		logout(){
-			const sessionid = window.localStorage.getItem('sessionid');
+		logout(sessionid){
 			return this.deleteInfo(sessionid);
 		}
 
@@ -104,6 +102,10 @@
 
 		clear(){
 			this.info = {};
+		}
+
+		getLogin(){
+			return this.info.login;
 		}
 
 	}

@@ -72,7 +72,6 @@
 		// TODO комментарии в стиле JSDoc
 
 		onSignup(callback, options = {}) {
-			console.log(options);
 			this._upButton.on('click', function (button) {
 				button.preventDefault();
 				options.clearErrors();
