@@ -9,7 +9,7 @@
     "fest": "./node_modules/.bin/fest-build --dir=public/",
     "karma:start": "karma start",
     "karma:run": "karma run",
-    "start": "node server.js"
+    "start": "npm run fest && node server.js"
   },
   "repository": {
     "type": "git",
