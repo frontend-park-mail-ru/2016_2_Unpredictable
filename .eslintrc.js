@@ -41,7 +41,9 @@ module.exports = {
 		"class-methods-use-this": 0,
 		"no-use-before-define": 0,
 		"object-curly-spacing": 0,
-		"newline-per-chained-call": 1
+		"newline-per-chained-call": 1,
+		"guard-for-in" : 0
+
 
 	}
 };

@@ -1,105 +1,112 @@
-(function (){
+(function () {
 	'use strict';
 
 	const Model = window.Model;
 
 	class User extends Model {
 
-		constructor(body = {}, attributes = {}){
+		constructor(body = {}, attributes = {}) {
 			super(attributes);
-			this.body = body;
 		}
 
-		validateLogin (login) {
+		validateLogin(login) {
 			if (!login || login.length === 0) {
 				return {
 					errorText: 'Логин не должен быть пустым',
-					error: true
 				};
 			}
 			if (!login.match(/^[a-zA-Z0-9]{1,20}$/)) {
 				return {
 					errorText: 'Логин должен состоять из латинских букв или цифр и иметь длину не более 20 символов',
-					error: true
 				};
 			}
-			return {
-			error: false
-			};
-		};
+			return {};
+		}
 
-		validatePassword (password) {
+		validatePassword(password, repeat = null) {
 			if (!password || password.length === 0) {
 				return {
 					errorText: 'Пароль не должен быть пустым',
-					error: true
 				};
 			}
 			if (!password.match(/^[a-z0-9]{6,20}$/i)) {
 				return {
 					errorText: 'Пароль должен состоять из латинских букв или цифр и иметь длину от 6 до 20 символов',
-					error: true
 				};
 			}
-			return {
-				error: false
-			};
-		};
-
-		validateIn() {
-			const isLoginValid = this.validateLogin(this.body.login);
-			const isPasswordValid = this.validatePassword(this.body.password);
-			if (isLoginValid.error) {
+			if (repeat && repeat !== password) {
 				return {
-					errorText : isLoginValid.errorText,
-					valid : false
-				}
+					errorText: 'Пароли не совпадают',
+				};
 			}
-			if (isPasswordValid.error) {
-				return {
-					errorText : isPasswordValid.errorText,
-					valid : false
-				}
-			}
-			return {
-				valid : true
-			};
+			return {};
 		}
 
-		signin(){
-			let validation = this.validateIn();
-			if (!validation.valid) {
-				this._errorText = validation.errorText;
-				return;
+		validate() {
+			const isLoginValid = this.validateLogin(this.info.login);
+			const isPasswordValid = this.validatePassword(this.info.password,
+				this.info.repeatPassword);
+			let error = false;
+			if (isLoginValid.errorText) {
+				error = true;
+				this._errorText._errorTextLogin = isLoginValid.errorText;
 			}
-			this.params = {
+			if (isPasswordValid.errorText) {
+				error = true;
+				this._errorText._errorTextPassword = isPasswordValid.errorText;
+			}
+			return error;
+		}
+
+		signin() {
+			const validation = this.validate();
+			if (validation) {
+				return;
+			} else {
+				this._errorText = null;
+			}
+			let params = {
 				attrs: ['userId', 'sessionid'],
-				body : this.body,
+				body: this.info,
 				oneMore: false,
 				func: 'signin'
 			};
 			let url = 'api/sessions';
-			return this.save(url, this.params);
+			return this.save(url, params);
 		}
 
-		signup(){
-			// if (!this.validate()) {
-				// 	return;
-			// }
-			this.params = {
+		signup() {
+			const validation = this.validate();
+			if (validation) {
+				return;
+			} else {
+				this._errorText = null;
+			}
+			let params = {
 				attrs: ['userid'],
-				body : this.body,
+				body: this.info,
 				oneMore: true,
 				func: 'signup'
 			};
 			let url = 'api/users';
-			return this.save(url, this.params);
+			return this.save(url, params);
 
 		}
 
-		logout(){
-			const sessionid = window.localStorage.getItem('sessionid');
+		logout(sessionid) {
 			return this.deleteInfo(sessionid);
+		}
+
+		setUserInfo(newInfo) {
+			this.info = newInfo;
+		}
+
+		clear() {
+			this.info = {};
+		}
+
+		getLogin() {
+			return this.info.login;
 		}
 
 	}

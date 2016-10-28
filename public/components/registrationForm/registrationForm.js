@@ -23,6 +23,12 @@
 					placeholder: 'Введите свой логин'
 				}
 			});
+			this._errorTextLogin = new Block('div', {
+				attrs: {
+					class: 'error'
+				}
+			});
+
 			this._inputEmail = new Input({
 				attrs: {
 					type: 'text',
@@ -44,6 +50,11 @@
 					placeholder: 'Введите пароль'
 				}
 			});
+			this._errorTextPassword = new Block('div', {
+				attrs: {
+					class: 'error'
+				}
+			});
 
 			this._inputRepeatPassword = new Input({
 				attrs: {
@@ -52,54 +63,83 @@
 					placeholder: 'Подтвердите пароль'
 				}
 			});
+			this._errorTextRepeat = new Block('div', {
+				attrs: {
+					class: 'error'
+				}
+			});
 			this._errorText = new Block('div', {
 				attrs: {
 					class: 'error'
 				}
 			});
+
 			this._regButton = new Button('Зарегистрироваться', {});
 			this._backButton = new Button('Назад', {});
 			this.append(this._header._get());
 			this.append(this._inputLogin._get());
+			this.append(this._errorTextLogin._get());
 			this.append(this._inputEmail._get());
 			this.append(this._inputName._get());
 			this.append(this._inputPassword._get());
+			this.append(this._errorTextPassword._get());
 			this.append(this._inputRepeatPassword._get());
+			this.append(this._errorTextRepeat._get());
 			this.append(this._errorText._get());
 			this.append(this._regButton._get());
 			this.append(this._backButton._get());
-
+			this.errors = {
+				logError: this._errorTextLogin,
+				passError: this._errorTextPassword,
+				repeatError: this._errorTextRepeat,
+				commonError: this._errorText
+			}
 		}
 
-		onRegistration(callback) {
+		onRegistration(callback, options = {}) {
 			this._regButton.on('click', function (button) {
 				button.preventDefault();
 				const body = {
 					login: this._inputLogin.getValue(),
-					email: this._inputName.getValue(),
-					// name : this._inputName.getValue(),
-					password: this._inputName.getValue()
+					email: this._inputEmail.getValue(),
+					//name : this._inputName.getValue(),
+					password: this._inputPassword.getValue(),
+					//repeatPassword : this._inputRepeatPassword.getValue()
 				};
-				const model = new User(body);
-				const res = model.signup(body);
-				if (res) {
+				options.setUserInfo(body);
+				const res = options.signup();
+				for (let key in this.errors) {
+					this.errors[key]._get().innerText = '';
+				}
+				if (options.getError()) {
+					let errors = options.getError();
+					for (let key in errors) {
+						this[key]._get().innerText = errors[key];
+					}
+				} else if (res) {
 					res.then(function () {
 						callback();
-					});
+					}).catch(console.error);
 				}
 			}.bind(this));
+			options.clearErrors();
 		}
 
-		onBack(callback) {
+		onBack(callback, options = {}) {
 			this._backButton.on('click', function (button) {
 				button.preventDefault();
+				options.clearErrors();
 				callback();
 			});
 		}
 
+		clearInputErrors() {
+			for (let key in this.errors) {
+				this.errors[key]._get().innerText = '';
+			}
+		}
 	}
 
 	window.RegistrationForm = RegitrationForm;
-
 
 })();

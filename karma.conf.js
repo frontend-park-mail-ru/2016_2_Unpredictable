@@ -10,10 +10,8 @@ module.exports = function (config) {
 		frameworks: ['jasmine'],
 
 		files: [
-			// './public/components/**/*.js',
 			'./public/modules/**/*.js',
 			'./public/models/**/*.js',
-			'./public/views/**/*.js',
 			'./test/**/*.spec.js'
 		],
 

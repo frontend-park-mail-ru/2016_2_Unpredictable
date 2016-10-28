@@ -10,26 +10,70 @@
 			this.regForm = new RegistrationForm();
 		}
 
-		init() {
-			this.regForm.onRegistration(this.showAppForm.bind(this));
-			this.regForm.onBack(this.showSignForm.bind(this));
+		/**
+		 * Инициализация вьюшки
+		 * @param model - модель юзера
+		 */
+		init(model = {}) {
+			this.user = model.user;
+			this.regForm.onRegistration(this.showAppForm.bind(this), this.user);
+			this.regForm.onBack(this.showSignForm.bind(this), this.user);
 			this.regForm.renderTo(this.getElement());
 		}
 
-		resume() {
-			if (window.localStorage.getItem('fromSign') === null) {
-				this.showSignForm();
-			} else {
-				this.show();
-			}
+		/**
+		 * Вызвается при переходе на вьюшку (переопределена)
+		 * @param model - модель юзера
+		 */
+		resume(model = {}) {
+			this.regForm.clearInputErrors();
+			this.show();
+
 		}
 
+		/**
+		 * Рендерить вьюшку
+		 */
+		show() {
+			setTimeout(() => {
+				this._el.hidden = false;
+				this._el.classList.toggle('js-reg--hidden', false);
+			}, 301);
+		}
+
+		/**
+		 * Вызывается при уходе со вьюшки
+ 		 */
+		pause() {
+			this._el.classList.toggle('js-reg--hidden', true);
+			this.hide();
+		}
+
+		/**
+		 * Прячет вьюшку
+		 */
+		hide() {
+			setTimeout(() => {
+				this._el.hidden = true;
+			}, 300);
+		}
+
+		/**
+		 * Переход на /app урл
+		 * @returns {*} - вьюшка по /app урлу
+		 */
 		showAppForm() {
-			return this.router.go('/app');
+			this.hide();
+			return this.router.go('/app', this.user);
 		}
 
+		/**
+		 * Переход на / урл
+		 * @returns {*} - вьюшка по / урлу
+		 */
 		showSignForm() {
-			return this.router.go('/');
+			this.hide();
+			return this.router.go('/', this.user);
 		}
 
 	}

@@ -41,7 +41,7 @@
 
 		_send(url, method, params) {
 			return fetch('https://morning-hamlet-29496.herokuapp.com/' + url, {
-				method: method,
+				method,
 				body: JSON.stringify(params.body),
 				mode: 'cors',
 				headers: {
@@ -55,18 +55,18 @@
 			}).then(function (answer) {
 				console.log(answer);
 				params.attrs.forEach(name => {
-					window.localStorage.setItem(name.toLowerCase(), answer[name]);
+					this.info[name.toLowerCase()] = answer[name];
 				});
-				if (window.localStorage.getItem('userid') === '101') {
-					window.localStorage.clear();
+				if (this.info['userid'] === '101') {
+					this.clear();
 					throw new Error();
 				}
 				if (params.oneMore) {
 					let newUrl = 'api/sessions';
 					params.attrs = ['sessionid'];
 					params.body = {
-						login : params.body.login,
-						password :params.body.password
+						login: params.body.login,
+						password: params.body.password
 					};
 					params.oneMore = false;
 					this.save(newUrl, params)
@@ -76,7 +76,7 @@
 				if (this.params.func === 'signin') {
 					this._errorText = 'Такого пользователя не существует. Попробуйте еще раз';
 				} else {
-					this._errorText = 'Такого пользователя существует. Попробуйте еще раз';
+					this._errorText = 'Такой пользователя существует. Попробуйте еще раз';
 				}
 				return Promise.reject();
 			}.bind(this));
@@ -93,7 +93,6 @@
 		}
 
 		deleteInfo(sessionid) {
-			const method = 'DELETE';
 			return fetch('https://morning-hamlet-29496.herokuapp.com/api/sessions/' + sessionid, {
 				method: 'DELETE',
 				mode: 'cors'
@@ -104,8 +103,13 @@
 			});
 		}
 
-		getError(){
-			return this._errorText;
+		getError() {
+			if (this._errorText)
+				return this._errorText;
+		}
+
+		clearErrors() {
+			this._errorText = {};
 		}
 	}
 
