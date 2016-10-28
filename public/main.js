@@ -5,6 +5,9 @@
 	const AppView = window.AppView;
 	const SignView = window.SignView;
 	const RegView = window.RegView;
+	const ScoreView = window.ScoreView;
+	const MainView = window.MainView;
+	const PlayView = window.PlayView;
 
 
 	// TIP: роуты нужно указывать от наиболее специфичного к наименее специфичному
@@ -12,7 +15,11 @@
 	(new Router())
 		.addRoute('/signup', RegView)
 		.addRoute('/app', AppView)
-		.addRoute('/', SignView)
+		.addRoute('/score/', ScoreView)
+		.addRoute('/authorization', SignView)
+		.addRoute('/singleplayer', PlayView)
+		.addRoute('/multiplayer', PlayView)
+		.addRoute('/', MainView)
 		.start();
 
 })();

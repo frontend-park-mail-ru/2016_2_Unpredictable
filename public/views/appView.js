@@ -42,9 +42,29 @@
 			}
 		}
 
+		show() {
+			setTimeout(() => {
+				this._el.hidden = false;
+				this._el.classList.toggle('js-app--hidden', false);
+
+			}, 301);
+		}
+
+		pause() {
+			this._el.classList.toggle('js-app--hidden', true);
+			this.hide();
+		}
+
+		hide() {
+			setTimeout(() => {
+				this._el.hidden = true;
+			}, 300);
+		}
+
 		showSignForm() {
 			return this.router.go('/');
 		}
+
 	}
 
 	window.AppView = AppView;

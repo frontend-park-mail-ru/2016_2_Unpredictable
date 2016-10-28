@@ -11,14 +11,15 @@
 	class SignForm extends Form {
 		constructor(options) {
 			super(options);
-			this._header = new Block('h1', {
+			this._header2 = new Block('h1', {
 				attrs: {
 					class: 'header'
 				}
 			});
-			this._header._get().innerText = `Привет!`;
+			this._header2._get().innerText = `TechnoOsmos`;
 			this._header1 = new Block('h3', {});
 			this._header1._get().innerText = `Залогинься или зарегистрируйся`;
+			this._loginBlock = new Block('div', {});
 			this._inputLogin = new Input({
 				attrs: {
 					type: 'text',
@@ -26,6 +27,12 @@
 					placeholder: 'Введите свой логин'
 				}
 			});
+			this._errorTextLogin = new Block('div', {
+				attrs: {
+					class: 'error'
+				}
+			});
+			this._passwordBlock = new Block('div', {});
 			this._inputPassword = new Input({
 				attrs: {
 					type: 'password',
@@ -35,18 +42,36 @@
 			});
 			this._inButton = new Button('Залогиниться', {});
 			this._upButton = new Button('Зарегистрироваться', {});
+			this._errorTextPassword = new Block('div', {
+				attrs: {
+					class: 'error'
+				}
+			});
 			this._errorText = new Block('div', {
 				attrs: {
 					class: 'error'
 				}
 			});
-			this.append(this._header._get());
+
+			this._back = new Button('a', {
+				attrs: {
+					onclick: 'history.back()'
+				}
+			});
+			this._back._get().innerText = `Go Back`;
+
+			this._inputLogin.renderTo(this._loginBlock._get());
+			this._errorTextLogin.renderTo(this._loginBlock._get());
+			this._inputPassword.renderTo(this._passwordBlock._get());
+			this._errorTextPassword.renderTo(this._passwordBlock._get());
+			this.append(this._header2._get());
 			this.append(this._header1._get());
-			this.append(this._inputLogin._get());
-			this.append(this._inputPassword._get());
+			this.append(this._loginBlock._get());
+			this.append(this._passwordBlock._get());
 			this.append(this._errorText._get());
 			this.append(this._inButton._get());
 			this.append(this._upButton._get());
+			this.append(this._back._get());
 		}
 
 		// TODO комментарии в стиле JSDoc
@@ -65,20 +90,23 @@
 					login: this._inputLogin.getValue(),
 					password: this._inputPassword.getValue()
 				};
-				console.log(params);
 				const model = new User(params);
 				const result = model.signin();
-				if(model.getError()){
-					this._errorText._get().innerText = model.getError();
+				if (model.getError()) {
+					for (const key in this.errors) {
+						this.errors[key]._get().innerText = '';
+					}
+					const errors = model.getError();
+					for (const key in errors) {
+						this[key]._get().innerText = errors[key];
+					}
 				} else if (result) {
 					result.then(function () {
 						window.localStorage.setItem('fromSign', 'true');
-						console.log('on signin callback');
 						callback();
 					}).catch(function () {
-						console.log(model.getError());
 						this._errorText._get().innerText = model.getError();
-						return Promise.reject();
+						return {};
 					}.bind(this));
 				}
 			}.bind(this));

@@ -15,6 +15,11 @@ const app = express();
 app.use('/', express.static('public', {maxAge: 1}));
 app.use('/app', express.static('public', {maxAge: 1}));
 app.use('/signup', express.static('public', {maxAge: 1}));
+app.use('/score', express.static('public', {maxAge: 1}));
+app.use('/authorization', express.static('public', {maxAge: 1}));
+app.use('/singleplayer', express.static('public', {maxAge: 1}));
+app.use('/multiplayer', express.static('public', {maxAge: 1}));
+
 
 app.use(parser.json());
 app.use('/libs', express.static('node_modules'));
@@ -92,6 +97,6 @@ app.delete('/api/sessions/:sessionid', function (req, res) {
 });
 
 
-app.listen(process.env.PORT || 3000, () => {
-	console.log(`App started on port ${process.env.PORT || 3000}`);
+app.listen(process.env.PORT || 4000, () => {
+	console.log(`App started on port ${process.env.PORT || 4000}`);
 });

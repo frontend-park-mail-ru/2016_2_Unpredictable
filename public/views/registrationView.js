@@ -12,7 +12,7 @@
 
 		init() {
 			this.regForm.onRegistration(this.showAppForm.bind(this));
-			this.regForm.onBack(this.showSignForm.bind(this));
+			// this.regForm.onBack(this.showSignForm.bind(this));
 			this.regForm.renderTo(this.getElement());
 		}
 
@@ -24,12 +24,30 @@
 			}
 		}
 
+		show() {
+			setTimeout(() => {
+				this._el.hidden = false;
+				this._el.classList.toggle('js-reg--hidden', false);
+			}, 301);
+		}
+
+		pause() {
+			this._el.classList.toggle('js-reg--hidden', true);
+			this.hide();
+		}
+
+		hide() {
+			setTimeout(() => {
+				this._el.hidden = true;
+			}, 300);
+		}
+
 		showAppForm() {
 			return this.router.go('/app');
 		}
 
 		showSignForm() {
-			return this.router.go('/');
+			return this.router.go('/authorization');
 		}
 
 	}
