@@ -11,7 +11,6 @@
 	class AppForm extends Form {
 		constructor(options) {
 			super(options);
-			debugger;
 			this._header = new Block('h1', {
 				attrs: {
 					class: 'header'
@@ -19,11 +18,10 @@
 			});
 			this._header._get().innerText = `TechnoOsmos`;
 
-			this._logoutButton = new Button('Log out', {});
-
 			this._singleplayer = new Link('SinglePlayer', {attrs:{href:'/singleplayer'}});
 			this._multiplayer = new Link('MultiPlayer', {attrs:{href:'/multiplayer'}});
 			this._score = new Link('ScoreBoard',{attrs:{href:'/score'}});
+			this._logoutButton = new Link('Log Out', {attrs:{href:'/'}});
 
 			this.append(this._header._get());
 			this._header2= new Block('h2', {});

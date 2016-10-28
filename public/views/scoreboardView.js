@@ -19,21 +19,24 @@
 		 * @param model - модель юзера
 		 */
 		init(model = {}) {
-			this._user = new UsersCollection();
-			this._user.sort();
+			//this._user = new UsersCollection();
+			//this._user.sort();
 			this.user = model.user;
-			//this.board = new ScoreTable();
+			this.board = new ScoreTable();
 		}
 
 		/**
 		 * Вызывается при переходе на  вьюшку
 		 */
 		resume() {
-			this._el.innerHTML = fest({items:this._user.getData()});
-			this.button = new Button ('Назад', {});
-			this.onBack(this.showMain.bind(this));
-			this.getElement().appendChild(this.button._get());
-			this.show();
+			this.board.getScore().then( (data) =>{
+				console.log(data);
+				this._el.innerHTML = fest({items: data});
+				this.button = new Button('Назад', {});
+				this.onBack(this.showMain.bind(this));
+				this.getElement().appendChild(this.button._get());
+				this.show();
+			})
 		}
 
 		/**
@@ -43,7 +46,8 @@
 		onBack(callback) {
 			this.button.on('click', function (button) {
 				button.preventDefault();
-				callback();
+				console.log(this._el);
+				callback(this._el);
 			});
 		}
 
@@ -55,8 +59,9 @@
 		}
 
 		pause() {
-			//this._el.classList.toggle('js-score--hidden', true);
-			this._el = {};
+			console.log(this._el);
+			this._el.classList.toggle('js-score--hidden', true);
+			//this._el = {};
 			this.hide();
 		}
 
@@ -70,12 +75,11 @@
 			this.button.on('click', function(button){
 				button.preventDefault();
 				callback();
-			})
+			}.bind(this))
 		}
 
 		showMain() {
-			console.log(this);
-			this.pause();
+			console.log(this._el);
 			return this.router.go('/');
 		}
 	}

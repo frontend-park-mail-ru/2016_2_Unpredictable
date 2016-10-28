@@ -63,7 +63,6 @@
 		 * @returns {*} - вьюшка по /app урлу
 		 */
 		showAppForm() {
-			this.hide();
 			return this.router.go('/app', this.user);
 		}
 
@@ -72,7 +71,6 @@
 		 * @returns {*} - вьюшка по / урлу
 		 */
 		showSignForm() {
-			this.hide();
 			return this.router.go('/authorization');
 		}
 
