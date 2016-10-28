@@ -4,7 +4,7 @@
 	const View = window.View;
 	const UsersCollection = window.UsersCollection;
 	const fest = window.fest['templates/scoreboard'];
-	const ScoreForm= window.ScoreForm;
+	const ScoreForm = window.ScoreForm;
 
 	class ScoreView extends View {
 
@@ -12,7 +12,7 @@
 			super('js-score');
 		}
 
-		init(){
+		init() {
 			this.scoreForm = new ScoreForm();
 			this.scoreForm.renderTo(this.getElement());
 		}
@@ -48,5 +48,3 @@
 
 	window.ScoreView = ScoreView;
 })();
-
-

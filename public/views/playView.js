@@ -10,7 +10,7 @@
 		}
 
 		init() {
-			this._el.innerHTML = "<img src=http://naklejka.ru/image/cache/data/naklejki/stickerbombing/stiker-s-kotom-persik-450x450.png>";
+			this._el.innerHTML = '<img src=http://naklejka.ru/image/cache/data/naklejki/stickerbombing/stiker-s-kotom-persik-450x450.png>';
 		}
 
 		resume() {
@@ -21,5 +21,3 @@
 
 	window.PlayView = PlayView;
 })();
-
-

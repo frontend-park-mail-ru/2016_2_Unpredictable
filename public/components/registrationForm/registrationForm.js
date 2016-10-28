@@ -82,9 +82,11 @@
 			});
 
 			this._regButton = new Button('Зарегистрироваться', {});
-			this._back = new Button('a',{attrs: {
-				onclick:'history.back()'
-			}});
+			this._back = new Button('a', {
+				attrs: {
+					onclick: 'history.back()'
+				}
+			});
 			this._back._get().innerText = `Go Back`;
 
 			this.append(this._header1._get());
@@ -101,11 +103,11 @@
 			this.append(this._regButton._get());
 			this.append(this._back._get());
 			this.errors = {
-				logError : this._errorTextLogin,
-				passError : this._errorTextPassword,
-				repeatError : this._errorTextRepeat,
-				commonError : this._errorText
-			}
+				logError: this._errorTextLogin,
+				passError: this._errorTextPassword,
+				repeatError: this._errorTextRepeat,
+				commonError: this._errorText
+			};
 		}
 
 		onRegistration(callback) {
@@ -114,24 +116,24 @@
 				const body = {
 					login: this._inputLogin.getValue(),
 					email: this._inputEmail.getValue(),
-					name : this._inputName.getValue(),
+					name: this._inputName.getValue(),
 					password: this._inputPassword.getValue(),
-					repeatPassword : this._inputRepeatPassword.getValue()
+					repeatPassword: this._inputRepeatPassword.getValue()
 				};
 				const model = new User(body);
 				const res = model.signup(body);
-				if(model.getError()){
-					for (let key in this.errors){
+				if (model.getError()) {
+					for (const key in this.errors) {
 						this.errors[key]._get().innerText = '';
 					}
-					let errors = model.getError();
-					for(let key in errors){
+					const errors = model.getError();
+					for (const key in errors) {
 						this[key]._get().innerText = errors[key];
 					}
 				} else if (res) {
 					res.then(function () {
 						callback();
-					}).catch(function(){
+					}).catch(function () {
 
 					});
 				}

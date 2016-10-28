@@ -19,7 +19,7 @@
 			this._header2._get().innerText = `TechnoOsmos`;
 			this._header1 = new Block('h3', {});
 			this._header1._get().innerText = `Залогинься или зарегистрируйся`;
-			this._loginBlock = new Block ('div', {});
+			this._loginBlock = new Block('div', {});
 			this._inputLogin = new Input({
 				attrs: {
 					type: 'text',
@@ -32,7 +32,7 @@
 					class: 'error'
 				}
 			});
-			this._passwordBlock = new Block ('div', {});
+			this._passwordBlock = new Block('div', {});
 			this._inputPassword = new Input({
 				attrs: {
 					type: 'password',
@@ -53,9 +53,11 @@
 				}
 			});
 
-			this._back = new Button('a',{attrs: {
-				onclick:'history.back()'
-			}});
+			this._back = new Button('a', {
+				attrs: {
+					onclick: 'history.back()'
+				}
+			});
 			this._back._get().innerText = `Go Back`;
 
 			this._inputLogin.renderTo(this._loginBlock._get());
@@ -90,12 +92,12 @@
 				};
 				const model = new User(params);
 				const result = model.signin();
-				if(model.getError()){
-					for (let key in this.errors){
+				if (model.getError()) {
+					for (const key in this.errors) {
 						this.errors[key]._get().innerText = '';
 					}
-					let errors = model.getError();
-					for(let key in errors){
+					const errors = model.getError();
+					for (const key in errors) {
 						this[key]._get().innerText = errors[key];
 					}
 				} else if (result) {
@@ -104,7 +106,6 @@
 						callback();
 					}).catch(function () {
 						this._errorText._get().innerText = model.getError();
-						debugger;
 						return {};
 					}.bind(this));
 				}

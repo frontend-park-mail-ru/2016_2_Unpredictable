@@ -9,6 +9,8 @@ module.exports = {
 		"es6": true
 	},
 	"rules": {
+		"guard-for-in": 0,
+		"no-restricted-syntax": 0,
 		"camelcase": 1,
 		"eqeqeq": 2,
 		"no-tabs": 0,

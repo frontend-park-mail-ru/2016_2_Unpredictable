@@ -12,13 +12,15 @@
 	class ScoreForm extends Form {
 		constructor(options) {
 			super(options);
-			this._back = new Button('a',{attrs: {
-				onclick:'history.back()'
-			}});
+			this._back = new Button('a', {
+				attrs: {
+					onclick: 'history.back()'
+				}
+			});
 			this._back._get().innerText = `Go Back`;
 			this._users = new UsersCollection();
 			this._users.sort();
-			this._el.innerHTML = fest({items:this._users.getData()});
+			this._el.innerHTML = fest({items: this._users.getData()});
 			this.append(this._back._get());
 
 		}

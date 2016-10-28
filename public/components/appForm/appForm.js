@@ -20,12 +20,12 @@
 
 			this._logoutButton = new Button('Log out', {});
 
-			this._singleplayer = new Link('SinglePlayer', {attrs:{href:'/singleplayer'}});
-			this._multiplayer = new Link('MultiPlayer', {attrs:{href:'/multiplayer'}});
-			this._score = new Link('ScoreBoard',{attrs:{href:'/score'}});
+			this._singleplayer = new Link('SinglePlayer', {attrs: {href: '/singleplayer'}});
+			this._multiplayer = new Link('MultiPlayer', {attrs: {href: '/multiplayer'}});
+			this._score = new Link('ScoreBoard', {attrs: {href: '/score'}});
 
 			this.append(this._header._get());
-			this._header2= new Block('h2', {});
+			this._header2 = new Block('h2', {});
 			this._header2._get().innerText = `Hello, ${this._options.name || 'Anon'}`;
 			this.append(this._header2._get());
 			this.append(this._singleplayer._get());
@@ -47,7 +47,7 @@
 						callback();
 					}).catch();
 				}
-			}.bind(this));
+			});
 		}
 
 	}
