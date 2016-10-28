@@ -106,7 +106,6 @@
 					password: this._inputPassword.getValue(),
 					//repeatPassword : this._inputRepeatPassword.getValue()
 				};
-				console.log(options);
 				options.setUserInfo(body);
 				const res = options.signup();
 				for (let key in this.errors) {

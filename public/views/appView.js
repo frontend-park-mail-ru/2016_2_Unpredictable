@@ -23,6 +23,7 @@
 						name: this.user.getLogin()
 					});
 					this.appForm.onLogout(this.showSignForm.bind(this), this.user);
+					this.appForm.onScore(this.showScoreTable.bind(this));
 					this.appForm.renderTo(this.getElement());
 				}
 				this.show();
@@ -49,6 +50,10 @@
 			setTimeout(() => {
 				this._el.hidden = true;
 			}, 300);
+		}
+
+		showScoreTable(){
+			this.router.go('/score/', this.user);
 		}
 
 		showSignForm() {

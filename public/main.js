@@ -16,8 +16,8 @@
 	// З.Ы. чтобы более ранние роуты не были префиксами более поздних ;]
 	(new Router())
 		.addRoute('/signup', RegView, options)
-		.addRoute('/app/score/', ScoreView, options)
 		.addRoute('/app', AppView, options)
+		.addRoute('/score/', ScoreView, options)
 		.addRoute('/', SignView, options)
 		.start();
 

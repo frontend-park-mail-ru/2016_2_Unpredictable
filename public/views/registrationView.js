@@ -19,11 +19,11 @@
 
 		resume(model = {}) {
 			this.regForm.clearInputErrors();
-			if (!this.user.fromSign) {
-				this.showSignForm();
-			} else {
+			// if (!this.user.fromSign) {
+			// 	this.showSignForm();
+			// } else {
 				this.show();
-			}
+			//}
 		}
 
 		show() {
