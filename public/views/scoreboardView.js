@@ -5,6 +5,7 @@
 	const UsersCollection = window.UsersCollection;
 	const ScoreTable = window.ScoreTable;
 	const fest = window.fest['templates/scoreboard'];
+	const ScoreForm= window.ScoreForm;
 	const Button = window.Button;
 
 	class ScoreView extends View {
@@ -54,6 +55,30 @@
 			this.pause();
 			this._el = {};
 			this.router.go('/app', this.user);
+		}
+
+
+		show() {
+			setTimeout(() => {
+				this._el.hidden = false;
+				this._el.classList.toggle('js-score--hidden', false);
+
+			}, 301);
+		}
+
+		pause() {
+			this._el.classList.toggle('js-score--hidden', true);
+			this.hide();
+		}
+
+		hide() {
+			setTimeout(() => {
+				this._el.hidden = true;
+			}, 300);
+		}
+
+		showSignForm() {
+			return this.router.go('/');
 		}
 	}
 

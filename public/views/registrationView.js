@@ -73,7 +73,7 @@
 		 */
 		showSignForm() {
 			this.hide();
-			return this.router.go('/', this.user);
+			return this.router.go('/authorization');
 		}
 
 	}

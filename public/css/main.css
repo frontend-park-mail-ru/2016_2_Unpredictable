@@ -8,32 +8,23 @@ body {
 	line-height: 1.2;
 }
 
-a {
-	padding: 0 30px 0;
-	background-color: #FFD700;
-	border: .1rem solid grey;
-	border-radius: .4rem;
-	color: grey;
-	cursor: pointer;
-	height: 30px;
+h1,h2{
 	text-align: center;
-	margin-right:40px;
-	outline: none;
-	margin-bottom: 3vh;
-	min-width: 40px;
-	text-decoration: none;
 }
 
 
-.js-sign, .js-app, .js-reg .js-scoreboard{
+.js-sign, .js-app, .js-reg .js-score .js-main {
 	opacity: 1;
 	transition: opacity 0.3s;
 }
 
-.js-sign--hidden, .js-app--hidden, .js-reg--hidden {
+.js-sign--hidden, .js-app--hidden, .js-reg--hidden .js-score--hidden .js-main--hidden {
 	opacity: 0;
 	pointer-events: none;
 }
 
+.js-play {
+	text-align: center;
+}
 
 

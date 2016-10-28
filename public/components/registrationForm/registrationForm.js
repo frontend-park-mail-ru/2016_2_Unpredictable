@@ -10,6 +10,13 @@
 	class RegitrationForm extends Form {
 		constructor(options) {
 			super(options);
+			this._header1 = new Block('h1', {
+				attrs: {
+					class: 'header'
+				}
+			});
+			this._header1._get().innerText = `TechnoOsmos`;
+
 			this._header = new Block('h3', {
 				attrs: {
 					class: 'header'
@@ -75,7 +82,12 @@
 			});
 
 			this._regButton = new Button('Зарегистрироваться', {});
-			this._backButton = new Button('Назад', {});
+			this._back = new Button('a',{attrs: {
+				onclick:'history.back()'
+			}});
+			this._back._get().innerText = `Go Back`;
+
+			this.append(this._header1._get());
 			this.append(this._header._get());
 			this.append(this._inputLogin._get());
 			this.append(this._errorTextLogin._get());
@@ -87,7 +99,7 @@
 			this.append(this._errorTextRepeat._get());
 			this.append(this._errorText._get());
 			this.append(this._regButton._get());
-			this.append(this._backButton._get());
+			this.append(this._back._get());
 			this.errors = {
 				logError: this._errorTextLogin,
 				passError: this._errorTextPassword,

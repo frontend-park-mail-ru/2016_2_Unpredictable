@@ -1,0 +1,21 @@
+a {
+	text-decoration: none;
+	padding: 0 15px ;
+	background-color: #FFD700;
+	border: .1rem solid grey;
+	border-radius: .4rem;
+	color: grey;
+	cursor: pointer;
+	height: 40px;
+	text-align: center;
+	outline: none;
+	width: 200px;
+	font-family: 'Comic Sans MS', cursive;
+	font-size: x-large;
+	display:block;
+	margin: auto;
+	margin-top: 1vw;
+	padding-bottom: 1px;
+	padding-top: 8px;
+
+}
