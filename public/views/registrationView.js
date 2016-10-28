@@ -47,7 +47,7 @@
 		}
 
 		showSignForm() {
-			return this.router.go('/');
+			return this.router.go('/authorization');
 		}
 
 	}

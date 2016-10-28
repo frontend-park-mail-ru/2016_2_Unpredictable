@@ -10,16 +10,39 @@
 	class AppForm extends Form {
 		constructor(options) {
 			super(options);
+			this._header = new Block('h1', {
+				attrs: {
+					class: 'header'
+				}
+			});
+			this._header._get().innerText = `TechnoOsmos`;
+
 			this._logoutButton = new Button('Log out', {});
-			this._score = new Block('a',{attrs: {
-				href:'/app/score'
+
+			this._singleplayer = new Block('a',{attrs: {
+				href:'/singleplayer'
 			}});
-			this._score._get().innerText = `Scoreboard`;
-			this._header = new Block('h1', {});
-			this._header._get().innerText = `Hello, ${this._options.name || 'Anon'}`;
+			this._singleplayer._get().innerText = `SinglePlayer`;
+
+			this._multiplayer = new Block('a',{attrs: {
+				href:'/multiplayer'
+			}});
+
+			this._multiplayer._get().innerText = `MultiPlayer`;
+			this._score = new Block('a',{attrs: {
+				href:'/score'
+			}});
+			this._score._get().innerText = `ScoreBoard`;
+
+
 			this.append(this._header._get());
-			this.append(this._logoutButton._get());
+			this._header2= new Block('h2', {});
+			this._header2._get().innerText = `Hello, ${this._options.name || 'Anon'}`;
+			this.append(this._header2._get());
+			this.append(this._singleplayer._get());
+			this.append(this._multiplayer._get());
 			this.append(this._score._get());
+			this.append(this._logoutButton._get());
 		}
 
 

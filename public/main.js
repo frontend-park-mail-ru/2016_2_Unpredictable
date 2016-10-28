@@ -15,7 +15,7 @@
 	(new Router())
 		.addRoute('/signup', RegView)
 		.addRoute('/app', AppView)
-		.addRoute('/app/score/', ScoreView)
+		.addRoute('/score/', ScoreView)
 		.addRoute('/authorization', SignView)
 		.addRoute('/play', PlayView)
 		.addRoute('/', MainView)

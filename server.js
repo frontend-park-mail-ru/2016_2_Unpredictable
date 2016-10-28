@@ -15,9 +15,10 @@ const app = express();
 app.use('/', express.static('public', {maxAge: 1}));
 app.use('/app', express.static('public', {maxAge: 1}));
 app.use('/signup', express.static('public', {maxAge: 1}));
-app.use('/app/score', express.static('public', {maxAge: 1}));
+app.use('/score', express.static('public', {maxAge: 1}));
 app.use('/authorization', express.static('public', {maxAge: 1}));
-app.use('/play', express.static('public', {maxAge: 1}));
+app.use('/singleplayer', express.static('public', {maxAge: 1}));
+app.use('/multiplayer', express.static('public', {maxAge: 1}));
 
 
 app.use(parser.json());

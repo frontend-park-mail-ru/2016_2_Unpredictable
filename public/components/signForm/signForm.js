@@ -11,12 +11,7 @@
 	class SignForm extends Form {
 		constructor(options) {
 			super(options);
-			this._header = new Block('h1', {
-				attrs: {
-					class: 'header'
-				}
-			});
-			this._header._get().innerText = `Привет!`;
+
 			this._header1 = new Block('h3', {});
 			this._header1._get().innerText = `Залогинься или зарегистрируйся`;
 			this._loginBlock = new Block ('div', {});
@@ -56,7 +51,6 @@
 			this._errorTextLogin.renderTo(this._loginBlock._get());
 			this._inputPassword.renderTo(this._passwordBlock._get());
 			this._errorTextPassword.renderTo(this._passwordBlock._get());
-			this.append(this._header._get());
 			this.append(this._header1._get());
 			this.append(this._loginBlock._get());
 			this.append(this._passwordBlock._get());
