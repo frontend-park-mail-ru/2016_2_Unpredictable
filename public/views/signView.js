@@ -25,30 +25,6 @@
 			return this.router.go('/signup');
 		}
 
-		resume() {
-			this.show();
-		}
-
-		show() {
-			setTimeout(() => {
-				this._el.hidden = false;
-				this._el.classList.toggle('js-sign--hidden', false);
-
-			}, 301);
-		}
-
-
-		pause() {
-			this._el.classList.toggle('js-sign--hidden', true);
-			this.hide();
-		}
-
-		hide() {
-			setTimeout(() => {
-				this._el.hidden = true;
-			}, 300);
-		}
-
 	}
 
 	window.SignView = SignView;

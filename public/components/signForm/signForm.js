@@ -7,6 +7,7 @@
 	const Block = window.Block;
 	const fetch = window.fetch;
 	const User = window.User;
+	const Link = window.Link;
 
 	class SignForm extends Form {
 		constructor(options) {
@@ -53,12 +54,8 @@
 				}
 			});
 
-			this._back = new Button('a', {
-				attrs: {
-					onclick: 'history.back()'
-				}
-			});
-			this._back._get().innerText = `Go Back`;
+
+			this._back = new Link('Go Back', {attrs: {href: 'back'}});
 
 			this._inputLogin.renderTo(this._loginBlock._get());
 			this._errorTextLogin.renderTo(this._loginBlock._get());

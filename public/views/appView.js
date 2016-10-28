@@ -35,30 +35,12 @@
 		}
 
 		resume() {
+			console.log('appView resume');
 			if (window.localStorage.getItem('fromSign') === null) {
 				this.showSignForm();
 			} else {
 				this.show();
 			}
-		}
-
-		show() {
-			setTimeout(() => {
-				this._el.hidden = false;
-				this._el.classList.toggle('js-app--hidden', false);
-
-			}, 301);
-		}
-
-		pause() {
-			this._el.classList.toggle('js-app--hidden', true);
-			this.hide();
-		}
-
-		hide() {
-			setTimeout(() => {
-				this._el.hidden = true;
-			}, 300);
 		}
 
 		showSignForm() {

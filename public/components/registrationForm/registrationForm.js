@@ -6,6 +6,7 @@
 	const Button = window.Button;
 	const Block = window.Block;
 	const User = window.User;
+	const Link = window.Link;
 
 	class RegitrationForm extends Form {
 		constructor(options) {
@@ -82,13 +83,7 @@
 			});
 
 			this._regButton = new Button('Зарегистрироваться', {});
-			this._back = new Button('a', {
-				attrs: {
-					onclick: 'history.back()'
-				}
-			});
-			this._back._get().innerText = `Go Back`;
-
+			this._back = new Link('Go Back', {attrs: {href: 'back'}});
 			this.append(this._header1._get());
 			this.append(this._header._get());
 			this.append(this._inputLogin._get());
