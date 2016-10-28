@@ -8,23 +8,8 @@ body {
 	font-family: 'Comic Sans MS', cursive;
 }
 
-h1{
+h1,h2{
 	text-align: center;
-}
-
-a {
-	padding: 0 30px 0;
-	background-color: #FFD700;
-	border: .1rem solid grey;
-	border-radius: .4rem;
-	color: grey;
-	cursor: pointer;
-	height: 30px;
-	text-align: center;
-	margin-right:3vh;
-	outline: none;
-	margin-bottom: 3vh;
-	text-decoration: none;
 }
 
 

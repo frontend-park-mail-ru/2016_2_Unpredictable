@@ -6,6 +6,7 @@
 	const Button = window.Button;
 	const Block = window.Block;
 	const User = window.User;
+	const Link = window.Link;
 
 	class AppForm extends Form {
 		constructor(options) {
@@ -19,22 +20,9 @@
 
 			this._logoutButton = new Button('Log out', {});
 
-			this._singleplayer = new Block('a',{attrs: {
-				href:'/singleplayer'
-			}});
-			this._singleplayer._get().innerText = `SinglePlayer`;
-
-			this._multiplayer = new Block('a',{attrs: {
-				href:'/multiplayer'
-			}});
-
-			this._multiplayer._get().innerText = `MultiPlayer`;
-			this._score = new Block('a',{attrs: {
-				href:'/score'
-			}});
-			this._score._get().innerText = `ScoreBoard`;
-
-
+			this._singleplayer = new Link('SinglePlayer', {attrs:{href:'/singleplayer'}});
+			this._multiplayer = new Link('MultiPlayer', {attrs:{href:'/multiplayer'}});
+			this._score = new Link('ScoreBoard',{attrs:{href:'/score'}});
 			this.append(this._header._get());
 			this._header2= new Block('h2', {});
 			this._header2._get().innerText = `Hello, ${this._options.name || 'Anon'}`;

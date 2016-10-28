@@ -6,6 +6,7 @@
 	const Button = window.Button;
 	const Block = window.Block;
 	const User = window.User;
+	const Link = window.Link;
 
 	class MainForm extends Form {
 		constructor(options) {
@@ -17,18 +18,9 @@
 			});
 			this._header._get().innerText = `TechnoOsmos`;
 
-			this._authorization = new Block('a',{attrs: {
-				href:'/authorization'
-			}});
-			this._authorization._get().innerText = `SignIn/SignUp`;
-			this._singleplayer = new Block('a',{attrs: {
-				href:'/singleplayer'
-			}});
-			this._singleplayer._get().innerText = `SinglePlayer`;
-			this._score = new Block('a',{attrs: {
-				href:'/score'
-			}});
-			this._score._get().innerText = `ScoreBoard`;
+			this._authorization = new Link('SignIn/SignUp',{attrs:{href:'/authorization'}});
+			this._singleplayer = new Link('SinglePlayer',{attrs:{href:'/singleplayer'}});
+			this._score = new Link('ScoreBoard',{attrs:{href:'/score'}});
 
 			this.append(this._header._get());
 			this.append(this._authorization._get());
