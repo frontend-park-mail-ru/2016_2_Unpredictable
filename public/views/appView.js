@@ -22,15 +22,17 @@
 		 * Вызывается при каждом переходе на вьюшку(переопределена)
 		 */
 		resume() {
+			console.log(this.user);
 			if (!this.user.fromSign) {
-				this.showSignForm();
+				this.showMain();
 			} else {
+				console.log(this.user.getLogin());
 				if (this.user.getLogin()) {
 					this.appForm = new AppForm({
 						name: this.user.getLogin()
 					});
-					this.appForm.onLogout(this.showSignForm.bind(this), this.user);
-					this.appForm.onScore(this.showScoreTable.bind(this));
+					this.appForm.onLogout(this.showMain.bind(this), this.user);
+					//this.appForm.onScore(this.showScoreTable.bind(this));
 					this.appForm.renderTo(this.getElement());
 				}
 				this.show();
@@ -73,14 +75,14 @@
 		 * @returns {*} -
 		 */
 		showScoreTable(){
-			this.router.go('/score/', this.user);
+			return this.router.go('/score/', this.user);
 		}
 
 		/**
 		 *Переход на главный экран
 		 * @returns {*}
 		 */
-		showSignForm() {
+		showMain() {
 			return this.router.go('/', this.user);
 		}
 

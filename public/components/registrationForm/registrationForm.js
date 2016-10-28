@@ -81,11 +81,12 @@
 				}
 			});
 
-			this._regButton = new Button('Зарегистрироваться', {});
-			this._back = new Button('a',{attrs: {
-				onclick:'history.back()'
-			}});
-			this._back._get().innerText = `Go Back`;
+			this._regButton = new Button('Registrate!', {});
+			this._backButton = new Button('Go Back', {});
+			// this._back = new Button('a',{attrs: {
+			// 	onclick:'history.back()'
+			// }});
+			// this._back._get().innerText = `Go Back`;
 
 			this.append(this._header1._get());
 			this.append(this._header._get());
@@ -99,7 +100,7 @@
 			this.append(this._errorTextRepeat._get());
 			this.append(this._errorText._get());
 			this.append(this._regButton._get());
-			this.append(this._back._get());
+			this.append(this._backButton._get());
 			this.errors = {
 				logError: this._errorTextLogin,
 				passError: this._errorTextPassword,

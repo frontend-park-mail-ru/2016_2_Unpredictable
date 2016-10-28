@@ -40,8 +40,8 @@
 					placeholder: 'Введите свой пароль'
 				}
 			});
-			this._inButton = new Button('Залогиниться', {});
-			this._upButton = new Button('Зарегистрироваться', {});
+			this._inButton = new Button('Sign In', {});
+			this._upButton = new Button('Sign Up', {});
 			this._errorTextPassword = new Block('div', {
 				attrs: {
 					class: 'error'
@@ -52,11 +52,11 @@
 					class: 'error'
 				}
 			});
-
-			this._back = new Button('a',{attrs: {
-				onclick:'history.back()'
-			}});
-			this._back._get().innerText = `Go Back`;
+			 this._backButton = new Button('Go Back', {});
+			// this._back = new Button('a',{attrs: {
+			// 	onclick:'history.back()'
+			// }});
+			// this._back._get().innerText = `Go Back`;
 
 			this._inputLogin.renderTo(this._loginBlock._get());
 			this._errorTextLogin.renderTo(this._loginBlock._get());
@@ -69,7 +69,7 @@
 			this.append(this._errorText._get());
 			this.append(this._inButton._get());
 			this.append(this._upButton._get());
-			this.append(this._back._get());
+			this.append(this._backButton._get());
 			this.errors = {
 				errorTextLogin: this._errorTextLogin,
 				errorTextPassword: this._errorTextPassword
@@ -111,6 +111,13 @@
 
 			}.bind(this));
 			options.clearErrors();
+		}
+
+		onBack(callback){
+			this._backButton.on('click', function(button){
+				button.preventDefault();
+				callback();
+			})
 		}
 
 		clearInputErrors() {

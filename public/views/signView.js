@@ -19,6 +19,7 @@
 			this.user = model.user;
 			this.signForm.onSignin(this.showAppForm.bind(this), this.user);
 			this.signForm.onSignup(this.showRegForm.bind(this), this.user);
+			this.signForm.onBack(this.showMain.bind(this), this.user);
 			this.signForm.renderTo(this.getElement());
 		}
 
@@ -49,6 +50,11 @@
 		showRegForm() {
 			this.pause();
 			return this.router.go('/signup', this.user);
+		}
+
+		showMain(){
+			this.pause();
+			return this.router.go('/', this.user);
 		}
 
 		/**

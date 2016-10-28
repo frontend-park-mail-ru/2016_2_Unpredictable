@@ -11,6 +11,7 @@
 	class AppForm extends Form {
 		constructor(options) {
 			super(options);
+			debugger;
 			this._header = new Block('h1', {
 				attrs: {
 					class: 'header'

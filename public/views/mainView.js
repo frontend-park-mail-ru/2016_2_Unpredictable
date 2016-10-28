@@ -12,6 +12,9 @@
 
 		init() {
 			this.mainForm = new MainForm();
+			this.mainForm.onAuth(this.showAuth.bind(this));
+			this.mainForm.onSingle(this.showSignForm.bind(this));
+			this.mainForm.onScore(this.showScore.bind(this));
 			this.mainForm.renderTo(this.getElement());
 		}
 
@@ -38,8 +41,18 @@
 			}, 300);
 		}
 
+		showScore(){
+			this.pause();
+			return this.router.go('/score');
+		}
+
+		showAuth(){
+			this.pause();
+			return this.router.go('/authorization');
+		}
+
 		showSignForm() {
-			return this.router.go('/');
+			this.pause()
 		}
 
 
