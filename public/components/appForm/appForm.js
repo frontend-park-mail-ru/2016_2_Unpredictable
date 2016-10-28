@@ -27,6 +27,11 @@
 
 		// TODO комментарии в стиле JSDoc
 
+		/**
+		 * Обработчик кнопки Логаута
+		 * @param callback - функция, вызываемая при нажатии
+		 * @param options - можель юзера
+		 */
 		onLogout(callback, options = {}) {
 			this._logoutButton.on('click', function (e) {
 				e.preventDefault();
@@ -40,6 +45,10 @@
 			}.bind(this));
 		}
 
+		/**
+		 * Обработчкуи кнопки вызова Таблицы рекордов
+		 * @param callback - функция, вызываемая при нажатии
+		 */
 		onScore(callback){
 			this._scoreButton.on('click', function (button){
 				button.preventDefault();

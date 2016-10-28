@@ -10,10 +10,17 @@
 			super('js-app');
 		}
 
+		/**
+		 * Инициализация вьюшки (переопределение)
+		 * @param model - объект юзера
+		 */
 		init(model = {}) {
 			this.user = model.user;
 		}
 
+		/**
+		 * Вызывается при каждом переходе на вьюшку(переопределена)
+		 */
 		resume() {
 			if (!this.user.fromSign) {
 				this.showSignForm();
@@ -30,6 +37,9 @@
 			}
 		}
 
+		/**
+		 * Делает блок видимым
+		 */
 		show() {
 			setTimeout(() => {
 				this._el.hidden = false;
@@ -38,6 +48,9 @@
 			}, 301);
 		}
 
+		/**
+		 * Вызывается при уходе с вьюшки
+		 */
 		pause() {
 			if (this.user.fromSign) {
 				this.getElement().removeChild(this.appForm._get());
@@ -46,16 +59,27 @@
 			this.hide();
 		}
 
+		/**
+		 * Скрывает вьюшку
+		 */
 		hide() {
 			setTimeout(() => {
 				this._el.hidden = true;
 			}, 300);
 		}
 
+		/**
+		 * Переход на таблицу рекордов
+		 * @returns {*} -
+		 */
 		showScoreTable(){
 			this.router.go('/score/', this.user);
 		}
 
+		/**
+		 *Переход на главный экран
+		 * @returns {*}
+		 */
 		showSignForm() {
 			return this.router.go('/', this.user);
 		}

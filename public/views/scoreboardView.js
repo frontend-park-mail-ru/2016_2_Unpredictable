@@ -13,6 +13,10 @@
 			super('js-score');
 		}
 
+		/**
+		 * Инициализация для вьюшки
+		 * @param model - модель юзера
+		 */
 		init(model = {}) {
 			this._user = new UsersCollection();
 			//this._users.sort();
@@ -20,6 +24,9 @@
 			//this.board = new ScoreTable();
 		}
 
+		/**
+		 * Вызывается при переходе на  вьюшку
+		 */
 		resume() {
 			this._el.innerHTML = fest({items:this._user.getData()});
 			this.button = new Button ('Назад', {});
@@ -29,6 +36,10 @@
 			this.show();
 		}
 
+		/**
+		 * Обработчик кнопки Baсл
+		 * @param callback - функция, вызываемая при нажатии
+		 */
 		onBack(callback){
 			this.button.on('click', function (button){
 				button.preventDefault();
@@ -36,6 +47,9 @@
 			});
 		}
 
+		/**
+		 * Переход по урлу /app
+		 */
 		showApp(){
 			this.pause();
 			this._el = {};
