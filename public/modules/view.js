@@ -17,6 +17,8 @@
 				this.tagName = options.tagName || 'div';
 				this._el = document.createElement(this.tagName);
 			}
+
+			this.__interval = null;
 		}
 
 		/**
@@ -51,7 +53,11 @@
 		 * @param {Object} [options={}] - Объект с параметрами
 		 */
 		show(options = {}) {
-			this._el.hidden = false;
+			this.__interval = setTimeout(() => {
+				this._el.style = 'opacity:0';
+				this._el.style = 'animation-name: fadeInDown;';
+				this.__interval = null;
+			}, 301);
 		}
 
 		/**
@@ -59,7 +65,11 @@
 		 * @param {Object} [options={}] - Объект с параметрами
 		 */
 		hide(options = {}) {
-			this._el.hidden = true;
+			if (this.__interval) {
+				clearTimeout(this.__interval);
+				this.__interval = null;
+			}
+			this._el.style = 'animation-name: fadeOutDown;';
 		}
 
 		/**

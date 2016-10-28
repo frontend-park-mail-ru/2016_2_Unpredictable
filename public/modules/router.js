@@ -15,6 +15,7 @@
 			}
 
 			this.routes = [];
+			this.pathsHistory = [];
 			this.activeRoute = null;
 
 			this.history = window.history;
@@ -44,10 +45,12 @@
 			window.onpopstate = function (event) {
 				const status = event.state;
 				const pathname = window.location.pathname;
+				this.pathsHistory.push(pathname);
 				this.onroute(pathname, status);
 			}.bind(this);
 			this.started = true;
 			const pathname = window.location.pathname;
+			this.pathsHistory.push(pathname);
 			this.onroute(pathname, state);
 		}
 
@@ -57,6 +60,7 @@
 		 * @param {Object} [state={}] - Объект state, который передаётся в вызов метода navigate
 		 */
 		onroute(pathname, state = {}) {
+			console.log(this.pathsHistory);
 			const route = this.routes.find(r => r.match(pathname));
 			if (!route) {
 				return;
@@ -83,6 +87,7 @@
 				return;
 			}
 			this.history.pushState(state, '', pathname);
+			this.pathsHistory.push(pathname);
 			this.onroute(pathname, state);
 		}
 
@@ -98,7 +103,8 @@
 		 * Возврат на один шаг назад в истории браузера
 		 */
 		back() {
-			this.history.back();
+			console.log(this.history);
+			this.history.go(-1);
 		}
 
 		/**
