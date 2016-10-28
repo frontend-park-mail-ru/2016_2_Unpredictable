@@ -6,6 +6,7 @@ body {
 	letter-spacing: .01em;
 	line-height: 1.2;
 	font-family: 'Comic Sans MS', cursive;
+
 }
 
 h1,h2{
@@ -13,15 +14,18 @@ h1,h2{
 }
 
 
-.js-sign, .js-app, .js-reg .js-score .js-main .js-play{
+.js-sign, .js-app, .js-reg .js-score .js-main {
 	opacity: 1;
 	transition: opacity 0.3s;
 }
 
-.js-sign--hidden, .js-app--hidden, .js-reg--hidden .js-score--hidden .js-main--hidden .js-play--hidden{
+.js-sign--hidden, .js-app--hidden, .js-reg--hidden .js-score--hidden .js-main--hidden {
 	opacity: 0;
 	pointer-events: none;
 }
 
+.js-play {
+	text-align: center;
+}
 
 

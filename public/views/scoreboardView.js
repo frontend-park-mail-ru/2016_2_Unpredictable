@@ -12,16 +12,6 @@
 			super('js-score');
 		}
 
-		// init() {
-		// 	this._users = new UsersCollection();
-		// 	this._users.sort();
-		// }
-
-		// resume() {
-		// 	this._el.innerHTML = fest({items:this._users.getData()});
-		// 	this.show();
-		// }
-
 		init(){
 			this.scoreForm = new ScoreForm();
 			this.scoreForm.renderTo(this.getElement());

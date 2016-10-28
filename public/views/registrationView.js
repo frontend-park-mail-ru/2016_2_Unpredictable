@@ -12,7 +12,7 @@
 
 		init() {
 			this.regForm.onRegistration(this.showAppForm.bind(this));
-			this.regForm.onBack(this.showSignForm.bind(this));
+			// this.regForm.onBack(this.showSignForm.bind(this));
 			this.regForm.renderTo(this.getElement());
 		}
 

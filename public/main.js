@@ -17,7 +17,8 @@
 		.addRoute('/app', AppView)
 		.addRoute('/score/', ScoreView)
 		.addRoute('/authorization', SignView)
-		.addRoute('/play', PlayView)
+		.addRoute('/singleplayer', PlayView)
+		.addRoute('/multiplayer', PlayView)
 		.addRoute('/', MainView)
 		.start();
 
