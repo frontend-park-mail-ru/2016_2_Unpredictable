@@ -19,13 +19,13 @@
 			});
 			this._header2._get().innerText = `TechnoOsmos`;
 			this._header1 = new Block('h3', {});
-			this._header1._get().innerText = `Залогинься или зарегистрируйся`;
+			this._header1._get().innerText = `Log In`;
 			this._loginBlock = new Block('div', {});
 			this._inputLogin = new Input({
 				attrs: {
 					type: 'text',
 					name: 'login',
-					placeholder: 'Введите свой логин'
+					placeholder: 'login'
 				}
 			});
 			this._errorTextLogin = new Block('div', {
@@ -38,11 +38,11 @@
 				attrs: {
 					type: 'password',
 					name: 'password',
-					placeholder: 'Введите свой пароль'
+					placeholder: 'password'
 				}
 			});
-			this._inButton = new Button('Залогиниться', {});
-			this._upButton = new Button('Зарегистрироваться', {});
+			this._inButton = new Button('Sign In', {});
+			this._upButton = new Button('Sign Up', {});
 			this._errorTextPassword = new Block('div', {
 				attrs: {
 					class: 'error'
