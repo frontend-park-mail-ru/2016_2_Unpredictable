@@ -23,12 +23,12 @@
 					class: 'header'
 				}
 			});
-			this._header._get().innerText = 'Введите свои данные';
+			this._header._get().innerText = 'Enter your information';
 			this._inputLogin = new Input({
 				attrs: {
 					type: 'text',
 					name: 'login',
-					placeholder: 'Введите свой логин'
+					placeholder: 'login'
 				}
 			});
 			this._errorTextLogin = new Block('div', {
@@ -41,21 +41,21 @@
 				attrs: {
 					type: 'text',
 					name: 'email',
-					placeholder: 'Введите свой email'
+					placeholder: 'email'
 				}
 			});
 			this._inputName = new Input({
 				attrs: {
 					type: 'text',
 					name: 'name',
-					placeholder: 'Введите свое имя'
+					placeholder: 'Your name'
 				}
 			});
 			this._inputPassword = new Input({
 				attrs: {
 					type: 'password',
 					name: 'password',
-					placeholder: 'Введите пароль'
+					placeholder: 'password'
 				}
 			});
 			this._errorTextPassword = new Block('div', {
@@ -68,7 +68,7 @@
 				attrs: {
 					type: 'password',
 					name: 'reppassword',
-					placeholder: 'Подтвердите пароль'
+					placeholder: ' confirm password'
 				}
 			});
 			this._errorTextRepeat = new Block('div', {
@@ -82,7 +82,7 @@
 				}
 			});
 
-			this._regButton = new Button('Зарегистрироваться', {});
+			this._regButton = new Button('Sign Up', {});
 			this._back = new Link('Go Back', {attrs: {href: 'back'}});
 			this.append(this._header1._get());
 			this.append(this._header._get());
