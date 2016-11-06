@@ -31,14 +31,14 @@
 	window.addEventListener('click', eventListener);
 	window.addEventListener('tap', eventListener);
 
-
 	// TIP: роуты нужно указывать от наиболее специфичного к наименее специфичному
 	// З.Ы. чтобы более ранние роуты не были префиксами более поздних ;]
+
 	(new Router())
 		.addRoute('/sign', newSignView, options)
 		.addRoute('/app', AppView, options)
 		.addRoute('/score', ScoreView, options)
-		.addRoute('/authorization', SignView, options)
+		// .addRoute('/authorization', newSignView, options)
 		.addRoute('/singleplayer', PlayView, options)
 		.addRoute('/multiplayer', PlayView, options)
 		.addRoute('/', MainView, options)

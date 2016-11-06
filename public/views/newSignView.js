@@ -6,6 +6,7 @@
 	const Button = window.Button;
 	const View = window.View;
 	const Block = window.Block;
+	const Link = window.Link;
 
 	class newSignView extends View {
 		constructor() {
@@ -33,9 +34,8 @@
 			this.getElement().appendChild(this._header2._get());
 			this.signForm.renderTo(this.getElement());
 			this.regForm.renderTo(this.getElement());
-			this.button = new Button('Back', {});
-			this.onBack(this.showMain.bind(this));
-			this.getElement().appendChild(this.button._get());
+			this._back = new Link('Go Back', {attrs: {href: 'back'}});
+			this.getElement().appendChild(this._back._get());
 		}
 
 		/**
@@ -99,15 +99,8 @@
 			}, 300);
 		}
 
-		onBack(callback){
-			this.button.on('click', function(button){
-				button.preventDefault();
-				callback();
-			}.bind(this))
-		}
 
 		showMain() {
-			console.log(this._el);
 			return this.router.go('/');
 		}
 

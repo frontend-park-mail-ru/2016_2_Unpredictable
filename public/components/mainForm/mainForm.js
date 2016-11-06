@@ -18,7 +18,7 @@
 			});
 			this._header._get().innerText = `TechnoOsmos`;
 
-			this._authorization = new Link('SignIn/SignUp', {attrs: {href: '/authorization'}});
+			this._authorization = new Link('SignIn/SignUp', {attrs: {href: '/sign'}});
 			this._singleplayer = new Link('SinglePlayer', {attrs: {href: '/singleplayer'}});
 			this._score = new Link('ScoreBoard', {attrs: {href: '/score'}});
 
@@ -29,7 +29,6 @@
 		}
 
 		}
-	}
 
 	window.MainForm = MainForm;
 

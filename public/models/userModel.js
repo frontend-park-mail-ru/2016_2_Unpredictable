@@ -82,9 +82,6 @@
 
 		signup() {
 			const validation = this.validate();
-			if (validation) {
-		signup() {
-			const validation = this.validate();
 			if (validation.error) {
 				this._errorText = {};
 				for (const key in validation) {

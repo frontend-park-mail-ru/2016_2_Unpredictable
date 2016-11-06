@@ -4,7 +4,7 @@
 	const View = window.View;
 	const UsersCollection = window.UsersCollection;
 	const ScoreTable = window.ScoreTable;
-	const fest = window.fest['templates/scoreboard'];
+	//const fest = window.fest['templates/scoreboard'];
 	const ScoreForm= window.ScoreForm;
 	const Button = window.Button;
 
@@ -31,7 +31,7 @@
 		resume() {
 			this.board.getScore().then( (data) =>{
 				console.log(data);
-				this._el.innerHTML = fest({items: data});
+				//this._el.innerHTML = fest({items: data});
 				this.button = new Button('Назад', {});
 				this.onBack(this.showMain.bind(this));
 				this.getElement().appendChild(this.button._get());

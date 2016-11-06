@@ -5,19 +5,12 @@
 	const Input = window.Input;
 	const Button = window.Button;
 	const Block = window.Block;
-	const fetch = window.fetch;
 	const User = window.User;
 	const Link = window.Link;
 
 	class SignForm extends Form {
 		constructor(options) {
 			super(options);
-			// this._header2 = new Block('h1', {
-			// 	attrs: {
-			// 		class: 'header'
-			// 	}
-			// });
-			// this._header2._get().innerText = `TechnoOsmos`;
 			this._header1 = new Block('h3', {});
 			this._header1._get().innerText = `Log In`;
 			this._loginBlock = new Block('div', {});
@@ -42,7 +35,6 @@
 				}
 			});
 			this._inButton = new Button('Sign In', {});
-			this._upButton = new Button('Sign Up', {});
 			this._errorTextPassword = new Block('div', {
 				attrs: {
 					class: 'error'
@@ -54,21 +46,15 @@
 				}
 			});
 
-
-			this._back = new Link('Go Back', {attrs: {href: 'back'}});
-
 			this._inputLogin.renderTo(this._loginBlock._get());
 			this._errorTextLogin.renderTo(this._loginBlock._get());
 			this._inputPassword.renderTo(this._passwordBlock._get());
 			this._errorTextPassword.renderTo(this._passwordBlock._get());
-			this.append(this._header2._get());
 			this.append(this._header1._get());
 			this.append(this._loginBlock._get());
 			this.append(this._passwordBlock._get());
 			this.append(this._errorText._get());
 			this.append(this._inButton._get());
-			this.append(this._upButton._get());
-			this.append(this._back._get());
 			this.errors = {
 				errorTextLogin: this._errorTextLogin,
 				errorTextPassword: this._errorTextPassword
@@ -110,13 +96,6 @@
 
 			}.bind(this));
 			options.clearErrors();
-		}
-
-		onBack(callback){
-			this._backButton.on('click', function(button){
-				button.preventDefault();
-				callback();
-			})
 		}
 
 		clearInputErrors() {

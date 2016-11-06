@@ -41,7 +41,7 @@ h1, h2 {
 	}
 }
 
-.js-sign, .js-app, .js-reg, .js-score, .js-main, .js-play {
+.js-score, .js-main, .js-play {
 	/*transition: opacity 0.3s;*/
 	/*background-color: red;*/
 	animation-duration: 0.5s;
@@ -57,4 +57,17 @@ h1, h2 {
 	text-align: center;
 }
 
+.js-reg {
+	position:absolute;
+	top:0;
+	left:23em;
+	transition: opacity 0.3s;
+}
+
+.js-sign {
+	position:absolute;
+	top:0;
+	left:1em;
+	transition: opacity 0.3s;
+}
 
