@@ -6,7 +6,6 @@ body {
 	letter-spacing: .01em;
 	line-height: 1.2;
 	font-family: 'Comic Sans MS', cursive;
-	overflow: hidden;
 }
 
 h1, h2 {
@@ -69,5 +68,9 @@ h1, h2 {
 	top:0;
 	left:1em;
 	transition: opacity 0.3s;
+}
+
+.js-canvas {
+	border: 1px solid #000;
 }
 
