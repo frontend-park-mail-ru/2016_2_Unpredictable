@@ -1,30 +1,30 @@
-(function(){
+(function () {
 	'use strict';
 
-	class KeyMaster{
-		constructor(){
+	class KeyMaster {
+		constructor() {
 			this.keys = {};
 
 			this._onPress = this._keyHandler.bind(this, 'down');
 			this._onUp = this._keyHandler.bind(this, 'up');
 		}
 
-		init(){
+		init() {
 			document.addEventListener('keypress', this._onPress);
 			document.addEventListener('keyup', this._onUp);
 		}
 
-		destroy(){
+		destroy() {
 			document.removeEventListener('keypress', this._onPress);
 			document.removeEventListener('keyup', this._onUp);
 		}
 
-		is(key){
+		is(key) {
 			return this.keys[key];
 		}
 
-		_keyHandler(action, event){
-			console.log(action,event);
+		_keyHandler(action, event) {
+			console.log(action, event);
 			let key = event.key;
 			this.keys[key] = action === 'down';
 		}
