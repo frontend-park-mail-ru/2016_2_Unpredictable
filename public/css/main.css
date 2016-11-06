@@ -1,53 +1,60 @@
 body {
 	padding: 10vh;
 	box-sizing: border-box;
-	font-family: 'OCR_OneCTT', arial;
 	color: grey;
 	font-size: 1.9vmax;
 	letter-spacing: .01em;
 	line-height: 1.2;
+	font-family: 'Comic Sans MS', cursive;
+	overflow: hidden;
 }
 
-h1,h2{
+h1, h2 {
 	text-align: center;
 }
 
+@keyframes fadeInDown {
+	from {
+		opacity: 0;
+		transform: translate3d(0, -100%, 0);
+	}
 
-.js-app, .js-score .js-main {
-	opacity: 1;
-	transition: opacity 0.3s;
+	to {
+		opacity: 1;
+		transform: none;
+	}
 }
 
-.js-sign--hidden, .js-app--hidden, .js-reg--hidden .js-score--hidden .js-main--hidden {
-	opacity: 0;
-	pointer-events: none;
+@keyframes fadeOutDown {
+	from {
+		opacity: 1;
+	}
+
+	99% {
+		opacity: 0;
+		transform: translate3d(0, 100%, 0);
+	}
+
+	to {
+		opacity: 0;
+		pointer-events: none;
+	}
+}
+
+.js-sign, .js-app, .js-reg, .js-score, .js-main, .js-play {
+	/*transition: opacity 0.3s;*/
+	/*background-color: red;*/
+	animation-duration: 0.5s;
+	animation-fill-mode: both;
+	position: absolute;
+	top: 0;
+	left: 0;
+	padding-top: 10vh;
+	width: 100%;
 }
 
 .js-play {
 	text-align: center;
-}
-
-.js-group{
-	opacity: 0.7;
-	background: #D3D3D3;
-	border-radius: 1em;
-	position:relative;
-	height: 20em;
-	width: 44em;
-}
-
-.js-reg {
-	position:absolute;
-	top:0;
-	left:23em;
-	transition: opacity 0.3s;
-}
-
-.js-sign {
-	position:absolute;
-	top:0;
-	left:1em;
-	transition: opacity 0.3s;
 }
 
 

@@ -10,12 +10,28 @@
 			super('js-app');
 		}
 
-		/**
-		 * Инициализация вьюшки (переопределение)
-		 * @param model - объект юзера
-		 */
-		init(model = {}) {
-			this.user = model.user;
+		init() {
+			const _a = function (userInfo) {
+				window.localStorage.setItem('login', userInfo.login);
+				this.appForm = new AppForm({name: window.localStorage.getItem('login')});
+				this.appForm.onLogout(this.showSignForm.bind(this));
+				this.appForm.renderTo(this.getElement());
+			};
+			const userid = window.localStorage.getItem('userid');
+			if (!userid) {
+				window.localStorage.removeItem('fromSign');
+				return {};
+			}
+			return fetch('https://morning-hamlet-29496.herokuapp.com/api/users/' + userid, {
+				method: 'GET',
+				mode: 'cors'
+			})
+				.then(function (resp) {
+					if (resp.status < 300) {
+						return resp.json();
+					}
+				})
+				.then(_a.bind(this));
 		}
 
 		/**
@@ -39,51 +55,8 @@
 			}
 		}
 
-		/**
-		 * Делает блок видимым
-		 */
-		show() {
-			setTimeout(() => {
-				this._el.hidden = false;
-				this._el.classList.toggle('js-app--hidden', false);
-
-			}, 301);
-		}
-
-		/**
-		 * Вызывается при уходе с вьюшки
-		 */
-		pause() {
-			if (this.user.fromSign) {
-				this.getElement().removeChild(this.appForm._get());
-			}
-			this._el.classList.toggle('js-app--hidden', true);
-			this.hide();
-		}
-
-		/**
-		 * Скрывает вьюшку
-		 */
-		hide() {
-			setTimeout(() => {
-				this._el.hidden = true;
-			}, 300);
-		}
-
-		/**
-		 * Переход на таблицу рекордов
-		 * @returns {*} -
-		 */
-		showScoreTable(){
-			return this.router.go('/score/', this.user);
-		}
-
-		/**
-		 *Переход на главный экран
-		 * @returns {*}
-		 */
-		showMain() {
-			return this.router.go('/', this.user);
+		showSignForm() {
+			return this.router.go('/');
 		}
 
 	}

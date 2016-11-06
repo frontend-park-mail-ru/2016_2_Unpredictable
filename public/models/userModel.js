@@ -7,7 +7,7 @@
 
 		constructor(body = {}, attributes = {}) {
 			super(attributes);
-
+			this.body = body;
 		}
 
 		validateLogin(login) {
@@ -61,14 +61,18 @@
 
 		signin() {
 			const validation = this.validate();
-			if (validation) {
+			if (validation.error) {
+				this._errorText = {};
+				for (const key in validation) {
+					if (key !== 'error') {
+						this._errorText[key] = validation[key];
+					}
+				}
 				return;
-			} else {
-				this._errorText = null;
 			}
 			let params = {
 				attrs: ['userId', 'sessionid'],
-				body: this.info,
+				body: this.body,
 				oneMore: false,
 				func: 'signin'
 			};
@@ -79,6 +83,15 @@
 		signup() {
 			const validation = this.validate();
 			if (validation) {
+		signup() {
+			const validation = this.validate();
+			if (validation.error) {
+				this._errorText = {};
+				for (const key in validation) {
+					if (key !== 'error') {
+						this._errorText[key] = validation[key];
+					}
+				}
 				return;
 			} else {
 				this._errorText = null;

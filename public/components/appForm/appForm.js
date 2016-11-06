@@ -18,13 +18,14 @@
 			});
 			this._header._get().innerText = `TechnoOsmos`;
 
-			this._singleplayer = new Link('SinglePlayer', {attrs:{href:'/singleplayer'}});
-			this._multiplayer = new Link('MultiPlayer', {attrs:{href:'/multiplayer'}});
-			this._score = new Link('ScoreBoard',{attrs:{href:'/score'}});
-			this._logoutButton = new Link('Log Out', {attrs:{href:'/'}});
+			this._logoutButton = new Button('Log out', {});
+
+			this._singleplayer = new Link('SinglePlayer', {attrs: {href: '/singleplayer'}});
+			this._multiplayer = new Link('MultiPlayer', {attrs: {href: '/multiplayer'}});
+			this._score = new Link('ScoreBoard', {attrs: {href: '/score'}});
 
 			this.append(this._header._get());
-			this._header2= new Block('h2', {});
+			this._header2 = new Block('h2', {});
 			this._header2._get().innerText = `Hello, ${this._options.name || 'Anon'}`;
 			this.append(this._header2._get());
 			this.append(this._singleplayer._get());
@@ -51,18 +52,7 @@
 						callback();
 					}).catch();
 				}
-			}.bind(this));
-		}
-
-		/**
-		 * Обработчкуи кнопки вызова Таблицы рекордов
-		 * @param callback - функция, вызываемая при нажатии
-		 */
-		onScore(callback){
-			this._scoreButton.on('click', function (button){
-				button.preventDefault();
-				callback();
-			})
+			});
 		}
 
 	}

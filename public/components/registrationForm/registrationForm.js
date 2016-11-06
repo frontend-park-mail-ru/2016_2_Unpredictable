@@ -6,16 +6,17 @@
 	const Button = window.Button;
 	const Block = window.Block;
 	const User = window.User;
+	const Link = window.Link;
 
 	class RegistrationForm extends Form {
 		constructor(options) {
 			super(options);
-			// this._header1 = new Block('h1', {
-			// 	attrs: {
-			// 		class: 'header'
-			// 	}
-			// });
-			// this._header1._get().innerText = `TechnoOsmos`;
+			this._header1 = new Block('h1', {
+				attrs: {
+					class: 'header'
+				}
+			});
+			this._header1._get().innerText = `TechnoOsmos`;
 
 			this._header = new Block('h3', {
 				attrs: {
@@ -81,14 +82,9 @@
 				}
 			});
 
-			this._regButton = new Button('Sign Up', {});
-			//this._backButton = new Button('Go Back', {});
-			// this._back = new Button('a',{attrs: {
-			// 	onclick:'history.back()'
-			// }});
-			// this._back._get().innerText = `Go Back`;
-
-			//this.append(this._header1._get());
+			this._regButton = new Button('Зарегистрироваться', {});
+			this._back = new Link('Go Back', {attrs: {href: 'back'}});
+			this.append(this._header1._get());
 			this.append(this._header._get());
 			this.append(this._inputLogin._get());
 			this.append(this._errorTextLogin._get());
@@ -100,13 +96,13 @@
 			this.append(this._errorTextRepeat._get());
 			this.append(this._errorText._get());
 			this.append(this._regButton._get());
-			//this.append(this._backButton._get());
+			this.append(this._back._get());
 			this.errors = {
 				logError: this._errorTextLogin,
 				passError: this._errorTextPassword,
 				repeatError: this._errorTextRepeat,
 				commonError: this._errorText
-			}
+			};
 		}
 
 		onRegistration(callback, options = {}) {
@@ -114,6 +110,15 @@
 				button.preventDefault();
 				const body = {
 					login: this._inputLogin.getValue(),
+<<<<<<< Temporary merge branch 1
+					email: this._inputName.getValue(),
+					// name : this._inputName.getValue(),
+					password: this._inputName.getValue()
+				};
+				const model = new User(body);
+				const res = model.signup(body);
+				if (res) {
+=======
 					email: this._inputEmail.getValue(),
 					//name : this._inputName.getValue(),
 					password: this._inputPassword.getValue(),

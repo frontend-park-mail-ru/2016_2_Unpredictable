@@ -18,9 +18,9 @@
 			});
 			this._header._get().innerText = `TechnoOsmos`;
 
-			this._authorization = new Button('SignIn/SignUp',{});
-			this._singleplayer = new Button('SinglePlayer',{});
-			this._score = new Button('ScoreBoard',{});
+			this._authorization = new Link('SignIn/SignUp', {attrs: {href: '/authorization'}});
+			this._singleplayer = new Link('SinglePlayer', {attrs: {href: '/singleplayer'}});
+			this._score = new Link('ScoreBoard', {attrs: {href: '/score'}});
 
 			this.append(this._header._get());
 			this.append(this._authorization._get());
@@ -28,25 +28,6 @@
 			this.append(this._score._get());
 		}
 
-		onAuth(callback){
-			this._authorization.on('click', function(button){
-				button.preventDefault();
-				callback();
-			})
-		}
-
-		onSingle(callback){
-			this._singleplayer.on('click', function(button){
-				button.preventDefault();
-				callback();
-			})
-		}
-
-		onScore(callback){
-			this._score.on('click', function(button){
-				button.preventDefault();
-				callback();
-			})
 		}
 	}
 

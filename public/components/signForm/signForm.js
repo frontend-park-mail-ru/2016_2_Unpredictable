@@ -7,6 +7,7 @@
 	const Block = window.Block;
 	const fetch = window.fetch;
 	const User = window.User;
+	const Link = window.Link;
 
 	class SignForm extends Form {
 		constructor(options) {
@@ -41,7 +42,7 @@
 				}
 			});
 			this._inButton = new Button('Sign In', {});
-			//this._upButton = new Button('Sign Up', {});
+			this._upButton = new Button('Sign Up', {});
 			this._errorTextPassword = new Block('div', {
 				attrs: {
 					class: 'error'
@@ -52,24 +53,22 @@
 					class: 'error'
 				}
 			});
-			 //this._backButton = new Button('Go Back', {});
-			// this._back = new Button('a',{attrs: {
-			// 	onclick:'history.back()'
-			// }});
-			// this._back._get().innerText = `Go Back`;
+
+
+			this._back = new Link('Go Back', {attrs: {href: 'back'}});
 
 			this._inputLogin.renderTo(this._loginBlock._get());
 			this._errorTextLogin.renderTo(this._loginBlock._get());
 			this._inputPassword.renderTo(this._passwordBlock._get());
 			this._errorTextPassword.renderTo(this._passwordBlock._get());
-			//this.append(this._header2._get());
+			this.append(this._header2._get());
 			this.append(this._header1._get());
 			this.append(this._loginBlock._get());
 			this.append(this._passwordBlock._get());
 			this.append(this._errorText._get());
 			this.append(this._inButton._get());
-			//this.append(this._upButton._get());
-			//this.append(this._backButton._get());
+			this.append(this._upButton._get());
+			this.append(this._back._get());
 			this.errors = {
 				errorTextLogin: this._errorTextLogin,
 				errorTextPassword: this._errorTextPassword
