@@ -28,7 +28,6 @@
 			}).then(function (answer) {
 				console.log(answer);
 				return answer;
-				// return answer;
 			}.bind(this)).catch(function (data) {
 				if (this.params.func === 'signin') {
 					this._errorText = 'Такого пользователя не существует. Попробуйте еще раз';

@@ -48,7 +48,7 @@
 
 		showAuth(){
 			this.pause();
-			return this.router.go('/authorization');
+			return this.router.go('/sign');
 		}
 
 		showSignForm() {

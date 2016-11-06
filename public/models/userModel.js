@@ -7,6 +7,7 @@
 
 		constructor(body = {}, attributes = {}) {
 			super(attributes);
+
 		}
 
 		validateLogin(login) {

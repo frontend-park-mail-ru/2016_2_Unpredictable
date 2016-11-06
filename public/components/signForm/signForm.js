@@ -11,14 +11,14 @@
 	class SignForm extends Form {
 		constructor(options) {
 			super(options);
-			this._header2 = new Block('h1', {
-				attrs: {
-					class: 'header'
-				}
-			});
-			this._header2._get().innerText = `TechnoOsmos`;
+			// this._header2 = new Block('h1', {
+			// 	attrs: {
+			// 		class: 'header'
+			// 	}
+			// });
+			// this._header2._get().innerText = `TechnoOsmos`;
 			this._header1 = new Block('h3', {});
-			this._header1._get().innerText = `Залогинься или зарегистрируйся`;
+			this._header1._get().innerText = `Log In`;
 			this._loginBlock = new Block('div', {});
 			this._inputLogin = new Input({
 				attrs: {
@@ -41,7 +41,7 @@
 				}
 			});
 			this._inButton = new Button('Sign In', {});
-			this._upButton = new Button('Sign Up', {});
+			//this._upButton = new Button('Sign Up', {});
 			this._errorTextPassword = new Block('div', {
 				attrs: {
 					class: 'error'
@@ -52,7 +52,7 @@
 					class: 'error'
 				}
 			});
-			 this._backButton = new Button('Go Back', {});
+			 //this._backButton = new Button('Go Back', {});
 			// this._back = new Button('a',{attrs: {
 			// 	onclick:'history.back()'
 			// }});
@@ -62,14 +62,14 @@
 			this._errorTextLogin.renderTo(this._loginBlock._get());
 			this._inputPassword.renderTo(this._passwordBlock._get());
 			this._errorTextPassword.renderTo(this._passwordBlock._get());
-			this.append(this._header2._get());
+			//this.append(this._header2._get());
 			this.append(this._header1._get());
 			this.append(this._loginBlock._get());
 			this.append(this._passwordBlock._get());
 			this.append(this._errorText._get());
 			this.append(this._inButton._get());
-			this.append(this._upButton._get());
-			this.append(this._backButton._get());
+			//this.append(this._upButton._get());
+			//this.append(this._backButton._get());
 			this.errors = {
 				errorTextLogin: this._errorTextLogin,
 				errorTextPassword: this._errorTextPassword

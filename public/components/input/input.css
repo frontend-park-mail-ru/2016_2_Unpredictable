@@ -1,6 +1,7 @@
 .input {
-	border: .1rem solid grey;
-	border-radius: .4rem;
+	outline: none;
+	border-bottom: 0.17em solid blue;
+	background: #d3d3d3;
 	height: 2.2em;
 	padding: 0.6rem 1rem;
 	width: 35vw;
@@ -11,6 +12,6 @@
 
 .input:focus {
 	outline: none;
-	border: .17rem solid gold;
+	border-bottom: 0.17rem solid gold;
 	border-radius: .4rem;
 }
