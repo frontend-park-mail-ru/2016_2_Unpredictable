@@ -48,11 +48,19 @@
 				y: false
 			};
 
-			if (this.x + this.r > rect.width || this.x - this.r < 0) {
+			if (this.x + this.r >= rect.width) {
+				this.x = rect.width - this.r;
+				result.x = true;
+			} else if (this.x - this.r <= 0){
+				this.x = this.r;
 				result.x = true;
 			}
 
-			if (this.y + this.r > rect.height || this.y - this.r < 0) {
+			if (this.y + this.r >= rect.height) {
+				this.y = rect.height - this.r;
+				result.y = true;
+			} else if (this.y - this.r <= 0) {
+				this.y = this.r;
 				result.y = true;
 			}
 
@@ -60,12 +68,40 @@
 		}
 
 		reflect(result) {
+
 			if (result.x) {
 				this.vx *= -1;
 			}
 			if (result.y) {
 				this.vy *= -1;
 			}
+		}
+
+		reduceR(){
+			this.r -= 0.1;
+		}
+
+		increaseR(){
+			this.r += 0.1;
+		}
+
+		countDistanceXY(ball1){
+			let dxy = (Math.sqrt((this.x - ball1.x) * (this.x - ball1.x) +
+					(this.y - ball1.y) * (this.y - ball1.y))) | 0;
+			let dr = this.r + ball1.r;
+			return dxy < dr;
+		}
+
+		compareR(ball1){
+			return this.r > ball1.r;
+		}
+
+		checkMinR(){
+			return this.r < 10;
+		}
+
+		changeColor(newColor){
+			this.color = newColor;
 		}
 
 		getCoordinates() {
