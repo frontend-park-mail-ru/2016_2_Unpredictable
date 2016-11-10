@@ -108,20 +108,22 @@
 					let coordinates = this.balls[ball].getCoordinates();
 					let deleted = false;
 					if (this.balls.ball1.countDistanceXY(coordinates)) {
-						if(this.balls.ball1.compareR(coordinates)) {
+						if (this.balls.ball1.compareR(coordinates)) {
 							this.balls.ball1.increaseR();
 							this.balls[ball].reduceR();
 						} else {
 							this.balls.ball1.reduceR();
 							this.balls[ball].increaseR();
 						}
-						if (this.balls[ball].checkMinR()){
+						if (this.balls[ball].checkMinR()) {
 							delete this.balls[ball];
 							deleted = true;
 						}
 					}
-					if(this.balls.ball1.compareR(coordinates) && !deleted){
+					if (this.balls.ball1.compareR(coordinates) && !deleted) {
 						this.balls[ball].changeColor('green');
+					} else if (!this.balls.ball1.compareR(coordinates) && !deleted) {
+						this.balls[ball].changeColor('red');
 					}
 				}
 			}

@@ -24,6 +24,8 @@ app.use('/multiplayer', express.static('public', {maxAge: 1}));
 app.use(parser.json());
 app.use('/libs', express.static('node_modules'));
 app.use('/qwest', express.static('node_modules'));
+app.use('/three', express.static('node_modules'));
+
 
 app.use(function (req, res, next) {
 	console.log(`${req.method}  ${req.originalUrl}`);

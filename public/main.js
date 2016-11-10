@@ -10,6 +10,7 @@
 	const ScoreView = window.ScoreView;
 	const MainView = window.MainView;
 	const PlayView = window.PlayView;
+	const NewPlayView = window.NewPlayView;
 
 	const options = {
 		user: new User()
@@ -39,7 +40,7 @@
 		.addRoute('/app', AppView, options)
 		.addRoute('/score', ScoreView, options)
 		// .addRoute('/authorization', newSignView, options)
-		.addRoute('/singleplayer', PlayView, options)
+		.addRoute('/singleplayer', NewPlayView, options)
 		.addRoute('/multiplayer', PlayView, options)
 		.addRoute('/', MainView, options)
 		.start();

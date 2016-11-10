@@ -51,7 +51,7 @@
 			if (this.x + this.r >= rect.width) {
 				this.x = rect.width - this.r;
 				result.x = true;
-			} else if (this.x - this.r <= 0){
+			} else if (this.x - this.r <= 0) {
 				this.x = this.r;
 				result.x = true;
 			}
@@ -77,30 +77,30 @@
 			}
 		}
 
-		reduceR(){
+		reduceR() {
 			this.r -= 0.1;
 		}
 
-		increaseR(){
+		increaseR() {
 			this.r += 0.1;
 		}
 
-		countDistanceXY(ball1){
+		countDistanceXY(ball1) {
 			let dxy = (Math.sqrt((this.x - ball1.x) * (this.x - ball1.x) +
 					(this.y - ball1.y) * (this.y - ball1.y))) | 0;
 			let dr = this.r + ball1.r;
 			return dxy < dr;
 		}
 
-		compareR(ball1){
+		compareR(ball1) {
 			return this.r > ball1.r;
 		}
 
-		checkMinR(){
+		checkMinR() {
 			return this.r < 10;
 		}
 
-		changeColor(newColor){
+		changeColor(newColor) {
 			this.color = newColor;
 		}
 
