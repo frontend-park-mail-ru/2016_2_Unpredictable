@@ -1,30 +1,28 @@
-(function () {
-	'use strict';
+'use strict';
 
-	const View = window.View;
-	const DGame = window.DGame;
+import View from '../modules/view';
+import DGame from '../newGame/newgame';
 
-	class PlayView extends View {
+export default class PlayView extends View {
 
-		constructor() {
-			super('js-play');
-			this.game = new DGame();
-		}
-
-
-		init(options = {}) {
-			this.game.init(this.getElement());
-			this.user = options;
-		}
-		resume(options = {}){
-			this.show();
-		}
-
-		show(){
-			this.getElement().hidden = false;
-			console.log(this.getElement());
-		}
+	constructor() {
+		super('js-play');
+		this.game = new DGame();
 	}
 
-	window.NewPlayView = PlayView;
-})();
+
+	init(options = {}) {
+		this.game.init(this.getElement());
+		this.user = options;
+	}
+
+	resume(options = {}) {
+		this.show();
+	}
+
+	show() {
+		this.getElement().hidden = false;
+		this.game.animate();
+	}
+}
+

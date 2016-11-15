@@ -1,14 +1,13 @@
-(function () {
 	'use strict';
 
-	const Form = window.Form;
-	const Input = window.Input;
-	const Button = window.Button;
-	const Block = window.Block;
-	const User = window.User;
-	const Link = window.Link;
+	import Form from '../form/form';
+	import Input from '../input/input';
+	import Button from '../button/button';
+	import Block from '../block/block';
+	import User from '../../models/userModel';
+	import Link from '../link/link';
 
-	class MainForm extends Form {
+	export default class MainForm extends Form {
 		constructor(options) {
 			super(options);
 			this._header = new Block('h1', {
@@ -30,6 +29,3 @@
 
 		}
 
-	window.MainForm = MainForm;
-
-})();

@@ -1,10 +1,10 @@
-(function () {
-	'use strict';
+'use strict';
 
 	let id = 0;
+	import pathToRegex from './pathToRegex'
 
 	/** Класс представляет собой Путь в вашем приложении */
-	class Route {
+	export default class Route {
 		/**
 		 * Создаёт новый Route - ассоциирует некоторую view с шаблоном пути
 		 * @param {string} pathname - Шаблон пути
@@ -13,12 +13,11 @@
 		 */
 		constructor(pathname, view, options = {}) {
 			// TODO: Сущий адище, нам нужно менеджерить депсы
-			this.pathToRegex = window.pathToRegex;
 
 			this.id = 'p' + id;
 			id++;
 			this.pathname = pathname;
-			this.regex = this.pathToRegex(pathname);
+			this.regex = pathToRegex(pathname);
 			this.View = view;
 			this.options = options;
 		}
@@ -67,7 +66,4 @@
 		}
 	}
 
-	// export
-	window.Route = Route;
 
-})();
