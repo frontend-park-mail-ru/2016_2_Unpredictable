@@ -66,14 +66,6 @@ export default class newSignView extends View {
 	}
 
 	/**
-	 * Переход на /app урл
-	 * @returns {*} - вьюшка по /app урлу
-	 */
-	showAppForm() {
-		return this.router.go('/app', this.user);
-	}
-
-	/**
 	 * Загружает вьюшку
 	 */
 	show() {

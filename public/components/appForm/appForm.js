@@ -53,6 +53,5 @@ export default class AppForm extends Form {
 			}
 		});
 	}
-
 }
 

@@ -25,6 +25,10 @@ export default class Ball {
 		scene.add(this.objectmesh);
 	}
 
+	removeFromScene(scene){
+		scene.remove(this.objectmesh);
+	}
+
 	getPosition() {
 		return {
 			x: this.x,
@@ -37,11 +41,11 @@ export default class Ball {
 		camera.lookAt(new THREE.Vector3(this.x, this.y, this.z));
 	}
 
-	update(dt){
+	update(dt) {
 		this.x += (this.vx / 100 * dt) | 0;
 		this.z += (this.vz / 100 * dt) | 0;
 		this.objectmesh.position.set(this.x, this.y, this.z);
-		console.log({x : this.x, y : this.y, z: this.z});
+		console.log({x: this.x, y: this.y, z: this.z});
 	}
 
 	dvzIncrease() {
@@ -81,7 +85,7 @@ export default class Ball {
 				this.vz += 1;
 			}
 		}
-		if(this.vx !== 0) {
+		if (this.vx !== 0) {
 			if (0 < this.vx && this.vx <= 100) {
 				this.vx -= 1;
 			} else if (0 > this.vx && this.vx >= -100) {
@@ -89,4 +93,8 @@ export default class Ball {
 			}
 		}
 	}
+
+
 }
+
+

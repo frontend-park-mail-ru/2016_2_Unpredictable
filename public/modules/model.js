@@ -115,4 +115,8 @@ export default class Model {
 	clearErrors() {
 		this._errorText = {};
 	}
+
+	_changeParams(params){
+
+	}
 }
