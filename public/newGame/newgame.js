@@ -14,9 +14,9 @@ export default class DGame {
 		this.height = 600;
 
 		/*this.socket = new Socket();
-		this.key
-		this.socket.init(this.key);
-		*/
+		 this.key
+		 this.socket.init(this.key);
+		 */
 		this.players = [];
 		this.dots = [];
 
@@ -25,14 +25,50 @@ export default class DGame {
 
 		this.rendrer = new THREE.WebGLRenderer({antialias: true});
 		this.rendrer.setSize(this.width, this.height);
+
+		this.lockChangeAlert = this.lockChangeAlert.bind(this);
+	}
+
+	lockChangeAlert() {
+		console.log(document.pointerLockElement);
+		if (document.pointerLockElement === this.canvas ||
+			document.mozPointerLockElement === this.canvas) {
+			console.log('The pointer lock status is now locked');
+			this.updatePosition = this.updatePosition.bind(this);
+			document.addEventListener("mousemove", this.updatePosition, false);
+		} else {
+			document.removeEventListener("mousemove", this.updatePosition, false);
+		}
+	}
+
+	updatePosition(mousePosition) {
+		let coordinates = this.camera.getPosition();
+		console.log(coordinates);
+		console.log(mousePosition.movementX);
+		let cameraCoordinates = {
+			x: coordinates.x + mousePosition.movementX,
+			z: coordinates.z
+		};
+		let ballCoordinates = this.dots[3].getPosition();
+		this.camera.countCircle(ballCoordinates, cameraCoordinates);
 	}
 
 	init(element) {
 		element.appendChild(this.rendrer.domElement);
-		this.scene = new THREE.Scene();
 
 		this.camera = new Camera({x: 0, y: 200, z: 300});
 		this.camera.setCamera(this.width, this.height);
+
+		this.canvas = this.rendrer.domElement;
+		this.canvas.requestPointerLock = this.canvas.requestPointerLock || this.canvas.mozRequestPointerLock;
+		document.exitPointerLock = document.exitPointerLock || document.mozRequestPointerLock;
+		this.canvas.onclick = () => {
+			this.canvas.requestPointerLock();
+		};
+		document.addEventListener('pointerlockchange', this.lockChangeAlert, false);
+		document.addEventListener('mozpointerlockchange', this.lockChangeAlert, false);
+
+		this.scene = new THREE.Scene();
 
 		this.players = [];
 		this.dots = [];
@@ -40,7 +76,7 @@ export default class DGame {
 		sphere.setCamera(this.camera.getCamera());
 		sphere.draw(this.scene);
 
-		let randsphere = new Ball({x: 100, y: 0, z: 100, r: 50, color: 'red'});
+		let randsphere = new Ball({x: 50, y: 0, z: 100, r: 50, color: 'red'});
 		randsphere.draw(this.scene);
 		this.dots.push(randsphere);
 		let randsphere1 = new Ball({x: 150, y: 0, z: 10, r: 10, color: 'red'});
@@ -51,7 +87,7 @@ export default class DGame {
 		this.dots.push(randsphere2);
 		this.dots.push(sphere);
 
-		this.light = new Light({x : 0, y : 150, z : 100});
+		this.light = new Light({x: 0, y: 150, z: 100});
 		this.light.setLight(this.scene);
 
 		this.rendrer.setClearColor('grey');
@@ -86,7 +122,7 @@ export default class DGame {
 	// 	doAnimate();
 	// }
 
-	animate(){
+	animate() {
 		let date = Date.now();
 		let doAnimate = () => {
 			let localdate = Date.now();
@@ -100,6 +136,7 @@ export default class DGame {
 			this.doKeys();
 			this.dots[3].decreaseAll();
 			this.dots[3].update(localdate - date);
+			console.log(this.camera.getPosition());
 			this.dots[3].setCamera(this.camera.getCamera());
 			this.renderer();
 			date = localdate;
@@ -122,13 +159,13 @@ export default class DGame {
 			this.dots[3].dvxIncrease();
 		}
 		let coordinates = this.dots[3].getPosition();
-		this.camera.changePosition({x: coordinates.x, y: coordinates.y + 100, z:coordinates.z + 200 });
-		this.light.changePosition({x: coordinates.x, y: coordinates.y + 200, z:coordinates.z + 200});
+		//this.camera.changePosition({x: coordinates.x, y: coordinates.y + 100, z:coordinates.z + 200 });
+		this.light.changePosition({x: coordinates.x, y: coordinates.y + 200, z: coordinates.z + 200});
 	}
 
-	checkR(){
+	checkR() {
 		let i;
-		for(i = 0; i < this.dots.length; ++i){
+		for (i = 0; i < this.dots.length; ++i) {
 
 		}
 	}

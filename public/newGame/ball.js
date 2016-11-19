@@ -25,7 +25,7 @@ export default class Ball {
 		scene.add(this.objectmesh);
 	}
 
-	removeFromScene(scene){
+	removeFromScene(scene) {
 		scene.remove(this.objectmesh);
 	}
 
@@ -51,7 +51,7 @@ export default class Ball {
 	dvzIncrease() {
 		if (this.vz <= 100) {
 			this.vz += 6;
-			this.objectmesh.rotation.z = 180;
+			this.objectmesh.rotation.z = 10;
 
 		}
 	}
@@ -59,21 +59,21 @@ export default class Ball {
 	dvzDecrease() {
 		if (this.vz >= -100) {
 			this.vz -= 6;
-			this.objectmesh.rotation.z = -180;
+			this.objectmesh.rotation.z = -10;
 		}
 	}
 
 	dvxIncrease() {
 		if (this.vx <= 100) {
 			this.vx += 6;
-			this.objectmesh.rotation.x = 180;
+			this.objectmesh.rotation.x = 10;
 		}
 	}
 
 	dvxDecrease() {
 		if (this.vx >= -100) {
 			this.vx -= 6;
-			this.objectmesh.rotation.x = 180;
+			this.objectmesh.rotation.x = 10;
 		}
 	}
 

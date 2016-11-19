@@ -37,7 +37,7 @@ export default class Socket {
 
 	workClose(event) {
 		this.socket.onerror = function (event) {
-			
+
 		}
 	}
 }

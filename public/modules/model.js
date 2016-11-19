@@ -116,7 +116,7 @@ export default class Model {
 		this._errorText = {};
 	}
 
-	_changeParams(params){
+	_changeParams(params) {
 
 	}
 }
