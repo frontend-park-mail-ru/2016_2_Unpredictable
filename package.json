@@ -25,7 +25,8 @@
     "body-parser": "^1.15.*",
     "express": "^4.14.*",
     "json-schema-mock": "^0.0.*",
-    "techno-gendoc": "^0.4.*"
+    "techno-gendoc": "^0.4.*",
+    "three-js": "^79.0.0"
   },
   "devDependencies": {
     "babel-core": "^6.18.2",
