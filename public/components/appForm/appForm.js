@@ -1,40 +1,59 @@
-(function () {
-	'use strict';
+'use strict';
 
-	const Form = window.Form;
-	const Input = window.Input;
-	const Button = window.Button;
-	const Block = window.Block;
-	const User = window.User;
-
-	class AppForm extends Form {
-		constructor(options) {
-			super(options);
-			this._logoutButton = new Button('Log out', {});
-			this._header = new Block('h1', {});
-			this._header._get().innerText = `Hello, ${this._options.name || 'Anon'}`;
-			this.append(this._header._get());
-			this.append(this._logoutButton._get());
-		}
+import Form from '../form/form';
+import Input from '../input/input';
+import Button from '../button/button';
+import Block from '../block/block';
+import User from '../../models/userModel';
+import Link from '../link/link';
+import './appForm.scss';
 
 
-		// TODO комментарии в стиле JSDoc
+export default class AppForm extends Form {
+	constructor(options) {
+		super(options);
+		this._header = new Block('h1', {
+			attrs: {
+				class: 'header'
+			}
+		});
+		this._header._get().innerText = `TechnoOsmos`;
 
-		onLogout(callback) {
-			this._logoutButton.on('click', function (e) {
-				e.preventDefault();
-				const model = new User();
-				const res = model.logOut();
-				if (res) {
-					res.then(function () {
-						callback();
-					}).catch();
-				}
-			}.bind(this));
-		}
+		this._logoutButton = new Button('Log out', {});
 
+		this._singleplayer = new Link('SinglePlayer', {attrs: {href: '/singleplayer'}});
+		this._multiplayer = new Link('MultiPlayer', {attrs: {href: '/multiplayer'}});
+		this._score = new Link('ScoreBoard', {attrs: {href: '/score'}});
+
+		this.append(this._header._get());
+		this._header2 = new Block('h2', {});
+		this._header2._get().innerText = `Hello, ${this._options.name || 'Anon'}`;
+		this.append(this._header2._get());
+		this.append(this._singleplayer._get());
+		this.append(this._multiplayer._get());
+		this.append(this._score._get());
+		this.append(this._logoutButton._get());
 	}
 
-	window.AppForm = AppForm;
 
-})();
+	// TODO комментарии в стиле JSDoc
+
+	/**
+	 * Обработчик кнопки Логаута
+	 * @param callback - функция, вызываемая при нажатии
+	 * @param options - модель юзера
+	 */
+	onLogout(callback, options = {}) {
+		this._logoutButton.on('click', function (e) {
+			e.preventDefault();
+			const model = new User();
+			const res = model.logout(options.info.sessionid);
+			if (res) {
+				res.then(function () {
+					callback();
+				}).catch();
+			}
+		});
+	}
+}
+

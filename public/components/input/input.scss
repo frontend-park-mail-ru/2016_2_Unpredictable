@@ -1,0 +1,17 @@
+.input {
+	outline: none;
+	border-bottom: 0.17em solid blue;
+	background: #d3d3d3;
+	height: 2.2em;
+	padding: 0.6rem 1rem;
+	width: 35vw;
+	margin-bottom: 7px;
+	margin-right: 20px;
+	font-family: 'OCR_OneCTT', arial;
+}
+
+.input:focus {
+	outline: none;
+	border-bottom: 0.17rem solid gold;
+	border-radius: .4rem;
+}

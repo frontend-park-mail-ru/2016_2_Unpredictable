@@ -9,15 +9,18 @@ const users = new Map();
 const sessions = new Map();
 let id = 0;
 
-technoDoc.generate(require('./api'), 'public');
+technoDoc.generate(require('./api'), 'dist');
 
 const app = express();
-app.use('/', express.static('public', {maxAge: 1}));
-app.use('/app', express.static('public', {maxAge: 1}));
-app.use('/signup', express.static('public', {maxAge: 1}));
+app.use('/', express.static('dist', {maxAge: 1}));
+app.use('/app', express.static('dist', {maxAge: 1}));
+app.use('/sign', express.static('dist', {maxAge: 1}));
+app.use('/score', express.static('dist', {maxAge: 1}));
+app.use('/authorization', express.static('dist', {maxAge: 1}));
+app.use('/singleplayer', express.static('dist', {maxAge: 1}));
+app.use('/multiplayer', express.static('dist', {maxAge: 1}));
 
 app.use(parser.json());
-app.use('/libs', express.static('node_modules'));
 
 app.use(function (req, res, next) {
 	console.log(`${req.method}  ${req.originalUrl}`);

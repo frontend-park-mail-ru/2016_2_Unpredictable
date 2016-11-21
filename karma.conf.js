@@ -3,6 +3,7 @@
 module.exports = function (config) {
 	'use strict';
 
+	// eslint-disable-next-line no-var
 	var configuration = {
 
 		basePath: '',
@@ -10,10 +11,8 @@ module.exports = function (config) {
 		frameworks: ['jasmine'],
 
 		files: [
-			// './public/components/**/*.js',
 			'./public/modules/**/*.js',
 			'./public/models/**/*.js',
-			'./public/views/**/*.js',
 			'./test/**/*.spec.js'
 		],
 
@@ -52,8 +51,8 @@ module.exports = function (config) {
 	};
 
 	if (process.env.TRAVIS) {
-		configuration.browsers = ['Chrome_travis_ci']
+		configuration.browsers = ['Chrome_travis_ci'];
 	}
 
-	config.set(configuration)
+	config.set(configuration);
 };

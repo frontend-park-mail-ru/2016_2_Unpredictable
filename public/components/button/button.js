@@ -1,16 +1,13 @@
-(function () {
-	'use strict';
+'use strict';
 
-	const Block = window.Block;
+import Block from '../block/block';
+import './button.scss';
 
-	class Button extends Block {
-		constructor(text, options) {
-			super('button', options);
-			this._el.innerText = text;
-			this._el.classList.add('button');
-		}
+
+export default class Button extends Block {
+	constructor(text, options) {
+		super('button', options);
+		this._el.innerText = text;
+		this._el.classList.add('button');
 	}
-
-	window.Button = Button;
-
-})();
+}

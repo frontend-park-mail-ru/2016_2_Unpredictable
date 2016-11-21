@@ -1,0 +1,73 @@
+body {
+	padding: 10vh;
+	box-sizing: border-box;
+	color: grey;
+	font-size: 1.9vmax;
+	letter-spacing: .01em;
+	line-height: 1.2;
+	font-family: 'Comic Sans MS', cursive;
+
+	h1, h2 {
+		text-align: center;
+	}
+}
+
+@keyframes fadeInDown {
+	from {
+		opacity: 0;
+		transform: translate3d(0, -100%, 0);
+	}
+
+	to {
+		opacity: 1;
+		transform: none;
+	}
+}
+
+@keyframes fadeOutDown {
+	from {
+		opacity: 1;
+	}
+
+	99% {
+		opacity: 0;
+		transform: translate3d(0, 100%, 0);
+	}
+
+	to {
+		opacity: 0;
+		pointer-events: none;
+	}
+}
+
+.js-score, .js-main, .js-play {
+	animation-duration: 0.5s;
+	animation-fill-mode: both;
+	position: absolute;
+	top: 0;
+	left: 0;
+	padding-top: 10vh;
+	width: 100%;
+}
+
+.js-play {
+	text-align: center;
+}
+
+.js-reg {
+	position: absolute;
+	top: 0;
+	left: 23em;
+	transition: opacity 0.3s;
+}
+
+.js-sign {
+	position: absolute;
+	top: 0;
+	left: 1em;
+	transition: opacity 0.3s;
+}
+
+.js-canvas {
+	border: 1px solid #000;
+}

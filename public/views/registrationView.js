@@ -1,39 +1,76 @@
-(function () {
-	'use strict';
+'use strict';
 
-	const RegistrationForm = window.RegistrationForm;
-	const View = window.View;
+import RegistrationForm from '../components/registrationForm/registrationForm';
+import View from '../modules/view';
 
-	class RegView extends View {
-		constructor() {
-			super('js-reg');
-			this.regForm = new RegistrationForm();
-		}
+export default class RegView extends View {
+	constructor() {
+		super('js-reg');
+		this.regForm = new RegistrationForm();
+	}
 
-		init() {
-			this.regForm.onRegistration(this.showAppForm.bind(this));
-			this.regForm.onBack(this.showSignForm.bind(this));
-			this.regForm.renderTo(this.getElement());
-		}
+	/**
+	 * Инициализация вьюшки
+	 * @param model - модель юзера
+	 */
+	init(model = {}) {
+		this.user = model.user;
+		this.regForm.onRegistration(this.showAppForm.bind(this), this.user);
+		this.regForm.onBack(this.showSignForm.bind(this), this.user);
+		this.regForm.renderTo(this.getElement());
+	}
 
-		resume() {
-			if (window.localStorage.getItem('fromSign') === null) {
-				this.showSignForm();
-			} else {
-				this.show();
-			}
-		}
-
-		showAppForm() {
-			return this.router.go('/app');
-		}
-
-		showSignForm() {
-			return this.router.go('/');
-		}
+	/**
+	 * Вызвается при переходе на вьюшку (переопределена)
+	 * @param model - модель юзера
+	 */
+	resume(model = {}) {
+		this.regForm.clearInputErrors();
+		this.show();
 
 	}
 
-	window.RegView = RegView;
-})();
+	/**
+	 * Рендерить вьюшку
+	 */
+	show() {
+		setTimeout(() => {
+			this._el.hidden = false;
+			this._el.classList.toggle('js-reg--hidden', false);
+		}, 301);
+	}
 
+	/**
+	 * Вызывается при уходе со вьюшки
+	 */
+	pause() {
+		this._el.classList.toggle('js-reg--hidden', true);
+		this.hide();
+	}
+
+	/**
+	 * Прячет вьюшку
+	 */
+	hide() {
+		setTimeout(() => {
+			this._el.hidden = true;
+		}, 300);
+	}
+
+	/**
+	 * Переход на /app урл
+	 * @returns {*} - вьюшка по /app урлу
+	 */
+	showAppForm() {
+		return this.router.go('/app', this.user);
+	}
+
+	/**
+	 * Переход на / урл
+	 * @returns {*} - вьюшка по / урлу
+	 */
+	showSignForm() {
+		return this.router.go('/authorization');
+	}
+
+}
