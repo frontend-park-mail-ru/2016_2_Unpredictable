@@ -1,11 +1,8 @@
 'use strict';
 
-import Model from '../modules/model';
 
-export default class User extends Model {
-
+export default class User {
 	constructor(body = {}, attributes = {}) {
-		super(attributes);
 		this.body = body;
 	}
 

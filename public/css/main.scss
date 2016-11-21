@@ -40,7 +40,9 @@ body {
 	}
 }
 
-.js-score, .js-main, .js-play {
+.js-sign, .js-app, .js-reg, .js-score, .js-main, .js-play {
+	/*transition: opacity 0.3s;*/
+	/*background-color: red;*/
 	animation-duration: 0.5s;
 	animation-fill-mode: both;
 	position: absolute;
@@ -52,22 +54,4 @@ body {
 
 .js-play {
 	text-align: center;
-}
-
-.js-reg {
-	position: absolute;
-	top: 0;
-	left: 23em;
-	transition: opacity 0.3s;
-}
-
-.js-sign {
-	position: absolute;
-	top: 0;
-	left: 1em;
-	transition: opacity 0.3s;
-}
-
-.js-canvas {
-	border: 1px solid #000;
 }
