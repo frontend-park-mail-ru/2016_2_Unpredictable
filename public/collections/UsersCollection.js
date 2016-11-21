@@ -1,8 +1,7 @@
 'use strict';
 
-import Model from '../modules/model';
 
-class ScoreTable extends Model {
+export default class ScoreTable {
 	constructor(attributes = {}) {
 		super(attributes);
 	}

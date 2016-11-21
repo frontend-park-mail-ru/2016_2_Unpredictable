@@ -55,7 +55,6 @@ module.exports = {
 			postcss: [precss, autoprefixer]
 		}),
 		new webpack.NoErrorsPlugin(),
-		// new ExtractTextPlugin('assets/css/[name].bundle.[hash].css'),
 		new HtmlPlugin({
 			filename: 'index.html',
 			template: path.resolve(__dirname, 'public/index.html')

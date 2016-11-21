@@ -4,9 +4,9 @@ import Form from '../form/form';
 import Input from '../input/input';
 import Button from '../button/button';
 import Block from '../block/block';
-import User from '../../models/userModel';
+import User from '../../models/UserModel';
 import Link from '../link/link';
-import UsersCollection from '../../models/userCollection';
+import UsersCollection from '../../collections/UsersCollection';
 import template from '../../templates/scoreboard.tmpl.xml';
 import './scoreboardForm.scss';
 

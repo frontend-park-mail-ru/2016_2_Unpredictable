@@ -1,16 +1,13 @@
 'use strict';
 
 import './css/main.scss';
+import User from './models/UserModel';
 import Router from './modules/router';
 import AppView from './views/appView';
 import SignView from './views/signView';
-import newSignView from './views/newSignView';
-import RegView from './views/registrationView';
-import User from './models/userModel';
-import ScoreView from './views/scoreboardView';
+import ScoreboardView from './views/scoreboardView';
 import MainView from './views/mainView';
 import PlayView from './views/playView';
-import NewPlayView from './views/newPlayView';
 
 
 const options = {
@@ -37,11 +34,10 @@ window.addEventListener('tap', eventListener);
 // З.Ы. чтобы более ранние роуты не были префиксами более поздних ;]
 
 (new Router())
-	.addRoute('/sign', newSignView, options)
+	.addRoute('/sign', SignView, options)
 	.addRoute('/app', AppView, options)
-	.addRoute('/score', ScoreView, options)
-	// .addRoute('/authorization', newSignView, options)
-	.addRoute('/singleplayer', NewPlayView, options)
-	.addRoute('/multiplayer', NewPlayView, options)
+	.addRoute('/score', ScoreboardView, options)
+	.addRoute('/singleplayer', PlayView, options)
+	.addRoute('/multiplayer', PlayView, options)
 	.addRoute('/', MainView, options)
 	.start();

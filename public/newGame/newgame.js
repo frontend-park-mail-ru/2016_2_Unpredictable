@@ -5,7 +5,7 @@ import Ball from "./ball";
 import Camera from "./camera";
 import KeyMaster from "./keymaster";
 import Light from "./light";
-import Socket from "../models/socketModel";
+import Socket from "../models/отвратительное имя переименовать!!!";
 var THREE = THREELib(); // return THREE JS
 
 export default class DGame {
