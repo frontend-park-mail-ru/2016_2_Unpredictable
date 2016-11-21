@@ -1,5 +1,8 @@
 'use strict';
 
+import './block.scss';
+
+
 export default class Block {
 	constructor(name, options = {}) {
 		this._el = document.createElement(name);

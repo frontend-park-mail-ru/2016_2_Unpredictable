@@ -1,6 +1,6 @@
 'use strict';
 
-import 'style-loader!css-loader!sass-loader!./css/main.scss';
+import './css/main.scss';
 import Router from './modules/router';
 import AppView from './views/appView';
 import SignView from './views/signView';

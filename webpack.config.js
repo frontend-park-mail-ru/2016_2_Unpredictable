@@ -5,11 +5,10 @@ const webpack = require('webpack');
 const precss = require('precss');
 const autoprefixer = require('autoprefixer');
 const HtmlPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
-	devtool: 'cheap-eval-source-map',
+	devtool: 'eval-source-map',
 	entry: [
 		'babel-polyfill',
 		'eventsource-polyfill',
@@ -32,7 +31,7 @@ module.exports = {
 			},
 			{
 				test: /\.(s)?css/,
-				loader: 'style-loader!css-loader!sass-loader'
+				loader: 'style-loader!css-loader!postcss-loader!sass-loader'
 			},
 			{
 				test: /\.tmpl\.xml/,
@@ -51,10 +50,10 @@ module.exports = {
 	},
 	plugins: [
 		new CleanWebpackPlugin('dist'),
-		// new webpack.LoaderOptionsPlugin({
-		// 	debug: true,
-		// 	postcss: [precss, autoprefixer]
-		// }),
+		new webpack.LoaderOptionsPlugin({
+			debug: true,
+			postcss: [precss, autoprefixer]
+		}),
 		new webpack.NoErrorsPlugin(),
 		// new ExtractTextPlugin('assets/css/[name].bundle.[hash].css'),
 		new HtmlPlugin({

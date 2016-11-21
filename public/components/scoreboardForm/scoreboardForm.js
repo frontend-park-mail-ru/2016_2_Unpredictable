@@ -8,6 +8,8 @@ import User from '../../models/userModel';
 import Link from '../link/link';
 import UsersCollection from '../../models/userCollection';
 import template from '../../templates/scoreboard.tmpl.xml';
+import './scoreboardForm.scss';
+
 
 export default class ScoreForm extends Form {
 	constructor(options) {

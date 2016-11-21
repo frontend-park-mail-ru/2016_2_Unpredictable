@@ -6,6 +6,8 @@ import Button from '../button/button';
 import Block from '../block/block';
 import User from '../../models/userModel';
 import Link from '../link/link';
+import './appForm.scss';
+
 
 export default class AppForm extends Form {
 	constructor(options) {

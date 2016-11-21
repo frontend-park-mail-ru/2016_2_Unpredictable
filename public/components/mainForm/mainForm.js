@@ -6,7 +6,7 @@ import Button from '../button/button';
 import Block from '../block/block';
 import User from '../../models/userModel';
 import Link from '../link/link';
-// import './mainForm.scss';
+import './mainForm.scss';
 
 export default class MainForm extends Form {
 	constructor(options) {

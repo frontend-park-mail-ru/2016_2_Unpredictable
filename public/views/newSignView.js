@@ -1,7 +1,7 @@
 'use strict';
 
 import SignForm from '../components/signForm/signForm';
-import RegistrationForm from '../components/registrationForm/registrationForm.css';
+import RegistrationForm from '../components/registrationForm/registrationForm.scss';
 import Button from '../components/button/button';
 import View from '../modules/view';
 import Block from '../components/block/block';
