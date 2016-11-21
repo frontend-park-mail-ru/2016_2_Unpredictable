@@ -3,4 +3,5 @@ public/coverage/
 public/api/
 node_modules/
 *.tmpl.js
-/public/templates/
+public/templates/
+dist/

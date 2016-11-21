@@ -39,7 +39,7 @@ export default class AppForm extends Form {
 	/**
 	 * Обработчик кнопки Логаута
 	 * @param callback - функция, вызываемая при нажатии
-	 * @param options - можель юзера
+	 * @param options - модель юзера
 	 */
 	onLogout(callback, options = {}) {
 		this._logoutButton.on('click', function (e) {

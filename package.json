@@ -6,11 +6,10 @@
   "scripts": {
     "test": "karma start --single-run",
     "lint": "eslint './**/*.js'",
-    "fest": "fest-build --dir=public/",
     "karma:start": "karma start",
     "karma:run": "karma run",
-    "start": "npm run fest && node server.js",
-    "webpack": "webpack --display-error-details --watch"
+    "start": "node server.js",
+    "webpack": "webpack --display-error-details"
   },
   "repository": {
     "type": "git",
@@ -29,6 +28,7 @@
     "three-js": "^79.0.0"
   },
   "devDependencies": {
+    "autoprefixer": "^6.5.3",
     "babel-core": "^6.18.2",
     "babel-loader": "^6.2.7",
     "babel-polyfill": "^6.16.0",
@@ -49,6 +49,10 @@
     "karma-chrome-launcher": "2.0.0",
     "karma-coverage": "^1.1.1",
     "karma-jasmine": "^1.0.2",
+    "node-sass": "^3.13.0",
+    "postcss-loader": "0.13.0",
+    "precss": "^1.4.0",
+    "sass-loader": "^4.0.2",
     "style-loader": "^0.13.1",
     "webpack": "^2.1.0-beta.25"
   }

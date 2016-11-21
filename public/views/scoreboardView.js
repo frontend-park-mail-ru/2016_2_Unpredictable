@@ -1,11 +1,10 @@
 'use strict';
 
 import View from '../modules/view';
-import UsersCollection from '../models/userCollection';
+import ScoreTable from '../models/userCollection';
 import ScoreForm from '../components/scoreboardForm/scoreboardForm';
 import Button from '../components/button/button';
-const ScoreTable = window.ScoreTable;
-//const fest = window.fest['templates/scoreboard'];
+import template from '../templates/scoreboard.tmpl.xml';
 
 export default class ScoreView extends View {
 
@@ -30,7 +29,7 @@ export default class ScoreView extends View {
 	resume() {
 		this.board.getScore().then((data) => {
 			console.log(data);
-			//this._el.innerHTML = fest({items: data});
+			this._el.innerHTML = template({items: data});
 			this.button = new Button('Назад', {});
 			this.onBack(this.showMain.bind(this));
 			this.getElement().appendChild(this.button._get());
@@ -38,17 +37,6 @@ export default class ScoreView extends View {
 		})
 	}
 
-	/**
-	 * Обработчик кнопки Baсл
-	 * @param callback - функция, вызываемая при нажатии
-	 */
-	onBack(callback) {
-		this.button.on('click', function (button) {
-			button.preventDefault();
-			console.log(this._el);
-			callback(this._el);
-		});
-	}
 
 	show() {
 		setTimeout(() => {

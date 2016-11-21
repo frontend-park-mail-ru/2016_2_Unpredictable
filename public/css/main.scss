@@ -6,10 +6,10 @@ body {
 	letter-spacing: .01em;
 	line-height: 1.2;
 	font-family: 'Comic Sans MS', cursive;
-}
 
-h1, h2 {
-	text-align: center;
+	h1, h2 {
+		text-align: center;
+	}
 }
 
 @keyframes fadeInDown {
@@ -41,8 +41,6 @@ h1, h2 {
 }
 
 .js-score, .js-main, .js-play {
-	/*transition: opacity 0.3s;*/
-	/*background-color: red;*/
 	animation-duration: 0.5s;
 	animation-fill-mode: both;
 	position: absolute;
@@ -57,16 +55,16 @@ h1, h2 {
 }
 
 .js-reg {
-	position:absolute;
-	top:0;
-	left:23em;
+	position: absolute;
+	top: 0;
+	left: 23em;
 	transition: opacity 0.3s;
 }
 
 .js-sign {
-	position:absolute;
-	top:0;
-	left:1em;
+	position: absolute;
+	top: 0;
+	left: 1em;
 	transition: opacity 0.3s;
 }
 

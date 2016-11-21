@@ -2,11 +2,14 @@
 
 const path = require('path');
 const webpack = require('webpack');
+const precss = require('precss');
+const autoprefixer = require('autoprefixer');
 const HtmlPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
+	devtool: 'inline-source-map',
 	entry: [
 		'babel-polyfill',
 		'eventsource-polyfill',
@@ -28,11 +31,8 @@ module.exports = {
 				}
 			},
 			{
-				test: /\.css/,
-				loader: ExtractTextPlugin.extract({
-					fallbackLoader: "style-loader",
-					loader: "css-loader"
-				})
+				test: /\.(s)?css/,
+				loader: 'style-loader!css-loader!postcss-loader!sass-loader'
 			},
 			{
 				test: /\.tmpl\.xml/,
@@ -40,11 +40,23 @@ module.exports = {
 			}
 		]
 	},
-
+	resolve: {
+		alias: {}
+	},
+	resolveLoader: {
+		moduleExtensions: ['-loader'],
+		alias: {
+			'fest-loader': path.resolve(__dirname, './fest-loader')
+		}
+	},
 	plugins: [
 		new CleanWebpackPlugin('dist'),
+		new webpack.LoaderOptionsPlugin({
+			debug: true,
+			postcss: [precss, autoprefixer]
+		}),
 		new webpack.NoErrorsPlugin(),
-		new ExtractTextPlugin('assets/css/bundle.css'),
+		// new ExtractTextPlugin('assets/css/bundle.css'),
 		new HtmlPlugin({
 			filename: 'index.html',
 			template: path.resolve(__dirname, 'public/index.html')

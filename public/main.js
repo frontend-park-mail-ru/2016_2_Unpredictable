@@ -10,7 +10,7 @@ import ScoreView from './views/scoreboardView';
 import MainView from './views/mainView';
 import PlayView from './views/playView';
 import NewPlayView from './views/newPlayView';
-import './css/main.css';
+import './css/main.scss';
 
 const options = {
 	user: new User()
