@@ -122,13 +122,13 @@ export default class RegistrationForm extends Form {
 				}).catch(console.error);
 			}
 		}.bind(this));
-		options.clearErrors();
+		//options.clearErrors();
 	}
 
 	onBack(callback, options = {}) {
 		this._backButton.on('click', function (button) {
 			button.preventDefault();
-			options.clearErrors();
+			//options.clearErrors();
 			callback();
 		});
 	}

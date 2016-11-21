@@ -67,7 +67,7 @@ export default class SignForm extends Form {
 	onSignup(callback, options = {}) {
 		this._upButton.on('click', function (button) {
 			button.preventDefault();
-			options.clearErrors();
+			//options.clearErrors();
 			callback();
 		});
 	}
@@ -96,7 +96,7 @@ export default class SignForm extends Form {
 			}
 
 		}.bind(this));
-		options.clearErrors();
+		//options.clearErrors();
 	}
 
 	clearInputErrors() {
