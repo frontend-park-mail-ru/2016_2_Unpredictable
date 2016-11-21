@@ -17,3 +17,7 @@
 ## Ментор:
 - Анатолий Остапенко
 
+
+https://morning-hamlet-29496.herokuapp.com/api/users/
+https://nameless-wildwood-32323.herokuapp.com/api/scoreboard?limit=10
+

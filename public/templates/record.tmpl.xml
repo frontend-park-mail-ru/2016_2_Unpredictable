@@ -2,10 +2,10 @@
     <fest:set name="record">
         <fest:if test="params">
             <div class="record__username">
-                <fest:value>params.username</fest:value>
+                <fest:value>params.login</fest:value>
             </div>
             <div class="record__score">
-                <fest:value>params.score</fest:value>
+                <fest:value>params.max_score</fest:value>
             </div>
         </fest:if>
     </fest:set>
