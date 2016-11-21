@@ -1,5 +1,6 @@
 'use strict';
 
+import 'style-loader!css-loader!sass-loader!./css/main.scss';
 import Router from './modules/router';
 import AppView from './views/appView';
 import SignView from './views/signView';
@@ -10,7 +11,7 @@ import ScoreView from './views/scoreboardView';
 import MainView from './views/mainView';
 import PlayView from './views/playView';
 import NewPlayView from './views/newPlayView';
-import './css/main.scss';
+
 
 const options = {
 	user: new User()
@@ -44,5 +45,3 @@ window.addEventListener('tap', eventListener);
 	.addRoute('/multiplayer', NewPlayView, options)
 	.addRoute('/', MainView, options)
 	.start();
-
-

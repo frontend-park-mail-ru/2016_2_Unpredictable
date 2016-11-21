@@ -9,7 +9,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
-	devtool: 'inline-source-map',
+	devtool: 'cheap-eval-source-map',
 	entry: [
 		'babel-polyfill',
 		'eventsource-polyfill',
@@ -32,7 +32,7 @@ module.exports = {
 			},
 			{
 				test: /\.(s)?css/,
-				loader: 'style-loader!css-loader!postcss-loader!sass-loader'
+				loader: 'style-loader!css-loader!sass-loader'
 			},
 			{
 				test: /\.tmpl\.xml/,
@@ -51,16 +51,15 @@ module.exports = {
 	},
 	plugins: [
 		new CleanWebpackPlugin('dist'),
-		new webpack.LoaderOptionsPlugin({
-			debug: true,
-			postcss: [precss, autoprefixer]
-		}),
+		// new webpack.LoaderOptionsPlugin({
+		// 	debug: true,
+		// 	postcss: [precss, autoprefixer]
+		// }),
 		new webpack.NoErrorsPlugin(),
-		// new ExtractTextPlugin('assets/css/bundle.css'),
+		// new ExtractTextPlugin('assets/css/[name].bundle.[hash].css'),
 		new HtmlPlugin({
 			filename: 'index.html',
 			template: path.resolve(__dirname, 'public/index.html')
 		})
 	]
 };
-
