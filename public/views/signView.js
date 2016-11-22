@@ -12,9 +12,9 @@ export default class SignView extends View {
 		super('js-group');
 		this._user = user;
 		this.signForm = new SignForm(this._user);
-		this.signForm._get().classList.add('js-sign');
+		this.signForm._get().classList.add('js-sign__form');
 		this.registrationForm = new RegistrationForm(this._user);
-		this.registrationForm._get().classList.add('js-reg');
+		this.registrationForm._get().classList.add('js-reg__form');
 		this._header = new Block('h1', {
 			attrs: {
 				class: 'header'
@@ -28,8 +28,8 @@ export default class SignView extends View {
 		this.signForm.onSignin(this.showAppForm.bind(this));
 		this.registrationForm.onRegistration(this.showAppForm.bind(this));
 		this._header.renderTo(this.getElement());
-		this.signForm.renderTo(this.getElement());
-		this.registrationForm.renderTo(this.getElement());
+		this.signForm.renderTo(document.querySelector('.js-sign'));
+		this.registrationForm.renderTo(document.querySelector('.js-reg'));
 		this._back.renderTo(this.getElement());
 	}
 
