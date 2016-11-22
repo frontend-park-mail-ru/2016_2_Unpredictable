@@ -7,6 +7,7 @@ export default class UsersCollection {
 	}
 
 	fetchUsers() {
+		console.log('fetchUsers() {');
 		return new Promise(function (resolve, reject) {
 			fetch('https://nameless-wildwood-32323.herokuapp.com/api/scoreboard?limit=10', {
 				method: 'GET',

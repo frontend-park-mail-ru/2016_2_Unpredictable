@@ -19,6 +19,7 @@ const eventListener = function (event) {
 		const url = el.getAttribute('data-nav') || el.getAttribute('href');
 		if (el.target !== '_blank' && el.target !== '_self') {
 			if (url === 'back') {
+				console.log('go back');
 				new Router().back();
 			}
 			event.preventDefault();
@@ -37,6 +38,7 @@ window.addEventListener('tap', eventListener);
 	.addRoute('/sign', SignView, options)
 	.addRoute('/app', AppView, options)
 	.addRoute('/score/', ScoreboardView, options)
+	.addRoute('/score/:page', ScoreboardView, options)
 	.addRoute('/singleplayer', PlayView, options)
 	.addRoute('/multiplayer', PlayView, options)
 	.addRoute('/', MainView, options)

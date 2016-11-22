@@ -16,6 +16,7 @@ app.use('/', express.static('dist', {maxAge: 1}));
 app.use('/app', express.static('dist', {maxAge: 1}));
 app.use('/sign', express.static('dist', {maxAge: 1}));
 app.use('/score', express.static('dist', {maxAge: 1}));
+app.use('/score/:page', express.static('dist', {maxAge: 1}));
 app.use('/authorization', express.static('dist', {maxAge: 1}));
 app.use('/singleplayer', express.static('dist', {maxAge: 1}));
 app.use('/multiplayer', express.static('dist', {maxAge: 1}));
