@@ -11,7 +11,6 @@ body {
 		text-align: center;
 	}
 }
-
 @keyframes fadeInDown {
 	from {
 		opacity: 0;
@@ -40,9 +39,9 @@ body {
 	}
 }
 
-.js-sign, .js-app, .js-reg, .js-score, .js-main, .js-play .js-group{
-	/*transition: opacity 0.3s;*/
-	/*background-color: red;*/
+.js-sign, .js-app, .js-reg, .js-score, .js-main, .js-play, h1{
+	//transition: opacity 0.3s;
+	//background-color: red;
 	animation-duration: 0.5s;
 	animation-fill-mode: both;
 	position: absolute;

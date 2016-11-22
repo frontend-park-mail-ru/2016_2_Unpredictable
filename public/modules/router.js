@@ -1,6 +1,6 @@
 'use strict';
 
-import Route from './route'
+import Route from './route';
 
 /** Класс роутера */
 export default class Router {

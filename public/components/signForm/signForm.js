@@ -67,7 +67,7 @@ export default class SignForm extends Form {
 	onSignup(callback, options = {}) {
 		this._upButton.on('click', function (button) {
 			button.preventDefault();
-			//options.clearErrors();
+			// options.clearErrors();
 			callback();
 		});
 	}
@@ -83,7 +83,7 @@ export default class SignForm extends Form {
 			const result = options.signin();
 			if (options.getError()) {
 				const errors = options.getError();
-				for (let key in errors) {
+				for (const key in errors) {
 					this[key]._get().innerText = errors[key];
 				}
 			} else if (result) {
@@ -96,11 +96,11 @@ export default class SignForm extends Form {
 			}
 
 		}.bind(this));
-		//options.clearErrors();
+		// options.clearErrors();
 	}
 
 	clearInputErrors() {
-		for (let key in this.errors) {
+		for (const key in this.errors) {
 			this.errors[key]._get().innerText = '';
 		}
 	}

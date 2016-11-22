@@ -36,7 +36,7 @@ window.addEventListener('tap', eventListener);
 (new Router())
 	.addRoute('/sign', SignView, options)
 	.addRoute('/app', AppView, options)
-	.addRoute('/score', ScoreboardView, options)
+	.addRoute('/score/', ScoreboardView, options)
 	.addRoute('/singleplayer', PlayView, options)
 	.addRoute('/multiplayer', PlayView, options)
 	.addRoute('/', MainView, options)

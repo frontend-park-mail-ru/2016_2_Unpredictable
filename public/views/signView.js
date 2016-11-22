@@ -15,18 +15,18 @@ export default class SignView extends View {
 		this.signForm._get().classList.add('js-sign');
 		this.registrationForm = new RegistrationForm(this._user);
 		this.registrationForm._get().classList.add('js-reg');
-		this._header = new Block('h2', {
+		this._header = new Block('h1', {
 			attrs: {
 				class: 'header'
 			}
 		});
+		this._header._get().innerText = `TechnoOsmos`;
 		this._back = new Link('Go Back', {attrs: {href: 'back'}});
 	}
 
 	init() {
 		this.signForm.onSignin(this.showAppForm.bind(this));
 		this.registrationForm.onRegistration(this.showAppForm.bind(this));
-
 		this._header.renderTo(this.getElement());
 		this.signForm.renderTo(this.getElement());
 		this.registrationForm.renderTo(this.getElement());

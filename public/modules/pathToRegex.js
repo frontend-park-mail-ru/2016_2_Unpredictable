@@ -1,7 +1,7 @@
 'use strict';
 
 // TODO сделать так, чтобы все тесты проходили
-export default function pathToRegex (pathname) {
+export default function pathToRegex(pathname) {
 	const keyNames = [];
 	const parts = pathname
 		.split('/')
@@ -53,4 +53,4 @@ export default function pathToRegex (pathname) {
 		}
 		return null;
 	};
-};
+}

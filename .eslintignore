@@ -5,3 +5,4 @@ node_modules/
 *.tmpl.js
 public/templates/
 dist/
+fest-loader/

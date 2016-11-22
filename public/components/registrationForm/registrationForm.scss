@@ -1,9 +1,18 @@
-.js-reg .button {
-	display: inline;
-	margin-right: 3vmin;
-	margin-top: auto;
-}
+.js-reg {
+	.button {
+		display: inline;
+		margin-right: 3vmin;
+		margin-top: auto;
+	}
 
-.js-reg h1 {
-	text-align: left;
+	h3 {
+		text-align: right;
+	}
+	animation-duration: 0.5s;
+	animation-fill-mode: both;
+	padding-top: 10vh;
+	position: absolute;
+	right: 0;
+	width:25vw;
+
 }

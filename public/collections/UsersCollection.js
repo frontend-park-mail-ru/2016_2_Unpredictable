@@ -26,9 +26,12 @@ export default class UsersCollection {
 		}.bind(this));
 	}
 
+	sort() {
+		this._data = this._data.sort((a, b) => b.score - a.score);
+	}
+
 	getData() {
 		return this._data;
 	}
-
 
 }

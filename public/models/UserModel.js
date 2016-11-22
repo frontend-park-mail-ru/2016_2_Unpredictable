@@ -66,13 +66,13 @@ export default class User {
 			}
 			return;
 		}
-		let params = {
+		const params = {
 			attrs: ['userId', 'sessionid'],
 			body: this.body,
 			oneMore: false,
 			func: 'signin'
 		};
-		let url = 'api/sessions';
+		const url = 'api/sessions';
 		return this.save(url, params);
 	}
 
@@ -89,13 +89,13 @@ export default class User {
 		} else {
 			this._errorText = null;
 		}
-		let params = {
+		const params = {
 			attrs: ['userid'],
 			body: this.info,
 			oneMore: true,
 			func: 'signup'
 		};
-		let url = 'api/users';
+		const url = 'api/users';
 		return this.save(url, params);
 
 	}

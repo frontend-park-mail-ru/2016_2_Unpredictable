@@ -108,12 +108,12 @@ export default class RegistrationForm extends Form {
 			};
 			options.setUserInfo(body);
 			const res = options.signup();
-			for (let key in this.errors) {
+			for (const key in this.errors) {
 				this.errors[key]._get().innerText = '';
 			}
 			if (options.getError()) {
-				let errors = options.getError();
-				for (let key in errors) {
+				const errors = options.getError();
+				for (const key in errors) {
 					this[key]._get().innerText = errors[key];
 				}
 			} else if (res) {
@@ -122,19 +122,19 @@ export default class RegistrationForm extends Form {
 				}).catch(console.error);
 			}
 		}.bind(this));
-		//options.clearErrors();
+		// options.clearErrors();
 	}
 
 	onBack(callback, options = {}) {
 		this._backButton.on('click', function (button) {
 			button.preventDefault();
-			//options.clearErrors();
+			// options.clearErrors();
 			callback();
 		});
 	}
 
 	clearInputErrors() {
-		for (let key in this.errors) {
+		for (const key in this.errors) {
 			this.errors[key]._get().innerText = '';
 		}
 	}
