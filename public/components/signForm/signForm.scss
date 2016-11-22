@@ -1,4 +1,11 @@
 .js-sign {
+	animation-duration: 0.5s;
+	animation-fill-mode: both;
+	padding-top: 10vh;
+	position: absolute;
+	left: 0;
+	width:25vw;
+
 	.error {
 		margin-bottom: 10px;
 	}
@@ -12,10 +19,4 @@
 	h3 {
 		text-align: left;
 	}
-	animation-duration: 0.5s;
-	animation-fill-mode: both;
-	padding-top: 10vh;
-	position: absolute;
-	left: 0;
-	width:25vw;
 }
