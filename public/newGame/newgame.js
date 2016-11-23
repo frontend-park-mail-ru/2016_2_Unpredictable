@@ -5,7 +5,7 @@ import Ball from "./ball";
 import Camera from "./camera";
 import KeyMaster from "./keymaster";
 import Light from "./light";
-import Socket from "../models/отвратительное имя переименовать!!!";
+import Socket from "../models/socketModel";
 var THREE = THREELib(); // return THREE JS
 
 export default class DGame {
@@ -19,6 +19,7 @@ export default class DGame {
 		 */
 		this.players = [];
 		this.dots = [];
+		this.oldPosition = 0;
 
 		this.key = new KeyMaster();
 		this.key.init();
@@ -43,13 +44,15 @@ export default class DGame {
 
 	updatePosition(mousePosition) {
 		let coordinates = this.camera.getPosition();
+		let d = mousePosition.movementX - this.oldPosition;
 		console.log(coordinates);
-		console.log(mousePosition.movementX);
+		console.log(d);
 		let cameraCoordinates = {
-			x: coordinates.x + mousePosition.movementX,
+			x: coordinates.x + d,
 			z: coordinates.z
 		};
 		let ballCoordinates = this.dots[3].getPosition();
+		this.oldPosition = mousePosition.movementX;
 		this.camera.countCircle(ballCoordinates, cameraCoordinates);
 	}
 

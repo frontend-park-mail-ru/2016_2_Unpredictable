@@ -45,7 +45,7 @@ export default class Ball {
 		this.x += (this.vx / 100 * dt) | 0;
 		this.z += (this.vz / 100 * dt) | 0;
 		this.objectmesh.position.set(this.x, this.y, this.z);
-		console.log({x: this.x, y: this.y, z: this.z});
+		//console.log({x: this.x, y: this.y, z: this.z});
 	}
 
 	dvzIncrease() {
