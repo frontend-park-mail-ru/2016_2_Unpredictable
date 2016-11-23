@@ -6,7 +6,7 @@ import Game from '../game/game';
 
 export default class PlayView extends View {
 	constructor() {
-		super();
+		super('js-play');
 	}
 
 	init() {
@@ -25,5 +25,5 @@ export default class PlayView extends View {
 		this._game.start();
 		super.resume();
 	}
-	
+
 }

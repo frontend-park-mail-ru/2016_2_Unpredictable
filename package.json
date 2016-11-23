@@ -9,7 +9,7 @@
     "karma:start": "karma start",
     "karma:run": "karma run",
     "start": "node server.js",
-    "webpack": "webpack --display-error-details"
+    "webpack": "webpack --display-error-details --watch"
   },
   "repository": {
     "type": "git",
