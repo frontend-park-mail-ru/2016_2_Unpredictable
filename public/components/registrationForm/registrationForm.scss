@@ -1,10 +1,10 @@
 .js-reg {
 	animation-duration: 0.5s;
 	animation-fill-mode: both;
-	padding-top: 10vh;
-	position: absolute;
-	right: 0;
-	width: 25vw;
+//	padding-top: 10vh;
+	display: inline-block;
+
+
 
 	.button {
 		display: inline;
@@ -13,6 +13,6 @@
 	}
 
 	h3 {
-		text-align: right;
+		text-align: center;
 	}
 }

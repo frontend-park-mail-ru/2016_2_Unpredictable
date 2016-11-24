@@ -23,7 +23,6 @@ export default class ScoreboardView extends View {
 		console.log('resume({page = 1}) {');
 		this._users.fetchUsers()
 			.then(() => {
-				console.log('fetch resolved');
 				this._users.sort();
 				this.usersArray = this._users.getData();
 				this.takePart(page);
@@ -39,9 +38,8 @@ export default class ScoreboardView extends View {
 		const part = 3;
 		this._next = new Link('>>', {attrs: {href: `/score/${+pageNumber + 1}`}});
 		this._prev = new Link('<<', {attrs: {href: `/score/${+pageNumber - 1}`}});
-		this._prev._get().setAttribute('style', 'float:left; width: 5%; margin-left: 30%;');
-		this._next._get().setAttribute('style', 'float:right; width: 5%; margin-right: 30%;');
-		this._back._get().setAttribute('style', 'margin-top:5%');
+		this._prev._get().setAttribute('style', 'float:left; width: 5%; margin-left: 30%; margin-top: 2vh');
+		this._next._get().setAttribute('style', 'float:right; width: 5%; margin-right: 30%; margin-top: 2vh');
 
 		if (pageNumber <= 1) {
 			this._prev._get().setAttribute('style', 'display: none;');

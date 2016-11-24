@@ -10,6 +10,14 @@ body {
 	h1, h2 {
 		text-align: center;
 	}
+
+	.js-group {
+		text-align: center;
+		.link {
+			display: inline;
+			margin-right: 3vmin;
+		}
+	}
 }
 @keyframes fadeInDown {
 	from {
@@ -39,7 +47,7 @@ body {
 	}
 }
 
-.js-sign, .js-app, .js-reg, .js-score, .js-main, .js-play, h1{
+.js-sign, .js-app, .js-reg, .js-score, .js-main, .js-play, .js-group{
 	//transition: opacity 0.3s;
 	//background-color: red;
 	animation-duration: 0.5s;
