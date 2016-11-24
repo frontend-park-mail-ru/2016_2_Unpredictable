@@ -7,11 +7,12 @@ import UsersCollection from '../collections/UsersCollection';
 import '../css/scoreboard.scss';
 
 export default class ScoreboardView extends View {
-	constructor(tag, {user}) {
+	constructor(tag, {user, host}) {
 		super('js-score');
 		this._user = user;
 		this._back = new Link('Go Back', {attrs: {href: '/'}});
 		this._users = new UsersCollection();
+		this._users.setHost(host);
 		this.pageNumber = 1;
 	}
 
@@ -46,7 +47,7 @@ export default class ScoreboardView extends View {
 			pageNumber = 1;
 			this._ourUsers = this.usersArray.slice(0, part);
 		} else {
-			this._ourUsers = this.usersArray.slice(pageNumber * part, pageNumber * part + part);
+			this._ourUsers = this.usersArray.slice(pageNumber * part, (pageNumber * part) + part);
 		}
 
 	}

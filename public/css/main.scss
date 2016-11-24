@@ -10,8 +10,8 @@ body {
 	h1, h2 {
 		text-align: center;
 	}
-
 }
+
 @keyframes fadeInDown {
 	from {
 		opacity: 0;
@@ -49,26 +49,28 @@ body {
 	padding-top: 10vh;
 	width: 100%;
 }
+
 .js-group {
-	position:relative;
-
-	h3 {
-		margin-top: 15vh;
-	}
-
-	a {
-		margin-top: 50vh;
-		height: 5vh;
-		padding-top: 1vh;
-		width: 10vw;
-	}
-
-	button {
-		height: 5vh;
-		padding-top: 1vh;
-		width: 10vw;
-
-	}
+	//position:relative;
+	//padding-top: 0;
+	//
+	//h3 {
+	//	margin-top: 15vh;
+	//}
+	//
+	//a {
+	//	margin-top: 50vh;
+	//	height: 5vh;
+	//	padding-top: 1vh;
+	//	width: 10vw;
+	//}
+	//
+	//button {
+	//	height: 5vh;
+	//	padding-top: 1vh;
+	//	width: 10vw;
+	//
+	//}
 
 }
 

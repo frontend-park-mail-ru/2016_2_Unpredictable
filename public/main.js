@@ -15,6 +15,8 @@ const options = {
 	host: 'http://localhost:5000/'
 };
 
+options.user.setHost(options.host);
+
 
 const eventListener = function (event) {
 	const el = event.target;
@@ -47,6 +49,6 @@ window.addEventListener('tap', eventListener);
 	.addRoute('/', MainView, options)
 	.start();
 
-options.user['авторизованы ли мы???']()
+options.user.checkAutorization()
 	.then(() => new Router().go('/app'))
 	.catch(() => new Router().go('/'));
