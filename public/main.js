@@ -11,8 +11,11 @@ import PlayView from './views/playView';
 
 
 const options = {
-	user: new User()
+	user: new User(),
+	host: 'http://localhost:5000/'
 };
+
+
 const eventListener = function (event) {
 	const el = event.target;
 	if (el.tagName === 'A' && (el.getAttribute('data-nav') || el.getAttribute('href'))) {
@@ -43,3 +46,7 @@ window.addEventListener('tap', eventListener);
 	.addRoute('/multiplayer', PlayView, options)
 	.addRoute('/', MainView, options)
 	.start();
+
+options.user['авторизованы ли мы???']()
+	.then(() => new Router().go('/app'))
+	.catch(() => new Router().go('/'));

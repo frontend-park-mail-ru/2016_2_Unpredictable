@@ -115,5 +115,6 @@ export default class User {
 	getLogin() {
 		return this.info.login;
 	}
+	'авторизованы ли мы?' () {}
 
 }

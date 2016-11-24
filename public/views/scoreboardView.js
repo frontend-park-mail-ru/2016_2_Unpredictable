@@ -10,7 +10,7 @@ export default class ScoreboardView extends View {
 	constructor(tag, {user}) {
 		super('js-score');
 		this._user = user;
-		this._back = new Link('Go Back', {attrs: {href: 'back'}});
+		this._back = new Link('Go Back', {attrs: {href: '/'}});
 		this._users = new UsersCollection();
 		this.pageNumber = 1;
 	}
@@ -28,17 +28,21 @@ export default class ScoreboardView extends View {
 				this.usersArray = this._users.getData();
 				this.takePart(page);
 				this._el.innerHTML = template({items: this._ourUsers});
-				this._back.renderTo(this.getElement());
-				this._next.renderTo(this.getElement());
 				this._prev.renderTo(this.getElement());
+				this._next.renderTo(this.getElement());
+				this._back.renderTo(this.getElement());
 				super.resume();
 			});
 	}
 
 	takePart(pageNumber) {
 		const part = 3;
-		this._next = new Link('Next', {attrs: {href: `/score/${+pageNumber + 1}`}});
-		this._prev = new Link('Prev', {attrs: {href: `/score/${+pageNumber - 1}`}});
+		this._next = new Link('>>', {attrs: {href: `/score/${+pageNumber + 1}`}});
+		this._prev = new Link('<<', {attrs: {href: `/score/${+pageNumber - 1}`}});
+		this._prev._get().setAttribute('style', 'float:left; width: 5%; margin-left: 30%;');
+		this._next._get().setAttribute('style', 'float:right; width: 5%; margin-right: 30%;');
+		this._back._get().setAttribute('style', 'margin-top:5%');
+
 		if (pageNumber <= 1) {
 			this._prev._get().setAttribute('style', 'display: none;');
 			pageNumber = 1;
