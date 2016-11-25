@@ -12,7 +12,7 @@ import PlayView from './views/playView';
 
 const options = {
 	user: new User(),
-	host: 'http://localhost:5000/'
+	host: 'https://osmosbackend.herokuapp.com/'
 };
 
 options.user.setHost(options.host);
