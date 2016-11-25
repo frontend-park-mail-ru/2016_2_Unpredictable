@@ -21,6 +21,7 @@ export default class User {
 				return reject();
 			}
 			fetch(this.host + 'api/login', {
+				credentials: 'include',
 				headers: {
 					'Accept': 'application/json',
 					'Content-Type': 'application/json'
@@ -63,6 +64,7 @@ export default class User {
 				return reject();
 			}
 			fetch(this.host + 'api/users', {
+				credentials: 'include',
 				headers: {
 					'Accept': 'application/json',
 					'Content-Type': 'application/json'
@@ -92,6 +94,7 @@ export default class User {
 	logout() {
 		return new Promise(function (resolve, reject) {
 			fetch(this.host + 'api/delete', {
+				credentials: 'include',
 				method: 'DELETE',
 				mode: 'cors'
 			}).then(res => {
@@ -130,6 +133,7 @@ export default class User {
 	checkAutorization() {
 		return new Promise(function (resolve, reject) {
 			fetch(this.host + 'api/me', {
+				credentials: 'include',
 				method: 'GET',
 				mode: 'cors'
 			}).then(res => {
