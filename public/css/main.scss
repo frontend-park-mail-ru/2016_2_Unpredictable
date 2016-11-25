@@ -10,6 +10,10 @@ body {
 	h1, h2 {
 		text-align: center;
 	}
+
+	button {
+		font-size: x-large;
+	}
 }
 
 @keyframes fadeInDown {
@@ -50,29 +54,6 @@ body {
 	width: 100%;
 }
 
-.js-group {
-	//position:relative;
-	//padding-top: 0;
-	//
-	//h3 {
-	//	margin-top: 15vh;
-	//}
-	//
-	//a {
-	//	margin-top: 50vh;
-	//	height: 5vh;
-	//	padding-top: 1vh;
-	//	width: 10vw;
-	//}
-	//
-	//button {
-	//	height: 5vh;
-	//	padding-top: 1vh;
-	//	width: 10vw;
-	//
-	//}
-
-}
 
 .js-sign {
 	position: absolute;

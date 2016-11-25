@@ -49,6 +49,6 @@ window.addEventListener('tap', eventListener);
 	.addRoute('/', MainView, options)
 	.start();
 
-options.user.checkAutorization()
-	.then(() => new Router().go('/app'))
-	.catch(() => new Router().go('/'));
+// options.user.checkAutorization()
+// 	.then(() => new Router().go('/app'))
+// 	.catch(() => new Router().go('/'));

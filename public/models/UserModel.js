@@ -38,12 +38,12 @@ export default class User {
 					this.score = body.score;
 					console.info('вошли');
 					return resolve();
-				})
+				});
 			}).catch(err => {
 				console.error(err);
 				console.info('какаято ошибка =((( ');
 				return reject(err);
-			})
+			});
 		}.bind(this));
 	}
 
@@ -80,12 +80,12 @@ export default class User {
 					this.score = body.score;
 					console.info('зарегались');
 					return resolve();
-				})
+				});
 			}).catch(err => {
 				console.error(err);
 				console.info('какаято ошибка =((( ');
 				return reject(err);
-			})
+			});
 		}.bind(this));
 	}
 
@@ -102,12 +102,12 @@ export default class User {
 				return res.json().then(body => {
 					console.info('Разлогинились');
 					return resolve();
-				})
+				});
 			}).catch(err => {
 				console.error(err);
 				console.info('какаято ошибка');
 				return reject(err);
-			})
+			});
 		}.bind(this));
 	}
 
@@ -142,12 +142,12 @@ export default class User {
 					this.score = body.score;
 					console.info('МЫ авторизованы!! УХУ');
 					return resolve();
-				})
+				});
 			}).catch(err => {
 				console.error(err);
 				console.info('МЫ не авторизованы!! какаято ошибка =((( meh =(');
 				return reject(err);
-			})
+			});
 		}.bind(this));
 	}
 
