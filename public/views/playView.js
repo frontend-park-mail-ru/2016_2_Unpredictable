@@ -1,22 +1,29 @@
-(function () {
-	'use strict';
+'use strict';
 
-	const View = window.View;
+import View from '../modules/view';
+import Game from '../game/game';
 
-	class PlayView extends View {
 
-		constructor() {
-			super('js-play');
-		}
-
-		init() {
-			this._el.innerHTML = '<img src=http://naklejka.ru/image/cache/data/naklejki/stickerbombing/stiker-s-kotom-persik-450x450.png>';
-			this._el.addEventListener('click', () => {
-				window.location.href = 'https://share.proto.io/GBTQEN/';
-			});
-			this._el.style = 'cursor:pointer;';
-		}
+export default class PlayView extends View {
+	constructor() {
+		super('js-play');
 	}
 
-	window.PlayView = PlayView;
-})();
+	init() {
+		this.canvas = this.getElement().querySelector('.js-canvas');
+		this.canvas.width = '1024';
+		this.canvas.height = '512';
+		this.ctx = this.canvas.getContext('2d');
+	}
+
+	resume() {
+		this._game = new Game({
+			height: 512,
+			width: 1024,
+			ctx: this.ctx
+		});
+		this._game.start();
+		super.resume();
+	}
+
+}

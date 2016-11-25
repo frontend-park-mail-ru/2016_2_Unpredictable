@@ -1,15 +1,12 @@
-(function () {
-	'use strict';
+'use strict';
 
-	const Block = window.Block;
+import Block from '../block/block';
+import './form.scss';
 
-	class Form extends Block {
-		constructor(options) {
-			super('form', options);
-			this._el.classList.add('form');
-		}
-
+export default class Form extends Block {
+	constructor(options) {
+		super('form', options);
+		this._el.classList.add('form');
 	}
-	window.Form = Form;
 
-})();
+}

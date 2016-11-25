@@ -1,20 +1,17 @@
-(function () {
-	'use strict';
+'use strict';
 
-	const View = window.View;
-	const MainForm = window.MainForm;
+import View from '../modules/view';
+import MainForm from '../components/mainForm/mainForm';
 
-	class MainView extends View {
 
-		constructor() {
-			super('js-main');
-		}
-
-		init() {
-			this.mainForm = new MainForm();
-			this.mainForm.renderTo(this.getElement());
-		}
+export default class MainView extends View {
+	constructor(tag, {user}) {
+		super('js-main');
+		this._user = user;
 	}
 
-	window.MainView = MainView;
-})();
+	init() {
+		this.mainForm = new MainForm();
+		this.mainForm.renderTo(this.getElement());
+	}
+}
