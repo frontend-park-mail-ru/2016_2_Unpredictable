@@ -1,31 +1,34 @@
 'use strict';
 
+import './css/bootstrap/bootstrap.min.scss';
+import './css/bootstrap/bootstrap-theme.min.scss';
 import './css/main.scss';
 import User from './models/UserModel';
 import Router from './modules/router';
 import AppView from './views/appView';
 import SignView from './views/signView';
+import RegView from './views/registrationView';
 import ScoreboardView from './views/scoreboardView';
 import MainView from './views/mainView';
 import PlayView from './views/playView';
 
 
-(function () {
-	'use strict';
-	if (!navigator.serviceWorker) {
-		return;
-	}
-	navigator.serviceWorker.register(
-		'/sw.js'
-	).then(function (registration) {
-		// при удачной регистрации имеем объект типа ServiceWorkerRegistration
-		console.log('ServiceWorker registration', registration);
-		// строкой ниже можно прекратить работу serviceWorker’а
-		// registration.unregister();
-	}).catch(function (err) {
-		throw new Error('ServiceWorker error: ' + err);
-	});
-})();
+// (function () {
+// 	'use strict';
+// 	if (!navigator.serviceWorker) {
+// 		return;
+// 	}
+// 	navigator.serviceWorker.register(
+// 		'/sw.js'
+// 	).then(function (registration) {
+// 		// при удачной регистрации имеем объект типа ServiceWorkerRegistration
+// 		console.log('ServiceWorker registration', registration);
+// 		// строкой ниже можно прекратить работу serviceWorker’а
+// 		// registration.unregister();
+// 	}).catch(function (err) {
+// 		throw new Error('ServiceWorker error: ' + err);
+// 	});
+// })();
 
 const options = {
 	user: new User(),
@@ -58,6 +61,7 @@ window.addEventListener('tap', eventListener);
 
 (new Router())
 	.addRoute('/sign', SignView, options)
+	.addRoute('/reg', RegView, options)
 	.addRoute('/app', AppView, options)
 	.addRoute('/score/', ScoreboardView, options)
 	.addRoute('/score/:page', ScoreboardView, options)

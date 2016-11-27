@@ -1,0 +1,16 @@
+//.input {
+//	display: block;
+//	border: .1rem solid grey;
+//	border-radius: .4rem;
+//	height: 2.2em;
+//	padding: 0.6rem 1rem;
+//	width: 30vw;
+//	margin-bottom: 7px;
+//	font-family: 'Comic Sans MS', cursive;
+//}
+//
+//.input:focus {
+//	outline: none;
+//	border: .17rem solid gold;
+//	border-radius: .4rem;
+//}

@@ -1,20 +1,35 @@
 body {
-	padding: 10vh;
-	box-sizing: border-box;
-	color: grey;
-	font-size: 1.9vmax;
-	letter-spacing: .01em;
-	line-height: 1.2;
-	font-family: 'Comic Sans MS', cursive;
+	background-color: #f0c987;
 
-	h1, h2 {
+	h1 {
 		text-align: center;
+		color: #3c153b !important;
 	}
 
-	button {
-		font-size: x-large;
+	h2 {
+		text-align: center;
+		color: #8b1e3f !important;
 	}
-}
+
+
+
+
+//	padding: 10vh;
+//	box-sizing: border-box;
+//	color: grey;
+//	font-size: 1.9vmax;
+//	letter-spacing: .01em;
+//	line-height: 1.2;
+//	font-family: 'Comic Sans MS', cursive;
+//
+//	h1, h2 {
+//		text-align: center;
+//	}
+//
+//	button {
+//		font-size: x-large;
+//	}
+//}
 
 @keyframes fadeInDown {
 	from {
@@ -51,23 +66,23 @@ body {
 	top: 0;
 	left: 0;
 	padding-top: 10vh;
-	width: 100%;
+
 }
-
-
-.js-sign {
-	position: absolute;
-	left: 0;
-	padding: 10px;
-	width:50%;
-}
-
-.js-reg {
-	position: absolute;
-	right: 0;
-	width: 50%;
-}
-
-.js-play {
-	text-align: center;
+//
+//
+//.js-sign {
+//	position: absolute;
+//	left: 0;
+//	padding: 10px;
+//	width:50%;
+//}
+//
+//.js-reg {
+//	position: absolute;
+//	right: 0;
+//	width: 50%;
+//}
+//
+//.js-play {
+//	text-align: center;
 }

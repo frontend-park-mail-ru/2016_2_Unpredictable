@@ -39,8 +39,8 @@ export default class ScoreboardView extends View {
 		const part = 3;
 		this._next = new Link('>>', {attrs: {href: `/score/${+pageNumber + 1}`}});
 		this._prev = new Link('<<', {attrs: {href: `/score/${+pageNumber - 1}`}});
-		this._prev._get().setAttribute('style', 'float:left; width: 5%; margin-left: 30%; margin-top: 2vh');
-		this._next._get().setAttribute('style', 'float:right; width: 5%; margin-right: 30%; margin-top: 2vh');
+		this._prev._get().setAttribute('class', 'pagination ');
+		this._next._get().setAttribute('class', 'pagination ');
 
 		if (pageNumber <= 1) {
 			this._prev._get().setAttribute('style', 'display: none;');

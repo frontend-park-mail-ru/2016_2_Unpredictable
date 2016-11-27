@@ -1,11 +1,13 @@
 <fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
     <fest:set name="record">
         <fest:if test="params">
-            <div class="record__username">
+            <div class="row">
+            <div class="record__login col-xs-6 col-md-6">
                 <fest:value>params.login</fest:value>
             </div>
-            <div class="record__score">
+            <div class="record__score col-xs-6 col-md-6">
                 <fest:value>params.score</fest:value>
+            </div>
             </div>
         </fest:if>
     </fest:set>

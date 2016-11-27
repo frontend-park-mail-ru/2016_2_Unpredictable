@@ -1,0 +1,23 @@
+'use strict';
+
+import RegistrationForm from '../components/registrationForm/registrationForm';
+import View from '../modules/view';
+
+export default class RegView extends View {
+	constructor(tag, {user}) {
+		super('js-reg');
+		this.regForm = new RegistrationForm();
+		this._user = user;
+	}
+
+	init() {
+		this.regForm.onRegistration(this.showAppForm.bind(this), this.user);
+		this.regForm.renderTo(this.getElement());
+	}
+
+	showAppForm() {
+		return this.router.go('/app', this.user);
+	}
+
+
+}

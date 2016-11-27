@@ -1,19 +1,22 @@
 <fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
     <fest:include context_name="" src="./record.tmpl.xml"/>
-        <div class="scoreboard">
-            <div class="scoreboard__title">
-                Scoreboard
-            </div>
-            <div class="scoreboard__username">
-                Username
-            </div>
-            <div class="scoreboard__score">
-                Score
-            </div>
+        <div class="scoreboard row">
+            <h1>TechnoOsmos</h1>
+            <h2>Scoreboard</h2>
+
+
             <div class="scoreboard__table">
+                <div class="record__login col-xs-6 col-md-6">
+                <h3>Login</h3>
+                    </div>
+                <div class="record__score col-xs-6 col-md-6">
+                <h3>Score</h3>
+                    </div>
+
                 <fest:for from="0" to="10" index="i">
                     <fest:get name="record">data.items[i]</fest:get>
                 </fest:for>
             </div>
+
         </div>
 </fest:template>
