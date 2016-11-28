@@ -11,7 +11,7 @@ body {
 		color: #8b1e3f !important;
 	}
 
-	h3{
+	h3 {
 		color: #3c153b !important;
 	}
 
@@ -19,76 +19,40 @@ body {
 		width: 100%;
 	}
 
+	@keyframes fadeInDown {
+		from {
+			opacity: 0;
+			transform: translate3d(0, -100%, 0);
+		}
 
-//	padding: 10vh;
-//	box-sizing: border-box;
-//	color: grey;
-//	font-size: 1.9vmax;
-//	letter-spacing: .01em;
-//	line-height: 1.2;
-//	font-family: 'Comic Sans MS', cursive;
-//
-//	h1, h2 {
-//		text-align: center;
-//	}
-//
-//	button {
-//		font-size: x-large;
-//	}
-//}
-
-@keyframes fadeInDown {
-	from {
-		opacity: 0;
-		transform: translate3d(0, -100%, 0);
+		to {
+			opacity: 1;
+			transform: none;
+		}
 	}
 
-	to {
-		opacity: 1;
-		transform: none;
+	@keyframes fadeOutDown {
+		from {
+			opacity: 1;
+		}
+
+		99% {
+			opacity: 0;
+			transform: translate3d(0, 100%, 0);
+		}
+
+		to {
+			opacity: 0;
+			pointer-events: none;
+		}
 	}
-}
 
-@keyframes fadeOutDown {
-	from {
-		opacity: 1;
+	.js-app, .js-score, .js-main, .js-play, .js-group {
+		animation-duration: 0.5s;
+		animation-fill-mode: both;
+		position: absolute;
+		top: 0;
+		left: 0;
+		padding-top: 10vh;
 	}
-
-	99% {
-		opacity: 0;
-		transform: translate3d(0, 100%, 0);
-	}
-
-	to {
-		opacity: 0;
-		pointer-events: none;
-	}
-}
-
-.js-app, .js-score, .js-main, .js-play, .js-group{
-	animation-duration: 0.5s;
-	animation-fill-mode: both;
-	position: absolute;
-	top: 0;
-	left: 0;
-	padding-top: 10vh;
-
-}
-//
-//
-//.js-sign {
-//	position: absolute;
-//	left: 0;
-//	padding: 10px;
-//	width:50%;
-//}
-//
-//.js-reg {
-//	position: absolute;
-//	right: 0;
-//	width: 50%;
-//}
-//
-//.js-play {
-//	text-align: center;
 }

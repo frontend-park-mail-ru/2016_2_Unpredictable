@@ -1,6 +1,6 @@
 'use strict';
 
-//import './block.scss';
+import './block.scss';
 
 
 export default class Block {
