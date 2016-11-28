@@ -8,7 +8,7 @@
     "lint": "eslint './**/*.js'",
     "karma:start": "karma start",
     "karma:run": "karma run",
-    "start": "webpack && node server.js",
+    "start": "./node_modules/.bin/webpack && node server.js",
     "webpack": "webpack --display-error-details --watch"
   },
   "repository": {
