@@ -1,5 +1,4 @@
-.button {
-
+.button, .button:focus {
 	text-decoration: none;
 	background: #89bd9e;
 	padding: 5% 7%;
@@ -16,6 +15,8 @@
 	text-align: center;
 	min-width: 170px;
 	min-height: 35px;
+	outline: none;
+	cursor: pointer;
 
 	&:hover, &:active {
 		color: #db4c40;

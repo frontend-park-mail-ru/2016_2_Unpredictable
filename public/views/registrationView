@@ -4,10 +4,11 @@ import RegistrationForm from '../components/registrationForm/registrationForm';
 import View from '../modules/view';
 
 export default class RegView extends View {
-	constructor(tag, {user}) {
+	constructor(tag, {user, host}) {
 		super('js-reg');
 		this.regForm = new RegistrationForm();
 		this._user = user;
+		this._host = host;
 	}
 
 	init() {

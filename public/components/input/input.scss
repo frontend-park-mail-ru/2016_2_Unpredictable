@@ -1,0 +1,19 @@
+.input {
+	display: block;
+	width: 90%;
+	height: 45px;
+	padding: 8px 10px;
+	border: 2px solid #f0c987;
+	border-radius: 0;
+	background: #fff;
+	font: 13px/19px 'Open Sans', Helvetica, Arial, sans-serif;
+	color: #404040;
+	cursor: auto;
+	letter-spacing: 1px;
+	margin: 15px;
+	min-width: 170px;
+
+	&:focus{
+		outline-color: #89bd9e;
+	}
+}

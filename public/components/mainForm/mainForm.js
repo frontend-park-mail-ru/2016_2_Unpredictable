@@ -18,14 +18,14 @@ export default class MainForm extends Form {
 		});
 		this._header._get().innerText = `TechnoOsmos`;
 
-		this._signin = new Link('Sign in', {attrs: {href: '/sign'}});
-		this._signup = new Link('Sign up', {attrs: {href: '/reg'}});
+		this._signin = new Link('Sign in/Sign up', {attrs: {href: '/sign'}});
+		//this._signup = new Link('Sign up', {attrs: {href: '/reg'}});
 		this._singleplayer = new Link('Single player', {attrs: {href: '/singleplayer'}});
 		this._score = new Link('ScoreBoard', {attrs: {href: '/score'}});
 
 		this.append(this._header._get());
 		this.append(this._signin._get());
-		this.append(this._signup._get());
+		//this.append(this._signup._get());
 		this.append(this._singleplayer._get());
 		this.append(this._score._get());
 	}

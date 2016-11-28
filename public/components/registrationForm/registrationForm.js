@@ -4,24 +4,30 @@ import Form from '../form/form';
 import Input from '../input/input';
 import Button from '../button/button';
 import Block from '../block/block';
-import User from '../../models/userModel';
-import Link from '../link/link';
+import './registrationForm.scss';
+
 
 export default class RegistrationForm extends Form {
 	constructor(options) {
 		super(options);
+		this._header1 = new Block('h1', {
+			attrs: {
+				class: 'header'
+			}
+		});
+		this._header1._get().innerText = `TechnoOsmos`;
 
 		this._header = new Block('h3', {
 			attrs: {
 				class: 'header'
 			}
 		});
-		this._header._get().innerText = 'Registration';
+		this._header._get().innerText = 'Enter your information';
 		this._inputLogin = new Input({
 			attrs: {
 				type: 'text',
 				name: 'login',
-				placeholder: 'Введите свой логин'
+				placeholder: 'login'
 			}
 		});
 		this._errorTextLogin = new Block('div', {
@@ -34,21 +40,21 @@ export default class RegistrationForm extends Form {
 			attrs: {
 				type: 'text',
 				name: 'email',
-				placeholder: 'Введите свой email'
+				placeholder: 'email'
 			}
 		});
 		this._inputName = new Input({
 			attrs: {
 				type: 'text',
 				name: 'name',
-				placeholder: 'Введите свое имя'
+				placeholder: 'Your name'
 			}
 		});
 		this._inputPassword = new Input({
 			attrs: {
 				type: 'password',
 				name: 'password',
-				placeholder: 'Введите пароль'
+				placeholder: 'password'
 			}
 		});
 		this._errorTextPassword = new Block('div', {
@@ -61,7 +67,7 @@ export default class RegistrationForm extends Form {
 			attrs: {
 				type: 'password',
 				name: 'reppassword',
-				placeholder: 'Подтвердите пароль'
+				placeholder: ' confirm password'
 			}
 		});
 		this._errorTextRepeat = new Block('div', {
@@ -75,7 +81,9 @@ export default class RegistrationForm extends Form {
 			}
 		});
 
-		this._regButton = new Button('SignUp', {});
+		this._regButton = new Button('Sign Up', {});
+		this._back = new Link('Go Back', {attrs: {href: 'back'}});
+		this.append(this._header1._get());
 		this.append(this._header._get());
 		this.append(this._inputLogin._get());
 		this.append(this._errorTextLogin._get());
@@ -87,6 +95,7 @@ export default class RegistrationForm extends Form {
 		this.append(this._errorTextRepeat._get());
 		this.append(this._errorText._get());
 		this.append(this._regButton._get());
+		this.append(this._back._get());
 		this.errors = {
 			logError: this._errorTextLogin,
 			passError: this._errorTextPassword,
@@ -95,45 +104,41 @@ export default class RegistrationForm extends Form {
 		};
 	}
 
-	onRegistration(callback, options = {}) {
+	onRegistration(callback) {
 		this._regButton.on('click', function (button) {
 			button.preventDefault();
 			const body = {
 				login: this._inputLogin.getValue(),
-				email: this._inputName.getValue(),
-				// name : this._inputName.getValue(),
-				password: this._inputName.getValue()
+				email: this._inputEmail.getValue(),
+				name: this._inputName.getValue(),
+				password: this._inputPassword.getValue(),
+				repeatPassword: this._inputRepeatPassword.getValue()
 			};
-			options.setUserInfo(body);
-			const res = options.signup();
-			for (let key in this.errors) {
-				this.errors[key]._get().innerText = '';
-			}
-			if (options.getError()) {
-				let errors = options.getError();
-				for (let key in errors) {
+			const model = new User(body);
+			const res = model.signup(body);
+			if (model.getError()) {
+				for (const key in this.errors) {
+					this.errors[key]._get().innerText = '';
+				}
+				const errors = model.getError();
+				for (const key in errors) {
 					this[key]._get().innerText = errors[key];
 				}
 			} else if (res) {
 				res.then(function () {
 					callback();
-				}).catch(console.error);
+				}).catch(function () {
+
+				});
 			}
 		}.bind(this));
-		options.clearErrors();
 	}
 
-	onBack(callback, options = {}) {
-		this._backButton.on('click', function (button) {
-			button.preventDefault();
-			options.clearErrors();
-			callback();
-		});
-	}
-
-	clearInputErrors() {
-		for (let key in this.errors) {
-			this.errors[key]._get().innerText = '';
-		}
-	}
+	// onBack(callback) {
+	// 	this._backButton.on('click', function (button) {
+	// 		button.preventDefault();
+	// 		callback();
+	// 	});
+	// }
 }
+

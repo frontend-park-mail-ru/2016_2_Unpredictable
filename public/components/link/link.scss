@@ -1,4 +1,4 @@
-a {
+a, a:focus {
 	text-decoration: none;
 	background: #89bd9e;
 	padding: 5% 7%;
@@ -15,9 +15,9 @@ a {
 	text-align: center;
 	min-width: 170px;
 	min-height: 35px;
+	outline: none;
 
-
-	&:hover, &:active {
+	&:hover, &:active{
 		color: #db4c40;
 		text-decoration: none;
 		outline: none;
