@@ -19,6 +19,6 @@ app.use('/score', express.static('dist', {maxAge: 1}));
 app.use('/score/:page', express.static('dist', {maxAge: 1}));
 app.use('/singleplayer', express.static('dist', {maxAge: 1}));
 
-app.listen(process.env.PORT || 5000, () => {
-	console.log(`App started on port ${process.env.PORT || 5000}`);
+app.listen(process.env.PORT || 3000, () => {
+	console.log(`App started on port ${process.env.PORT || 3000}`);
 });
