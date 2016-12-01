@@ -1,5 +1,6 @@
 'use strict';
 
+const sslRedirect = require('heroku-ssl-redirect');
 const express = require('express');
 const parser = require('body-parser');
 const technoDoc = require('techno-gendoc');
@@ -11,6 +12,7 @@ const sessions = new Map();
 technoDoc.generate(require('./api'), 'dist');
 
 const app = express();
+app.use(sslRedirect());
 app.use('/', express.static('dist', {maxAge: 1}));
 app.use('/app', express.static('dist', {maxAge: 1}));
 app.use('/sign', express.static('dist', {maxAge: 1}));
