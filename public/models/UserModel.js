@@ -180,7 +180,7 @@ export default class User {
 				mode: 'cors'
 			}).then(res => {
 				if (res.status !== 200) {
-					console.info('МЫ не авторизованы!! meh =(');
+					console.info('МЫ не авторизованы!!');
 					return reject();
 				}
 				return res.json().then(body => {
