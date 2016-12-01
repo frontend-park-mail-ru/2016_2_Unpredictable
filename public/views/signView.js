@@ -19,11 +19,13 @@ export default class SignView extends View {
 
 		this.signinLogin = this._el.querySelector('.signin__login-input');
 		this.signinPassword = this._el.querySelector('.signin__password-input');
+		//this.signinError = this._el.querySelector('.signin__error');
 		this.signinSubmit = this._el.querySelector('.signin__submit');
 
 		this.signupLogin = this._el.querySelector('.signup__login-input');
 		this.signupPassword = this._el.querySelector('.signup__password-input');
 		this.signupPasswordRepeat = this._el.querySelector('.signup__password-repeat');
+		//this.signupError = this._el.querySelector('.signup__error');
 		this.signupSubmit = this._el.querySelector('.signup__submit');
 
 		this.signinSubmit.addEventListener('click', this.handleSignIn.bind(this));

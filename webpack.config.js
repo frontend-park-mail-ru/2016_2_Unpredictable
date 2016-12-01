@@ -6,6 +6,7 @@ const precss = require('precss');
 const autoprefixer = require('autoprefixer');
 const HtmlPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require ('copy-webpack-plugin');
 
 module.exports = {
 	devtool: 'eval-source-map',
@@ -58,6 +59,11 @@ module.exports = {
 		new HtmlPlugin({
 			filename: 'index.html',
 			template: path.resolve(__dirname, 'public/index.html')
+		}),
+		new CopyWebpackPlugin([
+			{ from: 'public/sw.js' },
+		], {
+				copyUnmodified: true
 		})
 	]
 };
