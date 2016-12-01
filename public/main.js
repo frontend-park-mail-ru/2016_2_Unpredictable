@@ -32,7 +32,7 @@ import PlayView from './views/playView';
 
 const options = {
 	user: new User(),
-	host: 'https://osmosbackend.herokuapp.com/'
+	host: 'https://warm-fortress-86891.herokuapp.com/'
 };
 
 options.user.setHost(options.host);
