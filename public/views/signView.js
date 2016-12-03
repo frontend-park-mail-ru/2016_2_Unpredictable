@@ -19,6 +19,7 @@ export default class SignView extends View {
 
 		this.signinLogin = this._el.querySelector('.signin__login-input');
 		this.signinPassword = this._el.querySelector('.signin__password-input');
+		//this.signinError = this._el.querySelector('.signin__error');
 		this.signinSubmit = this._el.querySelector('.signin__submit');
 		this._inErrorTextLogin = this._el.querySelector('.signin__login_error');
 		this._inErrorTextPassword = this._el.querySelector('.signin__password_error');
@@ -32,6 +33,7 @@ export default class SignView extends View {
 		this.signupLogin = this._el.querySelector('.signup__login-input');
 		this.signupPassword = this._el.querySelector('.signup__password-input');
 		this.signupPasswordRepeat = this._el.querySelector('.signup__password-repeat');
+		//this.signupError = this._el.querySelector('.signup__error');
 		this.signupSubmit = this._el.querySelector('.signup__submit');
 		this._upErrorTextLogin = this._el.querySelector('.signup__login_error');
 		this._upErrorTextPassword = this._el.querySelector('.signup__password_error');
