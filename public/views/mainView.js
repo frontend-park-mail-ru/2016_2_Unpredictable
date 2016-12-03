@@ -14,4 +14,11 @@ export default class MainView extends View {
 		this.mainForm = new MainForm();
 		this.mainForm.renderTo(this.getElement());
 	}
+
+	resume(){
+		if(!this._user.checked){
+			this.show();
+		}
+	}
+
 }

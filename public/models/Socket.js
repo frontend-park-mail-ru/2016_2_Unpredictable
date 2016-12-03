@@ -6,8 +6,11 @@ var THREE = THREELib(); // return THREE JS
 
 export default class Socket {
 	constructor() {
-		this.socket = new WebSocket('');
-		this.key = new KeyMaster();
+		this.socket = new WebSocket('wss://warm-fortress-86891.herokuapp.com/game');
+		this.fisrtMessage = {
+			type: "ru.mail.park.mechanics.requests.JoinGame$Request",
+			content: "{}"
+		};
 	}
 
 	init(key) {
@@ -17,13 +20,18 @@ export default class Socket {
 	}
 
 	workOpen(key) {
-		this.socket.onopen = function (event, key) {
-			this.key.init();
-			key = this.key;
+		this.socket.onopen = (event, key) => {
+			console.log("socket open");
+			this.send();
 		}
 	}
 
+	send(){
+		this.socket.send(JSON.stringify(this.fisrtMessage))
+	}
+
 	workMessage(event, dots, players) {
+		console.log("socket answer");
 		this.socket.onmessage = function (event, players, dots) {
 			let i;
 			for (i = 0; i < players.length; ++i) {

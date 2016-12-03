@@ -5,7 +5,7 @@ import Ball from "./ball";
 import Camera from "./camera";
 import KeyMaster from "./keymaster";
 import Light from "./light";
-// import Socket from "../models/socketModel";
+import Socket from "../models/Socket";
 import pointerLock from "./pointerLock"
 var THREE = THREELib(); // return THREE JS
 
@@ -14,14 +14,13 @@ export default class DGame {
 		this.width = 1200;
 		this.height = 800;
 
-		/*this.socket = new Socket();
-		 this.key
-		 this.socket.init(this.key);
-		 */
+		//this.socket = new Socket();
+		this.key = new KeyMaster();
+		//this.socket.init(this.key);
+
 		this.players = [];
 		this.dots = [];
 
-		this.key = new KeyMaster();
 		this.key.init();
 
 		this.rendrer = new THREE.WebGLRenderer({antialias: true});
@@ -33,7 +32,7 @@ export default class DGame {
 	init(element) {
 		element.appendChild(this.rendrer.domElement);
 
-		this.camera = new Camera({x: 0, y: 150, z: 300});
+		this.camera = new Camera({x: 0, y: 0, z: 300});
 		this.camera.setCamera(this.width, this.height);
 
 		this.pointerLock = new pointerLock(this.rendrer, this.camera);
@@ -49,13 +48,14 @@ export default class DGame {
 		let randsphere = new Ball({x: 50, y: 0, z: 100, r: 50, color: 'red'});
 		randsphere.draw(this.scene);
 		this.dots.push(randsphere);
-		let randsphere1 = new Ball({x: 150, y: 0, z: 10, r: 10, color: 'red'});
+		let randsphere1 = new Ball({x: 150, y: 0, z: 10, r: 10, color: 'green'});
 		randsphere1.draw(this.scene);
 		this.dots.push(randsphere1);
 		let randsphere2 = new Ball({x: 300, y: 0, z: 150, r: 70, color: 'red'});
 		randsphere2.draw(this.scene);
 		this.dots.push(randsphere2);
 		this.dots.push(sphere);
+		this.dots[3].changeOpacity();
 
 		this.light = new Light({x: 0, y: 150, z: 100});
 		this.light.setLight(this.scene);
@@ -98,12 +98,6 @@ export default class DGame {
 		let date = Date.now();
 		let doAnimate = () => {
 			let localdate = Date.now();
-			// let r = this.dots[3].r -  1;
-			// console.log(r);
-			// this.dots[3].removeFromScene(this.scene);
-			// this.dots[3] = new Ball({x: 75, y: 0, z: 75, r: r, color: 'blue'});
-			// this.dots[3].setCamera(this.camera.getCamera());
-			// this.dots[3].draw(this.scene);
 			this.doKeys();
 			this.dots[3].decreaseAll();
 			this.dots[3].update(localdate - date);
@@ -122,24 +116,23 @@ export default class DGame {
 		let sum = Math.sqrt(coordinates.z ** 2 + coordinates.x ** 2);
 		let Sin = coordinates.x / sum;
 		let Cos = coordinates.z / sum;
-		console.log(Sin, Cos);
 		this.dots[3].changeSpeed(Sin, Cos);
 	}
 
 	doKeys() {
 		if (this.key.is('w') || this.key.is('ц')) {
-			this.dots[3].dvzDecrease();
+			this.calcSpeed();
 		}
 		if (this.key.is('s') || this.key.is('ы')) {
-			this.dots[3].dvzIncrease();
+			this.calcSpeed();
 		}
 		if (this.key.is('a') || this.key.is('ф')) {
-			this.dots[3].dvxDecrease();
+			this.calcSpeed();
 		}
 		if (this.key.is('d') || this.key.is('в')) {
-			this.dots[3].dvxIncrease();
+			this.calcSpeed();
 		}
-		if(this.key.is(' ')){
+		if(this.key.is(' ')) {
 			this.dots[3].increaseR(this.scene);
 		}
 		let coordinates = this.camera.getPosition();
@@ -157,8 +150,11 @@ export default class DGame {
 		let i;
 		let check = this.dots[3].getR().r;
 		for (i = 0; i < this.dots.length - 1; ++i) {
-			if (this.dots[i].getR().r < check){
-				this.dots[i].redraw(this.scene);
+			let checkColor = this.dots[i].getColor();
+			if (this.dots[i].getR().r < check && checkColor === 'red'){
+				this.dots[i].redraw(this.scene, 'green');
+			} else if (this.dots[i].getR().r > check && checkColor === 'green'){
+				this.dots[i].redraw(this.scene, 'red');
 			}
 		}
 	}

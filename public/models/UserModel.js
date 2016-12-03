@@ -7,6 +7,7 @@ export default class User {
 			login: null,
 			score: null
 		};
+		this.checked = false;
 	}
 
 	validateLogin(login) {
@@ -66,18 +67,13 @@ export default class User {
 		}
 	}
 
-	signin({login, password}, errors) {
+	signin({login, password}) {
 		this.info.login = login;
 		this.info.password = password;
 		this.validate();
 		if (this.error) {
-			for (let key in this._errorText) {
-				errors[key].innerText = this._errorText[key];
-			}
-			this.clearErrors();
-			return Promise.reject();
+			return Promise.reject(this._errorText);
 		}
-		this.errors = errors;
 		return fetch(this.host + 'api/sessions', {
 			credentials: 'include',
 			headers: {
@@ -92,24 +88,22 @@ export default class User {
 				throw new Error();
 			}
 			return Promise.resolve();
-		})
-			.catch(err => {
-				this.errors._errorText.innerText = 'No such user. Please try again';
-				return Promise.reject();
-			});
+		}).catch(err => {
+			this.errors = {};
+			this.errors._errorText = 'No such user. Please try again';
+			return Promise.reject(this.errors);
+		});
 	}
 
-	signup({login, password, passwordRepeat}, errors) {
+	signup({login, name, email, password, passwordRepeat}, errors) {
 		this.info.login = login;
+		this.info.name = name;
+		this.info.email = email;
 		this.info.password = password;
 		this.info.repeat = passwordRepeat;
 		this.validate();
 		if (this.error) {
-			for (let key in this._errorText) {
-				errors[key].innerText = this._errorText[key];
-			}
-			this.clearErrors();
-			return Promise.reject();
+			return Promise.reject(this._errorText);
 		}
 		delete this.info.repeat;
 		this.errors = errors;
@@ -120,40 +114,55 @@ export default class User {
 				'Content-Type': 'application/json'
 			},
 			method: 'POST',
-			body: JSON.stringify({login, password}),
+			body: JSON.stringify(this.info),
 			mode: 'cors'
 		}).then(res => {
-			if (res.status >= 200) {
+			if (res.status >= 300) {
 				throw new Error();
 			}
-			return Promise.resolve();
+			delete this.info.email;
+			delete this.info.name;
+			return fetch(this.host + 'api/sessions', {
+				credentials: 'include',
+				headers: {
+					'Accept': 'application/json',
+					'Content-Type': 'application/json'
+				},
+				method: 'POST',
+				body: JSON.stringify(this.info),
+				mode: 'cors'
+			}).then(res => {
+				if (res.status >= 300) {
+					throw new Error();
+				}
+				return Promise.resolve();
+			}).catch(err => {
+				throw new Error(this.errors);
+			})
 		}).catch(err => {
-			this.errors._errorText.innerText = 'User with this login already exist. Please try again';
-			return Promise.reject();
+			this.errors = {};
+			this.errors._errorText = 'User with this login already exist. Please try again';
+			return Promise.reject(this.errors);
 		});
 	}
 
 	logout() {
-		return new Promise(function (resolve, reject) {
-			fetch(this.host + 'api/delete', {
-				credentials: 'include',
-				method: 'DELETE',
-				mode: 'cors'
-			}).then(res => {
-				if (res.status !== 200) {
-					console.info('не разлогинились');
-					return reject();
-				}
-				return res.json().then(body => {
-					console.info('Разлогинились');
-					return resolve();
-				});
-			}).catch(err => {
-				console.error(err);
-				console.info('какаято ошибка');
-				return reject(err);
-			});
-		}.bind(this));
+		return fetch(this.host + 'api/sessions', {
+			credentials: 'include',
+			method: 'DELETE',
+			mode: 'cors',
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			}
+		}).then(res => {
+			if (res.status >= 300) {
+				throw new Error();
+			}
+			return Promise.resolve();
+		}).catch(err => {
+			return Promise.reject(err);
+		});
 	}
 
 	get login() {
@@ -172,37 +181,23 @@ export default class User {
 		this.info.login = value;
 	}
 
-	checkAutorization() {
-		return new Promise(function (resolve, reject) {
-			fetch(this.host + 'api/me', {
-				credentials: 'include',
-				method: 'GET',
-				mode: 'cors'
-			}).then(res => {
-				if (res.status !== 200) {
-					console.info('МЫ не авторизованы!!');
-					return reject();
-				}
-				return res.json().then(body => {
-					this.login = body.login;
-					this.score = body.score;
-					console.info('МЫ авторизованы!! УХУ');
-					return resolve();
-				});
-			}).catch(err => {
-				console.error(err);
-				console.info('МЫ не авторизованы!! какаято ошибка =((( meh =(');
-				return reject(err);
-			});
-		}.bind(this));
+	checkAuth() {
+		return fetch(this.host + 'api/auth', {
+			credentials: 'include',
+			method: 'GET',
+			mode: 'cors'
+		}).then(res => {
+			if (res.status >= 300) {
+				throw new Error()
+			}
+			return Promise.resolve(this.checked);
+		}).catch(() => {
+			return Promise.reject(this.checked);
+		});
 	}
 
 	setHost(host) {
 		this.host = host;
 	}
-
-	clearErrors() {
-		this._errorText = {};
-	}
-
 }
+

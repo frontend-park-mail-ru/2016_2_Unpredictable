@@ -32,7 +32,7 @@ import PlayView from './views/playView';
 
 const options = {
 	user: new User(),
-	host: 'https://warm-fortress-86891.herokuapp.com/'
+	host: 'https://warm-fortress-86891.herokuapp.com/',
 };
 
 options.user.setHost(options.host);
@@ -68,8 +68,13 @@ window.addEventListener('tap', eventListener);
 	.addRoute('/singleplayer', PlayView, options)
 	.addRoute('/multiplayer', PlayView, options)
 	.addRoute('/', MainView, options)
-	.start();
+	.start({}, options);
 
-// options.user.checkAutorization()
-// 	.then(() => new Router().go('/app'))
-// 	.catch(() => new Router().go('/'));
+ options.user.checkAuth()
+	 .then((checked) => {
+	 	checked = true;
+	 })
+ 	.catch((checked) => {
+ 		new Router().go('/');
+	    checked = true;
+ 	});

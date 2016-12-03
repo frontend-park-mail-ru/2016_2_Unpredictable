@@ -12,6 +12,23 @@ export default class Camera {
 		this.rCam = rCam;
 		this.changeX = -2;
 		this.changeZ = -2;
+		this.cameraPosition = 0;
+		this.countnNewCircle();
+	}
+
+	countnNewCircle(){
+		this.array = [];
+		let count = 0;
+		let angle;
+		for (angle = 0; angle <= 0.11; angle += 0.001) {
+			let obj = {};
+			obj.x = Math.cos(angle * 180 / Math.PI);
+			obj.z = Math.sin(angle * 180 / Math.PI);
+			console.log(obj);
+			this.array[count] = obj;
+			++count;
+		}
+		this.maxCameraPosition = count;
 	}
 
 	setCamera(width, height) {
@@ -37,23 +54,16 @@ export default class Camera {
 	}
 
 	countCircle(d) {
-		if (this.x >= 400 || this.x <= -400) {
-			this.changeX *= -1;
+		this.cameraPosition += d;
+		console.log(this.cameraPosition);
+		console.log(this.maxCameraPosition);
+		if(this.cameraPosition < 0){
+			this.cameraPosition = this.maxCameraPosition + this.cameraPosition;
 		}
-		if (this.z >= 400 || this.z <= -400) {
-			this.changeZ *= -1;
+		if (this.cameraPosition > this.maxCameraPosition) {
+			this.cameraPosition = this.cameraPosition - this.maxCameraPosition;
 		}
-		this.x += this.changeX * d;
-		this.z += this.changeZ * d;
-		if (this.x >= 400) {
-			this.x = 400;
-		} else if (this.x <= -400) {
-			this.x = -400;
-		}
-		if (this.z >= 400) {
-			this.z = 400;
-		} else if (this.z <= -400) {
-			this.z = -400;
-		}
+		this.x = 300 * this.array[this.cameraPosition].x;
+		this.z = 300 * this.array[this.cameraPosition].z;
 	}
 }

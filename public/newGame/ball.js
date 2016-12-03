@@ -23,9 +23,14 @@ export default class Ball {
 
 	draw(scene) {
 		this.object = new THREE.SphereGeometry(this.newR | 0, 32, 32);
-		this.objectmesh = new THREE.Mesh(this.object, new THREE.MeshPhongMaterial({color: this.color}));
+		this.material = new THREE.MeshPhongMaterial({color: this.color, transparent: true});
+		this.objectmesh = new THREE.Mesh(this.object, this.material);
 		this.objectmesh.position.set(this.x, this.y, this.z);
 		scene.add(this.objectmesh);
+	}
+
+	changeOpacity(){
+		this.material.opacity = 0.5;
 	}
 
 	getR(){
@@ -57,31 +62,27 @@ export default class Ball {
 		this.vz = -1 * ((80 * Cos) | 0);
 	}
 
-	dvzIncrease() {
+	dvzIncrease(Cos) {
 		if (this.vz <= 100) {
-			this.vz += 6;
-			this.objectmesh.rotation.z = 10;
+			this.vz += (10 * Cos) | 0;
 		}
 	}
 
-	dvzDecrease() {
+	dvzDecrease(Cos) {
 		if (this.vz >= -100) {
-			this.vz -= 6;
-			this.objectmesh.rotation.z = -10;
+			this.vz -= (10 * Cos) | 0;
 		}
 	}
 
-	dvxIncrease() {
+	dvxIncrease(Sin) {
 		if (this.vx <= 100) {
-			this.vx += 6;
-			this.objectmesh.rotation.x = 10;
+			this.vx += (10 * Sin) | 0;
 		}
 	}
 
-	dvxDecrease() {
+	dvxDecrease(Sin) {
 		if (this.vx >= -100) {
-			this.vx -= 6;
-			this.objectmesh.rotation.x = 10;
+			this.vx += (10 * Sin) | 0;
 		}
 	}
 
@@ -122,10 +123,14 @@ export default class Ball {
 		}
 	}
 
-	redraw(scene){
+	redraw(scene, green){
 		scene.remove(this.objectmesh);
-		this.color = 'green';
+		this.color = green;
 		this.draw(scene);
+	}
+
+	getColor(){
+		return this.color;
 	}
 
 

@@ -19,6 +19,8 @@
                 <h3 class="signup__header">Sign up</h3>
                 <input type="text" name="login" placeholder="Login" class="signup__login-input input"/>
                 <div class="signup__login_error"></div>
+                <input type="text" name="name" placeholder="Name" class="signup__name-input input"/>
+                <input type="text" name="email" placeholder="Email" class="signup__email-input input"/>
                 <input type="password" name="password1" placeholder="Password" class="signup__password-input input"/>
                 <div class="signup__password_error"></div>
                 <input type="password" name="password2" placeholder="Repeat password" class="signup__password-repeat input"/>

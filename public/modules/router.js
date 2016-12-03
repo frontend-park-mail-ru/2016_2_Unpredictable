@@ -39,17 +39,26 @@ export default class Router {
 	 * Запускает роутер и переходит по текущему пути в приложении
 	 * @param {Object} [state={}] - Объект state, который передаётся в первый вызов onroute
 	 */
-	start(state = {}) {
-		window.onpopstate = function (event) {
+	start(state = {}, options) {
+		window.onpopstate = (event) => {
 			const status = event.state;
 			const pathname = window.location.pathname;
 			this.pathsHistory.push(pathname);
 			this.onroute(pathname, status);
-		}.bind(this);
+		};
 		this.started = true;
-		const pathname = window.location.pathname;
-		this.pathsHistory.push(pathname);
-		this.onroute(pathname, state);
+//		options.user.checkAuth()
+//			.then(() => {
+				let pathname = window.location.pathname;
+				this.pathsHistory.push(pathname);
+				this.onroute(pathname, state);
+		// 	}).catch(() => {
+		// 		debugger;
+		// 		let pathname = '/';
+		// 		window.location = pathname;
+		// 		this.pathsHistory.push(pathname);
+		// 		this.onroute(pathname, state);
+		// });
 	}
 
 	/**
@@ -58,7 +67,6 @@ export default class Router {
 	 * @param {Object} [state={}] - Объект state, который передаётся в вызов метода navigate
 	 */
 	onroute(pathname, state = {}) {
-		console.log(this.pathsHistory);
 		const route = this.routes.find(r => r.match(pathname));
 		if (!route) {
 			return;

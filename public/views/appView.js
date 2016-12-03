@@ -11,8 +11,18 @@ export default class AppView extends View {
 	}
 
 	init() {
-		this.appForm = new AppForm();
+		this.appForm = new AppForm(this._user, this.goMain.bind(this));
 		this.appForm.renderTo(this.getElement());
+	}
+
+	resume(){
+		if(!this._user.checked){
+			this.show();
+		}
+	}
+
+	goMain() {
+		this.router.go('/');
 	}
 
 }
