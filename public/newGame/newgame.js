@@ -36,12 +36,14 @@ export default class DGame {
 		this.camera.setCamera(this.width, this.height);
 
 		this.pointerLock = new pointerLock(this.rendrer, this.camera);
+		this.i = 0;
 
 		this.scene = new THREE.Scene();
 
 		this.players = [];
 		this.dots = [];
-		let sphere = new Ball({x: 100, y: 0, z: 100, r: 40, color: 'blue'});
+		this.r = 40;
+		let sphere = new Ball({x: 100, y: 0, z: 100, r: this.r, color: 'blue'});
 		sphere.setCamera(this.camera.getCamera());
 		sphere.draw(this.scene);
 
@@ -56,6 +58,9 @@ export default class DGame {
 		this.dots.push(randsphere2);
 		this.dots.push(sphere);
 		this.dots[3].changeOpacity();
+		this.Sin = 0;
+		this.Cos = 0;
+		this.i = 3;
 
 		this.light = new Light({x: 0, y: 150, z: 100});
 		this.light.setLight(this.scene);
@@ -65,44 +70,15 @@ export default class DGame {
 		this.rendrer.setClearColor('grey');
 	}
 
-	// cicle() {
-	// 	let array = [];
-	// 	let count = 0;
-	// 	let angle = 0;
-	// 	for (angle = 0; angle <= 0.1; angle += 0.001) {
-	// 		let obj = {};
-	// 		obj.x = 150 * Math.cos(angle * 180 / Math.PI);
-	// 		obj.z = 150 * Math.sin(angle * 180 / Math.PI);
-	// 		console.log(obj);
-	// 		array[count] = obj;
-	// 		++count;
-	// 	}
-	// 	let pred = count;
-	// 	count = 0;
-	// 	let doAnimate = () => {
-	// 		if (count === pred) {
-	// 			count = 0;
-	// 		}
-	// 		this.camera.position.y = array[count].x;
-	// 		this.camera.position.z = array[count].z;
-	// 		++count;
-	// 		console.log(this.camera.position);
-	// 		this.light.lookAt(this.floormesh.position);
-	// 		this.renderer();
-	// 		requestAnimationFrame(doAnimate);
-	// 	};
-	// 	doAnimate();
-	// }
-
 	animate() {
 		let date = Date.now();
 		let doAnimate = () => {
 			let localdate = Date.now();
 			this.doKeys();
-			this.dots[3].decreaseAll();
-			this.dots[3].update(localdate - date);
-			this.dots[3].setCamera(this.camera.getCamera());
-			this.dots[3].decreaseR(this.scene);
+			this.dots[this.i].update(localdate - date);
+			this.dots[this.i].decreaseAll();
+			this.dots[this.i].setCamera(this.camera.getCamera());
+			this.dots[this.i].decreaseR(this.scene);
 			this.checkR();
 			this.renderer();
 			date = localdate;
@@ -112,31 +88,52 @@ export default class DGame {
 	}
 
 	calcSpeed(event){
-		let coordinates = this.camera.getPosition();
-		let sum = Math.sqrt(coordinates.z ** 2 + coordinates.x ** 2);
-		let Sin = coordinates.x / sum;
-		let Cos = coordinates.z / sum;
-		this.dots[3].changeSpeed(Sin, Cos);
+		this.calcSinCos();
+		console.log(this.i);
+		this.dots[this.i].removeFromScene(this.scene);
+		let coor = this.dots[this.i].getPosition();
+		this.dots.pop();
+		let food = new Ball({x: coor.x, z: coor.z, r: 7, color: 'green'});
+		food.draw(this.scene);
+		this.dots.push(food);
+		++this.i;
+		this.r -= 3;
+		let sphere = new Ball({x: coor.x, z: coor.z, r: this.r, color: 'blue'});
+		sphere.draw(this.scene);
+		this.dots.push(sphere);
+		this.dots[this.i].changeSpeed(this.Sin, this.Cos);
+		this.dots[this.i].changeOpacity();
 	}
 
-	doKeys() {
+	calcSinCos(){
+		let coordinates = this.camera.getPosition();
+		let sum = Math.sqrt(coordinates.z ** 2 + coordinates.x ** 2);
+		this.Sin = coordinates.x / sum;
+		this.Cos = coordinates.z / sum;
+	}
+
+	doKeys(){
 		if (this.key.is('w') || this.key.is('ц')) {
-			this.calcSpeed();
+			this.calcSinCos();
+			this.dots[this.i].moveForward(this.Sin, this.Cos);
 		}
 		if (this.key.is('s') || this.key.is('ы')) {
-			this.calcSpeed();
+			this.calcSinCos();
+			this.dots[this.i].moveBackward(this.Sin, this.Cos);
 		}
 		if (this.key.is('a') || this.key.is('ф')) {
-			this.calcSpeed();
+			this.calcSinCos();
+			this.dots[this.i].moveLeft(this.Sin, this.Cos);
 		}
 		if (this.key.is('d') || this.key.is('в')) {
-			this.calcSpeed();
+			this.calcSinCos();
+			this.dots[this.i].moveRight(this.Sin, this.Cos);
 		}
 		if(this.key.is(' ')) {
-			this.dots[3].increaseR(this.scene);
+			this.dots[this.i].increaseR(this.scene);
 		}
 		let coordinates = this.camera.getPosition();
-		let ballCoordinates = this.dots[3].getPosition();
+		let ballCoordinates = this.dots[this.i].getPosition();
 		let newCoor = {
 			x: coordinates.x + ballCoordinates.x,
 			y: coordinates.y + ballCoordinates.y,
@@ -148,7 +145,7 @@ export default class DGame {
 
 	checkR() {
 		let i;
-		let check = this.dots[3].getR().r;
+		let check = this.dots[this.i].getR().r;
 		for (i = 0; i < this.dots.length - 1; ++i) {
 			let checkColor = this.dots[i].getColor();
 			if (this.dots[i].getR().r < check && checkColor === 'red'){

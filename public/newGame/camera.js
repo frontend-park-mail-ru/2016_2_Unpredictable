@@ -24,7 +24,6 @@ export default class Camera {
 			let obj = {};
 			obj.x = Math.cos(angle * 180 / Math.PI);
 			obj.z = Math.sin(angle * 180 / Math.PI);
-			console.log(obj);
 			this.array[count] = obj;
 			++count;
 		}
@@ -55,12 +54,10 @@ export default class Camera {
 
 	countCircle(d) {
 		this.cameraPosition += d;
-		console.log(this.cameraPosition);
-		console.log(this.maxCameraPosition);
 		if(this.cameraPosition < 0){
 			this.cameraPosition = this.maxCameraPosition + this.cameraPosition;
 		}
-		if (this.cameraPosition > this.maxCameraPosition) {
+		if (this.cameraPosition >= this.maxCameraPosition) {
 			this.cameraPosition = this.cameraPosition - this.maxCameraPosition;
 		}
 		this.x = 300 * this.array[this.cameraPosition].x;
