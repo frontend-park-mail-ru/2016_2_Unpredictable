@@ -13,32 +13,9 @@ export default class PlayView extends View {
 
 	init(options = {}) {
 		this.game.init(this.getElement());
-		this.canPlay = false;
-		this.user.checkAuth()
-			.then(() => {
-				this.canPlay = true;
-				this.game.init(this.getElement());
-				return Promise.resolve();
-			}).catch(() => {
-				debugger;
-			this.router.go('/');
-			return Promise.reject();
-		});
-	}
-
-
-	resume(options = {}) {
-		if (!this.canPlay) {
-			this.canPlay = true;
-			this.game.init(this.getElement());
-		}
-		this.show();
-	}
-
-	show() {
-		this.getElement().hidden = false;
 		this.game.animate();
 	}
+
 }
 
 // 'use strict';

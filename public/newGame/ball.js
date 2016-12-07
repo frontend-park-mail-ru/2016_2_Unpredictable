@@ -5,7 +5,7 @@ var THREE = THREELib(); // return THREE JS
 
 export default class Ball {
 
-	constructor({x = 0, y = 0, z = 0, vx = 0, vy = 0, vz = 0, r = 0, color = '#FF4500'}) {
+	constructor({x = 0, y = 0, z = 0, vx = 0, vy = 0, vz = 0, r = 0, color = 'green'}) {
 		this.x = x;
 		this.y = y;
 		this.z = z;
@@ -17,7 +17,7 @@ export default class Ball {
 		this.r = r;
 		this.newR = r;
 		this.canChangeR = true;
-		this.dr = 20;
+		this.dr = 30;
 		this.color = color;
 	}
 
@@ -58,32 +58,28 @@ export default class Ball {
 	}
 
 	changeSpeed(Sin, Cos){
-		this.vx = -1 * ((80 * Sin) | 0);
-		this.vz = -1 * ((80 * Cos) | 0);
+		this.vx = -1 * ((100 * Sin) | 0);
+		this.vz = -1 * ((100 * Cos) | 0);
 	}
 
-	dvzIncrease(Cos) {
-		if (this.vz <= 100) {
-			this.vz += (10 * Cos) | 0;
-		}
+	moveForward(Sin, Cos){
+		this.vx = -1 * ((40 * Sin) | 0);
+		this.vz = -1 * ((40 * Cos) | 0);
 	}
 
-	dvzDecrease(Cos) {
-		if (this.vz >= -100) {
-			this.vz -= (10 * Cos) | 0;
-		}
+	moveBackward(Sin, Cos){
+		this.vx = (40 * Sin) | 0;
+		this.vz = (40 * Cos) | 0;
 	}
 
-	dvxIncrease(Sin) {
-		if (this.vx <= 100) {
-			this.vx += (10 * Sin) | 0;
-		}
+	moveLeft(Sin, Cos){
+		this.vx = -1 * ((40 * Cos) | 0);
+		this.vz = (40 * Sin) | 0;
 	}
 
-	dvxDecrease(Sin) {
-		if (this.vx >= -100) {
-			this.vx += (10 * Sin) | 0;
-		}
+	moveRight(Sin, Cos){
+		this.vx = (40 * Cos) | 0;
+		this.vz = -1 * ((40 * Sin) | 0);
 	}
 
 	decreaseAll() {
@@ -117,9 +113,10 @@ export default class Ball {
 
 	decreaseR(scene){
 		if(this.r < this.newR) {
-			this.newR -= 0.5;
+			this.newR -= 0.25;
 			scene.remove(this.objectmesh);
 			this.draw(scene);
+			this.changeOpacity();
 		}
 	}
 
@@ -129,11 +126,12 @@ export default class Ball {
 		this.draw(scene);
 	}
 
+	removeFromScene(scene){
+		scene.remove(this.objectmesh);
+	}
+
 	getColor(){
 		return this.color;
 	}
 
-
 }
-
-
