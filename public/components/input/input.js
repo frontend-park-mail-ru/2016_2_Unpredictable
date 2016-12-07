@@ -1,7 +1,8 @@
 'use strict';
 
 import Block from '../block/block';
-import './input.scss';
+import './input.scss'
+console.log('kjdjkjslf');
 
 
 export default class Input extends Block {

@@ -7,28 +7,26 @@ import User from './models/UserModel';
 import Router from './modules/router';
 import AppView from './views/appView';
 import SignView from './views/signView';
-import RegView from './views/registrationView';
 import ScoreboardView from './views/scoreboardView';
 import MainView from './views/mainView';
 import PlayView from './views/playView';
+import MyView from './views/myView';
 
 
-(function () {
-	'use strict';
-	if (!navigator.serviceWorker) {
-		return;
-	}
-	navigator.serviceWorker.register(
-		'/sw.js'
-	).then(function (registration) {
-		// при удачной регистрации имеем объект типа ServiceWorkerRegistration
-		console.log('ServiceWorker registration', registration);
-		// строкой ниже можно прекратить работу serviceWorker’а
-		// registration.unregister();
-	}).catch(function (err) {
-		throw new Error('ServiceWorker error: ' + err);
-	});
-})();
+// if (navigator.serviceWorker) {
+// 	console.log('sw');
+// 	navigator.serviceWorker.register(
+// 		'/sw.js'
+// 	).then(function (registration) {
+// 		// при удачной регистрации имеем объект типа ServiceWorkerRegistration
+// 		console.log('ServiceWorker registration', registration);
+// 		// строкой ниже можно прекратить работу serviceWorker’а
+// 		// registration.unregister();
+// 	}).catch(function (err) {
+// 		throw new Error('ServiceWorker error: ' + err);
+// 	});
+// }
+
 
 const options = {
 	user: new User(),
@@ -61,7 +59,7 @@ window.addEventListener('tap', eventListener);
 
 (new Router())
 	.addRoute('/sign', SignView, options)
-	.addRoute('/reg', RegView, options)
+	.addRoute('/reg', MyView, options)
 	.addRoute('/app', AppView, options)
 	.addRoute('/score/', ScoreboardView, options)
 	.addRoute('/score/:page', ScoreboardView, options)
@@ -70,11 +68,11 @@ window.addEventListener('tap', eventListener);
 	.addRoute('/', MainView, options)
 	.start({}, options);
 
- options.user.checkAuth()
-	 .then((checked) => {
-	 	checked = true;
-	 })
- 	.catch((checked) => {
- 		new Router().go('/');
-	    checked = true;
- 	});
+ // options.user.checkAuth()
+	//  .then((checked) => {
+	//  	checked = true;
+	//  })
+ // 	.catch((checked) => {
+ // 		new Router().go('/');
+	//     checked = true;
+ // 	});
