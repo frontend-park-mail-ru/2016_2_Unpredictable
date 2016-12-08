@@ -3,7 +3,6 @@
 import Block from '../block/block';
 import './button.scss';
 
-
 export default class Button extends Block {
 	constructor(text, options) {
 		super('a', options);

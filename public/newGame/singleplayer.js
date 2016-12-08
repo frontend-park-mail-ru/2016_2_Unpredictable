@@ -55,6 +55,16 @@ export default class DGame {
 		let randsphere4 = new Ball({x: 300, y: 0, z: -150, vx: -90, vz: -30, r: 25, color: 'red'});
 		randsphere4.draw(this.scene);
 		this.dots.push(randsphere4);
+		let randsphere5 = new Ball({x: 300, y: 0, z: -150, vx: -90, vz: 30, r: 55, color: 'red'});
+		randsphere5.draw(this.scene);
+		this.dots.push(randsphere5);
+		let randsphere6 = new Ball({x: 300, y: 0, z: -150, vx: 90, vz: -30, r: 60, color: 'red'});
+		randsphere6.draw(this.scene);
+		this.dots.push(randsphere6);
+		let randsphere7 = new Ball({x: 300, y: 0, z: -150, vx: 50, vz: -30, r: 15, color: 'green'});
+		randsphere7.draw(this.scene);
+		this.dots.push(randsphere7);
+
 
 		this.grid = new THREE.GridHelper(1000, 50, 'grey', 'grey');
 		this.scene.add(this.grid);

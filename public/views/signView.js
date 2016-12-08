@@ -164,7 +164,7 @@ export default class SignView extends View {
 //
 // // 'use strict';
 // //
-// // //import '../css/sign-view.scss';
+// // //import '../css/main.scss';
 // // import View from '../modules/view';
 // // //import template from '../templates/sign.tmpl.xml';
 // //

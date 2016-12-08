@@ -6,7 +6,6 @@ import Block from '../block/block';
 import Link from '../link/link';
 import './appForm.scss';
 
-
 export default class AppForm extends Form {
 	constructor(options, callback) {
 		super(options);
