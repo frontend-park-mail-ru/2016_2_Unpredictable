@@ -71,11 +71,11 @@ window.addEventListener('tap', eventListener);
 	.addRoute('/', MainView, options)
 	.start({}, options);
 
- options.user.checkAuth()
-	 .then((checked) => {
-	 	checked = true;
-	 })
- 	.catch((checked) => {
- 		new Router().go('/');
-	    checked = true;
- 	});
+options.user.checkAuth()
+	.then((checked) => {
+		checked = true;
+	})
+	.catch((checked) => {
+		new Router().go('/');
+		checked = true;
+	});
