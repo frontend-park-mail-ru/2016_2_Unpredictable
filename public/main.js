@@ -11,6 +11,7 @@ import RegView from './views/registrationView';
 import ScoreboardView from './views/scoreboardView';
 import MainView from './views/mainView';
 import PlayView from './views/playView';
+import SinglePlayView from './views/singleplayerView';
 
 
 // (function () {
@@ -65,7 +66,7 @@ window.addEventListener('tap', eventListener);
 	.addRoute('/app', AppView, options)
 	.addRoute('/score/', ScoreboardView, options)
 	.addRoute('/score/:page', ScoreboardView, options)
-	.addRoute('/singleplayer', PlayView, options)
+	.addRoute('/singleplayer', SinglePlayView, options)
 	.addRoute('/multiplayer', PlayView, options)
 	.addRoute('/', MainView, options)
 	.start({}, options);

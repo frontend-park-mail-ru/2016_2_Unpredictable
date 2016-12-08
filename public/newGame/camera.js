@@ -1,7 +1,7 @@
 'use strict';
 
 import THREELib from "three-js";
-var THREE = THREELib(); // return THREE JS
+var THREE = THREELib();
 
 export default class Camera {
 
@@ -53,7 +53,7 @@ export default class Camera {
 	}
 
 	countCircle(d) {
-		this.cameraPosition += d;
+		this.cameraPosition += (d / 4) | 0;
 		if(this.cameraPosition < 0){
 			this.cameraPosition = this.maxCameraPosition + this.cameraPosition;
 		}
