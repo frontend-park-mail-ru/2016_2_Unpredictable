@@ -22,7 +22,7 @@ export default class Ball {
 	}
 
 	draw(scene) {
-		this.object = new THREE.SphereGeometry(this.newR | 0, 32, 32);
+		this.object = new THREE.SphereGeometry(this.newR | 0, 26, 26);
 		this.material = new THREE.MeshPhongMaterial({color: this.color, transparent: true});
 		this.objectmesh = new THREE.Mesh(this.object, this.material);
 		this.objectmesh.position.set(this.x, this.y, this.z);
@@ -104,7 +104,7 @@ export default class Ball {
 			this.draw(scene);
 			setTimeout(() => {
 				this.canChangeR = true;
-			}, 5000)
+			}, 20000)
 		}
 	}
 
@@ -144,18 +144,18 @@ export default class Ball {
 		};
 
 		if (this.x + this.newR >= 1000) {
-			this.x = 1000 - this.newR;
+			this.x = (1000 - this.newR) | 0;
 			result.x = true;
 		} else if (this.x - this.newR <= -1000) {
-			this.x = this.newR - 1000;
+			this.x = (this.newR - 1000) |0;
 			result.x = true;
 		}
 
 		if (this.z + this.newR >= 1000) {
-			this.z = 1000 - this.newR;
+			this.z = (1000 - this.newR) | 0;
 			result.z = true;
 		} else if (this.z - this.newR <= -1000) {
-			this.z = this.newR - 1000;
+			this.z = (this.newR - 1000) | 0;
 			result.z = true;
 		}
 		this[action](result);

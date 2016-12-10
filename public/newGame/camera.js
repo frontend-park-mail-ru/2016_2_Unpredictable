@@ -20,7 +20,7 @@ export default class Camera {
 		this.array = [];
 		let count = 0;
 		let angle;
-		for (angle = 0; angle <= 0.11; angle += 0.001) {
+		for (angle = 0; angle <= 0.11; angle += 0.0005) {
 			let obj = {};
 			obj.x = Math.cos(angle * 180 / Math.PI);
 			obj.z = Math.sin(angle * 180 / Math.PI);
@@ -53,7 +53,7 @@ export default class Camera {
 	}
 
 	countCircle(d) {
-		this.cameraPosition += (d / 4) | 0;
+		this.cameraPosition += d | 0;
 		if(this.cameraPosition < 0){
 			this.cameraPosition = this.maxCameraPosition + this.cameraPosition;
 		}

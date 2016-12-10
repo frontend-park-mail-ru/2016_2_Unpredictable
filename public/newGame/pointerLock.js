@@ -1,9 +1,14 @@
 'use strict';
 
+
+import DGame from './singleplayer';
+
 export default class pointerLock{
 	constructor(rendrer, camera){
 		this.lockChangeAlert = this.lockChangeAlert.bind(this);
 		this.oldPosition = 0;
+		this.locked = false;
+		this.canCalcSpeed = false;
 		this.camera = camera;
 
 		this.canvas = rendrer.domElement;
@@ -22,9 +27,24 @@ export default class pointerLock{
 			console.log('The pointer lock status is now locked');
 			this.updatePosition = this.updatePosition.bind(this);
 			document.addEventListener("mousemove", this.updatePosition, false);
+			this.locked = true;
 		} else {
 			document.removeEventListener("mousemove", this.updatePosition, false);
+			console.log('The pointer lock status is now unlocked');
+			this.locked = false;
+			this.canCalcSpeed = false;
 		}
+	}
+
+	getLocked(){
+		return {
+			locked: this.locked,
+			canCalcSpeed: this.canCalcSpeed
+		}
+	}
+
+	setConditionCalc(){
+		this.canCalcSpeed = true;
 	}
 
 	updatePosition(mousePosition) {
