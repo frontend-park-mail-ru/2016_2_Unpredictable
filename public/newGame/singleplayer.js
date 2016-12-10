@@ -35,6 +35,8 @@ export default class DGame {
 
 		this.dots = [];
 		this.r = 40;
+		this.plural = 1;
+		this.factor = 0.2;
 		this.player = new Ball({x: 100, y: 0, z: 100, r: this.r, color: 'blue'});
 		this.player.setCamera(this.camera.getCamera());
 		this.player.draw(this.scene);
@@ -92,9 +94,6 @@ export default class DGame {
 				this.player.update(localdate - date);
 				this.player.checkReact('reflect');
 				this.dots.push(this.player);
-				// this.playerCoor = this.player.getPosition();
-				// this.playerR = this.player.getR();
-				// this.checkReactEach({j: 0, checkDotCoor: this.playerCoor, checkDotR: this.playerR});
 				for (let j = 0; j < this.dots.length; ++j) {
 					this.dots[j].update(localdate - date);
 					this.dots[j].checkReact('reflect');
@@ -125,9 +124,9 @@ export default class DGame {
 			food.draw(this.scene);
 			food.changeSpeed(-this.Sin, -this.Cos);
 			this.dots.push(food);
-			this.r -= 3;
-			if(!this.checkExist(this.r, -1).delete) {
-				this.player = new Ball({x: coor.x, z: coor.z, r: this.r, color: 'blue'});
+			let r = this.player.getR().r - 3;
+			if(!this.checkExist(r, -1).delete) {
+				this.player = new Ball({x: coor.x, z: coor.z, r: r, color: 'blue'});
 				this.player.draw(this.scene);
 				this.player.changeSpeed(this.Sin, this.Cos);
 			} else {
@@ -201,6 +200,25 @@ export default class DGame {
 				let speed = this.dots[j].getSpeed();
 				let speed1 = this.dots[k].getSpeed();
 				if (newCheckDotR > checkDotR.r) {
+					if (k === this.dots.length - 1) {
+						if(newCheckDotR > 75){
+							this.plural *= this.factor;
+						}
+						this.dots[k] = new Ball({
+							x: newCheckDotCoor.x | 0, z: newCheckDotCoor.z | 0, vx: speed1.vx, vz: speed1.vz,
+							r: newCheckDotR + this.plural, color: 'blue'
+						});
+						if(newCheckDotR + 1 - this.r > 15){
+							this.camera.increaseRCam();
+							this.r += 15;
+						}
+					} else {
+						this.dots[k] = new Ball({
+							x: newCheckDotCoor.x | 0, z: newCheckDotCoor.z | 0, vx: speed1.vx, vz: speed1.vz,
+							r: newCheckDotR + this.plural
+						});
+					}
+					this.dots[k].draw(this.scene);
 					let newk = this.checkExist(checkDotR.r - 1, j).k;
 					if (newk === j) {
 						this.dots[j] = new Ball({
@@ -209,22 +227,13 @@ export default class DGame {
 						});
 						this.dots[j].draw(this.scene);
 					}
-					if (k === this.dots.length - 1) {
-						this.dots[k] = new Ball({
-							x: newCheckDotCoor.x | 0, z: newCheckDotCoor.z | 0, vx: speed1.vx, vz: speed1.vz,
-							r: newCheckDotR + 1, color: 'blue'
-						});
-					} else {
-						this.dots[k] = new Ball({
-							x: newCheckDotCoor.x | 0, z: newCheckDotCoor.z | 0, vx: speed1.vx, vz: speed1.vz,
-							r: newCheckDotR + 1
-						});
-					}
-					this.dots[k].draw(this.scene);
 				} else {
+					if(newCheckDotR > 75){
+						this.plural *= this.factor;
+					}
 					this.dots[j] = new Ball({
 						x: checkDotCoor.x | 0, z: checkDotCoor.z | 0, vx: speed.vx, vz: speed.vz,
-						r: checkDotR.r + 1
+						r: checkDotR.r + this.plural
 					});
 					this.dots[j].draw(this.scene);
 					let newk = this.checkExist(newCheckDotR - 1, k).k;
@@ -234,9 +243,13 @@ export default class DGame {
 								x: newCheckDotCoor.x | 0, z: newCheckDotCoor.z | 0, vx: speed1.vx, vz: speed1.vz,
 								r: newCheckDotR - 1, color: 'blue'
 							});
+							if(this.r - newCheckDotR - 1 > 15 && this.r !== 40){
+								this.camera.decreaseRCam();
+								this.r -= 15;
+							}
 						} else {
 							this.dots[k] = new Ball({
-								x: newCheckDotCoor.x | 0, z: newCheckDotCoor.z | 0, vx: speed.vx, vz: speed.vz,
+								x: newCheckDotCoor.x | 0, z: newCheckDotCoor.z | 0, vx: speed1.vx, vz: speed1.vz,
 								r: newCheckDotR - 1
 							});
 						}
@@ -244,19 +257,17 @@ export default class DGame {
 					}
 				}
 			}
-			console.log(k);
 		}
 	}
 
 	checkExist(R, k){
-		if(R <= 5){
+		if(R < 5){
 			if(k == -1){
 				return { delete: true};
 			}
 			if(k === this.dots.length - 1){
 				this.dots.pop();
 			} else {
-				this.dots[k].removeFromScene(this.scene);
 				for (let m = k; m < this.dots.length - 1; ++m) {
 					this.dots[m] = this.dots[m + 1]
 				}

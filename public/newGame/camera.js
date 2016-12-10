@@ -5,7 +5,7 @@ var THREE = THREELib();
 
 export default class Camera {
 
-	constructor({x = 0, y = 0, z = 0, rCam = 50}) {
+	constructor({x = 0, y = 0, z = 0, rCam = 300}) {
 		this.x = x;
 		this.y = y;
 		this.z = z;
@@ -60,7 +60,17 @@ export default class Camera {
 		if (this.cameraPosition >= this.maxCameraPosition) {
 			this.cameraPosition = this.cameraPosition - this.maxCameraPosition;
 		}
-		this.x = 300 * this.array[this.cameraPosition].x;
-		this.z = 300 * this.array[this.cameraPosition].z;
+		this.x = this.rCam * this.array[this.cameraPosition].x;
+		this.z = this.rCam * this.array[this.cameraPosition].z;
+	}
+
+	increaseRCam(){
+		this.rCam += 50;
+	}
+
+	decreaseRCam(){
+		if(this.rCam === 300){
+			this.rCam -= 50;
+		}
 	}
 }
