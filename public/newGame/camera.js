@@ -1,11 +1,11 @@
 'use strict';
 
 import THREELib from "three-js";
-var THREE = THREELib(); // return THREE JS
+var THREE = THREELib();
 
 export default class Camera {
 
-	constructor({x = 0, y = 0, z = 0, rCam = 50}) {
+	constructor({x = 0, y = 0, z = 0, rCam = 300}) {
 		this.x = x;
 		this.y = y;
 		this.z = z;
@@ -20,7 +20,7 @@ export default class Camera {
 		this.array = [];
 		let count = 0;
 		let angle;
-		for (angle = 0; angle <= 0.11; angle += 0.001) {
+		for (angle = 0; angle <= 0.11; angle += 0.0005) {
 			let obj = {};
 			obj.x = Math.cos(angle * 180 / Math.PI);
 			obj.z = Math.sin(angle * 180 / Math.PI);
@@ -53,14 +53,24 @@ export default class Camera {
 	}
 
 	countCircle(d) {
-		this.cameraPosition += d;
+		this.cameraPosition += d | 0;
 		if(this.cameraPosition < 0){
 			this.cameraPosition = this.maxCameraPosition + this.cameraPosition;
 		}
 		if (this.cameraPosition >= this.maxCameraPosition) {
 			this.cameraPosition = this.cameraPosition - this.maxCameraPosition;
 		}
-		this.x = 300 * this.array[this.cameraPosition].x;
-		this.z = 300 * this.array[this.cameraPosition].z;
+		this.x = this.rCam * this.array[this.cameraPosition].x;
+		this.z = this.rCam * this.array[this.cameraPosition].z;
+	}
+
+	increaseRCam(){
+		this.rCam += 50;
+	}
+
+	decreaseRCam(){
+		if(this.rCam === 300){
+			this.rCam -= 50;
+		}
 	}
 }

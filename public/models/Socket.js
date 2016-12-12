@@ -7,10 +7,11 @@ var THREE = THREELib(); // return THREE JS
 export default class Socket {
 	constructor() {
 		this.socket = new WebSocket('wss://warm-fortress-86891.herokuapp.com/game');
-		this.fisrtMessage = {
+		this.Message = {
 			type: "ru.mail.park.mechanics.requests.JoinGame$Request",
 			content: "{}"
 		};
+		this.answer = {};
 	}
 
 	init(key) {
@@ -27,19 +28,13 @@ export default class Socket {
 	}
 
 	send(){
-		this.socket.send(JSON.stringify(this.fisrtMessage))
+		this.socket.send(JSON.stringify(this.Message))
 	}
 
-	workMessage(event, dots, players) {
-		console.log("socket answer");
-		this.socket.onmessage = function (event, players, dots) {
-			let i;
-			for (i = 0; i < players.length; ++i) {
-				players[i].position.set(JSON.parse(event.data));
-			}
-			for (i = 0; i < players.dots; ++i) {
-				dots[i].position.set(JSON.parse(event.data));
-			}
+	workMessage(event) {
+		this.socket.onmessage = function (event) {
+			console.log("socket answer");
+			//this.answer = event;
 		}
 	}
 

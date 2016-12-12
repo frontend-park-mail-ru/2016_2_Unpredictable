@@ -19,11 +19,12 @@ export default class KeyMaster {
 	}
 
 	is(key) {
+		// console.log(this.keys);
 		return this.keys[key];
 	}
 
 	_keyHandler(action, event) {
-		console.log(action, event);
+		// console.log(action, event);
 		let key = event.key;
 		this.keys[key] = action === 'down';
 	}

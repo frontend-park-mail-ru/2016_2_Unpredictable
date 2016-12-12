@@ -14,9 +14,9 @@ export default class DGame {
 		this.width = 1200;
 		this.height = 800;
 
-		//this.socket = new Socket();
+		this.socket = new Socket();
 		this.key = new KeyMaster();
-		//this.socket.init(this.key);
+		this.socket.init(this.key);
 
 		this.players = [];
 		this.dots = [];
@@ -94,10 +94,11 @@ export default class DGame {
 				}
 			}
 			this.dots[this.i].decreaseAll();
-				this.dots[this.i].setCamera(this.camera.getCamera());
+			this.dots[this.i].setCamera(this.camera.getCamera());
 			this.dots[this.i].decreaseR(this.scene);
 			this.checkR();
 			this.renderer();
+			//this.socket.send();
 			date = localdate;
 			requestAnimationFrame(doAnimate);
 		};
@@ -181,4 +182,3 @@ export default class DGame {
 	}
 
 }
-

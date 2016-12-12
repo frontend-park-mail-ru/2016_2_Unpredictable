@@ -22,22 +22,19 @@ export default class Ball {
 	}
 
 	draw(scene) {
-		this.object = new THREE.SphereGeometry(this.newR | 0, 32, 32);
+		this.object = new THREE.SphereGeometry(this.newR | 0, 26, 26);
 		this.material = new THREE.MeshPhongMaterial({color: this.color, transparent: true});
 		this.objectmesh = new THREE.Mesh(this.object, this.material);
 		this.objectmesh.position.set(this.x, this.y, this.z);
 		scene.add(this.objectmesh);
 	}
 
-	changeOpacity(){
-		this.material.opacity = 0.5;
-	}
-
-	getR(){
+	getR() {
 		return {
 			r: this.newR
 		};
 	}
+
 	getPosition() {
 		return {
 			x: this.x,
@@ -57,27 +54,27 @@ export default class Ball {
 		//console.log({x: this.x, y: this.y, z: this.z});
 	}
 
-	changeSpeed(Sin, Cos){
+	changeSpeed(Sin, Cos) {
 		this.vx = -1 * ((100 * Sin) | 0);
 		this.vz = -1 * ((100 * Cos) | 0);
 	}
 
-	moveForward(Sin, Cos){
+	moveForward(Sin, Cos) {
 		this.vx = -1 * ((40 * Sin) | 0);
 		this.vz = -1 * ((40 * Cos) | 0);
 	}
 
-	moveBackward(Sin, Cos){
+	moveBackward(Sin, Cos) {
 		this.vx = (40 * Sin) | 0;
 		this.vz = (40 * Cos) | 0;
 	}
 
-	moveLeft(Sin, Cos){
+	moveLeft(Sin, Cos) {
 		this.vx = -1 * ((40 * Cos) | 0);
 		this.vz = (40 * Sin) | 0;
 	}
 
-	moveRight(Sin, Cos){
+	moveRight(Sin, Cos) {
 		this.vx = (40 * Cos) | 0;
 		this.vz = -1 * ((40 * Sin) | 0);
 	}
@@ -99,39 +96,79 @@ export default class Ball {
 		}
 	}
 
-	increaseR(scene){
-		if(this.canChangeR) {
+	increaseR(scene) {
+		if (this.canChangeR) {
 			this.canChangeR = false;
 			this.newR = this.r + this.dr;
 			scene.remove(this.objectmesh);
 			this.draw(scene);
 			setTimeout(() => {
 				this.canChangeR = true;
-			}, 5000)
+			}, 20000)
 		}
 	}
 
-	decreaseR(scene){
-		if(this.r < this.newR) {
+	decreaseR(scene) {
+		if (this.r < this.newR) {
 			this.newR -= 0.25;
 			scene.remove(this.objectmesh);
 			this.draw(scene);
-			this.changeOpacity();
 		}
 	}
 
-	redraw(scene, green){
+	redraw(scene, green) {
 		scene.remove(this.objectmesh);
 		this.color = green;
 		this.draw(scene);
 	}
 
-	removeFromScene(scene){
+	removeFromScene(scene) {
 		scene.remove(this.objectmesh);
 	}
 
-	getColor(){
+	getColor() {
 		return this.color;
 	}
+
+	getSpeed() {
+		return {
+			vx: this.vx,
+			vz: this.vz
+		}
+	}
+
+	checkReact(action) {
+		const result = {
+			x: false,
+			z: false
+		};
+
+		if (this.x + this.newR >= 1000) {
+			this.x = (1000 - this.newR) | 0;
+			result.x = true;
+		} else if (this.x - this.newR <= -1000) {
+			this.x = (this.newR - 1000) |0;
+			result.x = true;
+		}
+
+		if (this.z + this.newR >= 1000) {
+			this.z = (1000 - this.newR) | 0;
+			result.z = true;
+		} else if (this.z - this.newR <= -1000) {
+			this.z = (this.newR - 1000) | 0;
+			result.z = true;
+		}
+		this[action](result);
+	}
+
+	reflect(result) {
+		if (result.x) {
+			this.vx *= -1;
+		}
+		if (result.z) {
+			this.vz *= -1;
+		}
+	}
+
 
 }
