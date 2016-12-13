@@ -21,6 +21,8 @@ export default class ScoreboardView extends View {
 	}
 
 	resume({page = 1}) {
+		super.resume();
+		this.showPreloader();
 		this._users.fetchUsers()
 			.then(() => {
 				this._users.sort();
@@ -30,10 +32,18 @@ export default class ScoreboardView extends View {
 				this._prev.renderTo(this.getElement());
 				this._next.renderTo(this.getElement());
 				this._back.renderTo(this.getElement());
-				super.resume();
-
+				this.hidePreloader();
 			});
 	}
+
+	showPreloader() {
+		console.log('showPreloader');
+	}
+
+	hidePreloader() {
+		console.log('hidePreloader');
+	}
+
 
 	takePart(pageNumber) {
 		const part = 5;
@@ -50,10 +60,10 @@ export default class ScoreboardView extends View {
 			this._ourUsers = this.usersArray.slice(0, part);
 
 		} else {
-			this._ourUsers = this.usersArray.slice((pageNumber-1) * part, ((pageNumber-1) * part) + part);
+			this._ourUsers = this.usersArray.slice((pageNumber - 1) * part, ((pageNumber - 1) * part) + part);
 
 		}
-		if (pageNumber >= (this.usersArray.length/part)) {
+		if (pageNumber >= (this.usersArray.length / part)) {
 
 			this._next._get().setAttribute('style', 'display: none;');
 		}

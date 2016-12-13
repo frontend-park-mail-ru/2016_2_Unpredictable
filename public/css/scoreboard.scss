@@ -1,5 +1,6 @@
 .js-score {
 
+
 	text-align: center !important;
 	.pagination {
 
@@ -11,7 +12,10 @@
 		padding: 10px;
 	}
 	.record__login, .record__score{
-
+		font-size: 20px;
+	}
+	.scoreboard_background{
+		background-color: #f8e39a;
 	}
 }
 

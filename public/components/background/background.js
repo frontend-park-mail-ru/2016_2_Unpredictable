@@ -6,7 +6,7 @@ import "../background/background.scss"
 export default class PingPong {
 
 	/**
-	 * Конструктор класса Form
+	 * Конструктор класса
 	 */
 	constructor({ctx, width, height}) {
 		this.ctx = ctx;
@@ -19,6 +19,11 @@ export default class PingPong {
 		}
 	}
 
+	setSize(width, height) {
+		this.width = width;
+		this.height = height;
+	}
+
 	/**
 	 * Начало новой игры
 	 */
@@ -29,7 +34,7 @@ export default class PingPong {
 		this._stopped = false;
 		this.balls.forEach(ball => {
 			ball.draw(this.ctx);
-			ball.dv({vx: this.getRandom(-0.02,0.02) , vy: this.getRandom(-0.02,0.02)});
+			ball.dv({vx: this.getRandom(-0.02, 0.02), vy: this.getRandom(-0.02, 0.02)});
 		});
 
 		this.move();
@@ -46,6 +51,7 @@ export default class PingPong {
 		let time,
 			exec = this.exec.bind(this);
 		const self = this;
+
 		function step() {
 			let now = Date.now(),
 				dt = now - (time || now);

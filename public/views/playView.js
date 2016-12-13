@@ -4,16 +4,30 @@ import View from '../modules/view';
 import DGame from '../newGame/newgame';
 
 export default class PlayView extends View {
-	constructor(tag, {user}) {
+	constructor(tag, {user, myView}) {
 		super('js-play');
-		this.game = new DGame();
+		this._myView = myView;
+		// this.game = new DGame();
 		this.user = user;
+	}
+
+	resume() {
+		console.log('this._myView.pause();');
+		this._myView.pause();
+		super.resume();
+	}
+
+
+	pause() {
+		console.log('this._myView.resume();');
+		this._myView.resume();
+		super.pause();
 	}
 
 
 	init(options = {}) {
-		this.game.init(this.getElement());
-		this.game.animate();
+		// this.game.init(this.getElement());
+		// this.game.animate();
 	}
 
 }
