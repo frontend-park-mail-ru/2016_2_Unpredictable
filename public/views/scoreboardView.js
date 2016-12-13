@@ -21,7 +21,6 @@ export default class ScoreboardView extends View {
 	}
 
 	resume({page = 1}) {
-		console.log('resume({page = 1}) {');
 		this._users.fetchUsers()
 			.then(() => {
 				this._users.sort();
@@ -32,22 +31,31 @@ export default class ScoreboardView extends View {
 				this._next.renderTo(this.getElement());
 				this._back.renderTo(this.getElement());
 				super.resume();
+
 			});
 	}
 
 	takePart(pageNumber) {
-		const part = 3;
+		const part = 5;
 		this._next = new Link('>>', {attrs: {href: `/score/${+pageNumber + 1}`}});
 		this._prev = new Link('<<', {attrs: {href: `/score/${+pageNumber - 1}`}});
 		this._prev._get().setAttribute('class', 'pagination ');
 		this._next._get().setAttribute('class', 'pagination ');
 
+
+		console.log(this.usersArray.length);
 		if (pageNumber <= 1) {
 			this._prev._get().setAttribute('style', 'display: none;');
 			pageNumber = 1;
 			this._ourUsers = this.usersArray.slice(0, part);
+
 		} else {
-			this._ourUsers = this.usersArray.slice(pageNumber * part, (pageNumber * part) + part);
+			this._ourUsers = this.usersArray.slice((pageNumber-1) * part, ((pageNumber-1) * part) + part);
+
+		}
+		if (pageNumber >= (this.usersArray.length/part)) {
+
+			this._next._get().setAttribute('style', 'display: none;');
 		}
 
 	}

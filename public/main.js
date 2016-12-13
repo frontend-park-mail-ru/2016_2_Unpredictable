@@ -7,7 +7,7 @@ import User from './models/UserModel';
 import Router from './modules/router';
 import AppView from './views/appView';
 import SignView from './views/signView';
-import RegView from './views/registrationView';
+//import RegView from './views/registrationView';
 import ScoreboardView from './views/scoreboardView';
 import MainView from './views/mainView';
 import PlayView from './views/playView';
@@ -52,6 +52,24 @@ const eventListener = function (event) {
 		}
 	}
 };
+let preloader = document.getElementById("preload");
+//let preloader = document.getElementsByClassName("preload");
+const preloader_func = function(el) {
+	el.style.opacity = 1;
+	let interpreloader = setInterval(function () {
+		el.style.opacity = el.style.opacity - 0.05;
+		if (el.style.opacity <= 0.05) {
+			clearInterval(interpreloader);
+			preloader.style.display = "none";
+		}
+	}, 16);
+};
+window.onload = function () {
+	setTimeout(function () {
+		preloader_func(preloader);
+	}, 1000);
+};
+
 
 window.addEventListener('click', eventListener);
 window.addEventListener('tap', eventListener);
@@ -61,7 +79,7 @@ window.addEventListener('tap', eventListener);
 
 (new Router())
 	.addRoute('/sign', SignView, options)
-	.addRoute('/reg', RegView, options)
+	//.addRoute('/reg', RegView, options)
 	.addRoute('/app', AppView, options)
 	.addRoute('/score/', ScoreboardView, options)
 	.addRoute('/score/:page', ScoreboardView, options)
@@ -70,11 +88,11 @@ window.addEventListener('tap', eventListener);
 	.addRoute('/', MainView, options)
 	.start({}, options);
 
- options.user.checkAuth()
-	 .then((checked) => {
-	 	checked = true;
-	 })
- 	.catch((checked) => {
- 		new Router().go('/');
-	    checked = true;
- 	});
+ // options.user.checkAuth()
+	//  .then((checked) => {
+	//  	checked = true;
+	//  })
+ // 	.catch((checked) => {
+ // 		new Router().go('/');
+	//     checked = true;
+ // 	});
