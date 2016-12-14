@@ -3,7 +3,7 @@
 import Ball from "../background/ball";
 import "../background/background.scss"
 
-export default class PingPong {
+export default class Background {
 
 	/**
 	 * Конструктор класса

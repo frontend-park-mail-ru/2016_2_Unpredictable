@@ -3,7 +3,7 @@
 import View from '../modules/view';
 import Background from '../components/background/background';
 
-export default class MyView extends View {
+export default class backgroundView extends View {
 	constructor(options = {}) {
 		super('js-background');
 	}

@@ -4,23 +4,23 @@ import View from '../modules/view';
 import DGame from '../newGame/newgame';
 
 export default class PlayView extends View {
-	constructor(tag, {user, myView}) {
+	constructor(tag, {user, backgroundView}) {
 		super('js-play');
-		this._myView = myView;
+		this._backgroundView = backgroundView;
 		// this.game = new DGame();
 		this.user = user;
 	}
 
 	resume() {
-		console.log('this._myView.pause();');
-		this._myView.pause();
+		console.log('this._backgroundView.pause();');
+		this._backgroundView.pause();
 		super.resume();
 	}
 
 
 	pause() {
-		console.log('this._myView.resume();');
-		this._myView.resume();
+		console.log('this._backgroundView.resume();');
+		this._backgroundView.resume();
 		super.pause();
 	}
 

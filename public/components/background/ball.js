@@ -41,10 +41,6 @@ export default class Ball {
 			this.y = this.height+10;
 		}
 
-
-
-
-
 	}
 
 	checkRectangleIntersection({width, height}, action = 'relect') {

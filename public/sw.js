@@ -1,5 +1,5 @@
 // // наименование для нашего хранилища кэша
-// const CACHE_NAME = 'app_serviceworker_v_1';
+// const CACHE_NAME = 'app_serviceworker_v_2';
 // // ссылки на кэшируемые файлы
 // const cacheUrls = [
 //
