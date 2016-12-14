@@ -1,39 +1,21 @@
 .js-score {
-	.scoreboard__title {
-		display: block;
-		font-size: 2em;
-		font-weight: bold;
-		text-align: center;
-		margin-bottom: 2vh;
-		color: #ffbf00;
-		text-shadow: #fff -1px -1px 0,
-		grey 1px 1px 0;
-	}
 
-	.record__username, .scoreboard__username {
+
+	text-align: center !important;
+	.pagination {
+
+		min-width: 40px;
+		min-height: 40px;
+		max-width: 120px;
+		max-height: 50px;
 		display: inline-block;
-		width: 50vw;
-		text-align: center;
+		padding: 10px;
 	}
-
-	.record__score, .scoreboard__score {
-		display: inline-block;
-		width: 50vw;
-		text-align: center;
+	.record__login, .record__score{
+		font-size: 20px;
 	}
-
-	.scoreboard__username, .scoreboard__score {
-		font-size: 1.5em;
-		text-align: center;
-		width: 50%;
-		color: gold;
-		text-shadow: #000000 1px 1px 0;
-	}
-
-	a {
-		margin-top: 10vh;
-		height: 5vh;
-		padding-top: 1vh;
-		width: 10vw;
+	.scoreboard_background{
+		background-color: #f8e39a;
 	}
 }
+

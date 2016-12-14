@@ -1,73 +1,72 @@
 body {
-	padding: 10vh;
-	box-sizing: border-box;
-	color: grey;
-	font-size: 1.9vmax;
-	letter-spacing: .01em;
-	line-height: 1.2;
-	font-family: 'Comic Sans MS', cursive;
+	background-color: #f0c987;
 
-	h1, h2 {
+	h1 {
 		text-align: center;
+		color: #3c153b !important;
 	}
 
-	button {
-		font-size: x-large;
-	}
-}
-
-@keyframes fadeInDown {
-	from {
-		opacity: 0;
-		transform: translate3d(0, -100%, 0);
+	h2 {
+		text-align: center;
+		color: #8b1e3f !important;
 	}
 
-	to {
-		opacity: 1;
-		transform: none;
-	}
-}
-
-@keyframes fadeOutDown {
-	from {
-		opacity: 1;
+	h3 {
+		color: #3c153b !important;
 	}
 
-	99% {
-		opacity: 0;
-		transform: translate3d(0, 100%, 0);
+	.js-group {
+		width: 100%;
 	}
 
-	to {
-		opacity: 0;
-		pointer-events: none;
+	@keyframes fadeInDown {
+		from {
+			opacity: 0;
+			transform: translate3d(0, -100%, 0);
+		}
+
+		to {
+			opacity: 1;
+			transform: none;
+		}
 	}
-}
 
-.js-app, .js-score, .js-main, .js-play, .js-group{
-	animation-duration: 0.5s;
-	animation-fill-mode: both;
-	position: absolute;
-	top: 0;
-	left: 0;
-	padding-top: 10vh;
-	width: 100%;
-}
+	@keyframes fadeOutDown {
+		from {
+			opacity: 1;
+		}
 
+		99% {
+			opacity: 0;
+			transform: translate3d(0, 100%, 0);
+		}
 
-.js-sign {
-	position: absolute;
-	left: 0;
-	padding: 10px;
-	width:50%;
-}
+		to {
+			opacity: 0;
+			pointer-events: none;
+		}
+	}
 
-.js-reg {
-	position: absolute;
-	right: 0;
-	width: 50%;
-}
+	.js-app, .js-score, .js-main, .js-play, .js-group {
+		animation-duration: 0.5s;
+		animation-fill-mode: both;
+		position: absolute;
+		top: 0;
+		left: 0;
+		padding-top: 10vh;
+	}
 
-.js-play {
-	text-align: center;
+	#preload {
+		display: block;
+		position: fixed;
+		z-index: 99999;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		min-width: 1000px;
+		background: #F9BF3B url(http://hello-site.ru//main/images/preloads/circles.svg) center center no-repeat;
+		background-size: 143px;
+	}
+
 }

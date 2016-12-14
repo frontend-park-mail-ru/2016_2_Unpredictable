@@ -3,7 +3,6 @@
 import Block from '../block/block';
 import './input.scss';
 
-
 export default class Input extends Block {
 	constructor(options) {
 		super('input', options);
@@ -14,4 +13,3 @@ export default class Input extends Block {
 		return this._el.value;
 	}
 }
-

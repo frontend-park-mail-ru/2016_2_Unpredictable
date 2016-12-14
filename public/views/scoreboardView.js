@@ -11,6 +11,8 @@ export default class ScoreboardView extends View {
 		super('js-score');
 		this._user = user;
 		this._back = new Link('Go Back', {attrs: {href: '/'}});
+		// TODO: назад при авторизованном пользователе
+
 		this._users = new UsersCollection();
 		this._users.setHost(host);
 		this.pageNumber = 1;
@@ -21,7 +23,8 @@ export default class ScoreboardView extends View {
 	}
 
 	resume({page = 1}) {
-		console.log('resume({page = 1}) {');
+		super.resume();
+		this.showPreloader();
 		this._users.fetchUsers()
 			.then(() => {
 				this._users.sort();
@@ -31,23 +34,40 @@ export default class ScoreboardView extends View {
 				this._prev.renderTo(this.getElement());
 				this._next.renderTo(this.getElement());
 				this._back.renderTo(this.getElement());
-				super.resume();
+				this.hidePreloader();
 			});
 	}
 
+	showPreloader() {
+		console.log('showPreloader');
+	}
+
+	hidePreloader() {
+		console.log('hidePreloader');
+	}
+
+
 	takePart(pageNumber) {
-		const part = 3;
+		const part = 5;
 		this._next = new Link('>>', {attrs: {href: `/score/${+pageNumber + 1}`}});
 		this._prev = new Link('<<', {attrs: {href: `/score/${+pageNumber - 1}`}});
-		this._prev._get().setAttribute('style', 'float:left; width: 5%; margin-left: 30%; margin-top: 2vh');
-		this._next._get().setAttribute('style', 'float:right; width: 5%; margin-right: 30%; margin-top: 2vh');
+		this._prev._get().setAttribute('class', 'pagination ');
+		this._next._get().setAttribute('class', 'pagination ');
 
+
+		console.log(this.usersArray.length);
 		if (pageNumber <= 1) {
 			this._prev._get().setAttribute('style', 'display: none;');
 			pageNumber = 1;
 			this._ourUsers = this.usersArray.slice(0, part);
+
 		} else {
-			this._ourUsers = this.usersArray.slice(pageNumber * part, (pageNumber * part) + part);
+			this._ourUsers = this.usersArray.slice((pageNumber - 1) * part,
+				((pageNumber - 1) * part) + part);
+		}
+		if (pageNumber >= (this.usersArray.length / part)) {
+
+			this._next._get().setAttribute('style', 'display: none;');
 		}
 
 	}

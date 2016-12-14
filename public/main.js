@@ -1,19 +1,42 @@
 'use strict';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/main.scss';
 import User from './models/UserModel';
 import Router from './modules/router';
 import AppView from './views/appView';
 import SignView from './views/signView';
+import BackgroundView from './views/backgroundView';
 import ScoreboardView from './views/scoreboardView';
 import MainView from './views/mainView';
 import PlayView from './views/playView';
 
 
+const serviceWorker = function () {
+
+	if (!navigator.serviceWorker) {
+		return;
+	}
+	navigator.serviceWorker.register(
+		'/sw.js'
+	).then(function (registration) {
+		// при удачной регистрации имеем объект типа ServiceWorkerRegistration
+		console.log('ServiceWorker registration', registration);
+		// строкой ниже можно прекратить работу serviceWorker’а
+		// registration.unregister();
+	}).catch(function (err) {
+		throw new Error('ServiceWorker error: ' + err);
+	});
+};
+
 const options = {
 	user: new User(),
-	host: 'https://osmosbackend.herokuapp.com/'
+	host: 'https://warm-fortress-86891.herokuapp.com/',
+	backgroundView: new BackgroundView(),
 };
+
+options.backgroundView.init();
+options.backgroundView.resume();
 
 options.user.setHost(options.host);
 
@@ -32,6 +55,27 @@ const eventListener = function (event) {
 		}
 	}
 };
+const preloader = document.getElementById('preload');
+// let preloader = document.getElementsByClassName("preload");
+const preloaderFunc = function (el) {
+	if (!el) {
+		return;
+	}
+	el.style.opacity = 1;
+	const interpreloader = setInterval(function () {
+		el.style.opacity -= 0.05;
+		if (el.style.opacity <= 0.05) {
+			clearInterval(interpreloader);
+			preloader.style.display = 'none';
+		}
+	}, 16);
+};
+window.onload = function () {
+	setTimeout(function () {
+		preloaderFunc(preloader);
+	}, 1000);
+};
+
 
 window.addEventListener('click', eventListener);
 window.addEventListener('tap', eventListener);
@@ -47,8 +91,12 @@ window.addEventListener('tap', eventListener);
 	.addRoute('/singleplayer', PlayView, options)
 	.addRoute('/multiplayer', PlayView, options)
 	.addRoute('/', MainView, options)
-	.start();
+	.start({}, options);
 
-// options.user.checkAutorization()
-// 	.then(() => new Router().go('/app'))
-// 	.catch(() => new Router().go('/'));
+options.user.checkAuth()
+	.then((checked) => {
+		checked = true;
+	}).catch((checked) => {
+		new Router().go('/');
+		checked = true;
+	});

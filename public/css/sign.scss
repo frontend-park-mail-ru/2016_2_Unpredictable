@@ -1,0 +1,23 @@
+.sign {
+	.signin {
+		margin-top: 30px;
+		margin-right: 10px;
+		margin-bottom: 10px;
+		background-color: #f8e7a6;
+
+
+		&__submit {
+			margin-left: 50%;
+		}
+
+	}
+
+	.signup{
+		background-color: #f8e7a6;
+
+		&__submit {
+			margin-left: 50%;
+		}
+
+	}
+}

@@ -7,108 +7,162 @@ export default class User {
 			login: null,
 			score: null
 		};
+		this.checked = false;
+	}
+
+	validateLogin(login) {
+		if (!login || login.length === 0) {
+			return {
+				errorText: 'Login shouldn\'t be empty',
+			};
+		}
+		if (!login.match(/^[a-zA-Z0-9]{1,20}$/)) {
+			return {
+				errorText: 'Login consists from latin letters and it\'s length should be more than 1 and less than 20',
+			};
+		}
+		return {};
+	}
+
+	validatePassword(password, repeat = null) {
+		if (!password || password.length === 0) {
+			return {
+				errorText: 'Passwords shouldn\'t be empty',
+			};
+		}
+		if (!password.match(/^[a-z0-9]{6,20}$/i)) {
+			return {
+				errorText: 'Password consists from latin letters and it\'s length should be more than 6 and less than 20',
+			};
+		}
+		return {};
+	}
+
+	checkRepeat(password, repeat = null) {
+		if (repeat && repeat !== password) {
+			return {
+				errorText: 'Passwords are not equals',
+			};
+		}
+		return {};
+	}
+
+	validate() {
+		const isLoginValid = this.validateLogin(this.info.login);
+		const isPasswordValid = this.validatePassword(this.info.password);
+		const isRepeat = this.checkRepeat(this.info.password, this.info.repeat);
+		this._errorText = {};
+		this.error = false;
+		if (isLoginValid.errorText) {
+			this.error = true;
+			this._errorText = isLoginValid.errorText;
+		}
+		if (isPasswordValid.errorText) {
+			this.error = true;
+			this._errorText = isPasswordValid.errorText;
+		}
+		if (isRepeat.errorText) {
+			this.error = true;
+			this._errorText = isRepeat.errorText;
+		}
 	}
 
 	signin({login, password}) {
-		console.log('sign in', arguments);
-		return new Promise(function (resolve, reject) {
-			if (!login) {
-				console.info('плохое имя');
-				return reject();
+		this.info.login = login;
+		this.info.password = password;
+		this.validate();
+		if (this.error) {
+			return Promise.reject(this._errorText);
+		}
+		return fetch(this.host + 'api/sessions', {
+			credentials: 'include',
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+			method: 'POST',
+			body: JSON.stringify({login, password}),
+			mode: 'cors'
+		}).then(res => {
+			if (res.status >= 300) {
+				throw new Error();
 			}
-			if (!password || password.length < 6) {
-				console.info('плохое passw');
-				return reject();
-			}
-			fetch(this.host + 'api/login', {
-				headers: {
-					'Accept': 'application/json',
-					'Content-Type': 'application/json'
-				},
-				method: 'POST',
-				body: JSON.stringify({login, password}),
-				mode: 'cors'
-			}).then(res => {
-				if (res.status !== 200) {
-					console.info('не верная пара');
-					return reject();
-				}
-				return res.json().then(body => {
-					this.login = body.login;
-					this.score = body.score;
-					console.info('вошли');
-					return resolve();
-				});
-			}).catch(err => {
-				console.error(err);
-				console.info('какаято ошибка =((( ');
-				return reject(err);
-			});
-		}.bind(this));
+			return Promise.resolve();
+		}).catch(err => {
+			this.errors = {};
+			this.errors._errorText = 'No such user. Please try again';
+			return Promise.reject(this.errors);
+		});
 	}
 
-	signup({login, password, passwordRepeat}) {
-		console.log('sign up', arguments);
-		return new Promise(function (resolve, reject) {
-			if (!login) {
-				console.info('плохое имя');
-				return reject();
+	signup({login, name, email, password, passwordRepeat}, errors) {
+		this.info.login = login;
+		this.info.name = name;
+		this.info.email = email;
+		this.info.password = password;
+		this.info.repeat = passwordRepeat;
+		this.validate();
+		if (this.error) {
+			return Promise.reject(this._errorText);
+		}
+		delete this.info.repeat;
+		this.errors = errors;
+		return fetch(this.host + 'api/users', {
+			credentials: 'include',
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+			method: 'POST',
+			body: JSON.stringify(this.info),
+			mode: 'cors'
+		}).then(res => {
+			if (res.status >= 300) {
+				throw new Error();
 			}
-			if (!password || password.length < 6) {
-				console.info('плохой пароль');
-				return reject();
-			}
-			if (passwordRepeat !== password) {
-				console.info('пароли не совпадают ');
-				return reject();
-			}
-			fetch(this.host + 'api/users', {
+			delete this.info.email;
+			delete this.info.name;
+			return fetch(this.host + 'api/sessions', {
+				credentials: 'include',
 				headers: {
 					'Accept': 'application/json',
 					'Content-Type': 'application/json'
 				},
 				method: 'POST',
-				body: JSON.stringify({login, password}),
+				body: JSON.stringify(this.info),
 				mode: 'cors'
 			}).then(res => {
-				if (res.status !== 200) {
-					console.info('пользователь уже существует или какая то хрень');
-					return reject();
+				if (res.status >= 300) {
+					throw new Error();
 				}
-				return res.json().then(body => {
-					this.login = body.login;
-					this.score = body.score;
-					console.info('зарегались');
-					return resolve();
-				});
+				return Promise.resolve();
 			}).catch(err => {
-				console.error(err);
-				console.info('какаято ошибка =((( ');
-				return reject(err);
+				throw new Error(this.errors);
 			});
-		}.bind(this));
+		}).catch(err => {
+			this.errors = {};
+			this.errors._errorText = 'User with this login already exist. Please try again';
+			return Promise.reject(this.errors);
+		});
 	}
 
 	logout() {
-		return new Promise(function (resolve, reject) {
-			fetch(this.host + 'api/delete', {
-				method: 'DELETE',
-				mode: 'cors'
-			}).then(res => {
-				if (res.status !== 200) {
-					console.info('не разлогинились');
-					return reject();
-				}
-				return res.json().then(body => {
-					console.info('Разлогинились');
-					return resolve();
-				});
-			}).catch(err => {
-				console.error(err);
-				console.info('какаято ошибка');
-				return reject(err);
-			});
-		}.bind(this));
+		return fetch(this.host + 'api/sessions', {
+			credentials: 'include',
+			method: 'DELETE',
+			mode: 'cors',
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			}
+		}).then(res => {
+			if (res.status >= 300) {
+				throw new Error();
+			}
+			return Promise.resolve();
+		}).catch(err => {
+			return Promise.reject(err);
+		});
 	}
 
 	get login() {
@@ -127,32 +181,22 @@ export default class User {
 		this.info.login = value;
 	}
 
-	checkAutorization() {
-		return new Promise(function (resolve, reject) {
-			fetch(this.host + 'api/me', {
-				method: 'GET',
-				mode: 'cors'
-			}).then(res => {
-				if (res.status !== 200) {
-					console.info('МЫ не авторизованы!! meh =(');
-					return reject();
-				}
-				return res.json().then(body => {
-					this.login = body.login;
-					this.score = body.score;
-					console.info('МЫ авторизованы!! УХУ');
-					return resolve();
-				});
-			}).catch(err => {
-				console.error(err);
-				console.info('МЫ не авторизованы!! какаято ошибка =((( meh =(');
-				return reject(err);
-			});
-		}.bind(this));
+	checkAuth() {
+		return fetch(this.host + 'api/auth', {
+			credentials: 'include',
+			method: 'GET',
+			mode: 'cors'
+		}).then(res => {
+			if (res.status >= 300) {
+				throw new Error();
+			}
+			return Promise.resolve(this.checked);
+		}).catch(() => {
+			return Promise.reject(this.checked);
+		});
 	}
 
 	setHost(host) {
 		this.host = host;
 	}
-
 }

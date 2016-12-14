@@ -3,7 +3,6 @@
 import Block from '../block/block';
 import './link.scss';
 
-
 export default class Link extends Block {
 	constructor(text, options) {
 		super('a', options);

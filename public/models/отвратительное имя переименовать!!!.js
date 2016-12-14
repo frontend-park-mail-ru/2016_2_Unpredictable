@@ -1,8 +1,9 @@
 'use strict';
 
 import KeyMaster from '../newGame/keymaster';
-import THREELib from "three-js";
-var THREE = THREELib(); // return THREE JS
+import THREELib from 'three-js';
+
+const THREE = THREELib(); // return THREE JS
 
 export default class Socket {
 	constructor() {
@@ -20,7 +21,7 @@ export default class Socket {
 		this.socket.onopen = function (event, key) {
 			this.key.init();
 			key = this.key;
-		}
+		};
 	}
 
 	workMessage(event, dots, players) {
@@ -32,12 +33,12 @@ export default class Socket {
 			for (i = 0; i < players.dots; ++i) {
 				dots[i].position.set(JSON.parse(event.data));
 			}
-		}
+		};
 	}
 
 	workClose(event) {
 		this.socket.onerror = function (event) {
 
-		}
+		};
 	}
 }

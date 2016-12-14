@@ -1,16 +1,19 @@
 .input {
 	display: block;
-	border: .1rem solid grey;
-	border-radius: .4rem;
-	height: 2.2em;
-	padding: 0.6rem 1rem;
-	width: 30vw;
-	margin-bottom: 7px;
-	font-family: 'Comic Sans MS', cursive;
-}
+	width: 90%;
+	height: 45px;
+	padding: 8px 10px;
+	border: 2px solid #f0c987;
+	border-radius: 0;
+	background: #fff;
+	font: 13px/19px 'Open Sans', Helvetica, Arial, sans-serif;
+	color: #404040;
+	cursor: auto;
+	letter-spacing: 1px;
+	margin: 15px;
+	min-width: 170px;
 
-.input:focus {
-	outline: none;
-	border: .17rem solid gold;
-	border-radius: .4rem;
+	&:focus{
+		outline-color: #89bd9e;
+	}
 }

@@ -54,6 +54,7 @@ export default class View {
 	show(options = {}) {
 		this.__interval = setTimeout(() => {
 			this._el.style = 'opacity:0';
+			console.log(this, 'animation-name: fadeInDown;');
 			this._el.style = 'animation-name: fadeInDown;';
 			this.__interval = null;
 		}, 301);
@@ -68,6 +69,7 @@ export default class View {
 			clearTimeout(this.__interval);
 			this.__interval = null;
 		}
+		console.log(this, 'animation-name: fadeOutDown;');
 		this._el.style = 'animation-name: fadeOutDown;';
 	}
 

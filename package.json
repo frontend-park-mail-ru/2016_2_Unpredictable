@@ -8,9 +8,8 @@
     "lint": "eslint './**/*.js'",
     "karma:start": "karma start",
     "karma:run": "karma run",
-    "start": "node server.js",
-    "webpack": "webpack --display-error-details --watch",
-    "build": "webpack --display-error-details"
+    "start": "./node_modules/.bin/webpack && node server.js",
+    "webpack": "webpack --display-error-details --watch"
   },
   "repository": {
     "type": "git",
@@ -25,7 +24,8 @@
     "body-parser": "^1.15.*",
     "express": "^4.14.*",
     "json-schema-mock": "^0.0.*",
-    "techno-gendoc": "^0.4.*"
+    "techno-gendoc": "^0.4.*",
+    "three-js": "^79.0.0"
   },
   "devDependencies": {
     "autoprefixer": "6.5.3",
@@ -34,14 +34,16 @@
     "babel-polyfill": "^6.16.0",
     "babel-preset-latest": "^6.16.0",
     "clean-webpack-plugin": "^0.1.14",
+    "copy-webpack-plugin": "^4.0.1",
     "css-loader": "0.25.0",
-    "eventsource-polyfill": "^0.9.6",
     "eslint": "^3.5.*",
     "eslint-config-airbnb": "^11.1.*",
     "eslint-plugin-import": "^1.15.*",
     "eslint-plugin-jsx-a11y": "^2.2.*",
     "eslint-plugin-react": "^6.2.*",
+    "eventsource-polyfill": "^0.9.6",
     "extract-text-webpack-plugin": "^2.0.0-beta.4",
+    "file-loader": "^0.9.0",
     "fest": "^0.12.1",
     "html-webpack-plugin": "^2.24.1",
     "jasmine": "^2.5.2",
@@ -54,6 +56,7 @@
     "precss": "1.4.0",
     "sass-loader": "4.0.2",
     "style-loader": "0.13.1",
+    "url-loader": "^0.5.7",
     "webpack": "^2.1.0-beta.25"
   }
 }

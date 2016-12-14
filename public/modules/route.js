@@ -1,7 +1,8 @@
 'use strict';
 
-let id = 0;
 import pathToRegex from './pathToRegex';
+
+let id = 0;
 
 /** Класс представляет собой Путь в вашем приложении */
 export default class Route {
@@ -41,10 +42,11 @@ export default class Route {
 		const keys = this.regex(pathname);
 		if (!this._view) {
 			const view = new this.View('', this.options);
-			view.init(this.options);
 			view.setRouter(this.__router);
+			view.init();
 			this._view = view;
 		}
+		console.log('Resume', this._view);
 		this._view.resume(Object.assign(state, keys));
 	}
 
@@ -53,6 +55,7 @@ export default class Route {
 	 */
 	leave() {
 		if (this._view) {
+			console.log('Leave', this._view);
 			this._view.pause();
 		}
 	}
