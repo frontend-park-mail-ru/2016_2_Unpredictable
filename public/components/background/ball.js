@@ -56,6 +56,18 @@ export default class Ball {
 		this[action](result);
 	}
 
+	checkBalls({balls}, action = 'relect') {
+		const result = {};
+		balls.forEach(ball => {
+			if ((ball.x != this.x) && (ball.y != this.y)) {
+				if (Math.sqrt(Math.pow((this.x - ball.x),2) + Math.pow((this.y - ball.y),2)) === this.r + ball.r){
+					result.x = true;
+				}
+			}
+			this[action](result);
+		});
+	}
+
 	destroy(axis) {
 		if (axis.x || axis.y) {
 			this.toDestroy = true;

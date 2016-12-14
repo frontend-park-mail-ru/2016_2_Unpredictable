@@ -85,6 +85,10 @@ export default class Background {
 				height: this.height
 			}, 'reflect');
 
+			ball.checkBalls({
+				balls: this.balls,
+			}, 'reflect');
+
 			ball.draw(this.ctx);
 		});
 	}
