@@ -1,7 +1,7 @@
 'use strict';
 
-import Ball from "../background/ball";
-import "../background/background.scss"
+import Ball from '../background/ball';
+import '../background/background.scss';
 
 export default class Background {
 
@@ -30,7 +30,7 @@ export default class Background {
 
 
 	start() {
-		//this.ball.draw(this.ctx);
+		// this.ball.draw(this.ctx);
 		this._stopped = false;
 		this.balls.forEach(ball => {
 			ball.draw(this.ctx);
@@ -48,13 +48,13 @@ export default class Background {
 	 * Начинаем движение
 	 */
 	move() {
-		let time,
-			exec = this.exec.bind(this);
+		let time;
+		const exec = this.exec.bind(this);
 		const self = this;
 
 		function step() {
-			let now = Date.now(),
-				dt = now - (time || now);
+			const now = Date.now();
+			const dt = now - (time || now);
 			time = now;
 
 			if (!self.isStopped()) {
@@ -90,6 +90,6 @@ export default class Background {
 	}
 
 	getRandom(min, max) {
-		return Math.random() * (max - min) + min;
+		return ((Math.random() * (max - min)) + min);
 	}
 }

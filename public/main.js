@@ -6,13 +6,13 @@ import User from './models/UserModel';
 import Router from './modules/router';
 import AppView from './views/appView';
 import SignView from './views/signView';
-import backgroundView from './views/backgroundView';
+import BackgroundView from './views/backgroundView';
 import ScoreboardView from './views/scoreboardView';
 import MainView from './views/mainView';
 import PlayView from './views/playView';
 
 
-const serviceWorker = function (){
+const serviceWorker = function () {
 
 	if (!navigator.serviceWorker) {
 		return;
@@ -27,12 +27,12 @@ const serviceWorker = function (){
 	}).catch(function (err) {
 		throw new Error('ServiceWorker error: ' + err);
 	});
-}
+};
 
 const options = {
 	user: new User(),
 	host: 'https://warm-fortress-86891.herokuapp.com/',
-	backgroundView: new backgroundView()
+	backgroundView: new BackgroundView(),
 };
 
 options.backgroundView.init();
@@ -55,24 +55,24 @@ const eventListener = function (event) {
 		}
 	}
 };
-let preloader = document.getElementById("preload");
-//let preloader = document.getElementsByClassName("preload");
-const preloader_func = function (el) {
+const preloader = document.getElementById('preload');
+// let preloader = document.getElementsByClassName("preload");
+const preloaderFunc = function (el) {
 	if (!el) {
 		return;
 	}
 	el.style.opacity = 1;
-	let interpreloader = setInterval(function () {
-		el.style.opacity = el.style.opacity - 0.05;
+	const interpreloader = setInterval(function () {
+		el.style.opacity -= 0.05;
 		if (el.style.opacity <= 0.05) {
 			clearInterval(interpreloader);
-			preloader.style.display = "none";
+			preloader.style.display = 'none';
 		}
 	}, 16);
 };
 window.onload = function () {
 	setTimeout(function () {
-		preloader_func(preloader);
+		preloaderFunc(preloader);
 	}, 1000);
 };
 
@@ -97,7 +97,6 @@ options.user.checkAuth()
 	.then((checked) => {
 		checked = true;
 	}).catch((checked) => {
-	//hide view
-	new Router().go('/');
-	checked = true;
-});
+		new Router().go('/');
+		checked = true;
+	});

@@ -9,9 +9,9 @@ export default class Ball {
 		this.vx = 0;
 		this.vy = 0;
 
-		this.r = this.getRandom(5,25);
-		this.x = this.getRandom(0,width);
-		this.y = this.getRandom(0,height);
+		this.r = this.getRandom(5, 25);
+		this.x = this.getRandom(0, width);
+		this.y = this.getRandom(0, height);
 
 		this.color = this.randomColor();
 		console.log(this.color);
@@ -31,20 +31,20 @@ export default class Ball {
 			this.x = 10;
 		}
 		if (this.x > this.width) {
-			this.x = this.width+10;
+			this.x = this.width + 10;
 		}
 
 		if (this.y < 0) {
 			this.y = 10;
 		}
 		if (this.y > this.height) {
-			this.y = this.height+10;
+			this.y = this.height + 10;
 		}
 
 	}
 
 	checkRectangleIntersection({width, height}, action = 'relect') {
-		let result = {};
+		const result = {};
 		if (this.x + this.r > width || this.x - this.r < 0) {
 			result.x = true;
 		}
@@ -67,7 +67,7 @@ export default class Ball {
 			if (axis[dem]) {
 				this[`v${dem}`] *= -1;
 			}
-		})
+		});
 	}
 
 	draw(ctx) {
@@ -83,7 +83,7 @@ export default class Ball {
 		return Math.floor(Math.random() * (max - min)) + min;
 	}
 	randomColor() {
-		return '#'+ Math.floor(Math.random()*16777215).toString(16);
+		return '#' + Math.floor(Math.random() * 16777215).toString(16);
 	}
 
 }

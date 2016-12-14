@@ -45,8 +45,7 @@ export default class AppForm extends Form {
 				this.callback();
 			}).catch((err) => {
 				console.log(err);
-				this._errorHeader._get().innerText = 'There are some problems with your logout. Please try again later'
-		});
+				this._errorHeader._get().innerText = 'There are some problems with your logout. Please try again later';
+			});
 	}
 }
-

@@ -138,7 +138,7 @@ export default class User {
 				return Promise.resolve();
 			}).catch(err => {
 				throw new Error(this.errors);
-			})
+			});
 		}).catch(err => {
 			this.errors = {};
 			this.errors._errorText = 'User with this login already exist. Please try again';
@@ -188,7 +188,7 @@ export default class User {
 			mode: 'cors'
 		}).then(res => {
 			if (res.status >= 300) {
-				throw new Error()
+				throw new Error();
 			}
 			return Promise.resolve(this.checked);
 		}).catch(() => {
@@ -200,4 +200,3 @@ export default class User {
 		this.host = host;
 	}
 }
-

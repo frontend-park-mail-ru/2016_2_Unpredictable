@@ -15,8 +15,8 @@ export default class AppView extends View {
 		this.appForm.renderTo(this.getElement());
 	}
 
-	resume(){
-		if(!this._user.checked){
+	resume() {
+		if (!this._user.checked) {
 			this.show();
 		}
 	}

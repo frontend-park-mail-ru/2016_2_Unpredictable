@@ -11,6 +11,8 @@ export default class ScoreboardView extends View {
 		super('js-score');
 		this._user = user;
 		this._back = new Link('Go Back', {attrs: {href: '/'}});
+		// TODO: назад при авторизованном пользователе
+
 		this._users = new UsersCollection();
 		this._users.setHost(host);
 		this.pageNumber = 1;
@@ -60,8 +62,8 @@ export default class ScoreboardView extends View {
 			this._ourUsers = this.usersArray.slice(0, part);
 
 		} else {
-			this._ourUsers = this.usersArray.slice((pageNumber - 1) * part, ((pageNumber - 1) * part) + part);
-
+			this._ourUsers = this.usersArray.slice((pageNumber - 1) * part,
+				((pageNumber - 1) * part) + part);
 		}
 		if (pageNumber >= (this.usersArray.length / part)) {
 

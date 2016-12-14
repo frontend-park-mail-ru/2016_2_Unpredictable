@@ -1,7 +1,8 @@
 'use strict';
 
-let id = 0;
 import pathToRegex from './pathToRegex';
+
+let id = 0;
 
 /** Класс представляет собой Путь в вашем приложении */
 export default class Route {

@@ -1,8 +1,7 @@
 'use strict';
 
 import Block from '../block/block';
-import './input.scss'
-console.log('kjdjkjslf');
+import './input.scss';
 
 export default class Input extends Block {
 	constructor(options) {
@@ -14,4 +13,3 @@ export default class Input extends Block {
 		return this._el.value;
 	}
 }
-

@@ -47,18 +47,10 @@ export default class Router {
 			this.onroute(pathname, status);
 		};
 		this.started = true;
-//		options.user.checkAuth()
-//			.then(() => {
-				let pathname = window.location.pathname;
-				this.pathsHistory.push(pathname);
-				this.onroute(pathname, state);
-		// 	}).catch(() => {
-		// 		debugger;
-		// 		let pathname = '/';
-		// 		window.location = pathname;
-		// 		this.pathsHistory.push(pathname);
-		// 		this.onroute(pathname, state);
-		// });
+		const pathname = window.location.pathname;
+		this.pathsHistory.push(pathname);
+		this.onroute(pathname, state);
+
 	}
 
 	/**

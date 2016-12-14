@@ -8,5 +8,3 @@ node_modules/
 public/api/
 public/coverage/
 /dist/
-/public/css/bootstrap/bootstrap.scss
-/public/css/bootstrap/bootstrap-theme.scss
