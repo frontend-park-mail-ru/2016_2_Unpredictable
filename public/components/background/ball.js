@@ -14,7 +14,6 @@ export default class Ball {
 		this.y = this.getRandom(0, height);
 
 		this.color = this.randomColor();
-		console.log(this.color);
 	}
 
 	dv({vx = 0, vy = 0}) {

@@ -46,7 +46,6 @@ export default class Route {
 			view.init();
 			this._view = view;
 		}
-		console.log('Resume', this._view);
 		this._view.resume(Object.assign(state, keys));
 	}
 
@@ -55,7 +54,6 @@ export default class Route {
 	 */
 	leave() {
 		if (this._view) {
-			console.log('Leave', this._view);
 			this._view.pause();
 		}
 	}

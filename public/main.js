@@ -12,8 +12,8 @@ import MainView from './views/mainView';
 import PlayView from './views/playView';
 
 
-const serviceWorker = function () {
-
+(function () {
+	'use strict';
 	if (!navigator.serviceWorker) {
 		return;
 	}
@@ -27,7 +27,8 @@ const serviceWorker = function () {
 	}).catch(function (err) {
 		throw new Error('ServiceWorker error: ' + err);
 	});
-};
+})();
+
 
 const options = {
 	user: new User(),
@@ -72,6 +73,7 @@ const preloaderFunc = function (el) {
 };
 window.onload = function () {
 	setTimeout(function () {
+
 		preloaderFunc(preloader);
 	}, 1000);
 };
