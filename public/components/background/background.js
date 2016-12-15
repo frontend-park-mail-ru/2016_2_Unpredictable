@@ -34,7 +34,7 @@ export default class Background {
 		this._stopped = false;
 		this.balls.forEach(ball => {
 			ball.draw(this.ctx);
-			ball.dv({vx: this.getRandom(-0.02, 0.02), vy: this.getRandom(-0.02, 0.02)});
+			ball.dv({vx: (this.getRandom(-0.02, 0.02)), vy: (this.getRandom(-0.02, 0.02))});
 		});
 
 		this.move();
@@ -85,12 +85,34 @@ export default class Background {
 				height: this.height
 			}, 'reflect');
 
-			ball.checkBalls({
-				balls: this.balls,
-			}, 'reflect');
+			this.checkBalls();
 
 			ball.draw(this.ctx);
 		});
+	}
+
+	checkBalls() {
+		const result = {};
+		this.count = 1;
+		this.balls.forEach(ball => {
+			let ballinfo = ball.getInfo();
+			for(let i = this.count; i < this.balls.length; ++i){
+				let bufferinfo = this.balls[i].getInfo();
+				if (((ballinfo.x | 0) !== (bufferinfo.x | 0)) && ((ballinfo.y | 0) !== (bufferinfo.y | 0))) {
+					if (((Math.sqrt((bufferinfo.x - ballinfo.x) ** 2 +
+							(bufferinfo.y - ballinfo.y) ** 2)) | 0) < bufferinfo.r + ballinfo.r) {
+						result.x = true;
+					}
+				}
+				this.balls[i].reflect(result);
+				result.x = false;
+			}
+			++this.count;
+		});
+	}
+
+	stop(){
+		this._stopped = true;
 	}
 
 	getRandom(min, max) {

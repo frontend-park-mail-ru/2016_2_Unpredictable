@@ -9,12 +9,11 @@ export default class Ball {
 		this.vx = 0;
 		this.vy = 0;
 
-		this.r = this.getRandom(5, 25);
-		this.x = this.getRandom(0, width);
-		this.y = this.getRandom(0, height);
+		this.r = this.getRandom(5, 25) | 0;
+		this.x = this.getRandom(0, width) | 0;
+		this.y = this.getRandom(0, height) | 0;
 
 		this.color = this.randomColor();
-		console.log(this.color);
 	}
 
 	dv({vx = 0, vy = 0}) {
@@ -28,22 +27,22 @@ export default class Ball {
 		this.y += this.vy * dt;
 
 		if (this.x < 0) {
-			this.x = 10;
+			this.x = this.r;
 		}
 		if (this.x > this.width) {
-			this.x = this.width + 10;
+			this.x = this.width - this.r;
 		}
 
 		if (this.y < 0) {
-			this.y = 10;
+			this.y = this.r;
 		}
 		if (this.y > this.height) {
-			this.y = this.height + 10;
+			this.y = this.height - this.r;
 		}
 
 	}
 
-	checkRectangleIntersection({width, height}, action = 'relect') {
+	checkRectangleIntersection({width, height}, action = 'reflect') {
 		const result = {};
 		if (this.x + this.r > width || this.x - this.r < 0) {
 			result.x = true;
@@ -54,18 +53,6 @@ export default class Ball {
 		}
 
 		this[action](result);
-	}
-
-	checkBalls({balls}, action = 'relect') {
-		const result = {};
-		balls.forEach(ball => {
-			if ((ball.x != this.x) && (ball.y != this.y)) {
-				if (Math.sqrt(Math.pow((this.x - ball.x),2) + Math.pow((this.y - ball.y),2)) === this.r + ball.r){
-					result.x = true;
-				}
-			}
-			this[action](result);
-		});
 	}
 
 	destroy(axis) {
@@ -88,6 +75,14 @@ export default class Ball {
 		ctx.fillStyle = this.color;
 		ctx.fill();
 		ctx.closePath();
+	}
+
+	getInfo(){
+		return {
+			x: this.x,
+			y: this.y,
+			r: this.r
+		}
 	}
 
 

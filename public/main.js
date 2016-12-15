@@ -9,25 +9,25 @@ import SignView from './views/signView';
 import BackgroundView from './views/backgroundView';
 import ScoreboardView from './views/scoreboardView';
 import MainView from './views/mainView';
-import PlayView from './views/playView';
+import SinglePlayView from './views/singleplayerView';
 
 
-const serviceWorker = function () {
-
-	if (!navigator.serviceWorker) {
-		return;
-	}
-	navigator.serviceWorker.register(
-		'/sw.js'
-	).then(function (registration) {
-		// при удачной регистрации имеем объект типа ServiceWorkerRegistration
-		console.log('ServiceWorker registration', registration);
-		// строкой ниже можно прекратить работу serviceWorker’а
-		// registration.unregister();
-	}).catch(function (err) {
-		throw new Error('ServiceWorker error: ' + err);
-	});
-};
+// const serviceWorker = function () {
+//
+// 	if (!navigator.serviceWorker) {
+// 		return;
+// 	}
+// 	navigator.serviceWorker.register(
+// 		'/sw.js'
+// 	).then(function (registration) {
+// 		// при удачной регистрации имеем объект типа ServiceWorkerRegistration
+// 		console.log('ServiceWorker registration', registration);
+// 		// строкой ниже можно прекратить работу serviceWorker’а
+// 		// registration.unregister();
+// 	}).catch(function (err) {
+// 		throw new Error('ServiceWorker error: ' + err);
+// 	});
+// };
 
 const options = {
 	user: new User(),
@@ -57,6 +57,7 @@ const eventListener = function (event) {
 };
 const preloader = document.getElementById('preload');
 // let preloader = document.getElementsByClassName("preload");
+
 const preloaderFunc = function (el) {
 	if (!el) {
 		return;
@@ -70,6 +71,8 @@ const preloaderFunc = function (el) {
 		}
 	}, 16);
 };
+
+
 window.onload = function () {
 	setTimeout(function () {
 		preloaderFunc(preloader);
@@ -88,8 +91,8 @@ window.addEventListener('tap', eventListener);
 	.addRoute('/app', AppView, options)
 	.addRoute('/score/', ScoreboardView, options)
 	.addRoute('/score/:page', ScoreboardView, options)
-	.addRoute('/singleplayer', PlayView, options)
-	.addRoute('/multiplayer', PlayView, options)
+	.addRoute('/singleplayer', SinglePlayView, options)
+	.addRoute('/multiplayer', SinglePlayView, options)
 	.addRoute('/', MainView, options)
 	.start({}, options);
 
