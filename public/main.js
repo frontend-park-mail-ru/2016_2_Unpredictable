@@ -9,7 +9,7 @@ import SignView from './views/signView';
 import BackgroundView from './views/backgroundView';
 import ScoreboardView from './views/scoreboardView';
 import MainView from './views/mainView';
-import PlayView from './views/playView';
+import PlayView from './views/singleplayerView';
 
 
 (function () {
@@ -73,7 +73,6 @@ const preloaderFunc = function (el) {
 };
 window.onload = function () {
 	setTimeout(function () {
-
 		preloaderFunc(preloader);
 	}, 1000);
 };
