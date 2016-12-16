@@ -13,8 +13,8 @@ import SinglePlayView from './views/singleplayerView';
 import MultiPlayView from './views/multiplayerView';
 
 
-const serviceWorker = function () {
-
+(function () {
+	'use strict';
 	if (!navigator.serviceWorker) {
 		return;
 	}
@@ -28,7 +28,8 @@ const serviceWorker = function () {
 	}).catch(function (err) {
 		throw new Error('ServiceWorker error: ' + err);
 	});
-};
+})();
+
 
 const options = {
 	user: new User(),
