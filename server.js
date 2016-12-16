@@ -4,13 +4,13 @@ const express = require('express');
 const parser = require('body-parser');
 const technoDoc = require('techno-gendoc');
 const path = require('path');
+const compression = require('compression')
 
 const users = new Map();
 const sessions = new Map();
 
-technoDoc.generate(require('./api'), 'dist');
-
 const app = express();
+app.use(compression());
 app.use('/', express.static('dist', {maxAge: 1}));
 app.use('/app', express.static('dist', {maxAge: 1}));
 app.use('/sign', express.static('dist', {maxAge: 1}));

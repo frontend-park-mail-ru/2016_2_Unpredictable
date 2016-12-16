@@ -55,15 +55,15 @@ export default class User {
 		this.error = false;
 		if (isLoginValid.errorText) {
 			this.error = true;
-			this._errorText = isLoginValid.errorText;
+			this._errorText._errorTextLogin = isLoginValid.errorText;
 		}
 		if (isPasswordValid.errorText) {
 			this.error = true;
-			this._errorText = isPasswordValid.errorText;
+			this._errorText._errorTextPassword = isPasswordValid.errorText;
 		}
 		if (isRepeat.errorText) {
 			this.error = true;
-			this._errorText = isRepeat.errorText;
+			this._errorText._errorRepeatPassword = isRepeat.errorText;
 		}
 	}
 
