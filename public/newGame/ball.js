@@ -170,5 +170,14 @@ export default class Ball {
 		}
 	}
 
+	prepareData(){
+		return {
+			vx: this.vx,
+			vz: this.vz,
+			r: this.r,
+			mousePress : this.mousePress,
+
+		}
+	}
 
 }

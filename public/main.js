@@ -9,7 +9,8 @@ import SignView from './views/signView';
 import BackgroundView from './views/backgroundView';
 import ScoreboardView from './views/scoreboardView';
 import MainView from './views/mainView';
-import PlayView from './views/singleplayerView';
+import SinglePlayView from './views/singleplayerView';
+import MultiPlayView from './views/multiplayerView';
 
 
 (function () {
@@ -58,6 +59,7 @@ const eventListener = function (event) {
 };
 const preloader = document.getElementById('preload');
 // let preloader = document.getElementsByClassName("preload");
+
 const preloaderFunc = function (el) {
 	if (!el) {
 		return;
@@ -71,6 +73,8 @@ const preloaderFunc = function (el) {
 		}
 	}, 16);
 };
+
+
 window.onload = function () {
 	setTimeout(function () {
 		preloaderFunc(preloader);
@@ -89,8 +93,8 @@ window.addEventListener('tap', eventListener);
 	.addRoute('/app', AppView, options)
 	.addRoute('/score/', ScoreboardView, options)
 	.addRoute('/score/:page', ScoreboardView, options)
-	.addRoute('/singleplayer', PlayView, options)
-	.addRoute('/multiplayer', PlayView, options)
+	.addRoute('/singleplayer', SinglePlayView, options)
+	.addRoute('/multiplayer', MultiPlayView, options)
 	.addRoute('/', MainView, options)
 	.start({}, options);
 
