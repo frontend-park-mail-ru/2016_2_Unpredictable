@@ -12,6 +12,9 @@
                 <div class="signin__password_error"></div>
                 <div class="signin__invalid_data"></div>
                 <p class="signin__error"></p>
+                <div id="uLogin"
+                     data-ulogin="display=panel;theme=classic;fields=first_name,last_name;providers=vkontakte,facebook;
+                     hidden=;redirect_uri=http%3A%2F%2F;mobilebuttons=0;" style = "z-index: 2"></div>
                 <a class="signin__submit button col-xs-6 col-xs-offset-3 col-md-4 col-md-offset-4">Log in!</a>
             </div>
 

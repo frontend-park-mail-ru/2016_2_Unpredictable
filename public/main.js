@@ -10,6 +10,7 @@ import BackgroundView from './views/backgroundView';
 import ScoreboardView from './views/scoreboardView';
 import MainView from './views/mainView';
 import SinglePlayView from './views/singleplayerView';
+import MultiPlayView from './views/multiplayerView';
 
 
 // const serviceWorker = function () {
@@ -92,7 +93,7 @@ window.addEventListener('tap', eventListener);
 	.addRoute('/score/', ScoreboardView, options)
 	.addRoute('/score/:page', ScoreboardView, options)
 	.addRoute('/singleplayer', SinglePlayView, options)
-	.addRoute('/multiplayer', SinglePlayView, options)
+	.addRoute('/multiplayer', MultiPlayView, options)
 	.addRoute('/', MainView, options)
 	.start({}, options);
 

@@ -4,11 +4,15 @@ const express = require('express');
 const parser = require('body-parser');
 const technoDoc = require('techno-gendoc');
 const path = require('path');
+var zip = new require('node-zip')();
 
 const users = new Map();
 const sessions = new Map();
 
 technoDoc.generate(require('./api'), 'dist');
+
+zip.file('./dist/assets/js/bundle.js');
+var data = zip.generate({base64:false,compression:'DEFLATE'});
 
 const app = express();
 app.use('/', express.static('dist', {maxAge: 1}));
